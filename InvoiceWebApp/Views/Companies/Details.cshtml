@@ -1,0 +1,90 @@
+@model InvoiceWebApp.Models.Company
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Company</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.CompanyName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.CompanyName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Email)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Email)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Phone)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Phone)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BankAccount)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BankAccount)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Address)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Address)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.PostalCode)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.PostalCode)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.City)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.City)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Country)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.Country)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.RegNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.RegNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.FinancialNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.FinancialNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EUFinancialNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EUFinancialNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.BankName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.BankName)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.CompanyID">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

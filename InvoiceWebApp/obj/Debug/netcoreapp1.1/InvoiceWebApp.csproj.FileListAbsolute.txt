@@ -1,0 +1,11 @@
+d:\big-j\documents\visual studio 2017\Projects\InvoiceWebApp\InvoiceWebApp\bin\Debug\netcoreapp1.1\invoice_db.mdf
+d:\big-j\documents\visual studio 2017\Projects\InvoiceWebApp\InvoiceWebApp\bin\Debug\netcoreapp1.1\InvoiceWebApp.deps.json
+d:\big-j\documents\visual studio 2017\Projects\InvoiceWebApp\InvoiceWebApp\bin\Debug\netcoreapp1.1\InvoiceWebApp.runtimeconfig.json
+d:\big-j\documents\visual studio 2017\Projects\InvoiceWebApp\InvoiceWebApp\bin\Debug\netcoreapp1.1\InvoiceWebApp.runtimeconfig.dev.json
+d:\big-j\documents\visual studio 2017\Projects\InvoiceWebApp\InvoiceWebApp\bin\Debug\netcoreapp1.1\InvoiceWebApp.dll
+d:\big-j\documents\visual studio 2017\Projects\InvoiceWebApp\InvoiceWebApp\bin\Debug\netcoreapp1.1\InvoiceWebApp.pdb
+d:\big-j\documents\visual studio 2017\Projects\InvoiceWebApp\InvoiceWebApp\obj\Debug\netcoreapp1.1\InvoiceWebApp.csprojResolveAssemblyReference.cache
+d:\big-j\documents\visual studio 2017\Projects\InvoiceWebApp\InvoiceWebApp\obj\Debug\netcoreapp1.1\UserSecretsAssemblyInfo.cs
+d:\big-j\documents\visual studio 2017\Projects\InvoiceWebApp\InvoiceWebApp\obj\Debug\netcoreapp1.1\InvoiceWebApp.AssemblyInfo.cs
+d:\big-j\documents\visual studio 2017\Projects\InvoiceWebApp\InvoiceWebApp\obj\Debug\netcoreapp1.1\InvoiceWebApp.dll
+d:\big-j\documents\visual studio 2017\Projects\InvoiceWebApp\InvoiceWebApp\obj\Debug\netcoreapp1.1\InvoiceWebApp.pdb

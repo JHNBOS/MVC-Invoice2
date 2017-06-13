@@ -1,0 +1,87 @@
+@model InvoiceWebApp.Models.Admin
+@inject ApplicationDbContext _context
+@using System.Diagnostics
+@using InvoiceWebApp.Data
+
+@{
+    ViewData["Title"] = "Login";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    AppSettings settings = null;
+    if (SessionHelper.IsExists(Context.Session, "Settings"))
+    {
+        settings = SessionHelper.Get<AppSettings>(Context.Session, "Settings");
+    }
+    if (!SessionHelper.IsExists(Context.Session, "Settings"))
+    {
+        settings = _context.Settings.FirstOrDefault();
+        SessionHelper.Set(Context.Session, "Settings", settings);
+    }
+}
+
+<div class="container">
+    <div class="row main">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                @if (settings.Logo != "" && settings.UseLogo == false)
+                {
+                    <h1 class="title">@settings.CompanyName</h1>
+                }
+                @if (settings.Logo != "" && settings.UseLogo == true)
+                {
+                    <img src="~/images/@(settings.Logo)" class="img-responsive center-block" />
+                }
+                <h3>Sign In - Admin</h3>
+                <hr style="width:30%;border-top:2px solid #fff;" />
+            </div>
+        </div>
+
+        <div class="main-login main-center">
+            <form class="form-horizontal" asp-controller="Admins" asp-action="Login">
+                <!--EMAIL-->
+                <div class="form-group">
+                    <label asp-for="Email" class="cols-sm-2 control-label">Your Email</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa-lg" aria-hidden="true"></i></span>
+                            <input type="text" asp-for="Email" class="form-control" id="email" placeholder="Enter your Email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!--PASSWORD-->
+                <div class="form-group">
+                    <label asp-for="Password" class="cols-sm-2 control-label">Password</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock fa-lg" aria-hidden="true"></i></span>
+                            <input type="password" asp-for="Password" class="form-control" id="password" placeholder="Enter your Password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!--LOGIN BUTTON-->
+                <div class="form-group ">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block login-button">Login</button>
+                </div>
+
+                <!--FORGOT PASSWORD LINK-->
+                <div class="login-register">
+                    <p>
+                        <a asp-action="ForgotPassword" class="login-register">Forgot password?</a>
+                        <br />
+                        @Html.ActionLink("Client?", "Login", "Users", new { }, new { @class = "login-register" })
+                    </p>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

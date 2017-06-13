@@ -1,0 +1,50 @@
+﻿@using InvoiceWebApp.Models
+
+@{
+    User user = null;
+    Admin admin = null;
+
+    if (SessionHelper.IsExists(Context.Session, "User")){
+        user = SessionHelper.Get<User>(Context.Session, "User");
+    }
+    if (SessionHelper.IsExists(Context.Session, "Admin")){
+        admin = SessionHelper.Get<Admin>(Context.Session, "Admin");
+    }
+}
+
+@if (SessionHelper.IsExists(Context.Session, "User")){
+    <form asp-area="" asp-controller="Users" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a asp-route-id="@(user.ID)" asp-controller="Users" asp-action="Edit" title="Manage">Hello @(user.Debtor.FirstName)!</a>
+            </li>
+            <li>
+                <a asp-area="" asp-controller="Users" asp-action="Logout">
+                    <span id="logout-icon" class="glyphicon glyphicon-log-out"></span>
+                    <span id="logout-link">Log out</span>
+                </a>
+            </li>
+        </ul>
+    </form>
+
+} else if (SessionHelper.IsExists(Context.Session, "Admin")){
+    <form asp-area="" asp-controller="Admins" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
+        <ul class="nav navbar-nav navbar-right">
+            <li>
+                <a asp-route-id="@(admin.AdminID)" asp-controller="Admins" asp-action="Edit" title="Manage">Hello @(admin.FirstName)!</a>
+            </li>
+            @if (admin != null){ <li><a asp-area="" asp-controller="Admins" asp-action="Settings"><span id="settings" class="glyphicon glyphicon-cog"></span></a></li> }
+            <li>
+                <a asp-area="" asp-controller="Admins" asp-action="Logout">
+                    <span id="logout-icon" class="glyphicon glyphicon-log-out"></span>
+                    <span id="logout-link">Log out</span>
+                </a>
+            </li>
+        </ul>
+    </form>
+
+} else {
+    <ul class="nav navbar-nav navbar-right">
+        <li><a asp-area="" asp-controller="Users" asp-action="Login">Log in</a></li>
+    </ul>
+}

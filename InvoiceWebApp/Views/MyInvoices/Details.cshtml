@@ -1,0 +1,194 @@
+@model InvoiceWebApp.Models.Invoice
+
+@{
+    ViewData["Title"] = "Invoice Details";
+}
+
+<div class="container">
+    <div class="row main">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h1 class="title">Invoice Details</h1>
+                <hr style="width:60%;border-top:2px solid #fff;" />
+            </div>
+        </div>
+
+        <div class="main-large main-center">
+            <form id="form" class="form-horizontal">
+
+                <div class="row">
+                    <!--BEGIN COLUMN 1-->
+                    <div class="col-sm-6 col-md-6">
+
+                        <!---DEBTOR-->
+                        <div class="form-group">
+                            <label asp-for="DebtorID" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-users fa-lg" aria-hidden="true"></i></span>
+                                    <select asp-for="DebtorID" class="form-control" asp-items="ViewBag.DebtorID" disabled></select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!---INVOICE DATE-->
+                        <div class="form-group">
+                            <label asp-for="CreatedOn" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar fa-lg" aria-hidden="true"></i></span>
+                                    <input type="text" asp-for="CreatedOn" class="form-control" name="creation" id="creation" readonly />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!---EXPIRATION DATE-->
+                        <div class="form-group">
+                            <label asp-for="ExpirationDate" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-calendar fa-lg" aria-hidden="true"></i></span>
+                                    <input type="text" asp-for="ExpirationDate" class="form-control" name="expiration" id="expiration" readonly />
+                                    <span asp-validation-for="ExpirationDate" class="text-danger" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <!---TOTAL-->
+                        <div class="form-group">
+                            <label asp-for="Total" class="col-md-2 control-label"></label>
+                            <div class="col-md-10">
+                                <div class="input-group">
+                                    <span class="input-group-addon" style="padding-right:19px;"><i class="fa fa-eur fa-lg" aria-hidden="true"></i></span>
+                                    <input id="total" name="total" type="text" class="form-control" readonly />
+                                    <span asp-validation-for="Total" class="text-danger" />
+                                </div>
+                            </div>
+                        </div>
+
+                        <br />
+
+                        <!--PAY BUTTON-->
+                        <div class="form-group">
+                            <div class="col-md-offset-2 col-md-10">
+                                <a id="pay_inv_btn" class="btn btn-primary">
+                                    <span class="fa fa-credit-card fa-lg"></span>
+                                    &nbsp;Pay
+                                </a>
+                            </div>
+                        </div>
+
+                        <br />
+                        <br />
+
+                        <div>
+                            <a asp-action="Index">Back to Overview</a>
+
+                        </div>
+                    </div>
+                    <!--END COLUMN 1-->
+                    <!----------------------------------------------------------->
+                    <!--BEGIN COLUMN 2-->
+                    <div class="col-sm-6 col-md-6">
+
+                        <div id="products">
+
+                        </div>
+
+                        <hr style="margin-bottom:0;margin-top:10px;" />
+                    </div>
+                    <!--END COLUMN 2-->
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            setRows();
+
+            var t = "@(ViewBag.Total)";
+            $("#total").val(t);
+
+            var s = "@(Model.Paid)";
+
+            if (s == "True" || s == "true") {
+                $("#pay_inv_btn").hide();
+            }
+        });
+
+        /* SET PRODUCT ROWS */
+        function setRows() {
+            var pids = new Array();
+            var amounts = new Array();
+            var pnames = new Array();
+
+            @foreach (var pid in ViewBag.PIDs)
+            {
+                @:pids.push('@(pid)');
+            }
+            @foreach (var amount in ViewBag.Amounts)
+            {
+                @:amounts.push('@(amount)');
+            }
+            @foreach (var name in ViewBag.Names)
+            {
+                @:pnames.push('@(name)');
+            }
+
+            console.log("PIDs: " + pids);
+            console.log("Amounts: " + amounts);
+            console.log("PNames: " + pnames);
+
+            for (var i = 0; i < amounts.length; i++) {
+                var amount = amounts[i];
+
+                var html = `<div id='productRow'>
+                    <div class="col-sm-7 col-md-7" style="padding-right:2px;">
+                    <select id="products` + i + `" name="products" class="form-control" disabled></select>
+                    </div>
+                    <div class="col-sm-3 col-md-3" style="padding-right:2px;padding-left:2px;">
+                    <input id="amount" value="` + amount + `" name="amount" class="form-control" readonly />
+                    </div>
+                    <br />
+                    <br />
+                    </div>`;
+
+                $("#products").append(html);
+            }
+
+            for (var i = 0; i < pnames.length; i++) {
+                var pid = pids[i];
+                var pname = pnames[i];
+
+                $("#products #products" + i).append("<option value='" + pid + "' selected>" + pname + "</option>");
+
+                pid = "";
+                pname = "";
+            }
+        }
+
+    /*-------------------------------------------------------------------------------------------*/
+
+        $("#pay_inv_btn").on("click", function () {
+            var id = @(Model.InvoiceNumber);
+
+            $.ajax(
+            {
+                type: "POST",
+                url: '@Url.Action("Pay")',
+                data: {
+                    id: id
+                },
+                success: function() { alert('Thank you for paying!'); window.location.href='@Url.Action("Index")'; },
+                error: function() { alert('An error occured while paying. Please try again!');}
+            });
+        })
+    /*-------------------------------------------------------------------------------------------*/
+    </script>
+}
