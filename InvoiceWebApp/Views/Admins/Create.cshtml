@@ -1,54 +1,104 @@
+@using static InvoiceWebApp.Models.AppSettings
 @model InvoiceWebApp.Models.Admin
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Admin Register";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    AppSettings settings = null;
+    if (SessionHelper.IsExists(Context.Session, "Settings"))
+    {
+        settings = SessionHelper.Get<AppSettings>(Context.Session, "Settings");
+    }
 }
 
-<h2>Create</h2>
+<div class="container">
+    <div class="row main-reg">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                @if (settings.Logo != "" && settings.UseLogo == false)
+                {
+                    <h1 class="title">@settings.CompanyName</h1>
+                }
 
-<form class="form-horizontal" asp-controller="Admins" asp-action="Create">
-    <div class="form-horizontal">
-        <h4>Admin</h4>
-        <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="FirstName" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+                @if (settings.Logo != "" && settings.UseLogo == true)
+                {
+                    <img src="~/images/@(settings.Logo)" class="img-responsive center-block" />
+                }
+                <h3>Sign Up - Admin</h3>
+                <hr style="width:35%;border-top:2px solid #fff;" />
             </div>
         </div>
-        <div class="form-group">
-            <label asp-for="LastName" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Email" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Password" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Password" class="form-control" />
-                <span asp-validation-for="Password" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+
+        <div class="main-register main-center">
+            <form class="form-horizontal" asp-controller="Admins" asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+                <!--FIRST NAME-->
+                <div class="form-group">
+                    <label asp-for="FirstName" class="cols-sm-2 control-label">Your First Name</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
+                            <input type="text" asp-for="FirstName" class="form-control" id="firstname" placeholder="Enter your first name" />
+                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!--LAST NAME-->
+                <div class="form-group">
+                    <label asp-for="LastName" class="cols-sm-2 control-label">Your Last Name</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
+                            <input type="text" asp-for="LastName" class="form-control" id="lastname" placeholder="Enter your last name" />
+                            <span asp-validation-for="LastName" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <hr style="width:80%;" />
+
+                <!--EMAIL-->
+                <div class="form-group">
+                    <label asp-for="Email" class="cols-sm-2 control-label">Your Email</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
+                            <input type="text" asp-for="Email" class="form-control" id="email" placeholder="Enter your Email" />
+                            <span asp-validation-for="Email" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!--PASSWORD-->
+                <div class="form-group">
+                    <label asp-for="Password" class="cols-sm-2 control-label">Password</label>
+                    <div class="cols-sm-10">
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
+                            <input type="password" asp-for="Password" class="form-control" id="password" placeholder="Enter your Password" />
+                            <span asp-validation-for="Password" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!--REGISTER BUTTON-->
+                <div class="form-group ">
+                    <button type="submit" class="btn btn-primary btn-lg btn-block register-button">Register</button>
+                </div>
+
+                <!--BACK TO LOGIN-->
+                <div class="login-register">
+                    <p>
+                        <a asp-action="Login">Back to Login</a>
+                    </p>
+                </div>
+
+            </form>
         </div>
     </div>
-</form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

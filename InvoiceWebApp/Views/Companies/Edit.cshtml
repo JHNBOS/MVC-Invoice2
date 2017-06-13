@@ -1,113 +1,219 @@
 @model InvoiceWebApp.Models.Company
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Company";
 }
 
-<h2>Edit</h2>
+<div class="container">
+    <div class="row main">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h1 class="title">Edit Company</h1>
+                <hr style="width:60%;border-top:2px solid #fff;" />
+            </div>
+        </div>
 
-<form asp-action="Edit">
-    <div class="form-horizontal">
-        <h4>Company</h4>
-        <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="CompanyID" />
-        <div class="form-group">
-            <label asp-for="CompanyName" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="CompanyName" class="form-control" />
-                <span asp-validation-for="CompanyName" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Email" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Phone" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Phone" class="form-control" />
-                <span asp-validation-for="Phone" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="BankAccount" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="BankAccount" class="form-control" />
-                <span asp-validation-for="BankAccount" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Address" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Address" class="form-control" />
-                <span asp-validation-for="Address" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="PostalCode" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="PostalCode" class="form-control" />
-                <span asp-validation-for="PostalCode" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="City" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="Country" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="Country" class="form-control" />
-                <span asp-validation-for="Country" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="RegNumber" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="RegNumber" class="form-control" />
-                <span asp-validation-for="RegNumber" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="FinancialNumber" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="FinancialNumber" class="form-control" />
-                <span asp-validation-for="FinancialNumber" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="EUFinancialNumber" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="EUFinancialNumber" class="form-control" />
-                <span asp-validation-for="EUFinancialNumber" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="BankName" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="BankName" class="form-control" />
-                <span asp-validation-for="BankName" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+        <div class="main-large-company main-center">
+            <form class="form-horizontal" asp-controller="Companies" asp-action="Edit" method="post">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="CompanyID" />
+
+                <!--LEFT COLUMN-->
+                <div class="col-sm-6 col-md-6">
+
+                    <!--COMPANY NAME-->
+                    <div class="form-group">
+                        <label asp-for="CompanyName" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-id-card-o fa-lg" aria-hidden="true"></i>
+                                </span>
+                                <input type="text" asp-for="CompanyName" class="form-control" id="name"
+                                       placeholder="Enter company name" />
+                                <span asp-validation-for="CompanyName" class="text-danger" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--EMAIL-->
+                    <div class="form-group">
+                        <label asp-for="Email" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-id-card-o fa-lg" aria-hidden="true"></i>
+                                </span>
+                                <input type="text" asp-for="Email" class="form-control" id="email"
+                                       placeholder="Enter email" />
+                                <span asp-validation-for="Email" class="text-danger" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--PHONE-->
+                    <div class="form-group">
+                        <label asp-for="Phone" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-id-card-o fa-lg" aria-hidden="true"></i>
+                                </span>
+                                <input type="text" asp-for="Phone" class="form-control" id="phone"
+                                       placeholder="Enter phone number" />
+                                <span asp-validation-for="Phone" class="text-danger" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="text-center" style="width:65%;border-top:1px solid rgba(57, 57, 57, 0.30) !important;" />
+
+                    <!--REG NUMBER-->
+                    <div class="form-group">
+                        <label asp-for="RegNumber" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-id-card-o fa-lg" aria-hidden="true"></i>
+                                </span>
+                                <input type="text" asp-for="RegNumber" class="form-control" id="regnumber" placeholder="Enter registration number" />
+                                <span asp-validation-for="RegNumber" class="text-danger" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--BANK ACCOUNT-->
+                    <div class="form-group">
+                        <label asp-for="BankAccount" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-id-card-o fa-lg" aria-hidden="true"></i>
+                                </span>
+                                <input type="text" asp-for="BankAccount" class="form-control" id="bankaccount" placeholder="Enter bank account number" />
+                                <span asp-validation-for="BankAccount" class="text-danger" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--BANK NAME-->
+                    <div class="form-group">
+                        <label asp-for="BankName" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-id-card-o fa-lg" aria-hidden="true"></i>
+                                </span>
+                                <input type="text" asp-for="BankName" class="form-control" id="bankname" placeholder="Enter bank name" />
+                                <span asp-validation-for="BankName" class="text-danger" />
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!--END OF LEFT COLUMN-->
+                <!-------------------------------------------------------------------------------------------->
+                <!--RIGHT COLUMN-->
+                <div class="col-sm-6 col-md-6">
+
+                    <!--ADDRESS-->
+                    <div class="form-group">
+                        <label asp-for="Address" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope-open" aria-hidden="true"></i></span>
+                                <input type="text" asp-for="Address" class="form-control" id="address" placeholder="Enter address" />
+                                <span asp-validation-for="Address" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--POSTAL CODE-->
+                    <div class="form-group">
+                        <label asp-for="PostalCode" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope-open" aria-hidden="true"></i></span>
+                                <input type="text" asp-for="PostalCode" class="form-control" id="postal" placeholder="Enter postal code" />
+                                <span asp-validation-for="PostalCode" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--CITY-->
+                    <div class="form-group">
+                        <label asp-for="City" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope-open" aria-hidden="true"></i></span>
+                                <input type="text" asp-for="City" class="form-control" id="city" placeholder="Enter city" />
+                                <span asp-validation-for="City" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--COUNTRY-->
+                    <div class="form-group">
+                        <label asp-for="Country" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <div class="input-group">
+                                <span class="input-group-addon"><i class="fa fa-envelope-open" aria-hidden="true"></i></span>
+                                <input type="text" asp-for="Country" class="form-control" id="country" placeholder="Enter country" />
+                                <span asp-validation-for="Country" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="text-center" style="width:65%;border-top:1px solid rgba(57, 57, 57, 0.30) !important;" />
+
+                    <!--FINANCIAL NUMBER-->
+                    <div class="form-group">
+                        <label asp-for="FinancialNumber" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-id-card-o fa-lg" aria-hidden="true"></i>
+                                </span>
+                                <input type="text" asp-for="FinancialNumber" class="form-control" id="financialnumber" placeholder="Enter fiscal number" />
+                                <span asp-validation-for="FinancialNumber" class="text-danger" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--EU FINANCIAL NUMBER-->
+                    <div class="form-group">
+                        <label asp-for="EUFinancialNumber" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-id-card-o fa-lg" aria-hidden="true"></i>
+                                </span>
+                                <input type="text" asp-for="EUFinancialNumber" class="form-control" id="eufinancialnumber" placeholder="Enter EU fiscal number" />
+                                <span asp-validation-for="EUFinancialNumber" class="text-danger" />
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--SPACER-->
+                    <div class="form-group">
+                        <div class="col-md-10">
+                            <br />
+                        </div>
+                    </div>
+
+                    <!--EDIT BUTTON-->
+                    <div class="form-group">
+                        <div class="col-md-offset-2 col-md-10">
+                            <input id="edit_comp_btn" class="btn btn-primary" type="submit" />
+                        </div>
+                    </div>
+
+                    <!--END OF RIGHT COLUMN-->
+                </div>
+                <a asp-action="Index">Back to Overview</a>
+
+            </form>
         </div>
     </div>
-</form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

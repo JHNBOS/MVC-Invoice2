@@ -13,10 +13,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="invoice_db.mdf" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="Controllers\DebtorsController.cs" />
     <Content Include="wwwroot\css\site.css" />
     <Content Include="wwwroot\css\site.min.css" />
@@ -86,11 +82,6 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.1" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="1.0.1" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="invoice_db.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <None Include="wwwroot\css\site.css" />

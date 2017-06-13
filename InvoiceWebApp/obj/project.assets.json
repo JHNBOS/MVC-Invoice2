@@ -11442,10 +11442,10 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "d:\\big-j\\documents\\visual studio 2017\\Projects\\InvoiceWebApp\\InvoiceWebApp\\InvoiceWebApp.csproj",
+      "projectUniqueName": "C:\\GitHub\\MVC-Invoice2\\InvoiceWebApp\\InvoiceWebApp.csproj",
       "projectName": "InvoiceWebApp",
-      "projectPath": "d:\\big-j\\documents\\visual studio 2017\\Projects\\InvoiceWebApp\\InvoiceWebApp\\InvoiceWebApp.csproj",
-      "outputPath": "d:\\big-j\\documents\\visual studio 2017\\Projects\\InvoiceWebApp\\InvoiceWebApp\\obj\\",
+      "projectPath": "C:\\GitHub\\MVC-Invoice2\\InvoiceWebApp\\InvoiceWebApp.csproj",
+      "outputPath": "C:\\GitHub\\MVC-Invoice2\\InvoiceWebApp\\obj\\",
       "projectStyle": "PackageReference",
       "originalTargetFrameworks": [
         "netcoreapp1.1"

@@ -93,6 +93,20 @@
                         </div>
                     </div>
 
+                    <!--BANK NAME-->
+                    <div class="form-group">
+                        <label asp-for="BankName" class="col-md-2 control-label"></label>
+                        <div class="col-md-10">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <i class="fa fa-id-card-o fa-lg" aria-hidden="true"></i>
+                                </span>
+                                <input type="text" asp-for="BankName" class="form-control" id="bankname" placeholder="Enter bank name" />
+                                <span asp-validation-for="BankName" class="text-danger" />
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
                 <!--END OF LEFT COLUMN-->
                 <!-------------------------------------------------------------------------------------------->
@@ -163,7 +177,7 @@
                         </div>
                     </div>
 
-                    <!--FINANCIAL NUMBER-->
+                    <!--EU FINANCIAL NUMBER-->
                     <div class="form-group">
                         <label asp-for="EUFinancialNumber" class="col-md-2 control-label"></label>
                         <div class="col-md-10">
