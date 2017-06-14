@@ -27,6 +27,7 @@ namespace InvoiceWebApp.Controllers
             }
 
             GetPaidInvoices();
+            GetConceptInvoiceCount();
 
             return View();
         }
@@ -86,6 +87,23 @@ namespace InvoiceWebApp.Controllers
             }
 
             return total;
+        }
+
+        //Get number of concept invoices
+        private void GetConceptInvoiceCount()
+        {
+            int count = 0;
+
+            try
+            {
+                List<Invoice> invoices = _context.Invoices.Where(s => s.Type == "Concept").ToList();
+                count = invoices.Count;
+                ViewBag.conceptCount = count;
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
         }
 
         //Get all paid invoices

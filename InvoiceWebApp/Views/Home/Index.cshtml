@@ -185,7 +185,7 @@
                 }
             }
 
-            if (paidArray >= 0 && unpaidArray > 0) {
+            if (paidArray >= 0 && unpaidArray >= 0) {
                 AmCharts.makeChart("chartdiv",
                     {
                         "type": "pie",
@@ -234,11 +234,13 @@
             var totalPaid = "";
             var totalAmount = "";
             var totalAmountFormatted = "";
+            var conceptCount = "";
 
             @{
                 int? totalPercentage = ViewBag.totalPercentage;
                 int? paidInvoiceCount = ViewBag.totalPaidCount;
                 int? unpaidInvoiceCount = ViewBag.totalUnPaidCount;
+                int? conceptInvoiceCount = ViewBag.conceptCount;
                 decimal? totalInvoicePaid = ViewBag.totalPaid;
                 decimal? totalInvoiceAmount = ViewBag.totalAmount;
 
@@ -267,6 +269,13 @@
                         totalAmount = @totalInvoiceAmount;
                     </text>
                 }
+                if (conceptInvoiceCount != null)
+                {
+                    <text>
+                        conceptCount = @conceptInvoiceCount;
+                        console.log("conceptCount: " + conceptCount);
+                    </text>
+                }
             }
 
             if (totalAmount >= 0) {
@@ -277,7 +286,7 @@
                 }, 2);
             }
 
-            if (totalAmount >= 0 && totalPaid >= 0) {
+            if (totalAmount > 0 && totalPaid >= 0) {
                 AmCharts.makeChart("admin_chartdiv",
                     {
                         "type": "serial",
@@ -420,6 +429,16 @@
 
             if ($("#admin_chartdiv").is(":empty") && $("#admin_chartdiv2").is(":empty")) {
                 var noInvoicesText = "There are currently no invoices.";
+
+                if (conceptCount == 0) {
+                    noInvoicesText += "<br /> You have 0 invoices saved as 'concept'.";
+                }
+                else if (conceptCount == 1) {
+                    noInvoicesText += "<br /> You have " + conceptCount + " invoice saved as 'concept'.";
+                } else {
+                    noInvoicesText += "<br /> You have " + conceptCount + " invoices saved as 'concept'.";
+                }
+
                 $("#invoiceText").html(noInvoicesText);
 
             }
