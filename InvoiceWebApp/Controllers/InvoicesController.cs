@@ -75,6 +75,8 @@ namespace InvoiceWebApp.Controllers
         //Create new invoice
         private async Task CreateInvoice(Invoice invoice, string pids, string amounts, string total)
         {
+            Debug.WriteLine("CreateInvoice method has been reached!");
+
             string[] pidArray = null;
             string[] amountArray = null;
             List<InvoiceItem> items = new List<InvoiceItem>();
@@ -375,13 +377,19 @@ namespace InvoiceWebApp.Controllers
         {
             if (ModelState.IsValid)
             {
+                if (invoice.DebtorID is int)
+                {
+                    invoice.CompanyID = null;
+                } else {
+                    invoice.DebtorID = null;
+                }
+
                 await CreateInvoice(invoice, pids, amounts, total);
 
                 //SEND MAIL TO DEBTOR NOTIFYING ABOUT INVOICE
                 if (invoice.Type == "Final")
                 {
-                    if (!String.IsNullOrEmpty(invoice.DebtorID.ToString()) ||
-                        invoice.DebtorID.ToString() == "none")
+                    if (invoice.DebtorID is int)
                     {
                         Debtor debtor = _context.Debtors.Single(s => s.DebtorID == invoice.DebtorID);
                         AuthMessageSender email = new AuthMessageSender(_settings);

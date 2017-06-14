@@ -8,14 +8,13 @@
     <div class="row main">
         <div class="panel-heading">
             <div class="panel-title text-center">
-                <h1 class="title">Create Product</h1>
+                <h1 class="title">Edit Product</h1>
                 <hr style="width:60%;border-top:2px solid #fff;" />
             </div>
         </div>
 
         <div class="main-large main-center">
             <form id="form" class="form-horizontal" asp-controller="Products" asp-action="Edit">
-
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="ProductID" />
 
@@ -27,11 +26,13 @@
                             <label asp-for="Name" class="col-md-2 control-label"></label>
                             <div class="col-md-10">
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-industry fa-lg" aria-hidden="true"></i></span>
-                                    <input type="text" asp-for="Name" class="form-control" id="name" placeholder="Enter product name" />
-                                    <span asp-validation-for="Name" class="text-danger" />
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-industry fa-lg" aria-hidden="true"></i>
+                                    </span>
+                                    <input type="text" asp-for="Name" class="form-control" id="name"                                placeholder="Enter product name" />
                                 </div>
                             </div>
+                            <span asp-validation-for="Name" class="text-danger" />
                         </div>
 
                         <!--DESCRIPTION-->
@@ -39,11 +40,13 @@
                             <label asp-for="Description" class="col-md-2 control-label"></label>
                             <div class="col-md-10">
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-industry fa-lg" aria-hidden="true"></i></span>
-                                    <input type="text" asp-for="Description" class="form-control" id="description" placeholder="Enter product description" />
-                                    <span asp-validation-for="Description" class="text-danger" />
+                                    <span class="input-group-addon">
+                                        <i class="fa fa-industry fa-lg" aria-hidden="true"></i>
+                                    </span>
+                                    <input type="text" asp-for="Description" class="form-control" id="description"                  placeholder="Enter product description" />
                                 </div>
                             </div>
+                            <span asp-validation-for="Description" class="text-danger" />
                         </div>
 
                         <!--PRICE-->
@@ -51,11 +54,14 @@
                             <label asp-for="Price" class="col-md-2 control-label"></label>
                             <div class="col-md-10">
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-eur fa-lg" style="padding-right:6px;padding-left:2px;" aria-hidden="true"></i></span>
-                                    <input class="form-control" type="text" name="price" id="price" placeholder="Enter price" />
-                                    <span asp-validation-for="Price" class="text-danger" />
+                                    <span class="input-group-addon" style="padding-right: 22.5px;padding-left: 22.5px;">
+                                        <i class="fa fa-eur fa-lg" aria-hidden="true"></i>
+                                    </span>
+                                    <input class="form-control" type="text" name="price" id="price" 
+                                           placeholder="Enter price" />
                                 </div>
                             </div>
+                            <span asp-validation-for="Price" class="text-danger" />
                         </div>
 
                         <!--VAT PERCENTAGE-->
@@ -63,17 +69,23 @@
                             <label asp-for="VAT" class="col-md-2 control-label"></label>
                             <div class="col-md-10">
                                 <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-percent fa-lg" aria-hidden="true"></i></span>
-                                    <input class="form-control" type="text" name="vat" id="vat" placeholder="Enter VAT percentage" />
-                                    <span asp-validation-for="VAT" class="text-danger" />
+                                    <span class="input-group-addon" style="padding-left:19px;padding-right:19px;">
+                                        <i class="fa fa-percent fa-lg" aria-hidden="true"></i>
+                                    </span>
+                                    <input class="form-control" type="text" name="vat" id="vat" 
+                                           placeholder="Enter VAT percentage" />
                                 </div>
                             </div>
+                            <span asp-validation-for="VAT" class="text-danger" />
                         </div>
 
                         <!--EDIT BUTTON-->
                         <div class="form-group">
                             <div class="col-md-offset-2 col-md-10">
-                                <input id="edit_prod_btn" type="submit" value="Save" class="btn btn-primary" />
+                                <button id="edit_prod_btn" class="btn btn-primary" type="submit">
+                                    <span class="fa fa-floppy-o fa-lg"></span>
+                                    &nbsp;Save
+                                </button>
                             </div>
                         </div>
 

@@ -18,6 +18,7 @@
         <div class="main-large main-center">
             <form id="form" class="form-horizontal" asp-controller="Invoices" asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="Paid" value="false" />
 
                 <div class="row">
                     <!--BEGIN COLUMN 1-->
@@ -32,7 +33,7 @@
                                         <i class="fa fa-users fa-lg" aria-hidden="true"></i>
                                     </span>
                                     <select asp-for="DebtorID" class="form-control" asp-items="ViewBag.DebtorID">
-                                        <option value="none">--</option>
+                                        <option value="-1">--</option>
                                     </select>
                                 </div>
                             </div>
@@ -47,7 +48,7 @@
                                         <i class="fa fa-users fa-lg" aria-hidden="true"></i>
                                     </span>
                                     <select asp-for="CompanyID" class="form-control" asp-items="ViewBag.CompanyID">
-                                        <option value="none">--</option>
+                                        <option value="-1">--</option>
                                     </select>
                                 </div>
                             </div>
@@ -63,7 +64,8 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar fa-lg" aria-hidden="true"></i>
                                     </span>
-                                    <input asp-for="CreatedOn" class="form-control" id="creation" placeholder="Enter                invoice date" />
+                                    <input asp-for="CreatedOn" class="form-control" id="creation" 
+                                           placeholder="Enter invoice date" />
                                     <span asp-validation-for="CreatedOn" class="text-danger" />
                                 </div>
                             </div>
@@ -88,7 +90,7 @@
                             <label asp-for="Total" class="col-md-2 control-label"></label>
                             <div class="col-md-10">
                                 <div class="input-group">
-                                    <span class="input-group-addon" style="padding-right:19px;">
+                                    <span class="input-group-addon" style="padding-right:21px;padding-left:21px;">
                                         <i class="fa fa-eur fa-lg" aria-hidden="true"></i>
                                     </span>
                                     <input id="total" name="total" type="text" class="form-control" readonly />
@@ -253,11 +255,14 @@
                 productArray.splice(0, 1);
                 amountArray.splice(0, 1);
 
+                var totalPrice = $("#total").val();
+
                 console.log(productArray.toString());
                 console.log(amountArray.toString());
-                console.log(total.toString());
+                console.log(totalPrice.toString());
 
-                $("#form").attr("action", "Create/?pids=" + productArray.toString() + "&amounts=" + amountArray.toString() + "&total=" + total);
+                $("#form").attr("action", "Create/?pids=" + productArray.toString() + "&amounts=" + amountArray.toString() + "&total=" + totalPrice.toString());
+
                 $("#form").submit();
             });
 

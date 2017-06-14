@@ -21,11 +21,13 @@
                     <label asp-for="Name" class="col-md-2 control-label"></label>
                     <div class="col-md-10">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-industry fa-lg" aria-hidden="true"></i></span>
+                            <span class="input-group-addon">
+                                <i class="fa fa-industry fa-lg" aria-hidden="true"></i>
+                            </span>
                             <input type="text" asp-for="Name" class="form-control" name="name" id="name" placeholder="" readonly />
-                            <span asp-validation-for="Name" class="text-danger" />
                         </div>
                     </div>
+                    <span asp-validation-for="Name" class="text-danger" />
                 </div>
 
                 <!--DESCRIPTION-->
@@ -33,11 +35,13 @@
                     <label asp-for="Description" class="col-md-2 control-label"></label>
                     <div class="col-md-10">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-industry fa-lg" aria-hidden="true"></i></span>
+                            <span class="input-group-addon">
+                                <i class="fa fa-industry fa-lg" aria-hidden="true"></i>
+                            </span>
                             <input type="text" asp-for="Description" class="form-control" name="description" id="description" placeholder="" readonly />
-                            <span asp-validation-for="Description" class="text-danger" />
                         </div>
                     </div>
+                    <span asp-validation-for="Description" class="text-danger" />
                 </div>
 
                 <!--PRICE-->
@@ -45,11 +49,13 @@
                     <label asp-for="Price" class="col-md-2 control-label"></label>
                     <div class="col-md-10">
                         <div class="input-group">
-                            <span class="input-group-addon" style="padding-right:19px;"><i class="fa fa-eur fa-lg" aria-hidden="true"></i></span>
+                            <span class="input-group-addon" style="padding-right: 22px;padding-left: 22px;">
+                                <i class="fa fa-eur fa-lg" aria-hidden="true"></i>
+                            </span>
                             <input type="text" asp-for="Price" class="form-control" name="price" id="price" placeholder="" readonly />
-                            <span asp-validation-for="Price" class="text-danger" />
                         </div>
                     </div>
+                    <span asp-validation-for="Price" class="text-danger" />
                 </div>
 
                 <!--VAT PERCENTAGE-->
@@ -57,11 +63,14 @@
                     <label asp-for="VAT" class="col-md-2 control-label"></label>
                     <div class="col-md-10">
                         <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-percent fa-lg" aria-hidden="true"></i></span>
-                            <input type="text" asp-for="VAT" class="form-control" name="vat" id="vat" placeholder="" readonly />
-                            <span asp-validation-for="VAT" class="text-danger" />
+                            <span class="input-group-addon">
+                                <i class="fa fa-percent fa-lg" aria-hidden="true"></i>
+                            </span>
+                            <input type="text" asp-for="VAT" class="form-control" name="vat" id="vat"
+                                   placeholder="" readonly />
                         </div>
                     </div>
+                    <span asp-validation-for="VAT" class="text-danger" />
                 </div>
 
                 <!--SPACER-->
@@ -74,7 +83,7 @@
                 <!--EDIT BUTTON-->
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <a id="edit_prod_btn" class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.ProductID">
+                        <a id="edit_prod_btn" class="btn btn-primary" asp-action="Edit" asp-route-id="@Model.ProductID" style="margin-right:80px;margin-top:5px;">
                             <span class="fa fa-pencil fa-lg"></span>
                             &nbsp;Edit
                         </a>
