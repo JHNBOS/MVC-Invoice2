@@ -55,21 +55,21 @@ textarea {
 
 /* DEBTOR BUTTONS */
 #create_deb_btn {
-    width: 180px;
+    width: 200px;
     float: right;
     margin-right: 30px;
     margin-top: 30px;
 }
 
 #edit_deb_btn {
-    width: 180px;
+    width: 200px;
     float: right;
     margin-right: 30px;
     margin-top: 30px;
 }
 
 #delete_deb_btn {
-    width: 180px;
+    width: 200px;
     float: right;
     margin-right: 30px;
     margin-top: 30px;
@@ -98,8 +98,8 @@ textarea {
 }
 
 /* INVOICE BUTTONS */
-#create_inv_btn {
-    width: 180px;
+#create_comp_btn {
+    width: 200px;
     float: right;
     margin-right: 100px;
     margin-top: 15px;
@@ -118,6 +118,29 @@ textarea {
     float: right;
     margin-top: 5px;
     margin-right: 112px;
+}
+
+/* COMPANY BUTTONS */
+#create_comp_btn {
+    width: 200px;
+    float: right;
+    margin-right: 85px;
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+#edit_comp_btn {
+    width: 200px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 85px;
+}
+
+#delete_comp_btn {
+    width: 200px;
+    float: right;
+    margin-top: 5px;
+    margin-right: 85px;
 }
 
 /* SETTINGS BUTTONS */
@@ -274,7 +297,7 @@ input::-webkit-input-placeholder {
 }
 
 .main-large-company {
-    height: 645px;
+    min-height: 600px;
     background-color: #fff;
     /* shadows and rounded borders */
     -moz-border-radius: 2px;

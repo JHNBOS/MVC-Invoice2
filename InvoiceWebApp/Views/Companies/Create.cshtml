@@ -15,99 +15,108 @@
 
         <div class="main-large-company main-center">
             <form class="form-horizontal" asp-controller="Companies" asp-action="Create">
+                
                 <!--LEFT COLUMN-->
                 <div class="col-sm-6 col-md-6">
 
                     <!--COMPANY NAME-->
                     <div class="form-group">
-                        <label asp-for="CompanyName" class="col-md-2 control-label"></label>
+                        <label asp-for="CompanyName" class="col-md-2 control-label"
+                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
                         <div class="col-md-10">
                             <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-company fa-lg" aria-hidden="true"></i>
+                                <span class="input-group-addon" 
+                                      style="padding-left:19px;padding-right:19px;">
+                                    <i class="fa fa-building fa-lg" aria-hidden="true"></i>
                                 </span>
-                                <input type="text" asp-for="CompanyName" class="form-control" id="name" 
+                                <input type="text" asp-for="CompanyName" class="form-control" id="name"
                                        placeholder="Enter company name" />
-                                <span asp-validation-for="CompanyName" class="text-danger" />
                             </div>
                         </div>
+                        <span asp-validation-for="CompanyName" class="text-danger" />
                     </div>
 
                     <!--EMAIL-->
                     <div class="form-group">
-                        <label asp-for="Email" class="col-md-2 control-label"></label>
+                        <label asp-for="Email" class="col-md-2 control-label"
+                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
                         <div class="col-md-10">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="fa fa-envelope-o fa-lg" aria-hidden="true"></i>
                                 </span>
-                                <input type="text" asp-for="Email" class="form-control" id="email" 
+                                <input type="text" asp-for="Email" class="form-control" id="email"
                                        placeholder="Enter email" />
-                                <span asp-validation-for="Email" class="text-danger" />
                             </div>
                         </div>
+                        <span asp-validation-for="Email" class="text-danger" />
                     </div>
 
                     <!--PHONE-->
                     <div class="form-group">
-                        <label asp-for="Phone" class="col-md-2 control-label"></label>
+                        <label asp-for="Phone" class="col-md-2 control-label"
+                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
                         <div class="col-md-10">
                             <div class="input-group">
-                                <span class="input-group-addon">
+                                <span class="input-group-addon"
+                                      style="padding-left:20px;padding-right:20px;">
                                     <i class="fa fa-phone fa-lg" aria-hidden="true"></i>
                                 </span>
-                                <input type="text" asp-for="Phone" class="form-control" id="phone" 
-                                    placeholder="Enter phone number" />
-                                <span asp-validation-for="Phone" class="text-danger" />
+                                <input type="text" asp-for="Phone" class="form-control" id="phone"
+                                       placeholder="Enter phone number" />
                             </div>
                         </div>
+                        <span asp-validation-for="Phone" class="text-danger" />
                     </div>
 
                     <hr class="text-center" style="width:65%;border-top:1px solid rgba(57, 57, 57, 0.30) !important;" />
 
                     <!--REG NUMBER-->
                     <div class="form-group">
-                        <label asp-for="RegNumber" class="col-md-2 control-label"></label>
+                        <label asp-for="RegNumber" class="col-md-2 control-label"
+                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
                         <div class="col-md-10">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="fa fa-id-card-o fa-lg" aria-hidden="true"></i>
                                 </span>
-                                <input type="text" asp-for="RegNumber" class="form-control" id="regnumber" 
+                                <input type="text" asp-for="RegNumber" class="form-control" id="regnumber"
                                        placeholder="Enter registration number" />
-                                <span asp-validation-for="RegNumber" class="text-danger" />
                             </div>
                         </div>
+                        <span asp-validation-for="RegNumber" class="text-danger" />
                     </div>
 
                     <!--BANK ACCOUNT-->
                     <div class="form-group">
-                        <label asp-for="BankAccount" class="col-md-2 control-label"></label>
+                        <label asp-for="BankAccount" class="col-md-2 control-label"
+                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
                         <div class="col-md-10">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="fa fa-university fa-lg" aria-hidden="true"></i>
                                 </span>
-                                <input type="text" asp-for="BankAccount" class="form-control" id="bankaccount" 
+                                <input type="text" asp-for="BankAccount" class="form-control" id="bankaccount"
                                        placeholder="Enter bank account number" />
-                                <span asp-validation-for="BankAccount" class="text-danger" />
                             </div>
                         </div>
+                        <span asp-validation-for="BankAccount" class="text-danger" />
                     </div>
 
                     <!--BANK NAME-->
                     <div class="form-group">
-                        <label asp-for="BankName" class="col-md-2 control-label"></label>
+                        <label asp-for="BankName" class="col-md-2 control-label"
+                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
                         <div class="col-md-10">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="fa fa-university fa-lg" aria-hidden="true"></i>
                                 </span>
-                                <input type="text" asp-for="BankName" class="form-control" id="bankname" 
+                                <input type="text" asp-for="BankName" class="form-control" id="bankname"
                                        placeholder="Enter bank name" />
-                                <span asp-validation-for="BankName" class="text-danger" />
                             </div>
                         </div>
+                        <span asp-validation-for="BankName" class="text-danger" />
                     </div>
 
                 </div>
@@ -118,94 +127,100 @@
 
                     <!--ADDRESS-->
                     <div class="form-group">
-                        <label asp-for="Address" class="col-md-2 control-label"></label>
+                        <label asp-for="Address" class="col-md-2 control-label"
+                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
                         <div class="col-md-10">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="fa fa-map-marker" aria-hidden="true"></i>
                                 </span>
-                                <input type="text" asp-for="Address" class="form-control" id="address" 
+                                <input type="text" asp-for="Address" class="form-control" id="address"
                                        placeholder="Enter address" />
-                                <span asp-validation-for="Address" class="text-danger"></span>
                             </div>
                         </div>
+                        <span asp-validation-for="Address" class="text-danger"></span>
                     </div>
 
                     <!--POSTAL CODE-->
                     <div class="form-group">
-                        <label asp-for="PostalCode" class="col-md-2 control-label"></label>
+                        <label asp-for="PostalCode" class="col-md-2 control-label"
+                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
                         <div class="col-md-10">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="fa fa-map-marker" aria-hidden="true"></i>
                                 </span>
-                                <input type="text" asp-for="PostalCode" class="form-control" id="postal" 
+                                <input type="text" asp-for="PostalCode" class="form-control" id="postal"
                                        placeholder="Enter postal code" />
-                                <span asp-validation-for="PostalCode" class="text-danger"></span>
                             </div>
                         </div>
+                        <span asp-validation-for="PostalCode" class="text-danger"></span>
                     </div>
 
                     <!--CITY-->
                     <div class="form-group">
-                        <label asp-for="City" class="col-md-2 control-label"></label>
+                        <label asp-for="City" class="col-md-2 control-label"
+                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
                         <div class="col-md-10">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="fa fa-map-marker" aria-hidden="true"></i>
                                 </span>
-                                <input type="text" asp-for="City" class="form-control" id="city" 
+                                <input type="text" asp-for="City" class="form-control" id="city"
                                        placeholder="Enter city" />
-                                <span asp-validation-for="City" class="text-danger"></span>
                             </div>
                         </div>
+                        <span asp-validation-for="City" class="text-danger"></span>
                     </div>
 
                     <!--COUNTRY-->
                     <div class="form-group">
-                        <label asp-for="Country" class="col-md-2 control-label"></label>
+                        <label asp-for="Country" class="col-md-2 control-label"
+                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
                         <div class="col-md-10">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="fa fa-map-marker" aria-hidden="true"></i>
                                 </span>
-                                <input type="text" asp-for="Country" class="form-control" id="country" 
+                                <input type="text" asp-for="Country" class="form-control" id="country"
                                        placeholder="Enter country" />
-                                <span asp-validation-for="Country" class="text-danger"></span>
                             </div>
                         </div>
+                        <span asp-validation-for="Country" class="text-danger"></span>
                     </div>
 
                     <hr class="text-center" style="width:65%;border-top:1px solid rgba(57, 57, 57, 0.30) !important;" />
 
                     <!--FINANCIAL NUMBER-->
                     <div class="form-group">
-                        <label asp-for="FinancialNumber" class="col-md-2 control-label"></label>
+                        <label asp-for="FinancialNumber" class="col-md-2 control-label"
+                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
                         <div class="col-md-10">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="fa fa-credit-card fa-lg" aria-hidden="true"></i>
                                 </span>
-                                <input type="text" asp-for="FinancialNumber" class="form-control" id="financialnumber" 
+                                <input type="text" asp-for="FinancialNumber" class="form-control" id="financialnumber"
                                        placeholder="Enter fiscal number" />
-                                <span asp-validation-for="FinancialNumber" class="text-danger" />
                             </div>
                         </div>
+                        <span asp-validation-for="FinancialNumber" class="text-danger" />
                     </div>
 
                     <!--EU FINANCIAL NUMBER-->
                     <div class="form-group">
-                        <label asp-for="EUFinancialNumber" class="col-md-2 control-label"></label>
+                        <label asp-for="EUFinancialNumber" class="col-md-2 control-label"
+                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
                         <div class="col-md-10">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="fa fa-credit-card fa-lg" aria-hidden="true"></i>
                                 </span>
-                                <input type="text" asp-for="EUFinancialNumber" class="form-control" id="eufinancialnumber" 
+                                <input type="text" asp-for="EUFinancialNumber" class="form-control" id="eufinancialnumber"
                                        placeholder="Enter EU fiscal number" />
-                                <span asp-validation-for="EUFinancialNumber" class="text-danger" />
                             </div>
                         </div>
+                        <span asp-validation-for="EUFinancialNumber" class="text-danger" />
                     </div>
 
                     <!--SPACER-->

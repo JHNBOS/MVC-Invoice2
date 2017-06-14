@@ -32,7 +32,8 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-users fa-lg" aria-hidden="true"></i>
                                     </span>
-                                    <select asp-for="DebtorID" class="form-control" asp-items="ViewBag.DebtorID">
+                                    <select id="debtor_select" asp-for="DebtorID" class="form-control" 
+                                            asp-items="ViewBag.DebtorID">
                                         <option value="-1">--</option>
                                     </select>
                                 </div>
@@ -47,7 +48,8 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-users fa-lg" aria-hidden="true"></i>
                                     </span>
-                                    <select asp-for="CompanyID" class="form-control" asp-items="ViewBag.CompanyID">
+                                    <select id="company_select" asp-for="CompanyID" class="form-control" 
+                                            asp-items="ViewBag.CompanyID">
                                         <option value="-1">--</option>
                                     </select>
                                 </div>
@@ -207,6 +209,32 @@
             var productArray = new Array();
             var amountArray = new Array();
 
+            /* SET ON OF THE SELECTS READ-ONLY BASED ON SELECTION */
+            $("#debtor_select").change(function () {
+                var optionSelected = $("#debtor_select option:selected");
+                var valueSelected = optionSelected.val();
+                var textSelected = optionSelected.text();
+
+                if (textSelected != "--") {
+                    $("#company_select").prop("disabled", true);
+                }
+                if (textSelected == "--") {
+                    $("#company_select").prop("disabled", false);
+                }
+            });
+
+            $("#company_select").change(function () {
+                var optionSelected = $(this).find("option:selected");
+                var valueSelected = optionSelected.val();
+                var textSelected = optionSelected.text();
+
+                if (textSelected != "--") {
+                    $("#debtor_select").prop("disabled", true);
+                }
+                if (textSelected == "--") {
+                    $("#debtor_select").prop("disabled", false);
+                }
+            });
 
             /* AUTOMATICALLY SET EXPIRATION DATE */
             $("#creation").on("change", function () {

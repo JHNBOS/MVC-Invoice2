@@ -32,7 +32,8 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-users fa-lg" aria-hidden="true"></i>
                                     </span>
-                                    <select asp-for="DebtorID" class="form-control" asp-items="ViewBag.DebtorID"                    disabled>
+                                    <select id="debtor_select" asp-for="DebtorID" class="form-control" 
+                                            asp-items="ViewBag.DebtorID">
                                         <option value="-1">--</option>
                                     </select>
                                 </div>
