@@ -13,12 +13,12 @@
             </div>
         </div>
 
-        <div class="main-large main-center">
+        <div class="main-large-settings main-center">
             <form class="form-horizontal" asp-controller="Admins" asp-action="Settings" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
                 <div class="row main">
-                    <div class="col-sm-7 col-md-7" style="padding-right:0px !important;">
+                    <div class="col-sm-7 col-md-7" id="settings-col-1" style="padding-right:0px !important;">
                         <!--COMPANY INFO-->
                         <!--NAME-->
                         <div class="form-group">
@@ -105,7 +105,7 @@
                         </div>
 
                     </div>
-                    <div class="col-sm-5 col-md-5" style="padding-left:0px !important;">
+                    <div class="col-sm-5 col-md-5" id="settings-col-2" style="padding-left:0px;">
                         <!--COMPANY EMAIL-->
                         <!--EMAIL-->
                         <div class="form-group">
@@ -162,7 +162,7 @@
                 <hr />
 
                 <div class="row main">
-                    <div class="col-sm-7 col-md-7" style="padding-right:0px !important;">
+                    <div class="col-sm-7 col-md-7" id="settings-col-3" style="padding-right:0px !important;">
                         <!--COMPANY INFO-->
                         <!--REGISTRATION NUMBER-->
                         <div class="form-group">
@@ -244,7 +244,7 @@
                         </div>
                     </div>
 
-                    <div class="col-sm-5 col-md-5" style="padding-left:0px !important;">
+                    <div class="col-sm-5 col-md-5" id="settings-col-4" style="padding-left:0px;">
                         <!--LOGO-->
                         <!--FILE UPLOAD-->
                         <div class="form-group">

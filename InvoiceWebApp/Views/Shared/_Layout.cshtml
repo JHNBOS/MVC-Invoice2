@@ -46,8 +46,10 @@
         <link href="https://fonts.googleapis.com/css?family=Oxygen" rel="stylesheet">
 
         <!--jQuery-->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js">
-        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <!--jQuery Adaptive Background Script-->
+        <script src="~/js/jquery-adaptive-background.js"></script>
     </environment>
     <environment names="Staging,Production">
         <!--Stylesheets-->
@@ -65,6 +67,9 @@
 
         <!--jQuery-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        <!--jQuery Adaptive Background Script-->
+        <script src="~/js/jquery-adaptive-background.js"></script>
     </environment>
     @RenderSection("HEAD", required: false)
     @Html.Raw(JavaScriptSnippet.FullScript)
@@ -83,40 +88,58 @@
                 <!--User-->
                 <!--Use logo and check if user exists-->
                 @if (settings.Logo != "" && settings.UseLogo == true && user != null) {
-                    <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-email="@(user.Email)" class="navbar-brand"><img src="~/images/@(settings.Logo)" class="img-responsive" /></a>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-email="@(user.Email)" 
+                       class="navbar-brand">
+                        <img src="~/images/@(settings.Logo)" class="img-responsive" data-adaptive-background/>
+                    </a>
                 }
                 <!--Use logo and check if user doesn't exists-->
                 @if (settings.Logo != "" && settings.UseLogo == true && user == null){
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><img src="~/images/@(settings.Logo)" class="img-responsive" /></a>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
+                        <img src="~/images/@(settings.Logo)" class="img-responsive" data-adaptive-background />
+                    </a>
                 }
                 <!--Don't use logo and check if user exists-->
                 @if (settings.UseLogo == false && user != null){
-                    <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-email="@(user.Email)" class="navbar-brand navtext">@settings.CompanyName</a>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-email="@(user.Email)" 
+                       class="navbar-brand navtext">
+                        @settings.CompanyName
+                    </a>
                 }
                 <!--Don't use logo and check if user doesn't exists-->
                 @if (settings.UseLogo == false && (user == null && admin == null)){
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand navtext">@settings.CompanyName</a>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" 
+                       class="navbar-brand navtext">
+                        @settings.CompanyName
+                    </a>
                 }
                 <!------------------------------------------------------------------>
                 <!--Admin-->
                 <!--Use logo and check if admin exists-->
                 @if (settings.Logo != "" && settings.UseLogo == true && admin != null){
-                    <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-email="@(admin.Email)" class="navbar-brand"><img src="~/images/@(settings.Logo)" class="img-responsive" /></a>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-email="@(admin.Email)" class="navbar-brand">
+                        <img src="~/images/@(settings.Logo)" class="img-responsive" data-adaptive-background />
+                    </a>
                 }
                 <!--Use logo and check if admin doesn't exists-->
                 @if (settings.Logo != "" && settings.UseLogo == true && admin == null){
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand"><img src="~/images/@(settings.Logo)" class="img-responsive" /></a>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="navbar-brand">
+                        <img src="~/images/@(settings.Logo)" class="img-responsive" data-adaptive-background />
+                    </a>
                 }
                 <!--Don't use logo and check if admin exists-->
                 @if (settings.UseLogo == false && admin != null){
-                    <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-email="@(admin.Email)" class="navbar-brand navtext">@settings.CompanyName</a>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" asp-route-email="@(admin.Email)" class="navbar-brand navtext">
+                        @settings.CompanyName
+                    </a>
                 }
 
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <!--Check if user exist-->
-                    @if (user != null){<li><a asp-area="" asp-controller="Home" asp-route-email="@(user.Email)" asp-action="Index">Home</a></li> }
+                    @if (user != null){<li><a asp-area="" asp-controller="Home" asp-route-email="@(user.Email)" 
+                                              asp-action="Index">Home</a></li> }
                     else { <li><a asp-area="" asp-controller="Home" asp-action="Index">Home</a></li> }
                     <!--Check if admin exist-->
                     @if (admin != null){

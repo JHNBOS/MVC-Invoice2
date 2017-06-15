@@ -10,18 +10,23 @@
     AppSettings settings = null;
 
     //Check for user
-    if (SessionHelper.IsExists(Context.Session, "User")){
+    if (SessionHelper.IsExists(Context.Session, "User"))
+    {
         user = (User)Context.Session.Get<User>("User");
     }
     //Check for admin
-    if (SessionHelper.IsExists(Context.Session, "Admin")){
+    if (SessionHelper.IsExists(Context.Session, "Admin"))
+    {
         admin = (Admin)Context.Session.Get<Admin>("Admin");
     }
     //Check for settings
-    if (SessionHelper.IsExists(Context.Session, "Settings")){
+    if (SessionHelper.IsExists(Context.Session, "Settings"))
+    {
         Debug.WriteLine("Settings exists");
         settings = SessionHelper.Get<AppSettings>(Context.Session, "Settings");
-    } else {
+    }
+    else
+    {
         settings = _context.Settings.FirstOrDefault();
         SessionHelper.Set(Context.Session, "Settings", settings);
     }
@@ -42,56 +47,75 @@
     <link href="https://www.amcharts.com/lib/3/plugins/export/export.css" rel="stylesheet" type="text/css">
 }
 
-<!-- Top Row -->
-<div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6 text-center">
-        @if (user != null && admin == null){ <h2 style="margin-top: 40px;">Welcome, @user.Debtor.FirstName</h2> }
-        else if (user == null && admin != null){ <h2 style="margin-top: 40px;">Welcome, @admin.FirstName</h2> }
-        else { <h2 style="margin-top: 40px;">Welcome</h2> }
+<div class="container">
+    <div class="row main">
+        <div class="panel-heading">
+            <div class="panel-title text-center">
+                <h1 class="title">Home</h1>
+                <hr style="width:60%;border-top:2px solid #fff;" />
+            </div>
+        </div>
+
+        <div class="main-large-home main-center">
+            <!-- Top Row -->
+            <div class="row">
+                <div class="col-sm-3 col-md-3"></div>
+                <div class="col-sm-6 col-md-6 text-center">
+                    @if (user != null && admin == null)
+                    { <h2 style="margin-top: 40px;">Welcome, @user.Debtor.FirstName</h2> }
+                    else if (user == null && admin != null)
+                    { <h2 style="margin-top: 40px;">Welcome, @admin.FirstName</h2> }
+                    else
+                    { <h2 style="margin-top: 40px;">Welcome</h2> }
+                </div>
+                <div class="col-sm-3 col-md-3"></div>
+            </div>
+
+            <br />
+            <br />
+
+            <!-- Middle Row -->
+            <div class="row">
+                <div class="col-sm-2 col-md-2"></div>
+                <div class="col-sm-8 col-md-8">
+                    <h4 id="invoiceText" class="text-center"></h4>
+                </div>
+                <div class="col-sm-2 col-md-2"></div>
+            </div>
+
+            <br />
+            <br />
+
+            @if (user != null && user.AccountType == "Client")
+            {
+                <!-- Bottom Row Client -->
+                <div class="row">
+                    <div class="col-sm-3 col-md-3"></div>
+                    <div class="col-sm-6 col-md-6 text-center">
+                        <div id="chartdiv" style="width:100%;height:400px;background-color:#d3d3d3;display:none;"></div>
+                    </div>
+                    <div class="col-sm-3 col-md-3"></div>
+                </div>
+            }
+
+            @if (admin != null)
+            {
+                <!-- Bottom Row Admin -->
+                <div class="row">
+                    <div class="col-sm-1 col-md-1"></div>
+                    <div class="col-sm-5 col-md-5 text-center">
+                        <div id="admin_chartdiv" style="width:100%;height:400px;background-color:#fff;display:none;"></div>
+                    </div>
+                    <div class="col-sm-5 col-md-5">
+                        <div id="admin_chartdiv2" style="width:100%;height:400px;background-color:#fff;display:none;"></div>
+                    </div>
+                    <div class="col-sm-1 col-md-1"></div>
+                </div>
+            }
+        </div>
     </div>
-    <div class="col-md-3"></div>
 </div>
 
-<br />
-<br />
-
-<!-- Middle Row -->
-<div class="row">
-    <div class="col-sm-2"></div>
-    <div class="col-sm-8">
-        <h4 id="invoiceText" class="text-center"></h4>
-    </div>
-    <div class="col-sm-2"></div>
-</div>
-
-<br />
-<br />
-
-@if (user != null && user.AccountType == "Client"){
-    <!-- Bottom Row Client -->
-    <div class="row">
-        <div class="col-sm-3"></div>
-        <div class="col-sm-6 text-center">
-            <div id="chartdiv" style="width:100%;height:400px;background-color:#d3d3d3;display:none;"></div>
-        </div>
-        <div class="col-sm-3"></div>
-    </div>
-}
-
-@if (admin != null){
-    <!-- Bottom Row Admin -->
-    <div class="row">
-        <div class="col-sm-1"></div>
-        <div class="col-sm-5 text-center">
-            <div id="admin_chartdiv" style="width:100%;height:400px;background-color:#d3d3d3;display:none;"></div>
-        </div>
-        <div class="col-sm-5">
-            <div id="admin_chartdiv2" style="width:100%;height:400px;background-color:#d3d3d3;display:none;"></div>
-        </div>
-        <div class="col-sm-1"></div>
-    </div>
-}
 
 @section Scripts{
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
@@ -185,7 +209,7 @@
                 }
             }
 
-            if (paidArray >= 0 && unpaidArray >= 0) {
+            if (paidArray > 0 && unpaidArray >= 0) {
                 AmCharts.makeChart("chartdiv",
                     {
                         "type": "pie",
@@ -383,7 +407,7 @@
                 );
             }
 
-            if (paidCount > 0 && unpaidCount >= 0) {
+            if (paidCount >= 0 && unpaidCount > 0) {
                 AmCharts.makeChart("admin_chartdiv2",
                     {
                         "type": "pie",
@@ -428,6 +452,8 @@
             }
 
             if ($("#admin_chartdiv").is(":empty") && $("#admin_chartdiv2").is(":empty")) {
+                $("#admin_chartdiv").hide();
+                $("#admin_chartdiv2").hide();
                 var noInvoicesText = "There are currently no invoices.";
 
                 if (conceptCount == 0) {

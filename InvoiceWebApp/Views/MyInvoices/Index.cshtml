@@ -14,7 +14,7 @@
             </div>
         </div>
 
-        <div class="main-large main-center">
+        <div class="main-large-index main-center" style="overflow-x: auto;">
             <p>
                 @using (Html.BeginForm())
                 {
@@ -24,7 +24,7 @@
                         <div class="cols-sm-10">
                             <div class="form-inline">
 
-                                @Html.TextBox("searchQuery", null, htmlAttributes: new { @class = "form-control",               @placeholder = "Find..." })
+                                @Html.TextBox("searchQuery", null, htmlAttributes: new { @class = "form-control", @placeholder = "Find..." })
 
                                 <button type="submit" value="Search" class="btn btn-primary">
                                     <span class="fa fa-search"></span>
@@ -100,5 +100,6 @@
                 </tbody>
             </table>
         </div>
+
     </div>
 </div>

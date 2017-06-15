@@ -51,76 +51,341 @@ textarea {
     }
 }
 
-/*CUSTOM CSS*/
-
-/* DEBTOR BUTTONS */
+/*-------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------*/
+/* BEGIN OF NAVBAR CSS */
+.navbar-nav > li > a {
+    padding-top: 12px;
+    padding-bottom: 13px;
+    line-height: 24px;
+}
+.navbar-brand {
+    padding-top: 0;
+    padding-bottom: 0;
+    font-family: 'Century Gothic', sans-serif;
+    font-size: 25px;
+}
+#settings {
+    font-size: 16px;
+    top: 3px;
+}
+#logout-icon {
+    font-size: 16px;
+    top: 3px;
+}
+#logout-link {
+    font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    padding-top: 0;
+    padding-bottom: 0;
+    top: 0px;
+    padding-left: 3px;
+    position: relative;
+}
+.navbar-brand > img {
+    max-height: 50px;
+    max-width: 200px;
+    width: auto;
+    height: auto;
+    background-size: contain;
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: auto;
+}
+.navtext {
+    text-align: center;
+    padding-top: 12px;
+    font-size: 25px;
+    font-weight: normal;
+}
+/* END OF NAVBAR CSS */
+/*-------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------*/
+/* BEGIN OF MAIN CSS */
+.main {
+    margin-top: 40px;
+    position: relative;
+}
+.main-center {
+    margin-top: 30px;
+    margin: 0 auto;
+    padding: 40px 40px;
+}
+.main-large {
+    background-color: #fff;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    max-width: 420px !important;
+    height: auto;
+}
+.main-large-home {
+    height: auto;
+    background-color: #fff;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    max-width: 100% !important;
+}
+.main-large-index {
+    height: auto;
+    background-color: #fff;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    max-width: 100% !important;
+}
+.amcharts-chart-div > a {
+    display: none !important;
+}
+/* END OF MAIN CSS */
+/*-------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------*/
+/* BEGIN OF USER CSS */
+/*-----REGISTER--------------*/
+.main-register {
+    background-color: #fff;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    max-width: 420px !important;
+}
+.register-button {
+    margin-top: 25px;
+    margin-bottom: 20px;
+    height: 55px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1;
+}
+/*-------LOGIN------------------*/
+h1.title {
+    font-size: 50px;
+    font-family: 'Passion One', cursive;
+    font-weight: 400;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+label {
+    margin-bottom: 15px;
+}
+input,
+input::-webkit-input-placeholder {
+    font-size: 11px;
+    padding-top: 3px;
+}
+.main-login {
+    background-color: #fff;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    max-width: 560px !important;
+}
+.login-button {
+    height: 55px;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 1;
+    width: 70%;
+    margin: 25px auto;
+}
+.login-register {
+    font-size: 14px;
+    text-align: center;
+    font-weight: bold;
+}
+/* END OF USER CSS */
+/*-------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------*/
+/* BEGIN OF ADMIN CSS */
+#settings_btn {
+    width: 220px;
+    float: right;
+    margin-top: 30px;
+    margin-right: 250px;
+}
+.main-large-admin {
+    height: 530px;
+    background-color: #fff;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    max-width: 100% !important;
+}
+.main-large-settings {
+    height: 530px;
+    background-color: #fff;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    max-width: 100% !important;
+}
+#showImg {
+    margin-top: 25px;
+    max-height: 60%;
+    max-width: 60%;
+}
+/* END OF ADMIN CSS */
+/*-------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------*/
+/* BEGIN OF DEBTOR CSS */
 #create_deb_btn {
     width: 200px;
     float: right;
     margin-right: 30px;
     margin-top: 30px;
 }
-
 #edit_deb_btn {
     width: 200px;
     float: right;
     margin-right: 30px;
     margin-top: 30px;
 }
-
 #delete_deb_btn {
     width: 200px;
     float: right;
     margin-right: 30px;
     margin-top: 30px;
 }
+.main-large-deb {
+    height: 530px;
+    background-color: #fff;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    max-width: 100% !important;
+}
 
-/* PRODUCT BUTTONS */
+@media screen and (max-width: 767px) {
+    .main-large-deb {
+        height: 1111px;
+    }
+    .main-large-prod{
+        height: 575px;
+    }
+    .main-large-company {
+        height: 1405px;
+    }
+    .main-large-invoice {
+        min-height: 1111px !important;
+        height: auto;
+        overflow: auto;
+    }
+    #inv-col-1 {
+        padding-left: 20%;
+    }
+    #inv-col-2 {
+        border-top: 1px solid #333;
+        padding-top: 50px;
+        padding-left: 20%;
+    }
+    #inv-col-2 #products #productRow .col-sm-3 {
+        padding-left: 15px !important;
+        padding-right: 0px !important;
+        padding-top: 2px;
+    }
+    #inv-col-2 #products #productRow .col-sm-2 {
+        padding-left: 0px;
+        width: 67px;
+        padding-right: 210px;
+        float: right;
+    }
+    #create_inv_btn {
+        margin-right: 35% !important;
+    }
+    .main-large-settings{
+        min-height: 2250px;
+    }
+    #settings_btn{
+        margin-right: 165px;
+    }
+    #settings-col-1,
+    #settings-col-2,
+    #settings-col-3 {
+        padding-left: 23% !important;
+    }
+    #settings-col-4 {
+        padding-top: 20px;
+        padding-left: 23% !important;
+    }
+    .main-login form {
+        padding-left: 80px;
+    }
+    .login-button {
+        margin-left: 25px;
+    }
+    .login-register {
+        margin-right: 30px;
+    }
+}
+/* END OF DEBTOR CSS */
+/*-------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------*/
+/* BEGIN OF PRODUCT CSS */
 #create_prod_btn {
     width: 220px;
     float: right;
-    margin-right: 255px;
+    margin-right: 115px;
     margin-top: 25px;
 }
 
 #edit_prod_btn {
     width: 220px;
     float: right;
-    margin-right: 255px;
+    margin-right: 115px;
     margin-top: 25px;
 }
 
 #delete_prod_btn {
     width: 200px;
     float: right;
-    margin-right: 80px;
+    margin-right: 95px;
     margin-top: 5px;
 }
 
-/* INVOICE BUTTONS */
-#create_comp_btn {
-    width: 200px;
-    float: right;
-    margin-right: 100px;
-    margin-top: 15px;
-    margin-bottom: 20px;
+.main-large-prod {
+    height: 460px;
+    background-color: #fff;
+    /* shadows and rounded borders */
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+    max-width: 70% !important;
 }
-
-#edit_inv_btn {
-    width: 200px;
-    float: right;
-    margin-top: 5px;
-    margin-right: 112px;
-}
-
-#delete_inv_btn {
-    width: 200px;
-    float: right;
-    margin-top: 5px;
-    margin-right: 112px;
-}
-
-/* COMPANY BUTTONS */
+/* END OF PRODUCT CSS */
+/*-------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------*/
+/* BEGIN OF COMPANY CSS */
 #create_comp_btn {
     width: 200px;
     float: right;
@@ -143,163 +408,9 @@ textarea {
     margin-right: 85px;
 }
 
-/* SETTINGS BUTTONS */
-#settings_btn {
-    width: 220px;
-    float: right;
-    margin-top: 30px;
-    margin-right: 250px;
-}
-
-/* NAVBAR */
-.navbar-nav > li > a {
-    padding-top: 12px;
-    padding-bottom: 13px;
-    line-height: 24px;
-}
-
-.navbar-brand {
-    padding-top: 0;
-    padding-bottom: 0;
-    font-family: 'Century Gothic', sans-serif;
-    font-size: 25px;
-}
-
-#settings {
-    font-size: 16px;
-    top: 3px;
-}
-
-#logout-icon {
-    font-size: 16px;
-    top: 3px;
-}
-
-#logout-link {
-    font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
-    font-size: 13px;
-    font-weight: 300;
-    padding-top: 0;
-    padding-bottom: 0;
-    top: 0px;
-    padding-left: 3px;
-    position: relative;
-}
-
-/* SETTINGS */
-#showImg {
-    margin-top: 25px;
-    max-height: 60%;
-    max-width: 60%;
-}
-
-/*---------------------------------------------------------*/
-
-/* BEGIN OF LOGIN */
-.main {
-    margin-top: 40px;
-    position: relative;
-}
-
-h1.title {
-    font-size: 50px;
-    font-family: 'Passion One', cursive;
-    font-weight: 400;
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-label {
-    margin-bottom: 15px;
-}
-
-input,
-input::-webkit-input-placeholder {
-    font-size: 11px;
-    padding-top: 3px;
-}
-
-.main-login {
-    background-color: #fff;
-    /* shadows and rounded borders */
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-}
-
-.main-center {
-    margin-top: 30px;
-    margin: 0 auto;
-    max-width: 420px !important;
-    padding: 40px 40px;
-}
-
-.login-button {
-    margin-top: 25px;
-    margin-bottom: 20px;
-    height: 55px;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 1;
-}
-
-.login-register {
-    font-size: 14px;
-    text-align: center;
-    font-weight: bold;
-}
-/* END OF LOGIN */
-
-/*----------------------------------------------------------------------*/
-
-/* BEGIN OF REGISTER */
-.main-register {
-    background-color: #fff;
-    /* shadows and rounded borders */
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    max-width: 420px !important;
-}
-
-.register-button {
-    margin-top: 25px;
-    margin-bottom: 20px;
-    height: 55px;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 1;
-}
-/* END OF REGISTER */
-
-/*----------------------------------------------------------------------*/
-
-/* BEGIN OF CSS */
-.main-large {
-    background-color: #fff;
-    /* shadows and rounded borders */
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    max-width: 100% !important;
-    height: auto;
-}
-
 .main-large-company {
-    min-height: 600px;
+    height: 600px;
     background-color: #fff;
-    /* shadows and rounded borders */
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px;
@@ -308,11 +419,34 @@ input::-webkit-input-placeholder {
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     max-width: 100% !important;
 }
+/* END OF COMPANY CSS */
+/*-------------------------------------------------------------------------------------*/
+/*-------------------------------------------------------------------------------------*/
+/* BEGIN OF INVOICE CSS */
+#create_inv_btn {
+    width: 200px;
+    float: right;
+    margin-top: 25px;
+    margin-right: 100px;
+}
 
-.main-large-deb {
-    height: 530px;
+#edit_inv_btn {
+    width: 200px;
+    float: right;
+    margin-top: 25px;
+    margin-right: 100px;
+}
+
+#delete_inv_btn {
+    width: 200px;
+    float: right;
+    margin-top: 25px;
+    margin-right: 100px;
+}
+
+.main-large-invoice {
+    height: 600px;
     background-color: #fff;
-    /* shadows and rounded borders */
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;
     border-radius: 2px;
@@ -321,34 +455,4 @@ input::-webkit-input-placeholder {
     box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
     max-width: 100% !important;
 }
-/*------------------------------------------------------------------*/
-/* BEGIN OF NAVBAR */
-
-.navbar-brand > img {
-    max-height: 50px;
-    max-width: 200px;
-    width: auto;
-    height: auto;
-    background-size: contain;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: auto;
-}
-
-.navtext {
-    text-align: center;
-    padding-top: 12px;
-    font-size: 25px;
-    font-weight: normal;
-}
-
-/* END OF NAVBAR */
-
-.amcharts-chart-div > a {
-    display: none !important;
-}
-
-
-
-/* END OF CSS */
+/* END OF INVOICE CSS */
