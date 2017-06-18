@@ -15,7 +15,7 @@
 @if (SessionHelper.IsExists(Context.Session, "User")){
     <form asp-area="" asp-controller="Users" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
-            <li>
+            <li class="@(ViewBag.Current == "UserManage" ? "active" : "")">
                 <a asp-route-id="@(user.ID)" asp-controller="Users" asp-action="Edit" title="Manage">Hello @(user.Debtor.FirstName)!</a>
             </li>
             <li>
@@ -30,10 +30,16 @@
 } else if (SessionHelper.IsExists(Context.Session, "Admin")){
     <form asp-area="" asp-controller="Admins" asp-action="Logout" method="post" id="logoutForm" class="navbar-right">
         <ul class="nav navbar-nav navbar-right">
-            <li>
+            <li class="@(ViewBag.Current == "Manage" ? "active" : "")">
                 <a asp-route-id="@(admin.AdminID)" asp-controller="Admins" asp-action="Edit" title="Manage">Hello @(admin.FirstName)!</a>
             </li>
-            @if (admin != null){ <li><a asp-area="" asp-controller="Admins" asp-action="Settings"><span id="settings" class="glyphicon glyphicon-cog"></span></a></li> }
+            @if (admin != null){
+                <li class="@(ViewBag.Current == "Settings" ? "active" : "")">
+                    <a asp-area="" asp-controller="Admins" asp-action="Settings">
+                        <span id="settings" class="glyphicon glyphicon-cog"></span>
+                    </a>
+                </li> 
+            }
             <li>
                 <a asp-area="" asp-controller="Admins" asp-action="Logout">
                     <span id="logout-icon" class="glyphicon glyphicon-log-out"></span>
@@ -45,6 +51,8 @@
 
 } else {
     <ul class="nav navbar-nav navbar-right">
-        <li><a asp-area="" asp-controller="Users" asp-action="Login">Log in</a></li>
+        <li class="@(ViewBag.Current == "Login" ? "active" : "")">
+            <a asp-area="" asp-controller="Users" asp-action="Login">Log in</a>
+        </li>
     </ul>
 }

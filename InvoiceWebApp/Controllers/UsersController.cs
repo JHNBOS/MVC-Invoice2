@@ -145,6 +145,9 @@ namespace InvoiceWebApp.Controllers
         // GET: User/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            //CURRENT PAGE
+            ViewBag.Current = "UserManage";
+
             if (id == null)
             {
                 return NotFound();
@@ -216,6 +219,9 @@ namespace InvoiceWebApp.Controllers
         //GET: User/Login
         public ActionResult Login()
         {
+            //CURRENT PAGE
+            ViewBag.Current = "Login";
+
             return View();
         }
 
@@ -257,6 +263,9 @@ namespace InvoiceWebApp.Controllers
         //GET: User/ForgotPassword
         public ActionResult ForgotPassword()
         {
+            //CURRENT PAGE
+            ViewBag.Current = "Login";
+
             return View();
         }
 

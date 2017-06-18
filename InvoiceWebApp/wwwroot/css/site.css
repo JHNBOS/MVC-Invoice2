@@ -1,15 +1,22 @@
-﻿body {
-    padding-top: 40px;
-    padding-bottom: 20px;
-    background: #d3d3d3;
-    font-family: 'Oxygen', sans-serif;
+﻿@import url('https://fonts.googleapis.com/css?family=Lato|Montserrat|Overpass|Raleway|Roboto');
+
+body {
+    background: #FFF;
+    font-family: 'Overpass', sans-serif;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    padding-bottom: 0px;
 }
 
 /* Wrapping element */
 /* Set some basic padding to keep content from hitting the edges */
 .body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 75px;
+    padding-right: 75px;
+    width: 90%;
+    margin: 0 auto;
+    flex: 1 0 auto;
 }
 
 /* Set widths on the form inputs since otherwise they're 100% wide */
@@ -54,25 +61,31 @@ textarea {
 /*-------------------------------------------------------------------------------------*/
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF NAVBAR CSS */
-.navbar-nav > li > a {
-    padding-top: 12px;
-    padding-bottom: 13px;
-    line-height: 24px;
+
+nav .brand-logo {
+    font-family: 'Montserrat', RaleWay, sans-serif;
+    font-weight: 100 !important;
 }
-.navbar-brand {
-    padding-top: 0;
-    padding-bottom: 0;
-    font-family: 'Century Gothic', sans-serif;
-    font-size: 25px;
+
+nav .brand-logo.right {
+    padding-right: 25px;
 }
+
+nav .brand-logo img {
+    vertical-align: middle;
+    padding-bottom: 10px;
+}
+
 #settings {
     font-size: 16px;
     top: 3px;
 }
+
 #logout-icon {
     font-size: 16px;
     top: 3px;
 }
+
 #logout-link {
     font-family: Open Sans, Helvetica Neue, Helvetica, Arial, sans-serif;
     font-size: 13px;
@@ -83,173 +96,44 @@ textarea {
     padding-left: 3px;
     position: relative;
 }
-.navbar-brand > img {
-    max-height: 50px;
-    max-width: 200px;
-    width: auto;
-    height: auto;
-    background-size: contain;
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    margin: auto;
-}
-.navtext {
-    text-align: center;
-    padding-top: 12px;
-    font-size: 25px;
-    font-weight: normal;
-}
+
 /* END OF NAVBAR CSS */
 /*-------------------------------------------------------------------------------------*/
-/*-------------------------------------------------------------------------------------*/
 /* BEGIN OF MAIN CSS */
-.main {
-    margin-top: 40px;
-    position: relative;
-}
-.main-center {
-    margin-top: 30px;
-    margin: 0 auto;
+
+#home {
     padding: 40px 40px;
+    margin: 0 auto;
+    min-height: 250px;
+    width: 100%;
 }
-.main-large {
-    background-color: #fff;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    max-width: 420px !important;
-    height: auto;
-}
-.main-large-home {
-    height: auto;
-    background-color: #fff;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    max-width: 100% !important;
-}
-.main-large-index {
-    height: auto;
-    background-color: #fff;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    max-width: 100% !important;
-}
+
 .amcharts-chart-div > a {
     display: none !important;
 }
+
 /* END OF MAIN CSS */
 /*-------------------------------------------------------------------------------------*/
-/*-------------------------------------------------------------------------------------*/
 /* BEGIN OF USER CSS */
-/*-----REGISTER--------------*/
-.main-register {
-    background-color: #fff;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    max-width: 420px !important;
+
+#login-form {
+    padding: 20px 30px;
 }
-.register-button {
-    margin-top: 25px;
-    margin-bottom: 20px;
-    height: 55px;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 1;
-}
-/*-------LOGIN------------------*/
-h1.title {
-    font-size: 50px;
-    font-family: 'Passion One', cursive;
-    font-weight: 400;
-}
-.form-group {
-    margin-bottom: 15px;
-}
-label {
-    margin-bottom: 15px;
-}
-input,
-input::-webkit-input-placeholder {
-    font-size: 11px;
-    padding-top: 3px;
-}
-.main-login {
-    background-color: #fff;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    max-width: 560px !important;
-}
-.login-button {
-    height: 55px;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 1;
-    width: 70%;
-    margin: 25px auto;
-}
-.login-register {
-    font-size: 14px;
-    text-align: center;
-    font-weight: bold;
+
+#forgot-form{
+    padding: 20pc 30px;
 }
 /* END OF USER CSS */
 /*-------------------------------------------------------------------------------------*/
-/*-------------------------------------------------------------------------------------*/
-/* BEGIN OF ADMIN CSS */
-#settings_btn {
-    width: 220px;
-    float: right;
-    margin-top: 30px;
-    margin-right: 250px;
-}
-.main-large-admin {
-    height: 530px;
-    background-color: #fff;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    max-width: 100% !important;
-}
-.main-large-settings {
-    height: 530px;
-    background-color: #fff;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    max-width: 100% !important;
-}
+/* BEGIN OF SETTINGS CSS */
+
 #showImg {
     margin-top: 25px;
     max-height: 60%;
     max-width: 60%;
 }
-/* END OF ADMIN CSS */
+
+/* END OF SETTINGS CSS */
 /*-------------------------------------------------------------------------------------*/
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF DEBTOR CSS */

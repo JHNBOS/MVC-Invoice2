@@ -21,6 +21,9 @@ namespace InvoiceWebApp.Controllers
 
         public IActionResult Index(string email)
         {
+            //CURRENT PAGE
+            ViewBag.Current = "Home";
+
             if (email != "")
             {
                 GetInvoices(email);
@@ -34,6 +37,9 @@ namespace InvoiceWebApp.Controllers
 
         public IActionResult About()
         {
+            //CURRENT PAGE
+            ViewBag.Current = "About";
+
             ViewData["Message"] = "Your application description page.";
 
             return View();
@@ -41,6 +47,9 @@ namespace InvoiceWebApp.Controllers
 
         public IActionResult Contact()
         {
+            //CURRENT PAGE
+            ViewBag.Current = "Contact";
+
             return View();
         }
 

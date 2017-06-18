@@ -99,12 +99,18 @@ namespace InvoiceWebApp.Controllers
         // GET: Admins
         public async Task<IActionResult> Index()
         {
+            //CURRENT PAGE
+            ViewBag.Current = "Admins";
+
             return View(await _context.Admins.ToListAsync());
         }
 
         // GET: Admins/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            //CURRENT PAGE
+            ViewBag.Current = "Admins";
+
             if (id == null)
             {
                 return NotFound();
@@ -123,6 +129,9 @@ namespace InvoiceWebApp.Controllers
         // GET: Admins/Create
         public IActionResult Create()
         {
+            //CURRENT PAGE
+            ViewBag.Current = "Admins";
+
             return View();
         }
 
@@ -144,6 +153,9 @@ namespace InvoiceWebApp.Controllers
         // GET: Admins/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            //CURRENT PAGE
+            ViewBag.Current = "Manage";
+
             if (id == null)
             {
                 return NotFound();
@@ -195,6 +207,9 @@ namespace InvoiceWebApp.Controllers
         // GET: Admins/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            //CURRENT PAGE
+            ViewBag.Current = "Admins";
+
             if (id == null)
             {
                 return NotFound();
@@ -224,6 +239,9 @@ namespace InvoiceWebApp.Controllers
         //GET: Admins/Login
         public ActionResult Login()
         {
+            //CURRENT PAGE
+            ViewBag.Current = "AdminLogin";
+
             return View();
         }
 
@@ -261,6 +279,9 @@ namespace InvoiceWebApp.Controllers
         //GET: Admins/ForgotPassword
         public ActionResult ForgotPassword()
         {
+            //CURRENT PAGE
+            ViewBag.Current = "AdminLogin";
+
             return View();
         }
 
@@ -302,6 +323,9 @@ namespace InvoiceWebApp.Controllers
         //GET: User/Settings
         public ActionResult Settings()
         {
+            //CURRENT PAGE
+            ViewBag.Current = "Settings";
+
             return View(_settings);
         }
 

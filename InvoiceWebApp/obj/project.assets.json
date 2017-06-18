@@ -140,7 +140,7 @@
           "lib/netstandard1.5/Microsoft.ApplicationInsights.dll": {}
         }
       },
-      "Microsoft.ApplicationInsights.AspNetCore/2.0.0": {
+      "Microsoft.ApplicationInsights.AspNetCore/2.0.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.ApplicationInsights": "2.2.0",
@@ -4565,16 +4565,16 @@
         "microsoft.applicationinsights.nuspec"
       ]
     },
-    "Microsoft.ApplicationInsights.AspNetCore/2.0.0": {
-      "sha512": "LcbwEaO9oA063w5yzxLgkxZkFIF9VCYxG98E2XZ2Ua/Uj2I3WMhyRp/gE7HI9sUapYRT3WCyJ/LYXT69WYrKow==",
+    "Microsoft.ApplicationInsights.AspNetCore/2.0.1": {
+      "sha512": "6XR356YN/o9RveaYPfZpgMEHVOM2PBS09h87lxRgupQ136Z82AviP8EvHOUjstnBizKQOjpzMkxAsGvTu4HZgg==",
       "type": "package",
-      "path": "microsoft.applicationinsights.aspnetcore/2.0.0",
+      "path": "microsoft.applicationinsights.aspnetcore/2.0.1",
       "files": [
         "lib/net451/Microsoft.ApplicationInsights.AspNetCore.dll",
         "lib/net451/Microsoft.ApplicationInsights.AspNetCore.xml",
         "lib/netstandard1.6/Microsoft.ApplicationInsights.AspNetCore.dll",
         "lib/netstandard1.6/Microsoft.ApplicationInsights.AspNetCore.xml",
-        "microsoft.applicationinsights.aspnetcore.2.0.0.nupkg.sha512",
+        "microsoft.applicationinsights.aspnetcore.2.0.1.nupkg.sha512",
         "microsoft.applicationinsights.aspnetcore.nuspec"
       ]
     },
@@ -11414,7 +11414,7 @@
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v1.1": [
       "MailKit >= 1.16.1",
-      "Microsoft.ApplicationInsights.AspNetCore >= 2.0.0",
+      "Microsoft.ApplicationInsights.AspNetCore >= 2.0.1",
       "Microsoft.AspNetCore >= 1.1.2",
       "Microsoft.AspNetCore.Authentication.Cookies >= 1.1.2",
       "Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore >= 1.1.2",
@@ -11538,7 +11538,7 @@
           },
           "Microsoft.ApplicationInsights.AspNetCore": {
             "target": "Package",
-            "version": "2.0.0"
+            "version": "2.0.1"
           },
           "Microsoft.AspNetCore.Session": {
             "target": "Package",

@@ -241,6 +241,9 @@ namespace InvoiceWebApp.Controllers
         // GET: Invoice
         public async Task<IActionResult> Index(string sortOrder, string searchQuery)
         {
+            //CURRENT PAGE
+            ViewBag.Current = "Invoices";
+
             //SORTING OPTIONS INVOICE LIST
             ViewBag.BeginSortParm = String.IsNullOrEmpty(sortOrder) ? "begin_desc" : "";
             ViewBag.NumberSortParm = sortOrder == "Number" ? "number_desc" : "Number";
@@ -298,6 +301,9 @@ namespace InvoiceWebApp.Controllers
         // GET: Invoice/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            //CURRENT PAGE
+            ViewBag.Current = "Invoices";
+
             if (id == null)
             {
                 return NotFound();
@@ -345,6 +351,9 @@ namespace InvoiceWebApp.Controllers
         // GET: Invoice/Create
         public IActionResult Create()
         {
+            //CURRENT PAGE
+            ViewBag.Current = "Invoices";
+
             var products = _context.Products
                 .Select(s => new SelectListItem
                 {
@@ -434,6 +443,9 @@ namespace InvoiceWebApp.Controllers
         // GET: Invoice/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            //CURRENT PAGE
+            ViewBag.Current = "Invoices";
+
             if (id == null)
             {
                 return NotFound();
@@ -542,6 +554,9 @@ namespace InvoiceWebApp.Controllers
         // GET: Invoice/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            //CURRENT PAGE
+            ViewBag.Current = "Invoices";
+
             if (id == null)
             {
                 return NotFound();

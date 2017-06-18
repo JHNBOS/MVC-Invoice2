@@ -22,12 +22,18 @@ namespace InvoiceWebApp.Controllers
         // GET: Companies
         public async Task<IActionResult> Index()
         {
+            //CURRENT PAGE
+            ViewBag.Current = "Companies";
+
             return View(await _context.Company.ToListAsync());
         }
 
         // GET: Companies/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            //CURRENT PAGE
+            ViewBag.Current = "Companies";
+
             if (id == null)
             {
                 return NotFound();
@@ -46,6 +52,9 @@ namespace InvoiceWebApp.Controllers
         // GET: Companies/Create
         public IActionResult Create()
         {
+            //CURRENT PAGE
+            ViewBag.Current = "Companies";
+
             return View();
         }
 
@@ -119,6 +128,9 @@ namespace InvoiceWebApp.Controllers
         // GET: Companies/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            //CURRENT PAGE
+            ViewBag.Current = "Companies";
+
             if (id == null)
             {
                 return NotFound();
