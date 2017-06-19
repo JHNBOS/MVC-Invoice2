@@ -257,6 +257,7 @@ namespace InvoiceWebApp.Controllers
         public ActionResult Logout()
         {
             HttpContext.Session.Remove("User");
+            HttpContext.Session.Remove("Admin");
             return RedirectToAction("Login", "Users", new { area = "" });
         }
 

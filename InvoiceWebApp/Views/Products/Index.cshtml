@@ -4,19 +4,18 @@
     ViewData["Title"] = "Products";
 }
 
-<div class="container">
-    <div class="row main">
-        <div class="panel-heading">
-            <div class="panel-title text-center">
-                <h1 class="title">Products</h1>
-                <hr style="width:60%;border-top:2px solid #fff;" />
-            </div>
-        </div>
+<div class="container grey lighten-4" id="product-index">
 
-        <div class="main-large-index main-center" style="overflow-x: auto;">
+    <div class="row">
+        <div class="col s12 col m12 center-align">
+            <h4 style="margin-top: 40px;">Products</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 col m12">
             <p>
-                @using (Html.BeginForm())
-                {
+                @using (Html.BeginForm()) {
                     <br />
 
                     <div class="form-group">
@@ -24,15 +23,16 @@
                             <div class="form-inline">
                                 @Html.TextBox("searchQuery", null, htmlAttributes: new { @class = "form-control", @placeholder = "Find..." })
 
-                                <button type="submit" value="Search" class="btn btn-primary">
+                                <button type="submit" value="Search" class="btn btn-primary tooltipped"
+                                        data-position="top" data-delay="50" data-tooltip="Search for Product">
                                     <span class="fa fa-search"></span>
                                     Search
                                 </button>
 
-                                <a asp-action="Create" value="Create Product" class="btn btn-primary" style="float:right;">
+                                <a asp-action="Create" value="Create Product" class="btn btn-primary tooltipped"
+                                   data-position="top" data-delay="50" data-tooltip="Create Product" style="float:right;">
                                     <span class="fa fa-cart-plus fa-lg"></span>
                                 </a>
-
                             </div>
                         </div>
                     </div>
@@ -42,7 +42,7 @@
                 }
             </p>
 
-            <table class="table table-hover table-striped">
+            <table class="responsive-table borderd highlight">
                 <thead>
                     <tr>
                         <th>
@@ -61,11 +61,11 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
-                    {
+                    @foreach (var item in Model) {
                         <tr>
                             <td>
-                                <a asp-action="Details" asp-route-id="@item.ProductID">
+                                <a class="tooltipped" asp-action="Details" asp-route-id="@item.ProductID"
+                                   data-position="top" data-delay="50" data-tooltip="View Details">
                                     @Html.DisplayFor(modelItem => item.Name)
                                 </a>
                             </td>
@@ -79,8 +79,16 @@
                                 @Html.Raw(String.Format("{0}%", item.VAT))
                             </td>
                             <td>
-                                <a asp-action="Edit" asp-route-id="@item.ProductID">Edit</a> |
-                                <a asp-action="Delete" asp-route-id="@item.ProductID">Delete</a>
+                                <a class="tooltipped" asp-action="Edit" asp-route-id="@item.ProductID"
+                                   data-position="top" data-delay="50" data-tooltip="Edit Product"
+                                   style="padding-right: 2px;">
+                                    <i class="material-icons green-text">edit</i>
+                                </a>
+                                <a class="tooltipped" asp-action="Delete" asp-route-id="@item.ProductID"
+                                   data-position="right" data-delay="50" data-tooltip="Remove Product"
+                                   style="padding-left: 2px;">
+                                    <i class="material-icons red-text">delete</i>
+                                </a>
                             </td>
                         </tr>
                     }
@@ -89,3 +97,13 @@
         </div>
     </div>
 </div>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            $('.tooltipped').tooltip({ delay: 50 });
+        });
+    </script>
+}

@@ -123,6 +123,7 @@ nav .brand-logo img {
 #forgot-form{
     padding: 20pc 30px;
 }
+
 /* END OF USER CSS */
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF SETTINGS CSS */
@@ -137,206 +138,57 @@ nav .brand-logo img {
 /*-------------------------------------------------------------------------------------*/
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF DEBTOR CSS */
-#create_deb_btn {
-    width: 200px;
-    float: right;
-    margin-right: 30px;
-    margin-top: 30px;
-}
-#edit_deb_btn {
-    width: 200px;
-    float: right;
-    margin-right: 30px;
-    margin-top: 30px;
-}
-#delete_deb_btn {
-    width: 200px;
-    float: right;
-    margin-right: 30px;
-    margin-top: 30px;
-}
-.main-large-deb {
-    height: 530px;
-    background-color: #fff;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    max-width: 100% !important;
+
+#debtor-index {
+    padding: 40px 40px;
+    margin: 0 auto;
+    min-height: 250px;
+    width: 100%;
 }
 
-@media screen and (max-width: 767px) {
-    .main-large-deb {
-        height: 1111px;
-    }
-    .main-large-prod{
-        height: 575px;
-    }
-    .main-large-company {
-        height: 1405px;
-    }
-    .main-large-invoice {
-        min-height: 1111px !important;
-        height: auto;
-        overflow: auto;
-    }
-    #inv-col-1 {
-        padding-left: 20%;
-    }
-    #inv-col-2 {
-        border-top: 1px solid #333;
-        padding-top: 50px;
-        padding-left: 20%;
-    }
-    #inv-col-2 #products #productRow .col-sm-3 {
-        padding-left: 15px !important;
-        padding-right: 0px !important;
-        padding-top: 2px;
-    }
-    #inv-col-2 #products #productRow .col-sm-2 {
-        padding-left: 0px;
-        width: 67px;
-        padding-right: 210px;
-        float: right;
-    }
-    #create_inv_btn {
-        margin-right: 35% !important;
-    }
-    .main-large-settings{
-        min-height: 2250px;
-    }
-    #settings_btn{
-        margin-right: 165px;
-    }
-    #settings-col-1,
-    #settings-col-2,
-    #settings-col-3 {
-        padding-left: 23% !important;
-    }
-    #settings-col-4 {
-        padding-top: 20px;
-        padding-left: 23% !important;
-    }
-    .main-login form {
-        padding-left: 80px;
-    }
-    .login-button {
-        margin-left: 25px;
-    }
-    .login-register {
-        margin-right: 30px;
-    }
+create-debtor {
+    padding: 40px 40px;
+    margin: 0 auto;
+    min-height: 250px;
+    width: 100%;
 }
+
 /* END OF DEBTOR CSS */
 /*-------------------------------------------------------------------------------------*/
-/*-------------------------------------------------------------------------------------*/
 /* BEGIN OF PRODUCT CSS */
-#create_prod_btn {
-    width: 220px;
-    float: right;
-    margin-right: 115px;
-    margin-top: 25px;
+#product-index {
+    padding: 40px 40px;
+    margin: 0 auto;
+    min-height: 250px;
+    width: 100%;
 }
 
-#edit_prod_btn {
-    width: 220px;
-    float: right;
-    margin-right: 115px;
-    margin-top: 25px;
-}
-
-#delete_prod_btn {
-    width: 200px;
-    float: right;
-    margin-right: 95px;
-    margin-top: 5px;
-}
-
-.main-large-prod {
-    height: 460px;
-    background-color: #fff;
-    /* shadows and rounded borders */
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    max-width: 70% !important;
-}
 /* END OF PRODUCT CSS */
 /*-------------------------------------------------------------------------------------*/
-/*-------------------------------------------------------------------------------------*/
 /* BEGIN OF COMPANY CSS */
-#create_comp_btn {
-    width: 200px;
-    float: right;
-    margin-right: 85px;
-    margin-top: 15px;
-    margin-bottom: 20px;
+
+#company-index {
+    padding: 40px 40px;
+    margin: 0 auto;
+    min-height: 250px;
+    width: 100%;
 }
 
-#edit_comp_btn {
-    width: 200px;
-    float: right;
-    margin-top: 5px;
-    margin-right: 85px;
-}
-
-#delete_comp_btn {
-    width: 200px;
-    float: right;
-    margin-top: 5px;
-    margin-right: 85px;
-}
-
-.main-large-company {
-    height: 600px;
-    background-color: #fff;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    max-width: 100% !important;
-}
 /* END OF COMPANY CSS */
 /*-------------------------------------------------------------------------------------*/
-/*-------------------------------------------------------------------------------------*/
 /* BEGIN OF INVOICE CSS */
-#create_inv_btn {
-    width: 200px;
-    float: right;
-    margin-top: 25px;
-    margin-right: 100px;
+
+#invoice-index {
+    padding: 40px 40px;
+    margin: 0 auto;
+    min-height: 250px;
+    width: 100%;
 }
 
-#edit_inv_btn {
-    width: 200px;
-    float: right;
-    margin-top: 25px;
-    margin-right: 100px;
-}
-
-#delete_inv_btn {
-    width: 200px;
-    float: right;
-    margin-top: 25px;
-    margin-right: 100px;
-}
-
-.main-large-invoice {
-    height: 600px;
-    background-color: #fff;
-    -moz-border-radius: 2px;
-    -webkit-border-radius: 2px;
-    border-radius: 2px;
-    -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
-    max-width: 100% !important;
-}
 /* END OF INVOICE CSS */
+/*-------------------------------------------------------------------------------------*/
+/* BEGIN OF MOBILE AND TABLET CSS */
+@media screen and (max-width: 767px) {
+
+}
+/* END OF MOBILE AND TABLET CSS */

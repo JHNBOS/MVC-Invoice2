@@ -135,7 +135,7 @@
                     </li>
                     <!--Login-->
                     <li>
-                        <a asp-controller="Users" asp-action="Login" class="btn waves-effect waves-yellow amber">Login</a>
+                        <a id="account-btn" asp-controller="Users" asp-action="Login" class="btn waves-effect waves-yellow amber">Login</a>
                     </li>
                 </ul>
             </div>
@@ -173,7 +173,7 @@
         </div>
     </footer>
 
-
+   
     <environment names="Development">
         <!--<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>-->
         <!--jQuery-->
@@ -207,6 +207,35 @@
         <!--Site JS-->
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
+
+    <script>
+        $(document).ready(() => {
+            var isLoggedIn = false;
+
+            @if (user != null || admin != null) {
+                <text>
+                    isLoggedIn = true;
+                </text>
+            }
+
+            if (isLoggedIn == true) {
+                $("#account-btn").html(`
+                    <i id="logout-icon" style="line-height:0;" class="fa fa-sign-out"></i>
+                    <span id="logout-link">Log out</span>
+                `);
+                $("#account-btn").attr("asp-action", "Logout");
+                $("#account-btn").attr("href", "/Users/Logout");
+            } else {
+                $("#account-btn").html(`
+                    <i id="login-icon" style="line-height:0;" class="fa fa-sign-in"></i>
+                    <span id="login-link">Log in</span>
+                `);
+                $("#account-btn").attr("asp-action", "Login");
+                $("#account-btn").attr("href", "/Users/Login");
+            }
+
+        });
+    </script>
 
     @RenderSection("Scripts", required: false)
 </body>

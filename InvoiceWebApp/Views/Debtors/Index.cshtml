@@ -4,7 +4,7 @@
     ViewData["Title"] = "Debtors";
 }
 
-<div class="container grey lighten-4" id="home">
+<div class="container grey lighten-4" id="debtor-index">
 
     <div class="row">
         <div class="col s12 col m12 center-align">
@@ -23,16 +23,16 @@
                             <div class="form-inline">
                                 @Html.TextBox("searchQuery", null, htmlAttributes: new { @class = "form-control", @placeholder = "Find..." })
 
-                                <button type="submit" value="Search" class="btn btn-primary tooltipped" data-position="top" 
-                                        data-delay="50" data-tooltip="Search for Debtor">
+                                <button type="submit" value="Search" class="btn btn-primary tooltipped"
+                                        data-position="top" data-delay="50" data-tooltip="Search for Debtor">
                                     <span class="fa fa-search"></span>
                                     Search
                                 </button>
 
-                                <a asp-action="Create" value="Create Debtor" class="btn btn-primary tooltipped" 
+                                <a asp-action="Create" value="Create Debtor" class="btn btn-primary tooltipped"
                                    data-position="top" data-delay="50" data-tooltip="Create Debtor" style="float:right;">
                                     <span class="fa fa-user-plus fa-lg"></span>
-                                </a>                                    
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -73,14 +73,14 @@
                                 @Html.DisplayFor(modelItem => item.IdNumber)
                             </td>
                             <td>
-                                <a class="tooltipped" asp-action="Details" asp-route-id="@item.DebtorID" data-position="top" 
-                                   data-delay="50" data-tooltip="View Details">
+                                <a class="tooltipped" asp-action="Details" asp-route-id="@item.DebtorID"
+                                   data-position="top" data-delay="50" data-tooltip="View Details">
                                     @Html.DisplayFor(modelItem => item.LastName)
                                 </a>
                             </td>
                             <td>
-                                <a class="tooltipped" asp-action="Details" asp-route-id="@item.DebtorID" data-position="top" 
-                                   data-delay="50" data-tooltip="View Details">
+                                <a class="tooltipped" asp-action="Details" asp-route-id="@item.DebtorID"
+                                   data-position="top" data-delay="50" data-tooltip="View Details">
                                     @Html.DisplayFor(modelItem => item.FirstName)
                                 </a>
                             </td>
@@ -94,12 +94,14 @@
                                 @Html.DisplayFor(modelItem => item.Country)
                             </td>
                             <td>
-                                <a class="tooltipped" asp-action="Edit" asp-route-id="@item.DebtorID" data-position="top" 
-                                   data-delay="50" data-tooltip="Edit Debtor" style="padding-right: 2px;">
+                                <a class="tooltipped" asp-action="Edit" asp-route-id="@item.DebtorID"
+                                   data-position="top" data-delay="50" data-tooltip="Edit Debtor"
+                                   style="padding-right: 2px;">
                                     <i class="material-icons green-text">edit</i>
                                 </a>
-                                <a class="tooltipped" asp-action="Delete" asp-route-id="@item.DebtorID" data-position="right" 
-                                   data-delay="50" data-tooltip="Remove Debtor" style="padding-left: 2px;">
+                                <a class="tooltipped" asp-action="Delete" asp-route-id="@item.DebtorID"
+                                   data-position="right" data-delay="50" data-tooltip="Remove Debtor"
+                                   style="padding-left: 2px;">
                                     <i class="material-icons red-text">delete</i>
                                 </a>
                             </td>

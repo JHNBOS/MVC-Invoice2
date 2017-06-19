@@ -4,21 +4,19 @@
     ViewData["Title"] = "Create Debtor";
 }
 
+<div class="grey lighten-4" id="create-debtor">
 
-<div class="container">
-    <div class="row main">
-        <div class="panel-heading">
-            <div class="panel-title text-center">
-                <h1 class="title">Create Debtor</h1>
-                <hr style="width:60%;border-top:2px solid #fff;" />
-            </div>
+    <div class="row">
+        <div class="col s12 col m12 center-align">
+            <h4 style="margin-top: 40px;">Create Debtor</h4>
         </div>
+    </div>
 
-        <div class="main-large-deb main-center">
+    <div class="row">
+        <div class="col s12 col m12">
             <form class="form-horizontal" asp-controller="Debtors" asp-action="Create">
-                
                 <!--LEFT COLUMN-->
-                <div class="col-sm-7 col-md-7">
+                <div class="col s7 col m7">
                     <!--PERSONAL ID NUMBER-->
                     <div class="form-group">
                         <label asp-for="IdNumber" class="col-sm-2 col-md-2 control-label"
@@ -119,7 +117,7 @@
                 <!--END OF LEFT COLUMN-->
                 <!-------------------------------------------------------------------------------------------->
                 <!--RIGHT COLUMN-->
-                <div class="col-sm-5 col-md-5">
+                <div class="col s5 col m5">
                     <!--ADDRESS-->
                     <div class="form-group">
                         <label asp-for="Address" class="col-sm-2 col-md-2 control-label"
@@ -202,14 +200,18 @@
 
             </form>
 
+            <a asp-action="Index">Back to Overview</a>
         </div>
-
-        <a asp-action="Index" style="position:absolute;top:93%;left:5%;">Back to Overview</a>
-
     </div>
+
 </div>
 
-
-@section Scripts {
+@section Scripts{
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            $('.tooltipped').tooltip({ delay: 50 });
+        });
+    </script>
 }

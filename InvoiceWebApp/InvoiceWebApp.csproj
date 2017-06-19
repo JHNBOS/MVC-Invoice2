@@ -13,7 +13,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Controllers\DebtorsController.cs" />
+    <Content Include="Controllers\AdminsController.cs" />
+    <Content Include="Controllers\CompaniesController.cs" />
+    <Content Include="Controllers\HomeController.cs" />
+    <Content Include="Controllers\InvoiceItemsController.cs" />
+    <Content Include="Controllers\InvoicesController.cs" />
+    <Content Include="Controllers\MyInvoicesController.cs" />
+    <Content Include="Controllers\ProductsController.cs" />
+    <Content Include="Controllers\UsersController.cs" />
     <Content Include="wwwroot\css\site.css" />
     <Content Include="wwwroot\css\site.min.css" />
     <Content Include="wwwroot\favicon.ico" />
