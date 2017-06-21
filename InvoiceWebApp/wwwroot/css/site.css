@@ -97,6 +97,16 @@ nav .brand-logo img {
     position: relative;
 }
 
+#sidenav-overlay{
+    z-index: 996;
+}
+
+.side-nav .collapsible-body li a, .side-nav.fixed .collapsible-body li a {
+    padding: 0 23.5px 0 31px;
+    text-align: center;
+    background-color: #e2ffd5;
+}
+
 /* END OF NAVBAR CSS */
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF MAIN CSS */
@@ -118,16 +128,26 @@ nav .brand-logo img {
 
 #login-form {
     padding: 20px 30px;
+    width: 80%;
 }
 
-#forgot-form{
-    padding: 20pc 30px;
+#forgot-form {
+    padding: 20px 30px;
+    width: 80%;
+}
+
+#login-form .input-field, #forgot-form .input-field {
+    position: relative;
+    left: 37%;
+}
+
+#login-form .input-field input, #forgot-form .input-field input {
+    max-width: 400px !important;
 }
 
 /* END OF USER CSS */
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF SETTINGS CSS */
-
 #showImg {
     margin-top: 25px;
     max-height: 60%;
@@ -139,42 +159,156 @@ nav .brand-logo img {
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF DEBTOR CSS */
 
-#debtor-index {
+#debtor-index,
+#create-debtor, #edit-debtor,
+#details-debtor, #remove-debtor {
     padding: 40px 40px;
     margin: 0 auto;
     min-height: 250px;
     width: 100%;
 }
 
-create-debtor {
-    padding: 40px 40px;
-    margin: 0 auto;
-    min-height: 250px;
-    width: 100%;
+#create-debtor-btn, #edit-debtor-btn,
+#change-debtor-btn, #remove-debtor-btn {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#create-debtor-btn > span, #edit-debtor-btn > span,
+#change-debtor-btn > span, #remove-debtor-btn > span {
+    height: 36px;
+    line-height: 40px;
+}
+
+#details-debtor input[type=text]:disabled, #remove-debtor input[type=text]:disabled,
+#details-debtor input[type=email]:disabled, #remove-debtor input[type=email]:disabled {
+    color: rgba(0, 0, 0, 0.65) !important;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
+}
+
+#details-debtor input[type=text]:disabled + label, #remove-debtor input[type=text]:disabled + label,
+#details-debtor input[type=email]:disabled + label, #remove-debtor input[type=email]:disabled + label {
+    color: rgba(0, 0, 0, 0.50) !important;
 }
 
 /* END OF DEBTOR CSS */
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF PRODUCT CSS */
-#product-index {
+
+#product-index,
+#create-product, #edit-product,
+#details-product, #remove-product {
     padding: 40px 40px;
     margin: 0 auto;
     min-height: 250px;
     width: 100%;
+}
+
+#create-product-btn, #edit-product-btn,
+#change-product-btn, #remove-product-btn {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#create-product-btn > span, #edit-product-btn > span,
+#change-product-btn > span, #remove-product-btn > span {
+    height: 36px;
+    line-height: 40px;
+}
+
+#details-product input[type=text]:disabled, #remove-product input[type=text]:disabled,
+#details-product input[type=email]:disabled, #remove-product input[type=email]:disabled,
+#details-product textarea:disabled, #remove-product textarea:disabled {
+    color: rgba(0, 0, 0, 0.65) !important;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
+}
+
+#details-product input[type=text]:disabled + label, #remove-product input[type=text]:disabled + label,
+#details-product input[type=email]:disabled + label, #remove-product input[type=email]:disabled + label,
+#details-product textarea:disabled + label, #remove-product textarea:disabled + label {
+    color: rgba(0, 0, 0, 0.50) !important;
+}
+
+#create-product #form .input-field, #edit-product #form .input-field,
+#details-product #form .input-field, #remove-product #form .input-field {
+    position: relative;
+    left: 31%;
 }
 
 /* END OF PRODUCT CSS */
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF COMPANY CSS */
-
-#company-index {
+#company-index,
+#create-company, #edit-company,
+#details-company, #remove-company {
     padding: 40px 40px;
     margin: 0 auto;
     min-height: 250px;
     width: 100%;
 }
 
+#create-company-btn, #edit-company-btn,
+#change-company-btn, #remove-company-btn {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#create-company-btn > span, #edit-company-btn > span,
+#change-company-btn > span, #remove-company-btn > span {
+    height: 36px;
+    line-height: 40px;
+}
+
+#details-company input[type=text]:disabled, #remove-company input[type=text]:disabled,
+#details-company input[type=email]:disabled, #remove-company input[type=email]:disabled {
+    color: rgba(0, 0, 0, 0.65) !important;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
+}
+
+#details-company input[type=text]:disabled + label, #remove-company input[type=text]:disabled + label,
+#details-company input[type=email]:disabled + label, #remove-company input[type=email]:disabled + label {
+    color: rgba(0, 0, 0, 0.50) !important;
+}
+
 /* END OF COMPANY CSS */
+/*-------------------------------------------------------------------------------------*/
+/* BEGIN OF ADMIN CSS */
+
+#admin-index,
+#create-admin, #edit-admin,
+#details-admin, #remove-admin {
+    padding: 40px 40px;
+    margin: 0 auto;
+    min-height: 250px;
+    width: 100%;
+}
+
+#create-admin-btn, #edit-admin-btn,
+#change-admin-btn, #remove-admin-btn {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
+
+#create-admin-btn > span, #edit-admin-btn > span,
+#change-admin-btn > span, #remove-admin-btn > span {
+    height: 36px;
+    line-height: 40px;
+}
+
+#details-admin input[type=text]:disabled, #remove-admin input[type=text]:disabled,
+#details-admin input[type=email]:disabled, #remove-admin input[type=email]:disabled,
+#details-admin input[type=password]:disabled, #remove-admin input[type=password]:disabled {
+    color: rgba(0, 0, 0, 0.65) !important;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
+}
+
+#details-admin input[type=text]:disabled + label, #remove-admin input[type=text]:disabled + label,
+#details-admin input[type=email]:disabled + label, #remove-admin input[type=email]:disabled + label,
+#details-admin input[type=password]:disabled + label, #remove-admin input[type=password]:disabled + label {
+    color: rgba(0, 0, 0, 0.50) !important;
+}
+
+/* END OF ADMIN CSS */
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF INVOICE CSS */
 
@@ -188,7 +322,23 @@ create-debtor {
 /* END OF INVOICE CSS */
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF MOBILE AND TABLET CSS */
+
 @media screen and (max-width: 767px) {
 
+    #create-product #form .input-field, #edit-product #form .input-field,
+    #details-product #form .input-field, #remove-product #form .input-field {
+        left: 0%;
+    }
+
+    #login-form, #forgot-form {
+        padding: 5px 7.5px;
+        width: 100%;
+    }
+
+    #login-form .input-field, #forgot-form .input-field {
+        left: 0%;
+    }
 }
+
 /* END OF MOBILE AND TABLET CSS */
+/*-------------------------------------------------------------------------------------*/

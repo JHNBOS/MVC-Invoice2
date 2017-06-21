@@ -4,208 +4,103 @@
     ViewData["Title"] = "Remove Debtor";
 }
 
-<div class="container">
-    <div class="row main">
-        <div class="panel-heading">
-            <div class="panel-title text-center">
-                <h1 class="title">Remove Debtor</h1>
-                <hr style="width:60%;border-top:2px solid #fff;" />
-            </div>
+<div class="container grey lighten-4" id="remove-debtor">
+
+    <div class="row">
+        <div class="col s12 col m12 center-align">
+            <h4 style="margin-top: 40px;">Remove Debtor</h4>
         </div>
+    </div>
 
-        <div class="main-large-deb main-center">
-            <form class="form-horizontal" asp-action="Delete" asp-controller="Debtors">
-                
-                <!--LEFT COLUMN-->
-                <div class="col-sm-7 col-md-7">
-                    <!--PERSONAL ID NUMBER-->
-                    <div class="form-group">
-                        <label asp-for="IdNumber" class="col-sm-2 col-md-2 control-label"
-                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
-                        <div class="col-sm-10 col-md-10">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-id-card-o fa-lg" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" asp-for="IdNumber" class="form-control" id="idnumber"
-                                       placeholder="Enter personal id number" readonly />
-                            </div>
-                        </div>
-                        <span asp-validation-for="IdNumber" class="text-danger" style="position: relative;left:3.6%;top:0%;" />
+    <div class="row" style="padding-left: 75px;">
+        <div class="col s12 col m12">
+            <form class="col s12 col m12" asp-controller="Debtors" asp-action="Delete" onsubmit="return confirm('Are you sure you want to delete this debtor?');">
+                <input type="hidden" asp-for="DebtorID" />
+
+                <div class="row">
+                    <div class="input-field col s6 col m6">
+                        <i class="material-icons prefix">perm_identity</i>
+                        <input id="icon_prefix" type="text" asp-for="IdNumber" class="validate" disabled>
+                        <label for="icon_prefix">Personal ID Number</label>
                     </div>
-
-                    <!--FIRST NAME-->
-                    <div class="form-group">
-                        <label asp-for="FirstName" class="col-sm-2 col-md-2 control-label"
-                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
-                        <div class="col-sm-10 col-md-10">
-                            <div class="input-group">
-                                <span class="input-group-addon" style="padding-right: 26px;">
-                                    <i class="fa fa-user fa-lg" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" asp-for="FirstName" class="form-control" id="firstname"
-                                       placeholder="Enter first name" readonly />
-                            </div>
-                        </div>
-                        <span asp-validation-for="FirstName" class="text-danger" style="position: relative;left:20%;top:0%;" />
+                    <div class="input-field col s6 col m6">
+                        <i class="material-icons prefix">place</i>
+                        <input id="icon_prefix" type="text" asp-for="Address" class="validate" disabled>
+                        <label for="icon_prefix">Address</label>
                     </div>
-
-                    <!--LAST NAME-->
-                    <div class="form-group">
-                        <label asp-for="LastName" class="col-sm-2 col-md-2 control-label"
-                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
-                        <div class="col-sm-10 col-md-10">
-                            <div class="input-group">
-                                <span class="input-group-addon" style="padding-right: 26px;">
-                                    <i class="fa fa-user fa-lg" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" asp-for="LastName" class="form-control" id="lastname"
-                                       placeholder="Enter last name" readonly />
-                            </div>
-                        </div>
-                        <span asp-validation-for="LastName" class="text-danger" style="position: relative;left:20%;top:0%;" />
-                    </div>
-
-                    <!--EMAIL-->
-                    <div class="form-group">
-                        <label asp-for="Email" class="col-sm-2 col-md-2 control-label"
-                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
-                        <div class="col-sm-10 col-md-10">
-                            <div class="input-group">
-                                <span class="input-group-addon" style="padding-right: 21px;">
-                                    <i class="fa fa-envelope-o fa-lg" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" asp-for="Email" class="form-control" id="email"
-                                       placeholder="Enter email" readonly />
-                            </div>
-                        </div>
-                        <span asp-validation-for="Email" class="text-danger" style="position: relative;left:20%;top:0%;" />
-                    </div>
-
-                    <!--PHONE-->
-                    <div class="form-group">
-                        <label asp-for="Phone" class="col-sm-2 col-md-2 control-label"
-                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
-                        <div class="col-sm-10 col-md-10">
-                            <div class="input-group">
-                                <span class="input-group-addon" style="padding-right: 25px;">
-                                    <i class="fa fa-phone fa-lg" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" asp-for="Phone" class="form-control" id="phone"
-                                       placeholder="Enter phone number" readonly />
-                            </div>
-                        </div>
-                        <span asp-validation-for="Phone" class="text-danger" style="position: relative;left:20%;top:0%;" />
-                    </div>
-
-                    <!--BANK ACCOUNT-->
-                    <div class="form-group">
-                        <label asp-for="BankAccount" class="col-sm-2 col-md-2 control-label"
-                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
-                        <div class="col-sm-10 col-md-10">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-university fa-lg" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" asp-for="BankAccount" class="form-control" id="bankaccount"
-                                       placeholder="Enter bank account number" readonly />
-                            </div>
-                        </div>
-                        <span asp-validation-for="BankAccount" class="text-danger" style="position: relative;left:20%;top:0%;" />
-                    </div>
-
                 </div>
-                <!--END OF LEFT COLUMN-->
-                <!-------------------------------------------------------------------------------------------->
-                <!--RIGHT COLUMN-->
-                <div class="col-sm-5 col-md-5">
-                    <!--ADDRESS-->
-                    <div class="form-group">
-                        <label asp-for="Address" class="col-sm-2 col-md-2 control-label"
-                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
-                        <div class="col-sm-10 col-md-10">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" asp-for="Address" class="form-control" id="address"
-                                       placeholder="Enter address" readonly />
-                            </div>
-                        </div>
-                        <span asp-validation-for="Address" class="text-danger" style="position: relative;left:20%;top:0%;" />
-                    </div>
 
-                    <!--POSTAL CODE-->
-                    <div class="form-group">
-                        <label asp-for="PostalCode" class="col-sm-2 col-md-2 control-label"
-                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
-                        <div class="col-sm-10 col-md-10">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" asp-for="PostalCode" class="form-control" id="postal"
-                                       placeholder="Enter postal code" readonly />
-                            </div>
-                        </div>
-                        <span asp-validation-for="PostalCode" class="text-danger" style="position: relative;left:20%;top:0%;" />
+                <div class="row">
+                    <div class="input-field col s6 col m6">
+                        <i class="material-icons prefix">person_outline</i>
+                        <input id="icon_prefix" type="text" asp-for="FirstName" class="validate" disabled>
+                        <label for="icon_prefix">First Name</label>
                     </div>
-
-                    <!--CITY-->
-                    <div class="form-group">
-                        <label asp-for="City" class="col-sm-2 col-md-2 control-label"
-                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
-                        <div class="col-sm-10 col-md-10">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" asp-for="City" class="form-control" id="city"
-                                       placeholder="Enter city" readonly />
-                            </div>
-                        </div>
-                        <span asp-validation-for="City" class="text-danger" style="position: relative;left:20%;top:0%;" />
+                    <div class="input-field col s6 col m6">
+                        <i class="material-icons prefix">place</i>
+                        <input id="icon_prefix" type="text" asp-for="PostalCode" class="validate" disabled>
+                        <label for="icon_prefix">Postal Code</label>
                     </div>
-
-                    <!--COUNTRY-->
-                    <div class="form-group">
-                        <label asp-for="Country" class="col-sm-2 col-md-2 control-label"
-                               style="padding-left:0px;padding-right:0px;font-size:14px;"></label>
-                        <div class="col-sm-10 col-md-10">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-map-marker" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" asp-for="Country" class="form-control" id="country"
-                                       placeholder="Enter country" readonly />
-                            </div>
-                        </div>
-                        <span asp-validation-for="Country" class="text-danger" style="position: relative;left:20%;top:0%;" />
-                    </div>
-
-                    <!--SPACER-->
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            <br />
-                        </div>
-                    </div>
-
-                    <!--DELETE BUTTON-->
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <button id="delete_deb_btn" class="btn btn-primary" type="submit">
-                                <span class="fa fa-trash fa-lg"></span>
-                                &nbsp;Remove
-                            </button>
-                        </div>
-                    </div>
-
                 </div>
-                <!--END OF RIGHT COLUMN-->
+
+                <div class="row">
+                    <div class="input-field col s6 col m6">
+                        <i class="material-icons prefix">person_outline</i>
+                        <input id="icon_prefix" type="text" asp-for="LastName" class="validate" disabled>
+                        <label for="icon_prefix">Last Name</label>
+                    </div>
+                    <div class="input-field col s6 col m6">
+                        <i class="material-icons prefix">place</i>
+                        <input id="icon_prefix" type="text" asp-for="City" class="validate" disabled>
+                        <label for="icon_prefix">City</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6 col m6">
+                        <i class="material-icons prefix">email</i>
+                        <input id="icon_prefix" type="email" asp-for="Email" class="validate" disabled>
+                        <label for="icon_prefix">Email</label>
+                    </div>
+                    <div class="input-field col s6 col m6">
+                        <i class="material-icons prefix">place</i>
+                        <input id="icon_prefix" type="text" asp-for="Country" class="validate" disabled>
+                        <label for="icon_prefix">Country</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s6 col m6">
+                        <i class="material-icons prefix">phone</i>
+                        <input id="icon_prefix" type="text" asp-for="Phone" class="validate" disabled>
+                        <label for="icon_prefix">Phone</label>
+                    </div>
+                    <div class="input-field col s6 col m6">
+                        <i class="material-icons prefix">credit_card</i>
+                        <input id="icon_prefix" type="text" asp-for="BankAccount" class="validate" disabled>
+                        <label for="icon_prefix">Bank Account No</label>
+                    </div>
+                </div>
+
+                <div class="divider" style="background-color: #cecece;"></div>
+
+                <div class="row">
+                    <button id="remove-debtor-btn" type="submit" value="Remove" class="btn btn-large center-align z-depth-3 waves-effect waves-light light-green">
+                        <i class="material-icons left">delete</i>
+                        <span>Remove</span>
+                    </button>
+
+                    <br />
+
+                    <a asp-action="Index" class="light-green-text text-darken-1 center-align">Back to Overview</a>
+                </div>
+
             </form>
         </div>
-
-        <a asp-action="Index" style="position:absolute;top:93%;left:5%;">Back to Overview</a>
-
     </div>
+
 </div>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

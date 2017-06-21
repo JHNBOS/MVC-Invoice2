@@ -4,102 +4,67 @@
     ViewData["Title"] = "Remove Product";
 }
 
-<div class="container">
-    <div class="row main">
-        <div class="panel-heading">
-            <div class="panel-title text-center">
-                <h1 class="title">Remove Product</h1>
-                <hr style="width:60%;border-top:2px solid #fff;" />
-            </div>
+<div class="container grey lighten-4" id="remove-product">
+
+    <div class="row">
+        <div class="col s12 col m12 center-align">
+            <h4 style="margin-top: 40px;">Remove Product</h4>
         </div>
-
-        <div class="main-large-prod main-center">
-            <div class="col-sm-2 col-md-2"></div>
-            <div class="col-sm-9 col-md-9">
-
-                <form class="form-horizontal" asp-action="Delete" asp-controller="Products">
-
-                    <!--NAME-->
-                    <div class="form-group">
-                        <label asp-for="Name" class="col-md-2 col-sm-2 control-label"></label>
-                        <div class="col-md-10 col-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-industry fa-lg" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" asp-for="Name" class="form-control" name="name" id="name" placeholder="" readonly />
-                            </div>
-                        </div>
-                        <span asp-validation-for="Name" class="text-danger" />
-                    </div>
-
-                    <!--DESCRIPTION-->
-                    <div class="form-group">
-                        <label asp-for="Description" class="col-md-2 col-sm-2 control-label"></label>
-                        <div class="col-md-10 col-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-industry fa-lg" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" asp-for="Description" class="form-control" name="description" id="description" placeholder="" readonly />
-                            </div>
-                        </div>
-                        <span asp-validation-for="Description" class="text-danger" />
-                    </div>
-
-                    <!--PRICE-->
-                    <div class="form-group">
-                        <label asp-for="Price" class="col-md-2 col-sm-2 control-label"></label>
-                        <div class="col-md-10 col-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon" style="padding-right: 22px;padding-left: 22px;">
-                                    <i class="fa fa-eur fa-lg" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" asp-for="Price" class="form-control" name="price" id="price" placeholder="" readonly />
-                            </div>
-                        </div>
-                        <span asp-validation-for="Price" class="text-danger" />
-                    </div>
-
-                    <!--VAT PERCENTAGE-->
-                    <div class="form-group">
-                        <label asp-for="VAT" class="col-md-2 col-sm-2 control-label"></label>
-                        <div class="col-md-10 col-sm-10">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="fa fa-percent fa-lg" aria-hidden="true"></i>
-                                </span>
-                                <input type="text" asp-for="VAT" class="form-control" name="vat" id="vat"
-                                       placeholder="" readonly />
-                            </div>
-                        </div>
-                        <span asp-validation-for="VAT" class="text-danger" />
-                    </div>
-
-                    <!--SPACER-->
-                    <div class="form-group">
-                        <div class="col-md-10">
-                            <br />
-                        </div>
-                    </div>
-
-                    <!--DELETE BUTTON-->
-                    <div class="form-group">
-                        <div class="col-md-offset-2 col-md-10">
-                            <button id="delete_prod_btn" class="btn btn-primary" type="submit">
-                                <span class="fa fa-trash fa-lg"></span>
-                                &nbsp;Remove
-                            </button>
-                        </div>
-                    </div>
-
-                </form>
-
-            </div>
-            <div class="col-sm-1 col-md-1"></div>
-        </div>
-
-        <a asp-action="Index" style="position:absolute;top:93%;left:18%;">Back to Overview</a>
-
     </div>
+
+    <div class="row">
+        <div class="col s12 col m12">
+            <form id="form" class="col s12 col m12" asp-controller="Products" asp-action="Delete" onsubmit="return confirm('Are you sure you want to delete this product?');">
+                <input type="hidden" asp-for="ProductID" />
+
+                <div class="row">
+                    <div class="input-field col s12 col m12">
+                        <i class="material-icons prefix">motorcycle</i>
+                        <input id="icon_prefix" type="text" asp-for="Name" class="validate" disabled>
+                        <label for="icon_prefix">Product Name</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 col m12">
+                        <i class="material-icons prefix">border_color</i>
+                        <textarea id="icon_prefix" asp-for="Description" class="materialize-textarea" disabled></textarea>
+                        <label for="icon_prefix">Description</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 col m12">
+                        <i class="material-icons prefix">euro_symbol</i>
+                        <input id="icon_prefix price" type="text" name="price" asp-for="Price" class="validate" disabled>
+                        <label for="icon_prefix">Price</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 col m12">
+                        <i class="material-icons prefix">exposure_plus_2</i>
+                        <input id="icon_prefix vat" type="text" name="vat" asp-for="VAT" class="validate" disabled>
+                        <label for="icon_prefix">VAT Percentage</label>
+                    </div>
+                </div>
+
+                <div class="divider" style="background-color: #cecece;"></div>
+
+                <div class="row">
+                    <button id="remove-product-btn" type="submit" value="Edit"
+                            class="btn btn-large center-align z-depth-3 waves-effect waves-light light-green">
+                        <i class="material-icons left">delete</i>
+                        <span>Remove</span>
+                    </button>
+
+                    <br />
+
+                    <a asp-action="Index" class="light-green-text text-darken-1 center-align">Back to Overview</a>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
 </div>

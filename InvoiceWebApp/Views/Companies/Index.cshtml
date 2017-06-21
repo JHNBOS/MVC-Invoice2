@@ -18,27 +18,32 @@
                 @using (Html.BeginForm()) {
                     <br />
 
-                    <div class="form-group">
-                        <div class="cols-sm-10">
+                    <div class="row valign-wrapper">
+                        <div class="col s10 col m10 valign">
                             <div class="form-inline">
-                                @Html.TextBox("searchQuery", null, htmlAttributes: new { @class = "form-control", @placeholder = "Find..." })
+                                <div class="input-field">
+                                    @Html.TextBox("searchQuery", null, htmlAttributes: new {
+                                    @class = "input-field inline",
+                                    @placeholder = "Find...",
+                                    @style = "margin-right: 15px;"
+                               })
 
-                                <button type="submit" value="Search" class="btn btn-primary tooltipped"
-                                        data-position="top" data-delay="50" data-tooltip="Search for Company">
-                                    <span class="fa fa-search"></span>
-                                    Search
-                                </button>
-
-                                <a asp-action="Create" value="Create Company" class="btn btn-primary tooltipped"
-                                   data-position="top" data-delay="50" data-tooltip="Create Company" style="float:right;">
-                                    <span class="fa fa-user-plus fa-lg"></span>
-                                </a>
+                                    <button type="submit" value="Search" 
+                                            class="waves-effect waves-light btn amber tooltipped"
+                                            data-position="top" data-delay="50" data-tooltip="Search for Company"
+                                            style="height: 40px;line-height: 40px;">
+                                        <i class="material-icons">search</i>
+                                    </button>
+                                </div>
                             </div>
                         </div>
+                        <div class="col s2 col m2 valign">
+                            <a asp-action="Create" value="Create Company" class="waves-effect waves-light btn btn-large amber tooltipped"
+                               data-position="top" data-delay="50" data-tooltip="Create Company" style="float: right;margin-top: 6px;">
+                                <i class="material-icons">add_box</i>
+                            </a>
+                        </div>
                     </div>
-
-                    <br />
-                    <br />
                 }
             </p>
 
@@ -58,7 +63,7 @@
                             @Html.ActionLink("City", "Index", new { sortOrder = ViewBag.CitySortParm })
                         </th>
                         <th>
-                            @Html.ActionLink("Country", "Index", new { sortOrder = ViewBag.CountrySortParm })
+                            @Html.DisplayNameFor(model => model.Country)
                         </th>
                         <th></th>
                     </tr>

@@ -1,53 +1,121 @@
 @model IEnumerable<InvoiceWebApp.Models.Admin>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Admins";
 }
 
-<h2>Index</h2>
+<div class="container grey lighten-4" id="admin-index">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.FirstName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LastName)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Password)
-                </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.AdminID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.AdminID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.AdminID">Delete</a>
-            </td>
-        </tr>
+    <div class="row">
+        <div class="col s12 col m12 center-align">
+            <h4 style="margin-top: 40px;">Administrators</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 col m12">
+            <p>
+                @using (Html.BeginForm()) {
+                    <br />
+
+                    <div class="row valign-wrapper">
+                        <div class="col s10 col m10 valign">
+                            <div class="form-inline">
+                                <div class="input-field">
+                                   @Html.TextBox("searchQuery", null, htmlAttributes: new {
+                                   @class = "input-field inline",
+                                   @placeholder = "Find...",
+                                   @style = "margin-right: 15px;"
+                               })
+
+                                    <button type="submit" value="Search" 
+                                            class="waves-effect waves-light btn amber tooltipped"
+                                            data-position="top" data-delay="50" data-tooltip="Search for Admin"
+                                            style="height: 40px;line-height: 40px;">
+                                        <i class="material-icons">search</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col s2 col m2 valign">
+                            <a asp-action="Create" value="Create Admin" 
+                               class="waves-effect waves-light btn btn-large amber tooltipped"
+                               data-position="top" data-delay="50" data-tooltip="Create Admin" 
+                               style="float: right;margin-top: 6px;">
+                                <i class="material-icons">add_box</i>
+                            </a>
+                        </div>
+                    </div>
+                }
+            </p>
+
+            <div class="divider" style="background-color:#c2c2c2;margin-bottom:35px;"></div>
+
+            <table class="responsive-table borderd highlight">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.AdminID)
+                        </th>
+                        <th>
+                            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.LastNameSortParm })
+                        </th>
+                        <th>
+                            @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FirstNameSortParm })
+                        </th>
+                        <th>
+                            @Html.ActionLink("Email", "Index", new { sortOrder = ViewBag.EmailSortParm })
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.AdminID)
+                            </td>
+                            <td>
+                                <a class="tooltipped" asp-action="Details" asp-route-id="@item.AdminID"
+                                   data-position="top" data-delay="50" data-tooltip="View Details">
+                                    @Html.DisplayFor(modelItem => item.LastName)
+                                </a>
+                            </td>
+                            <td>
+                                <a class="tooltipped" asp-action="Details" asp-route-id="@item.AdminID"
+                                   data-position="top" data-delay="50" data-tooltip="View Details">
+                                    @Html.DisplayFor(modelItem => item.FirstName)
+                                </a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>
+                            <td>
+                                <a class="tooltipped" asp-action="Edit" asp-route-id="@item.AdminID"
+                                   data-position="top" data-delay="50" data-tooltip="Edit Admin"
+                                   style="padding-right: 2px;">
+                                    <i class="material-icons green-text">edit</i>
+                                </a>
+                                <a class="tooltipped" asp-action="Delete" asp-route-id="@item.AdminID"
+                                   data-position="right" data-delay="50" data-tooltip="Remove Admin"
+                                   style="padding-left: 2px;">
+                                    <i class="material-icons red-text">delete</i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            $('.tooltipped').tooltip({ delay: 50 });
+        });
+    </script>
 }
-    </tbody>
-</table>

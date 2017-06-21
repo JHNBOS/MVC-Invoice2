@@ -4,101 +4,71 @@
     ViewData["Title"] = "Edit Product";
 }
 
-<div class="container">
-    <div class="row main">
-        <div class="panel-heading">
-            <div class="panel-title text-center">
-                <h1 class="title">Edit Product</h1>
-                <hr style="width:60%;border-top:2px solid #fff;" />
-            </div>
-        </div>
+<div class="container grey lighten-4" id="edit-product">
 
-        <div class="main-large-prod main-center">
-            <form id="form" class="form-horizontal" asp-controller="Products" asp-action="Edit">
+    <div class="row">
+        <div class="col s12 col m12 center-align">
+            <h4 style="margin-top: 40px;">Edit Product</h4>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 col m12">
+            <form id="form" class="col s12 col m12" asp-controller="Products" asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="ProductID" />
 
                 <div class="row">
-                    <div class="col-sm-2 col-md-2"></div>
-                    <div class="col-sm-9 col-md-9">
-                        <!--NAME-->
-                        <div class="form-group">
-                            <label asp-for="Name" class="col-md-2 col-sm-2 control-label"></label>
-                            <div class="col-sm-10 col-md-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-industry fa-lg" aria-hidden="true"></i>
-                                    </span>
-                                    <input type="text" asp-for="Name" class="form-control" id="name" placeholder="Enter product name" />
-                                </div>
-                            </div>
-                            <span asp-validation-for="Name" class="text-danger" />
-                        </div>
-
-                        <!--DESCRIPTION-->
-                        <div class="form-group">
-                            <label asp-for="Description" class="col-md-2 col-sm-2 control-label"></label>
-                            <div class="col-sm-10 col-md-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-industry fa-lg" aria-hidden="true"></i>
-                                    </span>
-                                    <input type="text" asp-for="Description" class="form-control" id="description" placeholder="Enter product description" />
-                                </div>
-                            </div>
-                            <span asp-validation-for="Description" class="text-danger" />
-                        </div>
-
-                        <!--PRICE-->
-                        <div class="form-group">
-                            <label asp-for="Price" class="col-md-2 col-sm-2 control-label"></label>
-                            <div class="col-sm-10 col-md-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon" style="padding-right: 22.5px;padding-left: 22.5px;">
-                                        <i class="fa fa-eur fa-lg" aria-hidden="true"></i>
-                                    </span>
-                                    <input class="form-control" type="text" name="price" id="price"
-                                           placeholder="Enter price" />
-                                </div>
-                            </div>
-                            <span asp-validation-for="Price" class="text-danger" />
-                        </div>
-
-                        <!--VAT PERCENTAGE-->
-                        <div class="form-group">
-                            <label asp-for="VAT" class="col-md-2 col-sm-2 control-label"></label>
-                            <div class="col-sm-10 col-md-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon" style="padding-left:19px;padding-right:19px;">
-                                        <i class="fa fa-percent fa-lg" aria-hidden="true"></i>
-                                    </span>
-                                    <input class="form-control" type="text" name="vat" id="vat"
-                                           placeholder="Enter VAT percentage" />
-                                </div>
-                            </div>
-                            <span asp-validation-for="VAT" class="text-danger" />
-                        </div>
-
-                        <!--EDIT BUTTON-->
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <button id="edit_prod_btn" class="btn btn-primary" type="submit">
-                                    <span class="fa fa-floppy-o fa-lg"></span>
-                                    &nbsp;Save
-                                </button>
-                            </div>
-                        </div>
-
+                    <div class="input-field col s12 col m12">
+                        <i class="material-icons prefix">motorcycle</i>
+                        <input id="icon_prefix" type="text" asp-for="Name" class="validate">
+                        <label for="icon_prefix">Product Name</label>
                     </div>
-                    <div class="col-sm-1 col-md-1"></div>
                 </div>
+
+                <div class="row">
+                    <div class="input-field col s12 col m12">
+                        <i class="material-icons prefix">border_color</i>
+                        <textarea id="icon_prefix" asp-for="Description" class="materialize-textarea"></textarea>
+                        <label for="icon_prefix">Description</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 col m12">
+                        <i class="material-icons prefix">euro_symbol</i>
+                        <input id="icon_prefix price" type="text" name="price" asp-for="Price" class="validate">
+                        <label for="icon_prefix">Price</label>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="input-field col s12 col m12">
+                        <i class="material-icons prefix">exposure_plus_2</i>
+                        <input id="icon_prefix vat" type="text" name="vat" asp-for="VAT" class="validate">
+                        <label for="icon_prefix">VAT Percentage</label>
+                    </div>
+                </div>
+
+                <div class="divider" style="background-color: #cecece;"></div>
+
+                <div class="row">
+                    <button id="edit-product-btn" type="submit" value="Save" class="btn btn-large center-align z-depth-3 waves-effect waves-light light-green">
+                        <i class="material-icons left">save</i>
+                        <span>Save</span>
+                    </button>
+
+                    <br />
+
+                    <a asp-action="Index" class="light-green-text text-darken-1 center-align">Back to Overview</a>
+                </div>
+
             </form>
         </div>
-
-        <a asp-action="Index" style="position:absolute;top:93%;left:18%;">Back to Overview</a>
-
     </div>
+
 </div>
+
 
 
 @section Scripts {
@@ -113,7 +83,7 @@
             $("#vat").val(vat);
         });
 
-        $("#edit_prod_btn").on("click", function () {
+        $("edit-product-btn").on("click", function () {
             var price = $("#price").val();
             $("#form").attr("asp-route-price", price);
         })

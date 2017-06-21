@@ -69,13 +69,80 @@
 </head>
 <body>
     <div class="navbar-fixed">
+
         <!--Debtor dropdown-->
-        <ul id="dropdown-debtor" class="dropdown-content">
+        <ul id="dropdown-debtor" class="dropdown-content collapsible collapsible-accordion">
             <li class="@(ViewBag.Current == "Debtors" ? "active" : "")">
                 <a asp-area="" asp-controller="Debtors" asp-action="Index">Persons</a>
             </li>
             <li class="@(ViewBag.Current == "Companies" ? "active" : "")">
                 <a asp-area="" asp-controller="Companies" asp-action="Index">Companies</a>
+            </li>
+        </ul>
+
+        <!--Mobile Nav-->
+        <ul id="mobile-nav" class="side-nav">
+            <!--Check if user exist-->
+            @if (user != null) {
+                <li class="@(ViewBag.Current == "Home" ? "active" : "")">
+                    <a asp-area="" asp-controller="Home" asp-route-email="@(user.Email)"
+                       asp-action="Index">Home</a>
+                </li>
+            } else {
+                <li class="@(ViewBag.Current == "Home" ? "active" : "")">
+                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+            }
+            <!--Check if admin exist-->
+            @if (admin != null) {
+                <!--Debtors-->
+                <li>
+                    <ul id="dropdown-debtor-slide" class="collapsible collapsible-accordion">
+                        <li>
+                            <a href="#" class="collapsible-header" style="padding-left: 31px;">
+                                Debtors
+                                <i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li class="@(ViewBag.Current == "Debtors" ? "active" : "")">
+                                        <a asp-area="" asp-controller="Debtors" asp-action="Index">Persons</a>
+                                    </li>
+                                    <li class="@(ViewBag.Current == "Companies" ? "active" : "")">
+                                        <a asp-area="" asp-controller="Companies" asp-action="Index">Companies</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <!--Products-->
+                    <li class="@(ViewBag.Current == "Products" ? "active" : "")">
+                        <a asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                    </li>
+                <!--Invoices-->
+                    <li class="@(ViewBag.Current == "Invoices" ? "active" : "")">
+                        <a asp-area="" asp-controller="Invoices" asp-action="Index">Invoices</a>
+                    </li>
+                <!--Admins-->
+                    <li class="@(ViewBag.Current == "Admins" ? "active" : "")">
+                        <a asp-area="" asp-controller="Admins" asp-action="Index">Admins</a>
+                    </li>
+            }
+            <!--Check if user exist-->
+            @if (user != null) {
+                <!--My Invoices-->
+                <li class="@(ViewBag.Current == "MyInvoices" ? "active" : "")">
+                    <a asp-area="" asp-controller="MyInvoices" asp-action="Index">Invoices</a>
+                </li>
+            }
+            <!--Contact-->
+            <li class="@(ViewBag.Current == "Contact" ? "active" : "")">
+                <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+            </li>
+            <!--Login-->
+            <li>
+                <a id="account-btn" asp-controller="Users" asp-action="Login" class="btn waves-effect waves-yellow amber">Login</a>
             </li>
         </ul>
 
@@ -92,6 +159,7 @@
                     }
                     <!--END OF LOGO-->
                 </a>
+                <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="left hide-on-med-and-down">
                     <!--Check if user exist-->
                     @if (user != null) {
@@ -114,13 +182,17 @@
                             </a>
                         </li>
                         <!--Products-->
-                        <li class="@(ViewBag.Current == "Products" ? "active" : "")">
-                            <a asp-area="" asp-controller="Products" asp-action="Index">Products</a>
-                        </li>
+                            <li class="@(ViewBag.Current == "Products" ? "active" : "")">
+                                <a asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                            </li>
                         <!--Invoices-->
-                        <li class="@(ViewBag.Current == "Invoices" ? "active" : "")">
-                            <a asp-area="" asp-controller="Invoices" asp-action="Index">Invoices</a>
-                        </li>
+                            <li class="@(ViewBag.Current == "Invoices" ? "active" : "")">
+                                <a asp-area="" asp-controller="Invoices" asp-action="Index">Invoices</a>
+                            </li>
+                        <!--Admins-->
+                            <li class="@(ViewBag.Current == "Admins" ? "active" : "")">
+                                <a asp-area="" asp-controller="Admins" asp-action="Index">Admins</a>
+                            </li>
                     }
                     <!--Check if user exist-->
                     @if (user != null) {
@@ -173,7 +245,7 @@
         </div>
     </footer>
 
-   
+
     <environment names="Development">
         <!--<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>-->
         <!--jQuery-->
@@ -210,7 +282,11 @@
 
     <script>
         $(document).ready(() => {
+            $(".button-collapse").sideNav();
+            $(".collapsible").collapsible();
+
             var isLoggedIn = false;
+            var width = $(window).width();
 
             @if (user != null || admin != null) {
                 <text>
@@ -218,16 +294,30 @@
                 </text>
             }
 
-            if (isLoggedIn == true) {
+            if (isLoggedIn == true && width > 767) {
                 $("#account-btn").html(`
                     <i id="logout-icon" style="line-height:0;" class="fa fa-sign-out"></i>
                     <span id="logout-link">Log out</span>
                 `);
                 $("#account-btn").attr("asp-action", "Logout");
                 $("#account-btn").attr("href", "/Users/Logout");
-            } else {
+            } else if (isLoggedIn == false && width > 767) {
                 $("#account-btn").html(`
                     <i id="login-icon" style="line-height:0;" class="fa fa-sign-in"></i>
+                    <span id="login-link">Log in</span>
+                `);
+                $("#account-btn").attr("asp-action", "Login");
+                $("#account-btn").attr("href", "/Users/Login");
+                    }
+
+            if (isLoggedIn == true && width <= 767) {
+                $("#account-btn").html(`
+                    <span id="logout-link">Log out</span>
+                `);
+                $("#account-btn").attr("asp-action", "Logout");
+                $("#account-btn").attr("href", "/Users/Logout");
+            } else if (isLoggedIn == false && width <= 767) {
+                $("#account-btn").html(`
                     <span id="login-link">Log in</span>
                 `);
                 $("#account-btn").attr("asp-action", "Login");
