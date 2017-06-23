@@ -20,30 +20,35 @@
 }
 
 <div>
-    <div class="section">
-        <h3 class="center-align" style="font-family:Roboto, sans-serif;">Sign In - Admin</h3>
+    <div class="section center-align" style="font-family:Roboto, sans-serif;">
+        <h4>Sign In</h4>
+        <h5 style="font-weight: 300;">Admin</h5>
     </div>
 
-    <div class="row grey lighten-3">
-        <div class="col s12 col m12">
+    <div id="login-row" class="row">
+        <div class="col s12 col m12 ">
             <form id="login-form" asp-controller="Admins" asp-action="Login">
+
                 <!--Email-->
                 <div class="row">
                     <div class="input-field col s12 col m12">
-                        <input asp-for="Email" id="email" type="email" class="validate grey-text text-darken-3" style="max-width: 400px !important;">
+                        <input asp-for="Email" id="email" type="email" class="validate grey-text text-darken-3">
                         <label class="grey-text text-darken-3" for="email">Email</label>
                     </div>
                 </div>
+
                 <!--Password-->
                 <div class="row">
                     <div class="input-field col s12 col m12">
-                        <input asp-for="Password" id="password" type="password" class="validate grey-text text-darken-3" style="max-width: 400px !important;">
+                        <input asp-for="Password" id="password" type="password" class="validate grey-text text-darken-3">
                         <label class="grey-text text-darken-3" for="password">Password</label>
                     </div>
                 </div>
+
                 <!--Button-->
                 <div class="row">
-                    <button type="submit" class="btn z-depth-2 light-green darken-1 right white-text wave-effect wave-green">LOGIN</button>
+                    <button id="login-button" type="submit" 
+                        class="btn z-depth-2 light-green accent-4 right white-text wave-effect wave-green">LOGIN</button>
                 </div>
             </form>
         </div>
@@ -56,10 +61,12 @@
 
     <br />
 
-    <div class="row right" style="margin-right: 100px;">
-        <a asp-action="ForgotPassword" style="font-weight: bold;" class="light-green-text text-darken-1">Forgot Password?</a>
-        |
-        <a asp-controller="Users" asp-action="Login" style="font-weight: bold;" class="light-green-text text-darken-1">Client Login</a>
+    <div class="row right">
+        <div id="login-links">
+            <a asp-action="ForgotPassword" style="font-weight: bold;" class="light-green-text text-darken-1">Forgot Password?</a>
+            |
+            <a asp-controller="Users" asp-action="Login" style="font-weight: bold;" class="light-green-text text-darken-1">Client Login</a>
+        </div>
     </div>
 
     <br />

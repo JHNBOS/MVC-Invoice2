@@ -148,8 +148,8 @@
 
         <!--Navbar-->
         <nav class="blue-grey darken-1">
-            <div class="nav-wrapper">
-                <a href="#" class="brand-logo right">
+            <div class="nav-wrapper container">
+                <a href="#" class="brand-logo">
                     <!--BEGIN OF LOGO-->
                     @if (settings.Logo != "" && settings.UseLogo == true) {
                         <img src="~/images/@(settings.Logo)" class="responsive-img" data-adaptive-background />
@@ -160,7 +160,7 @@
                     <!--END OF LOGO-->
                 </a>
                 <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
-                <ul id="nav-mobile" class="left hide-on-med-and-down">
+                <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <!--Check if user exist-->
                     @if (user != null) {
                         <li class="@(ViewBag.Current == "Home" ? "active" : "")">
@@ -205,10 +205,15 @@
                     <li class="@(ViewBag.Current == "Contact" ? "active" : "")">
                         <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                     </li>
+
                     <!--Login-->
                     <li>
-                        <a id="account-btn" asp-controller="Users" asp-action="Login" class="btn waves-effect waves-yellow amber">Login</a>
+                        <button type="submit" id="account-btn" asp-controller="Users" asp-action="Login" 
+                                class="btn-flat waves-effect waves-default tooltipped"
+                                data-position="bottom" data-delay="50" data-tooltip="Sign in">
+                        </button>
                     </li>
+
                 </ul>
             </div>
         </nav>
@@ -280,13 +285,17 @@
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
 
+    @RenderSection("Scripts", required: false)
+
     <script>
         $(document).ready(() => {
             $(".button-collapse").sideNav();
             $(".collapsible").collapsible();
+            $('.tooltipped').tooltip({ delay: 50 });
 
             var isLoggedIn = false;
             var width = $(window).width();
+            var button = $(".navbar-fixed #account-btn");
 
             @if (user != null || admin != null) {
                 <text>
@@ -294,39 +303,33 @@
                 </text>
             }
 
-            if (isLoggedIn == true && width > 767) {
-                $("#account-btn").html(`
-                    <i id="logout-icon" style="line-height:0;" class="fa fa-sign-out"></i>
-                    <span id="logout-link">Log out</span>
-                `);
-                $("#account-btn").attr("asp-action", "Logout");
-                $("#account-btn").attr("href", "/Users/Logout");
-            } else if (isLoggedIn == false && width > 767) {
-                $("#account-btn").html(`
-                    <i id="login-icon" style="line-height:0;" class="fa fa-sign-in"></i>
-                    <span id="login-link">Log in</span>
-                `);
-                $("#account-btn").attr("asp-action", "Login");
-                $("#account-btn").attr("href", "/Users/Login");
-                    }
+            if (isLoggedIn == true && width > 768) {
+                button.css("color", "#e53935", "important");
+                button.html(`<i class="fa fa-sign-out" style="text-shadow: 0px 0px 3px #000;"></i>`);
 
-            if (isLoggedIn == true && width <= 767) {
-                $("#account-btn").html(`
-                    <span id="logout-link">Log out</span>
-                `);
-                $("#account-btn").attr("asp-action", "Logout");
-                $("#account-btn").attr("href", "/Users/Logout");
-            } else if (isLoggedIn == false && width <= 767) {
-                $("#account-btn").html(`
-                    <span id="login-link">Log in</span>
-                `);
-                $("#account-btn").attr("asp-action", "Login");
-                $("#account-btn").attr("href", "/Users/Login");
+                button.attr("data-tooltip", "Sign out");
+                button.tooltip();
+
+                button.attr("onclick", "location.href='@Url.Action("Logout", "Users")'");
+            } else if (isLoggedIn == false && width > 768) {
+                button.css("color", "#64dd17", "important");
+                button.html(`<i class="fa fa-sign-in" style="text-shadow: 0px 0px 3px #000;"></i>`);
+
+                button.attr("data-tooltip", "Sign in");
+                button.tooltip();
+
+                button.attr("onclick", "location.href='@Url.Action("Login", "Users")'");
+            }
+
+            if (isLoggedIn == true && width <= 768) {
+                button.html(`<span>Log out</span>`);
+                button.attr("onclick", "location.href='@Url.Action("Logout", "Users")'");
+            } else if (isLoggedIn == false && width <= 768) {
+                button.html(`<span>Log in</span>`);
+                button.attr("onclick", "location.href='@Url.Action("Login", "Users")'");
             }
 
         });
     </script>
-
-    @RenderSection("Scripts", required: false)
 </body>
 </html>
