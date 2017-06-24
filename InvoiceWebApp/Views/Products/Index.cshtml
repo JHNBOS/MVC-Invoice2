@@ -4,7 +4,7 @@
     ViewData["Title"] = "Products";
 }
 
-<div class="container grey lighten-4" id="product-index">
+<div class="container" id="product-index">
 
     <div class="row">
         <div class="col s12 col m12 center-align">
@@ -12,41 +12,46 @@
         </div>
     </div>
 
+    <br />
+
+    <!--Top Form-->
+    <div class="row" style="margin-top: 5px;">
+        <div class="col s12 col m12">
+            @using (Html.BeginForm()) {
+                <!--Spacer-->
+                <div class="col s2 col m2"></div>
+
+                <!--Input-->
+                <div class="input-field col s12 col m4 right-align">
+                    <input id="searchQuery" type="text" placeholder="Search..." style="max-width: 300px;">
+                </div>
+
+                <!--Buttons-->
+                <div class="input-field col s12 col m4 center-align">
+                    <button id="search-product-btn" type="submit" value="Search"
+                            class="btn-large amber tooltipped waves-effect waves-light"
+                            data-position="top" data-delay="50" data-tooltip="Search for Product">
+                        <i class="material-icons">search</i>
+                    </button>
+
+                    <a id="add-product-btn" asp-action="Create" value="Create Product"
+                       class="btn-large amber tooltipped waves-effect waves-light"
+                       data-position="top" data-delay="50" data-tooltip="Create Product">
+                        <i class="material-icons">add_box</i>
+                    </a>
+                </div>
+
+                <!--Spacer-->
+                <div class="col s2 col m2"></div>
+            }
+        </div>
+    </div>
+
+    <div class="divider" style="background-color:#c2c2c2;margin-bottom:35px;"></div>
+
     <div class="row">
         <div class="col s12 col m12">
-            <p>
-                @using (Html.BeginForm()) {
-                    <br />
-
-                    <div class="row valign-wrapper">
-                        <div class="col s10 col m10 valign">
-                            <div class="form-inline">
-                                <div class="input-field">
-                                    @Html.TextBox("searchQuery", null, htmlAttributes: new {
-                                    @class = "input-field inline",
-                                    @placeholder = "Find...",
-                                    @style = "margin-right: 15px;"
-                               })
-
-                                    <button type="submit" value="Search" class="waves-effect waves-light btn amber tooltipped"
-                                            data-position="top" data-delay="50" data-tooltip="Search for Product"
-                                            style="height: 40px;line-height: 40px;">
-                                        <i class="material-icons">search</i>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col s2 col m2 valign">
-                            <a asp-action="Create" value="Create Product" class="waves-effect waves-light btn btn-large amber tooltipped"
-                               data-position="top" data-delay="50" data-tooltip="Create Product" style="float: right;margin-top: 6px;">
-                                <i class="material-icons">add_box</i>
-                            </a>
-                        </div>
-                    </div>
-                }
-            </p>
-
-            <table class="responsive-table borderd highlight">
+            <table class="responsive-table bordered highlight">
                 <thead>
                     <tr>
                         <th>
@@ -66,35 +71,35 @@
                 </thead>
                 <tbody>
                     @foreach (var item in Model) {
-                        <tr>
-                            <td>
-                                <a class="tooltipped" asp-action="Details" asp-route-id="@item.ProductID"
-                                   data-position="top" data-delay="50" data-tooltip="View Details">
-                                    @Html.DisplayFor(modelItem => item.Name)
-                                </a>
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.Description)
-                            </td>
-                            <td>
-                                @Html.Raw(String.Format("{0:C2}", item.Price))
-                            </td>
-                            <td>
-                                @Html.Raw(String.Format("{0}%", item.VAT))
-                            </td>
-                            <td>
-                                <a class="tooltipped" asp-action="Edit" asp-route-id="@item.ProductID"
-                                   data-position="top" data-delay="50" data-tooltip="Edit Product"
-                                   style="padding-right: 2px;">
-                                    <i class="material-icons green-text">edit</i>
-                                </a>
-                                <a class="tooltipped" asp-action="Delete" asp-route-id="@item.ProductID"
-                                   data-position="right" data-delay="50" data-tooltip="Remove Product"
-                                   style="padding-left: 2px;">
-                                    <i class="material-icons red-text">delete</i>
-                                </a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>
+                            <a class="tooltipped" asp-action="Details" asp-route-id="@item.ProductID"
+                               data-position="top" data-delay="50" data-tooltip="View Details">
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </a>
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.Raw(String.Format("{0:C2}", item.Price))
+                        </td>
+                        <td>
+                            @Html.Raw(String.Format("{0}%", item.VAT))
+                        </td>
+                        <td>
+                            <a class="tooltipped" asp-action="Edit" asp-route-id="@item.ProductID"
+                               data-position="top" data-delay="50" data-tooltip="Edit Product"
+                               style="padding-right: 2px;">
+                                <i class="material-icons green-text">edit</i>
+                            </a>
+                            <a class="tooltipped" asp-action="Delete" asp-route-id="@item.ProductID"
+                               data-position="right" data-delay="50" data-tooltip="Remove Product"
+                               style="padding-left: 2px;">
+                                <i class="material-icons red-text">delete</i>
+                            </a>
+                        </td>
+                    </tr>
                     }
                 </tbody>
             </table>

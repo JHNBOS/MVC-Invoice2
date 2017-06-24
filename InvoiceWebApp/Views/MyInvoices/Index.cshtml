@@ -5,42 +5,47 @@
 }
 
 
-<div class="container">
-    <div class="row main">
-        <div class="panel-heading">
-            <div class="panel-title text-center">
-                <h1 class="title">Invoices</h1>
-                <hr style="width:60%;border-top:2px solid #fff;" />
-            </div>
+<div class="container" id="myinvoice-index">
+    <div class="row">
+        <div class="col s12 col m12 center-align">
+            <h4 style="margin-top: 40px;">Invoices</h4>
         </div>
+    </div>
 
-        <div class="main-large-index main-center" style="overflow-x: auto;">
-            <p>
-                @using (Html.BeginForm())
-                {
-                    <br />
+    <br />
 
-                    <div class="form-group">
-                        <div class="cols-sm-10">
-                            <div class="form-inline">
+    <!--Top Form-->
+    <div class="row" style="margin-top: 5px;">
+        <div class="col s12 col m12">
+            @using (Html.BeginForm()) {
+                <!--Spacer-->
+            <div class="col s2 col m2"></div>
 
-                                @Html.TextBox("searchQuery", null, htmlAttributes: new { @class = "form-control", @placeholder = "Find..." })
+                <!--Input-->
+            <div class="input-field col s12 col m4 right-align">
+                <input id="searchQuery" type="text" placeholder="Search..." style="max-width: 300px;">
+            </div>
 
-                                <button type="submit" value="Search" class="btn btn-primary">
-                                    <span class="fa fa-search"></span>
-                                    Search
-                                </button>
+                <!--Buttons-->
+            <div class="input-field col s12 col m4 center-align">
+                <button id="search-myinvoice-btn" type="submit" value="Search"
+                        class="btn-large amber tooltipped waves-effect waves-light"
+                        data-position="top" data-delay="50" data-tooltip="Search for Invoices">
+                    <i class="material-icons">search</i>
+                </button>
+            </div>
 
-                            </div>
-                        </div>
-                    </div>
+                <!--Spacer-->
+            <div class="col s2 col m2"></div>
+            }
+        </div>
+    </div>
 
-                    <br />
-                    <br />
-                }
-            </p>
+    <div class="divider" style="background-color:#c2c2c2;margin-bottom:35px;"></div>
 
-            <table class="table table-hover table-striped">
+    <div class="row">
+        <div class="col s12 col m12">
+            <table class="responsive-table bordered highlight">
                 <thead>
                     <tr>
                         <th>
@@ -65,8 +70,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach (var item in Model)
-                    {
+                    @foreach (var item in Model) {
                         <tr>
                             <td>
                                 <a asp-action="Details" asp-route-id="@item.InvoiceNumber">
@@ -80,12 +84,9 @@
                                 @Html.DisplayFor(modelItem => item.ExpirationDate)
                             </td>
                             <td>
-                                @if (item.Paid == true)
-                                {
+                                @if (item.Paid == true) {
                                     @Html.Raw("Yes")
-                                }
-                                else
-                                {
+                                } else {
                                     @Html.Raw("No")
                                 }
                             </td>
@@ -99,7 +100,9 @@
                     }
                 </tbody>
             </table>
-        </div>
 
+        </div>
     </div>
+
+
 </div>

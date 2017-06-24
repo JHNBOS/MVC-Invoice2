@@ -128,6 +128,10 @@ nav ul a {
     display: none !important;
 }
 
+#searchQuery::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, 0.5);
+}
+
 /* END OF MAIN CSS */
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF USER CSS */
@@ -218,6 +222,12 @@ nav ul a {
     color: rgba(0, 0, 0, 0.50) !important;
 }
 
+#add-debtor-btn, #search-debtor-btn {
+    margin-top: -5px;
+    width: 120px;
+    vertical-align: middle;
+}
+
 /* END OF DEBTOR CSS */
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF PRODUCT CSS */
@@ -263,6 +273,12 @@ nav ul a {
     left: 31%;
 }
 
+#add-product-btn, #search-product-btn {
+    margin-top: -5px;
+    width: 120px;
+    vertical-align: middle;
+}
+
 /* END OF PRODUCT CSS */
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF COMPANY CSS */
@@ -297,6 +313,12 @@ nav ul a {
 #details-company input[type=text]:disabled + label, #remove-company input[type=text]:disabled + label,
 #details-company input[type=email]:disabled + label, #remove-company input[type=email]:disabled + label {
     color: rgba(0, 0, 0, 0.50) !important;
+}
+
+#add-company-btn, #search-company-btn {
+    margin-top: -5px;
+    width: 120px;
+    vertical-align: middle;
 }
 
 /* END OF COMPANY CSS */
@@ -338,6 +360,12 @@ nav ul a {
     color: rgba(0, 0, 0, 0.50) !important;
 }
 
+#add-admin-btn, #search-admin-btn {
+    margin-top: -5px;
+    width: 120px;
+    vertical-align: middle;
+}
+
 /* END OF ADMIN CSS */
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF INVOICE CSS */
@@ -350,7 +378,31 @@ nav ul a {
     background-color: #e2e2e2;
 }
 
+#add-invoice-btn, #search-invoice-btn {
+    margin-top: -5px;
+    width: 120px;
+    vertical-align: middle;
+}
+
 /* END OF INVOICE CSS */
+/*-------------------------------------------------------------------------------------*/
+/* BEGIN OF MY INVOICES CSS */
+
+#myinvoice-index {
+    padding: 40px 40px;
+    margin: 0 auto;
+    min-height: 250px;
+    width: 100%;
+    background-color: #e2e2e2;
+}
+
+#search-myinvoice-btn {
+    margin-top: -5px;
+    width: 160px;
+    vertical-align: middle;
+}
+
+/* END OF MY INVOICES CSS */
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF MOBILE AND TABLET CSS */
 
@@ -359,13 +411,11 @@ nav ul a {
     .body-content {
         width: 100%;
         margin: 0 auto;
+        padding-left: 7px;
+        padding-right: 7px;
     }
 
-    #create-product #form .input-field, #edit-product #form .input-field,
-    #details-product #form .input-field, #remove-product #form .input-field {
-        left: 0%;
-    }
-
+    /*------LOGIN--------*/
     #login-row, #forgot-row {
         max-width: 100vw;
         width: 100%;
@@ -402,6 +452,36 @@ nav ul a {
         float: left !important;
         width: 90%;
         margin-bottom: 20px;
+    }
+
+    /*------ADMIN--------*/
+    #add-admin-btn, #search-admin-btn {
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    /*------DEBTOR--------*/
+    #add-debtor-btn, #search-debtor-btn {
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    /*------COMPANY--------*/
+    #add-company-btn, #search-company-btn {
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    /*------COMPANY--------*/
+    #add-invoice-btn, #search-invoice-btn {
+        margin-top: 10px;
+        width: 100%;
+    }
+
+    /*------PRODUCT--------*/
+    #create-product #form .input-field, #edit-product #form .input-field,
+    #details-product #form .input-field, #remove-product #form .input-field {
+        left: 0%;
     }
 }
 
