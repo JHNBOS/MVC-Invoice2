@@ -29,6 +29,7 @@
     <Content Include="wwwroot\images\banner3.svg" />
     <Content Include="wwwroot\images\banner4.svg" />
     <Content Include="wwwroot\js\jquery-adaptive-background.js" />
+    <Content Include="wwwroot\js\quantize.js" />
     <Content Include="wwwroot\js\site.js" />
     <Content Include="wwwroot\js\site.min.js" />
     <Content Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />

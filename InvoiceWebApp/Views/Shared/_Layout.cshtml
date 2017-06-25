@@ -140,6 +140,17 @@
             <li class="@(ViewBag.Current == "Contact" ? "active" : "")">
                 <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
             </li>
+
+            @if (admin != null) {
+                 <!--Settings button mobile-->
+                <li>
+                    <a id="settings-btn-mobile" asp-controller="Admins" asp-action="Settings"
+                       class="btn-flat waves-effect waves-default">
+                        Settings
+                    </a>
+                </li>
+            }
+           
             <!--Login/Logout button mobile-->
             <li>
                 <button type="submit" id="account-btn-mobile" asp-controller="Users" asp-action="Login"
@@ -155,7 +166,7 @@
                        asp-route-email="@(user.Email)">
                         <!--BEGIN OF LOGO-->
                         @if (settings.Logo != "" && settings.UseLogo == true) {
-                            <img src="~/images/@(settings.Logo)" class="responsive-img" data-adaptive-background />
+                            <img src="~/images/@(settings.Logo)" class="responsive-img" />
                         }
                         @if (settings.UseLogo == false || settings.Logo == "") {
                             @settings.CompanyName
@@ -168,7 +179,7 @@
                        asp-route-email="@(admin.Email)">
                         <!--BEGIN OF LOGO-->
                         @if (settings.Logo != "" && settings.UseLogo == true) {
-                            <img src="~/images/@(settings.Logo)" class="responsive-img" data-adaptive-background />
+                            <img src="~/images/@(settings.Logo)" class="responsive-img" />
                         }
                         @if (settings.UseLogo == false || settings.Logo == "") {
                             @settings.CompanyName
@@ -180,7 +191,7 @@
                        asp-route-email="">
                         <!--BEGIN OF LOGO-->
                         @if (settings.Logo != "" && settings.UseLogo == true) {
-                            <img src="~/images/@(settings.Logo)" class="responsive-img" data-adaptive-background />
+                            <img src="~/images/@(settings.Logo)" class="responsive-img" />
                         }
                         @if (settings.UseLogo == false || settings.Logo == "") {
                             @settings.CompanyName
@@ -235,6 +246,17 @@
                     <li class="@(ViewBag.Current == "Contact" ? "active" : "")">
                         <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                     </li>
+
+                    <!--Settings button-->
+                    @if (admin != null) {
+                        <li class="@(ViewBag.Current == "Settings" ? "active" : "")">
+                            <a id="settings-btn" asp-controller="Admins" asp-action="Settings"
+                                    class="btn-flat waves-effect waves-default tooltipped"
+                                    data-position="bottom" data-delay="50" data-tooltip="Settings">
+                                <i class="material-icons">settings</i>
+                            </a>
+                        </li>
+                    }
 
                     <!--Login/Logout button-->
                     <li>
@@ -333,7 +355,7 @@
             //Account button non-mobile
             if (isLoggedIn == true && width > 768) {
                 button.css("color", "#e53935", "important");
-                button.html(`<i class="fa fa-sign-out" style="text-shadow: 0px 0px 3px #000;"></i>`);
+                button.html(`<i class="fa fa-sign-out"></i>`);
 
                 button.attr("data-tooltip", "Sign out");
                 button.tooltip();
@@ -341,7 +363,7 @@
                 button.attr("onclick", "location.href='@Url.Action("Logout", "Users")'");
             } else if (isLoggedIn == false && width > 768) {
                 button.css("color", "#64dd17", "important");
-                button.html(`<i class="fa fa-sign-in" style="text-shadow: 0px 0px 3px #000;"></i>`);
+                button.html(`<i class="fa fa-sign-in"></i>`);
 
                 button.attr("data-tooltip", "Sign in");
                 button.tooltip();

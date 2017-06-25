@@ -86,9 +86,38 @@ nav ul a {
     cursor: pointer;
 }
 
-#settings {
-    font-size: 16px;
-    top: 3px;
+#settings-btn {
+    display: block;
+    height: 64px;
+    line-height: 68.5px;
+    text-align: center;
+    color: #fff;
+    transition: background-color .3s;
+    font-size: 1rem;
+    display: block;
+    padding: 0 15px;
+    cursor: pointer;
+}
+
+#settings-btn i {
+    text-shadow: 0px 0px 3px #000;
+}
+
+#settings-btn:hover i {
+    text-shadow: 0px 3px 20px #000;
+}
+    
+#settings-btn-mobile {
+    display: none;
+    text-align: center;
+    color: #fff;
+    background: #7cb342;
+    transition: background-color .3s;
+    font-size: 1rem;
+    display: block;
+    padding: 0 15px;
+    cursor: pointer;
+    width: 100%;
 }
 
 #account-btn {
@@ -101,6 +130,14 @@ nav ul a {
     display: block;
     padding: 0 15px;
     cursor: pointer;
+}
+
+#account-btn:hover i {
+    text-shadow: 0px 3px 20px #000;
+}
+
+#account-btn i {
+    text-shadow: 0px 0px 3px #000;
 }
 
 #account-btn-mobile {
@@ -191,6 +228,11 @@ input[type=email]:focus:not([readonly]) + label {
 /* icon prefix focus color */
 .input-field .prefix.active {
     color: #7cb342;
+}
+/* input color email */
+input[type="checkbox"]:checked + label:before {
+    border-right: 5px solid #7cb342;
+    border-bottom: 5px solid #7cb342;
 }
 
 /* END OF MAIN CSS */
@@ -388,7 +430,8 @@ input[type=email]:focus:not([readonly]) + label {
 
 #admin-index,
 #create-admin, #edit-admin,
-#details-admin, #remove-admin {
+#details-admin, #remove-admin,
+#settings-admin{
     padding: 40px 40px;
     margin: 0 auto;
     min-height: 250px;
@@ -397,13 +440,15 @@ input[type=email]:focus:not([readonly]) + label {
 }
 
 #create-admin-btn, #edit-admin-btn,
-#change-admin-btn, #remove-admin-btn {
+#change-admin-btn, #remove-admin-btn,
+#save-settings-btn{
     margin-top: 15px;
     margin-bottom: 25px;
 }
 
 #create-admin-btn > span, #edit-admin-btn > span,
-#change-admin-btn > span, #remove-admin-btn > span {
+#change-admin-btn > span, #remove-admin-btn > span,
+#save-settings-btn > span {
     height: 36px;
     line-height: 40px;
 }
