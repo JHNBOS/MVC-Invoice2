@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿namespace InvoiceWebApp.Models.ManageViewModels {
 
-namespace InvoiceWebApp.Models.ManageViewModels
-{
-    public class FactorViewModel
-    {
+    public class FactorViewModel {
         public string Purpose { get; set; }
     }
 }

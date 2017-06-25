@@ -10,14 +10,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace InvoiceWebApp
-{
-    public class Startup
-    {
+namespace InvoiceWebApp {
+
+    public class Startup {
         private string _contentRootPath = "";
 
-        public Startup(IHostingEnvironment env)
-        {
+        public Startup(IHostingEnvironment env) {
             _contentRootPath = env.ContentRootPath;
 
             var builder = new ConfigurationBuilder()
@@ -25,8 +23,7 @@ namespace InvoiceWebApp
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
 
-            if (env.IsDevelopment())
-            {
+            if (env.IsDevelopment()) {
                 // For more details on using the user secret store see https://go.microsoft.com/fwlink/?LinkID=532709
                 builder.AddUserSecrets<Startup>();
             }
@@ -38,12 +35,10 @@ namespace InvoiceWebApp
         public IConfigurationRoot Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
-        public void ConfigureServices(IServiceCollection services)
-        {
+        public void ConfigureServices(IServiceCollection services) {
             //Add connection services
             string conn = Configuration.GetConnectionString("DefaultConnection");
-            if (conn.Contains("%CONTENTROOTPATH%"))
-            {
+            if (conn.Contains("%CONTENTROOTPATH%")) {
                 conn = conn.Replace("%CONTENTROOTPATH%", _contentRootPath);
             }
             services.AddOptions();
@@ -71,19 +66,15 @@ namespace InvoiceWebApp
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
-        {
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory) {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();
 
-            if (env.IsDevelopment())
-            {
+            if (env.IsDevelopment()) {
                 app.UseDeveloperExceptionPage();
                 app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
-            }
-            else
-            {
+            } else {
                 app.UseExceptionHandler("/Home/Error");
             }
 
@@ -97,8 +88,7 @@ namespace InvoiceWebApp
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
-            app.UseMvc(routes =>
-            {
+            app.UseMvc(routes => {
                 routes.MapRoute(
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");

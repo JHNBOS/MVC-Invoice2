@@ -1,9 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace InvoiceWebApp.Models
-{
-    public class Debtor
-    {
+namespace InvoiceWebApp.Models {
+
+    public class Debtor {
+
         [Key]
         public int DebtorID { get; set; }
 
@@ -42,10 +42,8 @@ namespace InvoiceWebApp.Models
         [Required]
         public string Country { get; set; }
 
-        public string FullName
-        {
-            get
-            {
+        public string FullName {
+            get {
                 return FirstName + " " + LastName;
             }
         }

@@ -92,6 +92,7 @@ nav ul a {
 }
 
 #account-btn {
+    display: block;
     height: 64px;
     line-height: 68.5px;
     text-align: center;
@@ -100,6 +101,17 @@ nav ul a {
     display: block;
     padding: 0 15px;
     cursor: pointer;
+}
+
+#account-btn-mobile {
+    display: none;
+    text-align: center;
+    transition: background-color .3s;
+    font-size: 1rem;
+    display: block;
+    padding: 0 15px;
+    cursor: pointer;
+    width: 100%;
 }
 
 #sidenav-overlay{
@@ -128,8 +140,57 @@ nav ul a {
     display: none !important;
 }
 
+#search-form {
+    text-align: right;
+}
+
 #searchQuery::-webkit-input-placeholder {
     color: rgba(0, 0, 0, 0.5);
+}
+
+/* placeholder color */
+::-webkit-input-placeholder {
+    color: #9a9a9a;
+}
+/* placeholder focus color */
+::-webkit-input-placeholder:focus {
+    color: #2b2b2b;
+}
+/* input color email */
+input[type=email]:focus:not([readonly]) {
+    border-bottom: 1px solid #7cb342;
+    box-shadow: 0 1px 0 0 #7cb342;
+}
+/* label color email */
+input[type=email]:focus:not([readonly]) + label {
+    color: #2b2b2b;
+}
+/* label color */
+.input-field label {
+    color: #9a9a9a;
+}
+/* label focus color */
+.input-field input[type=text]:focus + label {
+    color: #2b2b2b;
+}
+/* label underline focus color */
+.input-field input[type=text]:focus {
+    border-bottom: 1px solid #7cb342;
+    box-shadow: 0 1px 0 0 #7cb342;
+}
+/* valid color */
+.input-field input[type=text].valid {
+    border-bottom: 1px solid #7cb342;
+    box-shadow: 0 1px 0 0 #7cb342;
+}
+/* invalid color */
+.input-field input[type=text].invalid {
+    border-bottom: 1px solid #E23834;
+    box-shadow: 0 1px 0 0 #E23834;
+}
+/* icon prefix focus color */
+.input-field .prefix.active {
+    color: #7cb342;
 }
 
 /* END OF MAIN CSS */
@@ -338,7 +399,7 @@ nav ul a {
 #create-admin-btn, #edit-admin-btn,
 #change-admin-btn, #remove-admin-btn {
     margin-top: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 25px;
 }
 
 #create-admin-btn > span, #edit-admin-btn > span,
@@ -364,6 +425,17 @@ nav ul a {
     margin-top: -5px;
     width: 120px;
     vertical-align: middle;
+}
+
+#button-area {
+    margin-right: 5%;
+    margin-top: 15px;
+    float: right;
+}
+
+#button-area a {
+    font-size: 17px;
+    padding-left: 25px;
 }
 
 /* END OF ADMIN CSS */
@@ -407,12 +479,15 @@ nav ul a {
 /* BEGIN OF MOBILE AND TABLET CSS */
 
 @media screen and (max-width: 768px) {
-
     .body-content {
         width: 100%;
         margin: 0 auto;
         padding-left: 7px;
         padding-right: 7px;
+    }
+
+    #search-form{
+        text-align: center;
     }
 
     /*------LOGIN--------*/
@@ -431,7 +506,7 @@ nav ul a {
     }
 
     #login-form .input-field, #forgot-form .input-field {
-        left: 4%;
+        left: 0%;
         margin: 10px auto 0 auto;
     }
 
@@ -439,6 +514,13 @@ nav ul a {
         min-width: 80%;
         max-width: 90%;
         display: block !important;
+        margin: 0 auto;
+    }
+
+    #login-form .input-field label, #forgot-form .input-field label {
+        display: inline-block !important;
+        margin: 0 auto;
+        padding-left: 20px;
     }
 
     #login-links, #forgot-links {
@@ -455,9 +537,24 @@ nav ul a {
     }
 
     /*------ADMIN--------*/
-    #add-admin-btn, #search-admin-btn {
+    #add-admin-btn, #search-admin-btn, #create-admin-btn {
         margin-top: 10px;
         width: 100%;
+    }
+
+    #button-area {
+        float: none;
+        margin-right: 0;
+    }
+
+    #button-area button i{
+        display: none;
+    }
+
+    #button-area a {
+        padding-left: 140px;
+        font-size: 15px;
+        font-weight: bold;
     }
 
     /*------DEBTOR--------*/

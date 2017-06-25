@@ -140,25 +140,55 @@
             <li class="@(ViewBag.Current == "Contact" ? "active" : "")">
                 <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
             </li>
-            <!--Login-->
+            <!--Login/Logout button mobile-->
             <li>
-                <a id="account-btn" asp-controller="Users" asp-action="Login" class="btn waves-effect waves-yellow amber">Login</a>
+                <button type="submit" id="account-btn-mobile" asp-controller="Users" asp-action="Login"
+                        class="btn-flat waves-effect waves-default"></button>
             </li>
         </ul>
 
         <!--Navbar-->
         <nav class="blue-grey darken-1">
             <div class="nav-wrapper container">
-                <a href="#" class="brand-logo">
-                    <!--BEGIN OF LOGO-->
-                    @if (settings.Logo != "" && settings.UseLogo == true) {
-                        <img src="~/images/@(settings.Logo)" class="responsive-img" data-adaptive-background />
-                    }
-                    @if (settings.UseLogo == false || settings.Logo == "") {
-                        @settings.CompanyName
-                    }
-                    <!--END OF LOGO-->
-                </a>
+                @if (user != null) {
+                    <a href="#" class="brand-logo" asp-controller="Home" asp-action="Index"
+                       asp-route-email="@(user.Email)">
+                        <!--BEGIN OF LOGO-->
+                        @if (settings.Logo != "" && settings.UseLogo == true) {
+                            <img src="~/images/@(settings.Logo)" class="responsive-img" data-adaptive-background />
+                        }
+                        @if (settings.UseLogo == false || settings.Logo == "") {
+                            @settings.CompanyName
+                        }
+                        <!--END OF LOGO-->
+                    </a>
+                }
+                @if (admin != null) {
+                    <a class="brand-logo" asp-controller="Home" asp-action="Index"
+                       asp-route-email="@(admin.Email)">
+                        <!--BEGIN OF LOGO-->
+                        @if (settings.Logo != "" && settings.UseLogo == true) {
+                            <img src="~/images/@(settings.Logo)" class="responsive-img" data-adaptive-background />
+                        }
+                        @if (settings.UseLogo == false || settings.Logo == "") {
+                            @settings.CompanyName
+                        }
+                        <!--END OF LOGO-->
+                    </a>
+                } else {
+                    <a class="brand-logo" asp-controller="Home" asp-action="Index"
+                       asp-route-email="">
+                        <!--BEGIN OF LOGO-->
+                        @if (settings.Logo != "" && settings.UseLogo == true) {
+                            <img src="~/images/@(settings.Logo)" class="responsive-img" data-adaptive-background />
+                        }
+                        @if (settings.UseLogo == false || settings.Logo == "") {
+                            @settings.CompanyName
+                        }
+                        <!--END OF LOGO-->
+                    </a>
+                }
+
                 <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
                 <ul id="nav-mobile" class="right hide-on-med-and-down">
                     <!--Check if user exist-->
@@ -206,14 +236,13 @@
                         <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
                     </li>
 
-                    <!--Login-->
+                    <!--Login/Logout button-->
                     <li>
-                        <button type="submit" id="account-btn" asp-controller="Users" asp-action="Login" 
+                        <button type="submit" id="account-btn" asp-controller="Users" asp-action="Login"
                                 class="btn-flat waves-effect waves-default tooltipped"
                                 data-position="bottom" data-delay="50" data-tooltip="Sign in">
                         </button>
                     </li>
-
                 </ul>
             </div>
         </nav>
@@ -221,11 +250,9 @@
 
     <div class="body-content">
         @RenderBody()
-
     </div>
 
     <div class="divider"></div>
-
 
     <footer class="page-footer blue-grey darken-1">
         <div class="container">
@@ -249,7 +276,6 @@
             </div>
         </div>
     </footer>
-
 
     <environment names="Development">
         <!--<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>-->
@@ -296,6 +322,7 @@
             var isLoggedIn = false;
             var width = $(window).width();
             var button = $(".navbar-fixed #account-btn");
+            var mobileButton = $(".navbar-fixed #account-btn-mobile");
 
             @if (user != null || admin != null) {
                 <text>
@@ -303,6 +330,7 @@
                 </text>
             }
 
+            //Account button non-mobile
             if (isLoggedIn == true && width > 768) {
                 button.css("color", "#e53935", "important");
                 button.html(`<i class="fa fa-sign-out" style="text-shadow: 0px 0px 3px #000;"></i>`);
@@ -321,12 +349,19 @@
                 button.attr("onclick", "location.href='@Url.Action("Login", "Users")'");
             }
 
+            //Account button mobile
             if (isLoggedIn == true && width <= 768) {
-                button.html(`<span>Log out</span>`);
-                button.attr("onclick", "location.href='@Url.Action("Logout", "Users")'");
+                mobileButton.css("background", "#e53935", "important");
+                mobileButton.css("color", "#fff", "important");
+
+                mobileButton.html(`<span>Log out</span>`);
+                mobileButton.attr("onclick", "location.href='@Url.Action("Logout", "Users")'");
             } else if (isLoggedIn == false && width <= 768) {
-                button.html(`<span>Log in</span>`);
-                button.attr("onclick", "location.href='@Url.Action("Login", "Users")'");
+                mobileButton.css("background", "#64dd17", "important");
+                mobileButton.css("color", "#fff", "important");
+
+                mobileButton.html(`<span>Log in</span>`);
+                mobileButton.attr("onclick", "location.href='@Url.Action("Login", "Users")'");
             }
 
         });

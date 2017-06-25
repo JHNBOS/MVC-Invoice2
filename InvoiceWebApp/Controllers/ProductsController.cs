@@ -1,92 +1,72 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using InvoiceWebApp.Data;
 using InvoiceWebApp.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace InvoiceWebApp.Controllers
-{
-    public class ProductsController : Controller
-    {
+namespace InvoiceWebApp.Controllers {
+
+    public class ProductsController : Controller {
         private ApplicationDbContext _context;
 
-        public ProductsController(ApplicationDbContext context)
-        {
-            _context = context;    
+        public ProductsController(ApplicationDbContext context) {
+            _context = context;
         }
 
         /*----------------------------------------------------------------------*/
         //DATABASE ACTION METHODS
 
-        private async Task<List<Product>> GetProducts()
-        {
+        private async Task<List<Product>> GetProducts() {
             List<Product> productList = await _context.Products.Include(s => s.InvoiceItems).ToListAsync();
             return productList;
         }
 
-        private async Task<Product> GetProduct(int? id)
-        {
+        private async Task<Product> GetProduct(int? id) {
             Product product = null;
 
-            try
-            {
+            try {
                 product = await _context.Products.SingleOrDefaultAsync(s => s.ProductID == id);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
 
             return product;
         }
 
-        private async Task CreateProduct(Product product, string price)
-        {
+        private async Task CreateProduct(Product product, string price) {
             product.Price = decimal.Parse(price);
 
-            try
-            {
+            try {
                 _context.Products.Add(product);
                 await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
         }
 
-        private async Task UpdateProduct(Product product, string price)
-        {
+        private async Task UpdateProduct(Product product, string price) {
             product.Price = decimal.Parse(price);
 
-            try
-            {
+            try {
                 _context.Update(product);
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException ex)
-            {
+            } catch (DbUpdateConcurrencyException ex) {
                 Debug.WriteLine(ex);
             }
         }
 
-        private async Task DeleteProduct(int id)
-        {
+        private async Task DeleteProduct(int id) {
             Product product = await GetProduct(id);
 
-            try
-            {
+            try {
                 _context.InvoiceItems.RemoveRange(_context.InvoiceItems.Where(s => s.ProductID == product.ProductID).ToList());
                 _context.Products.Remove(product);
                 await _context.SaveChangesAsync();
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
         }
@@ -95,8 +75,7 @@ namespace InvoiceWebApp.Controllers
         //CONTROLLER ACTIONS
 
         // GET: Product
-        public async Task<IActionResult> Index(string sortOrder, string searchQuery)
-        {
+        public async Task<IActionResult> Index(string sortOrder, string searchQuery) {
             //CURRENT PAGE
             ViewBag.Current = "Products";
 
@@ -110,14 +89,12 @@ namespace InvoiceWebApp.Controllers
                         select product;
 
             //SEARCH OPTION PRODUCT LIST
-            if (!String.IsNullOrEmpty(searchQuery))
-            {
+            if (!String.IsNullOrEmpty(searchQuery)) {
                 query = query.Where(s => s.Name.Contains(searchQuery)
                                     || s.Price.ToString().Contains(searchQuery));
             }
 
-            switch (sortOrder)
-            {
+            switch (sortOrder) {
                 //WHEN NO SORT
                 case "begin_desc":
                     query = query.OrderByDescending(s => s.Name);
@@ -126,6 +103,7 @@ namespace InvoiceWebApp.Controllers
                 case "Name":
                     query = query.OrderBy(s => s.Name);
                     break;
+
                 case "name_desc":
                     query = query.OrderByDescending(s => s.Name);
                     break;
@@ -133,6 +111,7 @@ namespace InvoiceWebApp.Controllers
                 case "Price":
                     query = query.OrderBy(s => s.Price);
                     break;
+
                 case "price_desc":
                     query = query.OrderByDescending(s => s.Price);
                     break;
@@ -146,20 +125,17 @@ namespace InvoiceWebApp.Controllers
         }
 
         // GET: Product/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
+        public async Task<IActionResult> Details(int? id) {
             //CURRENT PAGE
             ViewBag.Current = "Products";
 
-            if (id == null)
-            {
+            if (id == null) {
                 return NotFound();
             }
 
             var product = await GetProduct(id);
 
-            if (product == null)
-            {
+            if (product == null) {
                 return NotFound();
             }
 
@@ -167,8 +143,7 @@ namespace InvoiceWebApp.Controllers
         }
 
         // GET: Product/Create
-        public IActionResult Create()
-        {
+        public IActionResult Create() {
             //CURRENT PAGE
             ViewBag.Current = "Products";
 
@@ -178,10 +153,8 @@ namespace InvoiceWebApp.Controllers
         // POST: Product/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductID,Description,Name,VAT")] Product product, string price)
-        {
-            if (ModelState.IsValid)
-            {
+        public async Task<IActionResult> Create([Bind("ProductID,Description,Name,VAT")] Product product, string price) {
+            if (ModelState.IsValid) {
                 await CreateProduct(product, price);
                 return RedirectToAction("Index", "Products", null);
             }
@@ -190,13 +163,11 @@ namespace InvoiceWebApp.Controllers
         }
 
         // GET: Product/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
+        public async Task<IActionResult> Edit(int? id) {
             //CURRENT PAGE
             ViewBag.Current = "Products";
 
-            if (id == null)
-            {
+            if (id == null) {
                 return NotFound();
             }
 
@@ -204,8 +175,7 @@ namespace InvoiceWebApp.Controllers
             ViewBag.Price = String.Format("{0:N2}", product.Price);
             ViewBag.VAT = product.VAT;
 
-            if (product == null)
-            {
+            if (product == null) {
                 return NotFound();
             }
 
@@ -213,19 +183,16 @@ namespace InvoiceWebApp.Controllers
         }
 
         // POST: Product/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Description,Name,VAT")] Product product, string price)
-        {
-            if (id != product.ProductID)
-            {
+        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Description,Name,VAT")] Product product, string price) {
+            if (id != product.ProductID) {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
+            if (ModelState.IsValid) {
                 await UpdateProduct(product, price);
                 return RedirectToAction("Index", "Products", null);
             }
@@ -234,20 +201,17 @@ namespace InvoiceWebApp.Controllers
         }
 
         // GET: Product/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
+        public async Task<IActionResult> Delete(int? id) {
             //CURRENT PAGE
             ViewBag.Current = "Products";
 
-            if (id == null)
-            {
+            if (id == null) {
                 return NotFound();
             }
 
             var product = await GetProduct(id);
 
-            if (product == null)
-            {
+            if (product == null) {
                 return NotFound();
             }
 
@@ -257,16 +221,13 @@ namespace InvoiceWebApp.Controllers
         // POST: Product/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
+        public async Task<IActionResult> DeleteConfirmed(int id) {
             await DeleteProduct(id);
             return RedirectToAction("Index", "Products", null);
         }
 
-        private bool ProductExists(int id)
-        {
+        private bool ProductExists(int id) {
             return _context.Products.Any(e => e.ProductID == id);
         }
     }
 }
-

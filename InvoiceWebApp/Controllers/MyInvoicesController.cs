@@ -1,32 +1,26 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using InvoiceWebApp.Data;
 using InvoiceWebApp.Models;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using Microsoft.AspNetCore.NodeServices;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using WkWrap.Core;
-using System.Collections;
 
-namespace InvoiceWebApp.Controllers
-{
-    public class MyInvoicesController : Controller
-    {
+namespace InvoiceWebApp.Controllers {
+
+    public class MyInvoicesController : Controller {
         private ApplicationDbContext _context;
         private AppSettings _settings;
         private IHostingEnvironment _env;
         private readonly IViewRenderService _viewRenderService;
 
-        public MyInvoicesController(ApplicationDbContext context, IHostingEnvironment env, IViewRenderService viewRenderService)
-        {
+        public MyInvoicesController(ApplicationDbContext context, IHostingEnvironment env, IViewRenderService viewRenderService) {
             _context = context;
             _settings = _context.Settings.FirstOrDefault();
             _env = env;
@@ -36,37 +30,29 @@ namespace InvoiceWebApp.Controllers
         /*----------------------------------------------------------------------*/
         //DATABASE ACTION METHODS
 
-        private async Task<Invoice> GetInvoice(int? id)
-        {
+        private async Task<Invoice> GetInvoice(int? id) {
             Invoice invoice = null;
 
-            try
-            {
+            try {
                 invoice = await _context.Invoices.Include(s => s.Debtor)
                                     .Include(s => s.InvoiceItems)
                                     .ThenInclude(s => s.Product)
                                     .SingleOrDefaultAsync(s => s.InvoiceNumber == id);
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
 
             return invoice;
         }
 
-        private async Task<List<InvoiceItem>> GetInvoiceItems(int? id)
-        {
+        private async Task<List<InvoiceItem>> GetInvoiceItems(int? id) {
             List<InvoiceItem> itemList = null;
 
-            try
-            {
+            try {
                 itemList = await _context.InvoiceItems.Include(d => d.Product)
                                         .Where(s => s.InvoiceNumber == id)
                                         .ToListAsync();
-            }
-            catch (Exception ex)
-            {
+            } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
 
@@ -77,8 +63,7 @@ namespace InvoiceWebApp.Controllers
         //CONTROLLER ACTIONS
 
         // GET: MyInvoice
-        public async Task<IActionResult> Index(string sortOrder, string searchQuery)
-        {
+        public async Task<IActionResult> Index(string sortOrder, string searchQuery) {
             //CURRENT PAGE
             ViewBag.Current = "MyInvoices";
 
@@ -98,14 +83,12 @@ namespace InvoiceWebApp.Controllers
             var query = from invoice in invoices
                         select invoice;
 
-            if (!String.IsNullOrEmpty(searchQuery))
-            {
+            if (!String.IsNullOrEmpty(searchQuery)) {
                 query = query.Where(i => i.InvoiceNumber.ToString().Contains(searchQuery)
                                     || i.Total.ToString().Contains(searchQuery));
             }
 
-            switch (sortOrder)
-            {
+            switch (sortOrder) {
                 //WHEN NO SORT
                 case "begin_desc":
                     query = query.OrderBy(s => s.InvoiceNumber);
@@ -114,6 +97,7 @@ namespace InvoiceWebApp.Controllers
                 case "Number":
                     query = query.OrderBy(s => s.InvoiceNumber);
                     break;
+
                 case "number_desc":
                     query = query.OrderByDescending(s => s.InvoiceNumber);
                     break;
@@ -121,6 +105,7 @@ namespace InvoiceWebApp.Controllers
                 case "Total":
                     query = query.OrderBy(s => s.Total);
                     break;
+
                 case "total_desc":
                     query = query.OrderByDescending(s => s.Total);
                     break;
@@ -134,13 +119,11 @@ namespace InvoiceWebApp.Controllers
         }
 
         // GET: Invoice/Details/5
-        public async Task<IActionResult> Details(int? id)
-        {
+        public async Task<IActionResult> Details(int? id) {
             //CURRENT PAGE
             ViewBag.Current = "MyInvoices";
 
-            if (id == null)
-            {
+            if (id == null) {
                 return NotFound();
             }
 
@@ -148,12 +131,10 @@ namespace InvoiceWebApp.Controllers
             List<InvoiceItem> invoiceItems = await GetInvoiceItems(id);
             List<Product> productList = new List<Product>();
 
-            if (invoice == null)
-            {
+            if (invoice == null) {
                 return NotFound();
             }
-            foreach (var item in invoiceItems)
-            {
+            foreach (var item in invoiceItems) {
                 Product product = _context.Products.SingleOrDefault(s => s.ProductID == item.ProductID);
                 productList.Add(product);
             }
@@ -161,8 +142,7 @@ namespace InvoiceWebApp.Controllers
             int cnt = 0;
             string[] pids = new string[invoiceItems.Count];
 
-            foreach (var product in productList)
-            {
+            foreach (var product in productList) {
                 string _id = product.ProductID + "_" + product.Price;
                 pids[cnt] = _id;
                 cnt++;
@@ -174,8 +154,7 @@ namespace InvoiceWebApp.Controllers
             ViewBag.Total = String.Format("{0:N2}", invoice.Total);
             ViewData["DebtorID"] = new SelectList(_context.Debtors, "DebtorID", "FullName", invoice.DebtorID);
 
-            if (invoice == null)
-            {
+            if (invoice == null) {
                 return NotFound();
             }
 
@@ -183,8 +162,7 @@ namespace InvoiceWebApp.Controllers
         }
 
         // GET: MyInvoice/Create
-        public IActionResult Create()
-        {
+        public IActionResult Create() {
             //CURRENT PAGE
             ViewBag.Current = "MyInvoices";
 
@@ -193,14 +171,12 @@ namespace InvoiceWebApp.Controllers
         }
 
         // POST: MyInvoice/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("InvoiceNumber,CreatedOn,DebtorID,ExpirationDate,Total,Type")] Invoice invoice)
-        {
-            if (ModelState.IsValid)
-            {
+        public async Task<IActionResult> Create([Bind("InvoiceNumber,CreatedOn,DebtorID,ExpirationDate,Total,Type")] Invoice invoice) {
+            if (ModelState.IsValid) {
                 _context.Add(invoice);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");
@@ -210,19 +186,16 @@ namespace InvoiceWebApp.Controllers
         }
 
         // GET: MyInvoice/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
+        public async Task<IActionResult> Edit(int? id) {
             //CURRENT PAGE
             ViewBag.Current = "MyInvoices";
 
-            if (id == null)
-            {
+            if (id == null) {
                 return NotFound();
             }
 
             var invoice = await _context.Invoices.SingleOrDefaultAsync(m => m.InvoiceNumber == id);
-            if (invoice == null)
-            {
+            if (invoice == null) {
                 return NotFound();
             }
             ViewData["DebtorID"] = new SelectList(_context.Debtors, "DebtorID", "Address", invoice.DebtorID);
@@ -230,32 +203,23 @@ namespace InvoiceWebApp.Controllers
         }
 
         // POST: MyInvoice/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("InvoiceNumber,CreatedOn,DebtorID,ExpirationDate,Total,Type")] Invoice invoice)
-        {
-            if (id != invoice.InvoiceNumber)
-            {
+        public async Task<IActionResult> Edit(int id, [Bind("InvoiceNumber,CreatedOn,DebtorID,ExpirationDate,Total,Type")] Invoice invoice) {
+            if (id != invoice.InvoiceNumber) {
                 return NotFound();
             }
 
-            if (ModelState.IsValid)
-            {
-                try
-                {
+            if (ModelState.IsValid) {
+                try {
                     _context.Update(invoice);
                     await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!InvoiceExists(invoice.InvoiceNumber))
-                    {
+                } catch (DbUpdateConcurrencyException) {
+                    if (!InvoiceExists(invoice.InvoiceNumber)) {
                         return NotFound();
-                    }
-                    else
-                    {
+                    } else {
                         throw;
                     }
                 }
@@ -266,19 +230,16 @@ namespace InvoiceWebApp.Controllers
         }
 
         // GET: MyInvoice/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
+        public async Task<IActionResult> Delete(int? id) {
             //CURRENT PAGE
             ViewBag.Current = "MyInvoices";
 
-            if (id == null)
-            {
+            if (id == null) {
                 return NotFound();
             }
 
             var invoice = await _context.Invoices.SingleOrDefaultAsync(m => m.InvoiceNumber == id);
-            if (invoice == null)
-            {
+            if (invoice == null) {
                 return NotFound();
             }
 
@@ -288,23 +249,20 @@ namespace InvoiceWebApp.Controllers
         // POST: MyInvoice/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
+        public async Task<IActionResult> DeleteConfirmed(int id) {
             var invoice = await _context.Invoices.SingleOrDefaultAsync(m => m.InvoiceNumber == id);
             _context.Invoices.Remove(invoice);
             await _context.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
-        public IActionResult DownloadPDF(int id)
-        {
+        public IActionResult DownloadPDF(int id) {
             Invoice invoice = _context.Invoices.Single(s => s.InvoiceNumber == id);
             Debtor debtor = _context.Debtors.Single(s => s.DebtorID == invoice.DebtorID);
             List<InvoiceItem> invoiceItems = _context.InvoiceItems.Where(s => s.InvoiceNumber == invoice.InvoiceNumber).ToList();
             List<Product> productList = new List<Product>();
 
-            foreach (var item in invoiceItems)
-            {
+            foreach (var item in invoiceItems) {
                 Product product = _context.Products.Single(s => s.ProductID == item.ProductID);
                 productList.Add(product);
             }
@@ -312,8 +270,8 @@ namespace InvoiceWebApp.Controllers
             string invoiceNumber = _settings.Prefix + "-" + invoice.InvoiceNumber.ToString();
 
             //CSS string
-            var cssString = @"<style> 
-                .invoice-box { 
+            var cssString = @"<style>
+                .invoice-box {
                     max-width: 2480px;
                     max-height: 3495px:
                     width: 100%;
@@ -325,20 +283,20 @@ namespace InvoiceWebApp.Controllers
                     font-family: 'Helvetica Neue', 'Helvetica', Helvetica, Arial, sans-serif;
                     color: #555;
                     letter-spacing: 0px;
-                } 
-                .invoice-box table { 
+                }
+                .invoice-box table {
                     width: 100%;
                     line-height: inherit;
                     text-align: left;
-                } 
-                .invoice-box table td { 
+                }
+                .invoice-box table td {
                     padding: 5px 0px;
                     vertical-align: top;
-                } 
-                .invoice-box table tr.top table td { 
-                    padding-bottom: 50px; 
                 }
-                .invoice-box table .top td .title { 
+                .invoice-box table tr.top table td {
+                    padding-bottom: 50px;
+                }
+                .invoice-box table .top td .title {
                     font-size: 32px;
                     line-height: 32px;
                     padding-left: 65px !important;
@@ -346,8 +304,8 @@ namespace InvoiceWebApp.Controllers
                     float: left;
                     width: 80%;
                     text-align: left;
-                } 
-                .invoice-box table .top .company { 
+                }
+                .invoice-box table .top .company {
                     float: right;
                     font-size: 13.5px;
                     text-align: left !important;
@@ -382,7 +340,7 @@ namespace InvoiceWebApp.Controllers
                 }
                 .invoice-box .debtor-table .debtor-name,
                 .invoice-box .debtor-table .debtor-address,
-                .invoice-box .debtor-table .debtor-city{ 
+                .invoice-box .debtor-table .debtor-city{
                     font-size: 16px;
                     text-align: left !important;
                     padding-bottom: 0px;
@@ -412,33 +370,33 @@ namespace InvoiceWebApp.Controllers
                     text-align: left;
                     align: left;
                 }
-                .invoice-box .item-table tr.heading td { 
-                    background: #eee; 
-                    border-bottom: 1px solid #ddd; 
+                .invoice-box .item-table tr.heading td {
+                    background: #eee;
+                    border-bottom: 1px solid #ddd;
                     font-weight: bold;
                     font-size: 15px;
-                } 
-                .invoice-box .item-table tr.details td { 
-                    padding-bottom: 20px; 
-                } 
+                }
+                .invoice-box .item-table tr.details td {
+                    padding-bottom: 20px;
+                }
                 .invoice-box .item-table{
                     margin-bottom: 25px !important;
                 }
-                .invoice-box .item-table tr.item td { 
+                .invoice-box .item-table tr.item td {
                     border-bottom: 1px solid #eee;
                     font-size: 14px;
-                } 
-                .invoice-box .item-table tr.item.last td { 
-                    border-bottom: none; 
                 }
-                .invoice-box .item-table tr td:nth-child(1){ 
-                    border-top: 2px solid #eee; 
+                .invoice-box .item-table tr.item.last td {
+                    border-bottom: none;
+                }
+                .invoice-box .item-table tr td:nth-child(1){
+                    border-top: 2px solid #eee;
                     width: 26%;
                     padding-left: 4px;
-                } 
-                .invoice-box .item-table tr td:nth-child(2){ 
+                }
+                .invoice-box .item-table tr td:nth-child(2){
                     width: 37%;
-                } 
+                }
                 .invoice-box .item-table tr td:nth-child(4),
                 .invoice-box .item-table tr td:nth-child(5),
                 .invoice-box .item-table tr td:nth-child(6){
@@ -446,12 +404,12 @@ namespace InvoiceWebApp.Controllers
                 }
                 .invoice-box .item-table tr td:nth-child(3),
                 .invoice-box .item-table tr td:nth-child(4),
-                .invoice-box .item-table tr td:nth-child(5){ 
+                .invoice-box .item-table tr td:nth-child(5){
                     width: 8%;
                 }
-                .invoice-box .item-table tr td:nth-child(6){ 
+                .invoice-box .item-table tr td:nth-child(6){
                     width: 13%
-                } 
+                }
                 .invoice-box .total-table{
                     border-collapse: collapse;
                     border-spacing; 0;
@@ -461,17 +419,17 @@ namespace InvoiceWebApp.Controllers
                     padding: 0 0 0 0 !important;
                 }
                 .invoice-box .total-table .total{
-                    border-top: 1px solid #888; 
+                    border-top: 1px solid #888;
                 }
                 .invoice-box .total-table tr td:nth-child(1),
                 .invoice-box .total-table tr td:nth-child(2),
-                .invoice-box .total-table tr td:nth-child(3){ 
+                .invoice-box .total-table tr td:nth-child(3){
                     align: right !important;
-                    font-weight: bold; 
+                    font-weight: bold;
                     text-align: right;
                     font-size: 15px;
                     padding-bottom: 1px;
-                } 
+                }
                 .invoice-box .disclaimer-table{
                     width: 100%;
                     border-top: 2px solid #DDD;
@@ -486,28 +444,28 @@ namespace InvoiceWebApp.Controllers
                     text-align: left;
                     padding: 5px 25px !important;
                 }
-                @media only screen and (max-width: 600px) { 
-                    .invoice-box table tr.top table td { 
+                @media only screen and (max-width: 600px) {
+                    .invoice-box table tr.top table td {
                         width: 100%;
                         display: block;
                         text-align: center;
-                    } 
-                    .invoice-box table tr.information table td { 
-                        width: 100%; 
-                        display: block; 
-                        text-align: center; 
-                    } 
-                } 
+                    }
+                    .invoice-box table tr.information table td {
+                        width: 100%;
+                        display: block;
+                        text-align: center;
+                    }
+                }
             </style>";
 
             //Company string
             string companyString = @"<div class=invoice-box>
-                <table cellpadding=0 cellspacing=0> 
-                <tr class=top> 
-                <td colspan=2> 
-                <table> 
-                <tr> 
-                <td class=title> 
+                <table cellpadding=0 cellspacing=0>
+                <tr class=top>
+                <td colspan=2>
+                <table>
+                <tr>
+                <td class=title>
                 <h2>" + _settings.CompanyName + "</h2>"
                 + "</td>"
                 + "<td class=company>"
@@ -581,8 +539,7 @@ namespace InvoiceWebApp.Controllers
             decimal subTotalAmount = 0;
             decimal vatTotalAmount = 0;
 
-            for (int i = 0; i < invoiceItems.Count; i++)
-            {
+            for (int i = 0; i < invoiceItems.Count; i++) {
                 InvoiceItem item = invoiceItems[i];
                 Product product = productList.Single(s => s.ProductID == item.ProductID);
 
@@ -642,8 +599,7 @@ namespace InvoiceWebApp.Controllers
         }
 
         // POST: Invoice/Pay
-        public IActionResult Pay(int id)
-        {
+        public IActionResult Pay(int id) {
             Invoice invoiceBeforeUpdate = _context.Invoices.Single(s => s.InvoiceNumber == id);
             invoiceBeforeUpdate.Paid = true;
 
@@ -653,11 +609,8 @@ namespace InvoiceWebApp.Controllers
             return RedirectToAction("Index");
         }
 
-        private bool InvoiceExists(int id)
-        {
+        private bool InvoiceExists(int id) {
             return _context.Invoices.Any(e => e.InvoiceNumber == id);
         }
-
     }
 }
- 

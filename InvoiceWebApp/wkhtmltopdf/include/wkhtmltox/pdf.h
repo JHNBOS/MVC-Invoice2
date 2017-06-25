@@ -30,9 +30,9 @@ typedef struct wkhtmltopdf_object_settings wkhtmltopdf_object_settings;
 struct wkhtmltopdf_converter;
 typedef struct wkhtmltopdf_converter wkhtmltopdf_converter;
 
-typedef void (*wkhtmltopdf_str_callback)(wkhtmltopdf_converter * converter, const char * str);
-typedef void (*wkhtmltopdf_int_callback)(wkhtmltopdf_converter * converter, const int val);
-typedef void (*wkhtmltopdf_void_callback)(wkhtmltopdf_converter * converter);
+typedef void(*wkhtmltopdf_str_callback)(wkhtmltopdf_converter * converter, const char * str);
+typedef void(*wkhtmltopdf_int_callback)(wkhtmltopdf_converter * converter, const int val);
+typedef void(*wkhtmltopdf_void_callback)(wkhtmltopdf_converter * converter);
 
 CAPI(int) wkhtmltopdf_init(int use_graphics);
 CAPI(int) wkhtmltopdf_deinit();
@@ -49,7 +49,6 @@ CAPI(int) wkhtmltopdf_set_global_setting(wkhtmltopdf_global_settings * settings,
 CAPI(int) wkhtmltopdf_get_global_setting(wkhtmltopdf_global_settings * settings, const char * name, char * value, int vs);
 CAPI(int) wkhtmltopdf_set_object_setting(wkhtmltopdf_object_settings * settings, const char * name, const char * value);
 CAPI(int) wkhtmltopdf_get_object_setting(wkhtmltopdf_object_settings * settings, const char * name, char * value, int vs);
-
 
 CAPI(wkhtmltopdf_converter *) wkhtmltopdf_create_converter(wkhtmltopdf_global_settings * settings);
 CAPI(void) wkhtmltopdf_destroy_converter(wkhtmltopdf_converter * converter);

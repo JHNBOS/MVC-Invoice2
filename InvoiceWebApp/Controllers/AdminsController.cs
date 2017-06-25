@@ -1,18 +1,18 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using InvoiceWebApp.Data;
 using InvoiceWebApp.Models;
-using System.Diagnostics;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace InvoiceWebApp.Controllers {
+
     public class AdminsController : Controller {
         private ApplicationDbContext _context;
         private AppSettings _settings;
@@ -107,6 +107,7 @@ namespace InvoiceWebApp.Controllers {
                 case "FirstName":
                     query = query.OrderBy(s => s.FirstName);
                     break;
+
                 case "firstname_desc":
                     query = query.OrderByDescending(s => s.FirstName);
                     break;
@@ -114,6 +115,7 @@ namespace InvoiceWebApp.Controllers {
                 case "Email":
                     query = query.OrderBy(s => s.Email);
                     break;
+
                 case "email_desc":
                     query = query.OrderByDescending(s => s.Email);
                     break;
@@ -121,6 +123,7 @@ namespace InvoiceWebApp.Controllers {
                 case "LastName":
                     query = query.OrderBy(s => s.LastName);
                     break;
+
                 case "lastname_desc":
                     query = query.OrderByDescending(s => s.LastName);
                     break;
@@ -160,7 +163,7 @@ namespace InvoiceWebApp.Controllers {
         }
 
         // POST: Admins/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -190,7 +193,7 @@ namespace InvoiceWebApp.Controllers {
         }
 
         // POST: Admins/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]

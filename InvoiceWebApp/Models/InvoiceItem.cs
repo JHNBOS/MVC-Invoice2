@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace InvoiceWebApp.Models
-{
-    public class InvoiceItem
-    {
+namespace InvoiceWebApp.Models {
+
+    public class InvoiceItem {
+
         [Key]
         public int ItemID { get; set; }
 

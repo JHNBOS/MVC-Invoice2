@@ -1,14 +1,14 @@
+using InvoiceWebApp.Data;
+using InvoiceWebApp.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
-using InvoiceWebApp.Data;
-using InvoiceWebApp.Models;
 
 namespace InvoiceWebApp.Controllers {
+
     public class CompaniesController : Controller {
         private ApplicationDbContext _context;
 
@@ -58,6 +58,7 @@ namespace InvoiceWebApp.Controllers {
                 case "CompanyName":
                     query = query.OrderBy(s => s.CompanyName);
                     break;
+
                 case "companyname_desc":
                     query = query.OrderByDescending(s => s.CompanyName);
                     break;
@@ -65,6 +66,7 @@ namespace InvoiceWebApp.Controllers {
                 case "Email":
                     query = query.OrderBy(s => s.Email);
                     break;
+
                 case "email_desc":
                     query = query.OrderByDescending(s => s.Email);
                     break;
@@ -72,6 +74,7 @@ namespace InvoiceWebApp.Controllers {
                 case "City":
                     query = query.OrderBy(s => s.City);
                     break;
+
                 case "city_desc":
                     query = query.OrderByDescending(s => s.City);
                     break;
@@ -111,7 +114,7 @@ namespace InvoiceWebApp.Controllers {
         }
 
         // POST: Companies/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -138,7 +141,7 @@ namespace InvoiceWebApp.Controllers {
         }
 
         // POST: Companies/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]

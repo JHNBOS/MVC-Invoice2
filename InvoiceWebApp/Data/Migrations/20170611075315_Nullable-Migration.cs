@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace InvoiceWebApp.Data.Migrations
-{
-    public partial class NullableMigration : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+namespace InvoiceWebApp.Data.Migrations {
+
+    public partial class NullableMigration : Migration {
+
+        protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.DropForeignKey(
                 name: "FK_Invoices_Company_CompanyID",
                 table: "Invoices");
@@ -45,8 +42,7 @@ namespace InvoiceWebApp.Data.Migrations
                 onDelete: ReferentialAction.Restrict);
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        protected override void Down(MigrationBuilder migrationBuilder) {
             migrationBuilder.DropForeignKey(
                 name: "FK_Invoices_Company_CompanyID",
                 table: "Invoices");

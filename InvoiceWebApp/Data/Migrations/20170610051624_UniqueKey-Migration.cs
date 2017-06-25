@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace InvoiceWebApp.Data.Migrations
-{
-    public partial class UniqueKeyMigration : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+namespace InvoiceWebApp.Data.Migrations {
+
+    public partial class UniqueKeyMigration : Migration {
+
+        protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.AlterColumn<string>(
                 name: "Name",
                 table: "Products",
@@ -87,8 +84,7 @@ namespace InvoiceWebApp.Data.Migrations
                 column: "RegNumber");
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        protected override void Down(MigrationBuilder migrationBuilder) {
             migrationBuilder.DropUniqueConstraint(
                 name: "AlternateKey_Name",
                 table: "Products");

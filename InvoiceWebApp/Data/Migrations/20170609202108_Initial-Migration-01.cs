@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Microsoft.EntityFrameworkCore.Metadata;
+using System;
 
-namespace InvoiceWebApp.Data.Migrations
-{
-    public partial class InitialMigration01 : Migration
-    {
-        protected override void Up(MigrationBuilder migrationBuilder)
-        {
+namespace InvoiceWebApp.Data.Migrations {
+
+    public partial class InitialMigration01 : Migration {
+
+        protected override void Up(MigrationBuilder migrationBuilder) {
             migrationBuilder.DropIndex(
                 name: "IX_AspNetUserRoles_UserId",
                 table: "AspNetUserRoles");
@@ -30,8 +28,7 @@ namespace InvoiceWebApp.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Settings",
-                columns: table => new
-                {
+                columns: table => new {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Address = table.Column<string>(nullable: true),
@@ -54,15 +51,13 @@ namespace InvoiceWebApp.Data.Migrations
                     UseLogo = table.Column<bool>(nullable: false),
                     Website = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Settings", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Company",
-                columns: table => new
-                {
+                columns: table => new {
                     CompanyID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Address = table.Column<string>(nullable: false),
@@ -78,15 +73,13 @@ namespace InvoiceWebApp.Data.Migrations
                     PostalCode = table.Column<string>(nullable: false),
                     RegNumber = table.Column<string>(nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Company", x => x.CompanyID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Debtors",
-                columns: table => new
-                {
+                columns: table => new {
                     DebtorID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Address = table.Column<string>(nullable: false),
@@ -100,15 +93,13 @@ namespace InvoiceWebApp.Data.Migrations
                     Phone = table.Column<string>(nullable: true),
                     PostalCode = table.Column<string>(nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Debtors", x => x.DebtorID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Products",
-                columns: table => new
-                {
+                columns: table => new {
                     ProductID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Description = table.Column<string>(nullable: true),
@@ -116,15 +107,13 @@ namespace InvoiceWebApp.Data.Migrations
                     Price = table.Column<decimal>(nullable: false),
                     VAT = table.Column<int>(nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Products", x => x.ProductID);
                 });
 
             migrationBuilder.CreateTable(
                 name: "Invoices",
-                columns: table => new
-                {
+                columns: table => new {
                     InvoiceNumber = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     CompanyID = table.Column<int>(nullable: false),
@@ -135,8 +124,7 @@ namespace InvoiceWebApp.Data.Migrations
                     Total = table.Column<decimal>(nullable: false),
                     Type = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Invoices", x => x.InvoiceNumber);
                     table.ForeignKey(
                         name: "FK_Invoices_Company_CompanyID",
@@ -154,8 +142,7 @@ namespace InvoiceWebApp.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "Users",
-                columns: table => new
-                {
+                columns: table => new {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     AccountType = table.Column<string>(nullable: true),
@@ -163,8 +150,7 @@ namespace InvoiceWebApp.Data.Migrations
                     Email = table.Column<string>(nullable: true),
                     Password = table.Column<string>(nullable: true)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_Users", x => x.ID);
                     table.ForeignKey(
                         name: "FK_Users_Debtors_DebtorID",
@@ -176,16 +162,14 @@ namespace InvoiceWebApp.Data.Migrations
 
             migrationBuilder.CreateTable(
                 name: "InvoiceItems",
-                columns: table => new
-                {
+                columns: table => new {
                     ItemID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Amount = table.Column<int>(nullable: false),
                     InvoiceNumber = table.Column<int>(nullable: false),
                     ProductID = table.Column<int>(nullable: false)
                 },
-                constraints: table =>
-                {
+                constraints: table => {
                     table.PrimaryKey("PK_InvoiceItems", x => x.ItemID);
                     table.ForeignKey(
                         name: "FK_InvoiceItems_Invoices_InvoiceNumber",
@@ -246,8 +230,7 @@ namespace InvoiceWebApp.Data.Migrations
                 onDelete: ReferentialAction.Cascade);
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
+        protected override void Down(MigrationBuilder migrationBuilder) {
             migrationBuilder.DropForeignKey(
                 name: "FK_AspNetUsers_Debtors_DebtorID",
                 table: "AspNetUsers");

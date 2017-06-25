@@ -32,7 +32,7 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-users fa-lg" aria-hidden="true"></i>
                                     </span>
-                                    <select id="debtor_select" asp-for="DebtorID" class="form-control" 
+                                    <select id="debtor_select" asp-for="DebtorID" class="form-control"
                                             asp-items="ViewBag.DebtorID">
                                         <option value="-1">--</option>
                                     </select>
@@ -48,7 +48,7 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-users fa-lg" aria-hidden="true"></i>
                                     </span>
-                                    <select id="company_select" asp-for="CompanyID" class="form-control" 
+                                    <select id="company_select" asp-for="CompanyID" class="form-control"
                                             asp-items="ViewBag.CompanyID">
                                         <option value="-1">--</option>
                                     </select>
@@ -66,7 +66,7 @@
                                     <span class="input-group-addon">
                                         <i class="fa fa-calendar fa-lg" aria-hidden="true"></i>
                                     </span>
-                                    <input asp-for="CreatedOn" class="form-control" id="creation" 
+                                    <input asp-for="CreatedOn" class="form-control" id="creation"
                                            placeholder="Enter invoice date" />
                                     <span asp-validation-for="CreatedOn" class="text-danger" />
                                 </div>
@@ -149,7 +149,6 @@
 
                                 <br />
                                 <br />
-
                             </div>
 
                             <div id="productRow">
@@ -168,7 +167,6 @@
 
                                 <br />
                                 <br />
-
                             </div>
                         </div>
 
@@ -178,19 +176,15 @@
                         <a href="#" id="add_row_btn" class="btn" style="margin-left:15px;">
                             <span class="glyphicon glyphicon-plus" style="color:limegreen;"></span>
                         </a>
-
                     </div>
                     <!--END COLUMN 2-->
                 </div>
-
             </form>
         </div>
 
         <a asp-action="Index" style="position:absolute;top:93%;left:5%;">Back to Overview</a>
-
     </div>
 </div>
-
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

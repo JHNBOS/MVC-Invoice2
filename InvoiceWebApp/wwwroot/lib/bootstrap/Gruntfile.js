@@ -37,7 +37,6 @@ module.exports = function (grunt) {
 
   // Project configuration.
   grunt.initConfig({
-
     // Metadata.
     pkg: grunt.file.readJSON('package.json'),
     banner: '/*!\n' +
@@ -426,9 +425,7 @@ module.exports = function (grunt) {
         ]
       }
     }
-
   });
-
 
   // These plugins provide necessary tasks.
   require('load-grunt-tasks')(grunt, { scope: 'devDependencies' });

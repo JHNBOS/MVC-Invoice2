@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace InvoiceWebApp.Models
-{
-    public class Product
-    {
+namespace InvoiceWebApp.Models {
+
+    public class Product {
+
         [Key]
         public int ProductID { get; set; }
 
@@ -20,8 +20,4 @@ namespace InvoiceWebApp.Models
 
         public virtual List<InvoiceItem> InvoiceItems { get; set; }
     }
-
 }
-
-
-

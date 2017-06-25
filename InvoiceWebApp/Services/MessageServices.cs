@@ -2,26 +2,22 @@
 using InvoiceWebApp.Models;
 using MailKit.Net.Smtp;
 using MimeKit;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace InvoiceWebApp.Services
-{
+namespace InvoiceWebApp.Services {
+
     // This class is used by the application to send Email and SMS
     // when you turn on two-factor authentication in ASP.NET Identity.
     // For more details see this link https://go.microsoft.com/fwlink/?LinkID=532713
-    public class AuthMessageSender : IEmailSender, ISmsSender
-    {
+    public class AuthMessageSender : IEmailSender, ISmsSender {
         private AppSettings _settings;
         private ApplicationDbContext _context;
 
-        public AuthMessageSender(AppSettings settings)
-        {
+        public AuthMessageSender(AppSettings settings) {
             _settings = settings;
         }
 
-        public async Task SendLoginEmailAsync(string email, string pass)
-        {
+        public async Task SendLoginEmailAsync(string email, string pass) {
             string smtp = _settings.SMTP;
             int port = _settings.Port;
             string company = _settings.CompanyName;
@@ -50,8 +46,7 @@ namespace InvoiceWebApp.Services
             emailMessage.Subject = subject;
             emailMessage.Body = new TextPart("plain") { Text = message };
 
-            using (var client = new SmtpClient())
-            {
+            using (var client = new SmtpClient()) {
                 client.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
                 await client.ConnectAsync(smtp, port, false).ConfigureAwait(false);
@@ -68,8 +63,7 @@ namespace InvoiceWebApp.Services
             //return Task.FromResult(0);
         }
 
-        public async Task SendInvoiceEmailAsync(string email)
-        {
+        public async Task SendInvoiceEmailAsync(string email) {
             string smtp = _settings.SMTP;
             int port = _settings.Port;
             string company = _settings.CompanyName;
@@ -92,8 +86,7 @@ namespace InvoiceWebApp.Services
             emailMessage.Subject = subject;
             emailMessage.Body = new TextPart("plain") { Text = message };
 
-            using (var client = new SmtpClient())
-            {
+            using (var client = new SmtpClient()) {
                 client.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
                 await client.ConnectAsync(smtp, port, false).ConfigureAwait(false);
@@ -107,12 +100,9 @@ namespace InvoiceWebApp.Services
             }
         }
 
-        public Task SendSmsAsync(string number, string message)
-        {
+        public Task SendSmsAsync(string number, string message) {
             // Plug in your SMS service here to send a text message.
             return Task.FromResult(0);
         }
-
-        
     }
 }

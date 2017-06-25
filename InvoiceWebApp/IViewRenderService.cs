@@ -7,49 +7,41 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using Microsoft.AspNetCore.Routing;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 
-namespace InvoiceWebApp
-{
-    public interface IViewRenderService
-    {
+namespace InvoiceWebApp {
+
+    public interface IViewRenderService {
+
         Task<string> RenderToStringAsync(string viewName, object model);
     }
 
-    public class ViewRenderService : IViewRenderService
-    {
+    public class ViewRenderService : IViewRenderService {
         private readonly IRazorViewEngine _razorViewEngine;
         private readonly ITempDataProvider _tempDataProvider;
         private readonly IServiceProvider _serviceProvider;
 
         public ViewRenderService(IRazorViewEngine razorViewEngine,
             ITempDataProvider tempDataProvider,
-            IServiceProvider serviceProvider)
-        {
+            IServiceProvider serviceProvider) {
             _razorViewEngine = razorViewEngine;
             _tempDataProvider = tempDataProvider;
             _serviceProvider = serviceProvider;
         }
 
-        public async Task<string> RenderToStringAsync(string viewName, object model)
-        {
+        public async Task<string> RenderToStringAsync(string viewName, object model) {
             var httpContext = new DefaultHttpContext { RequestServices = _serviceProvider };
             var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
 
-            using (var sw = new StringWriter())
-            {
+            using (var sw = new StringWriter()) {
                 var viewResult = _razorViewEngine.FindView(actionContext, viewName, false);
 
-                if (viewResult.View == null)
-                {
+                if (viewResult.View == null) {
                     throw new ArgumentNullException($"{viewName} does not match any available view");
                 }
 
-                var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary())
-                {
+                var viewDictionary = new ViewDataDictionary(new EmptyModelMetadataProvider(), new ModelStateDictionary()) {
                     Model = model
                 };
 

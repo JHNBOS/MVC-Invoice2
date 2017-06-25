@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace InvoiceWebApp.Models
-{
-    public class Invoice
-    {
+namespace InvoiceWebApp.Models {
+
+    public class Invoice {
+
         [Key]
         [Display(Name = "Invoice Number")]
         public int InvoiceNumber { get; set; }
@@ -35,6 +35,5 @@ namespace InvoiceWebApp.Models
         public virtual Debtor Debtor { get; set; }
         public virtual Company Company { get; set; }
         public virtual List<InvoiceItem> InvoiceItems { get; set; }
-
     }
 }

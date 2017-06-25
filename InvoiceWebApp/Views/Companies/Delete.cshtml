@@ -100,7 +100,7 @@
                 <div class="divider" style="background-color: #cecece;"></div>
 
                 <div class="row">
-                    <button id="remove-company-btn" type="submit" value="Remove" 
+                    <button id="remove-company-btn" type="submit" value="Remove"
                             class="btn btn-large center-align z-depth-3 waves-effect waves-light light-green"
                             asp-action="Edit" asp-route-id="@Model.CompanyID">
                         <i class="material-icons left">delete</i>
@@ -111,14 +111,11 @@
 
                     <a asp-action="Index" class="light-green-text text-darken-1 center-align">Back to Overview</a>
                 </div>
-
             </form>
         </div>
     </div>
-
 </div>
 
 @section Scripts{
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 }
-

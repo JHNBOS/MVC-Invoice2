@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace InvoiceWebApp.Models.ManageViewModels
-{
-    public class VerifyPhoneNumberViewModel
-    {
+namespace InvoiceWebApp.Models.ManageViewModels {
+
+    public class VerifyPhoneNumberViewModel {
+
         [Required]
         public string Code { get; set; }
 

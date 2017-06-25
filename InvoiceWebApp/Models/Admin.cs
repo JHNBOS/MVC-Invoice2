@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace InvoiceWebApp.Models
-{
-    public class Admin
-    {
+namespace InvoiceWebApp.Models {
+
+    public class Admin {
+
         [Key]
         public int AdminID { get; set; }
 
@@ -27,14 +23,10 @@ namespace InvoiceWebApp.Models
         [DataType(DataType.Password)]
         public string Password { get; set; }
 
-        public string FullName
-        {
-            get
-            {
+        public string FullName {
+            get {
                 return FirstName + " " + LastName;
             }
         }
-
-
     }
 }

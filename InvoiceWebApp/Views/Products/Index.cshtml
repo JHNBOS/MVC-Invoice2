@@ -22,7 +22,7 @@
                 <div class="col s2 col m2"></div>
 
                 <!--Input-->
-                <div class="input-field col s12 col m4 right-align">
+                <div class="input-field col s12 col m4" id="search-form">
                     <input id="searchQuery" type="text" placeholder="Search..." style="max-width: 300px;">
                 </div>
 
@@ -71,35 +71,35 @@
                 </thead>
                 <tbody>
                     @foreach (var item in Model) {
-                    <tr>
-                        <td>
-                            <a class="tooltipped" asp-action="Details" asp-route-id="@item.ProductID"
-                               data-position="top" data-delay="50" data-tooltip="View Details">
-                                @Html.DisplayFor(modelItem => item.Name)
-                            </a>
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @Html.Raw(String.Format("{0:C2}", item.Price))
-                        </td>
-                        <td>
-                            @Html.Raw(String.Format("{0}%", item.VAT))
-                        </td>
-                        <td>
-                            <a class="tooltipped" asp-action="Edit" asp-route-id="@item.ProductID"
-                               data-position="top" data-delay="50" data-tooltip="Edit Product"
-                               style="padding-right: 2px;">
-                                <i class="material-icons green-text">edit</i>
-                            </a>
-                            <a class="tooltipped" asp-action="Delete" asp-route-id="@item.ProductID"
-                               data-position="right" data-delay="50" data-tooltip="Remove Product"
-                               style="padding-left: 2px;">
-                                <i class="material-icons red-text">delete</i>
-                            </a>
-                        </td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <a class="tooltipped" asp-action="Details" asp-route-id="@item.ProductID"
+                                   data-position="top" data-delay="50" data-tooltip="View Details">
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.Raw(String.Format("{0:C2}", item.Price))
+                            </td>
+                            <td>
+                                @Html.Raw(String.Format("{0}%", item.VAT))
+                            </td>
+                            <td>
+                                <a class="tooltipped" asp-action="Edit" asp-route-id="@item.ProductID"
+                                   data-position="top" data-delay="50" data-tooltip="Edit Product"
+                                   style="padding-right: 2px;">
+                                    <i class="material-icons green-text">edit</i>
+                                </a>
+                                <a class="tooltipped" asp-action="Delete" asp-route-id="@item.ProductID"
+                                   data-position="right" data-delay="50" data-tooltip="Remove Product"
+                                   style="padding-left: 2px;">
+                                    <i class="material-icons red-text">delete</i>
+                                </a>
+                            </td>
+                        </tr>
                     }
                 </tbody>
             </table>

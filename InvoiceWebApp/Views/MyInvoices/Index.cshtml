@@ -4,7 +4,6 @@
     ViewData["Title"] = "Invoices";
 }
 
-
 <div class="container" id="myinvoice-index">
     <div class="row">
         <div class="col s12 col m12 center-align">
@@ -19,24 +18,24 @@
         <div class="col s12 col m12">
             @using (Html.BeginForm()) {
                 <!--Spacer-->
-            <div class="col s2 col m2"></div>
+                <div class="col s2 col m2"></div>
 
                 <!--Input-->
-            <div class="input-field col s12 col m4 right-align">
-                <input id="searchQuery" type="text" placeholder="Search..." style="max-width: 300px;">
-            </div>
+                <div class="input-field col s12 col m4" id="search-form">
+                    <input id="searchQuery" type="text" placeholder="Search..." style="max-width: 300px;">
+                </div>
 
                 <!--Buttons-->
-            <div class="input-field col s12 col m4 center-align">
-                <button id="search-myinvoice-btn" type="submit" value="Search"
-                        class="btn-large amber tooltipped waves-effect waves-light"
-                        data-position="top" data-delay="50" data-tooltip="Search for Invoices">
-                    <i class="material-icons">search</i>
-                </button>
-            </div>
+                <div class="input-field col s12 col m4 center-align">
+                    <button id="search-myinvoice-btn" type="submit" value="Search"
+                            class="btn-large amber tooltipped waves-effect waves-light"
+                            data-position="top" data-delay="50" data-tooltip="Search for Invoices">
+                        <i class="material-icons">search</i>
+                    </button>
+                </div>
 
                 <!--Spacer-->
-            <div class="col s2 col m2"></div>
+                <div class="col s2 col m2"></div>
             }
         </div>
     </div>
@@ -100,9 +99,6 @@
                     }
                 </tbody>
             </table>
-
         </div>
     </div>
-
-
 </div>

@@ -27,9 +27,9 @@ typedef struct wkhtmltoimage_global_settings wkhtmltoimage_global_settings;
 struct wkhtmltoimage_converter;
 typedef struct wkhtmltoimage_converter wkhtmltoimage_converter;
 
-typedef void (*wkhtmltoimage_str_callback)(wkhtmltoimage_converter * converter, const char * str);
-typedef void (*wkhtmltoimage_int_callback)(wkhtmltoimage_converter * converter, const int val);
-typedef void (*wkhtmltoimage_void_callback)(wkhtmltoimage_converter * converter);
+typedef void(*wkhtmltoimage_str_callback)(wkhtmltoimage_converter * converter, const char * str);
+typedef void(*wkhtmltoimage_int_callback)(wkhtmltoimage_converter * converter, const int val);
+typedef void(*wkhtmltoimage_void_callback)(wkhtmltoimage_converter * converter);
 
 CAPI(int) wkhtmltoimage_init(int use_graphics);
 CAPI(int) wkhtmltoimage_deinit();
