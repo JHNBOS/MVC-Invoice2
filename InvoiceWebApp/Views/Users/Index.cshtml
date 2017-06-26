@@ -1,53 +1,133 @@
 @model IEnumerable<InvoiceWebApp.Models.User>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Users";
 }
 
-<h2>Index</h2>
+<div class="container" id="user-index">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.Email)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Password)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.AccountType)
-                </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Debtor)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Password)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.AccountType)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Debtor.Address)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
+    <div class="row">
+        <div class="col s12 col m12 center-align">
+            <h4 style="margin-top: 40px;">Users</h4>
+        </div>
+    </div>
+
+    <br />
+
+    <!--Top Form-->
+    <div class="row" style="margin-top: 5px;">
+        <div class="col s12 col m12">
+            @using (Html.BeginForm()) {
+                <!--Spacer-->
+                <div class="col s2 col m2"></div>
+
+                <!--Input-->
+                <div class="input-field col s12 col m4" id="search-form">
+                    <input id="searchQuery" type="text" placeholder="Search..." style="max-width: 300px;">
+                </div>
+
+                <!--Buttons-->
+                <div class="input-field col s12 col m4 center-align">
+                    <button id="search-user-btn" type="submit" value="Search"
+                            class="btn-large amber tooltipped waves-effect waves-light"
+                            data-position="top" data-delay="50" data-tooltip="Search for User">
+                        <i class="material-icons">search</i>
+                    </button>
+                </div>
+
+                <!--Spacer-->
+                <div class="col s2 col m2"></div>
+            }
+        </div>
+    </div>
+
+    <div class="divider" style="background-color:#c2c2c2;margin-bottom:35px;"></div>
+
+    <div class="row">
+        <div class="col s12 col m12">
+            <table class="responsive-table bordered highlight">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.ID)
+                        </th>
+                        <th>
+                            @Html.ActionLink("Last Name", "Index", new { sortOrder = ViewBag.LastNameSortParm })
+                        </th>
+                        <th>
+                            @Html.ActionLink("First Name", "Index", new { sortOrder = ViewBag.FirstNameSortParm })
+                        </th>
+                        <th>
+                            @Html.ActionLink("Email", "Index", new { sortOrder = ViewBag.EmailSortParm })
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Debtor.PostalCode)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Debtor.City)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Debtor.Country)
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model) {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.ID)
+                            </td>
+                            <td>
+                                <a class="tooltipped" asp-action="Details" asp-route-id="@item.ID"
+                                   data-position="top" data-delay="50" data-tooltip="View Details">
+                                    @Html.DisplayFor(modelItem => item.Debtor.LastName)
+                                </a>
+                            </td>
+                            <td>
+                                <a class="tooltipped" asp-action="Details" asp-route-id="@item.ID"
+                                   data-position="top" data-delay="50" data-tooltip="View Details">
+                                    @Html.DisplayFor(modelItem => item.Debtor.FirstName)
+                                </a>
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Debtor.Email)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Debtor.PostalCode)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Debtor.City)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Debtor.Country)
+                            </td>
+                            <td>
+                                <a class="tooltipped" asp-action="Edit" asp-route-id="@item.ID"
+                                   data-position="top" data-delay="50" data-tooltip="Edit Admin"
+                                   style="padding-right: 2px;">
+                                    <i class="material-icons green-text">edit</i>
+                                </a>
+                                <a class="tooltipped" asp-action="Delete" asp-route-id="@item.ID"
+                                   data-position="right" data-delay="50" data-tooltip="Remove Admin"
+                                   style="padding-left: 2px;">
+                                    <i class="material-icons red-text">delete</i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            $('.tooltipped').tooltip({ delay: 50 });
+        });
+    </script>
 }
-    </tbody>
-</table>

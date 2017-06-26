@@ -27,7 +27,7 @@ namespace InvoiceWebApp.Controllers {
         //DATABASE ACTION METHODS
 
         private async Task<List<User>> GetUsers() {
-            List<User> userList = await _context.Users.ToListAsync();
+            List<User> userList = await _context.Users.Include(s => s.Debtor).ToListAsync();
             return userList;
         }
 
@@ -35,7 +35,7 @@ namespace InvoiceWebApp.Controllers {
             User user = null;
 
             try {
-                user = await _context.Users.SingleOrDefaultAsync(s => s.ID == id);
+                user = await _context.Users.Include(s => s.Debtor).SingleOrDefaultAsync(s => s.ID == id);
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
@@ -78,8 +78,66 @@ namespace InvoiceWebApp.Controllers {
         //CONTROLLER ACTIONS
 
         // GET: User
-        public async Task<IActionResult> Index() {
-            return View(await GetUsers());
+        public async Task<IActionResult> Index(string sortOrder, string searchQuery) {
+            //CURRENT PAGE
+            ViewBag.Current = "Users";
+
+            //SORTING OPTIONS ADMIN LIST
+            ViewBag.BeginSortParm = String.IsNullOrEmpty(sortOrder) ? "begin_desc" : "";
+            ViewBag.FirstNameSortParm = sortOrder == "FirstName" ? "firstname_desc" : "FirstName";
+            ViewBag.LastNameSortParm = sortOrder == "LastName" ? "lastname_desc" : "LastName";
+            ViewBag.EmailSortParm = sortOrder == "Email" ? "email_desc" : "Email";
+
+            var users = await GetUsers();
+            var query = from user in users
+                        select user;
+
+            //SEARCH OPTION ADMIN LIST
+            if (!String.IsNullOrEmpty(searchQuery)) {
+                query = query.Where(s => s.Debtor.FirstName.Contains(searchQuery)
+                                       || s.Email.Contains(searchQuery)
+                                       || s.Debtor.LastName.Contains(searchQuery)
+                                       || s.Debtor.City.Contains(searchQuery)
+                                       || s.Debtor.PostalCode.Contains(searchQuery)
+                                       || s.Debtor.Country.Contains(searchQuery));
+            }
+
+            switch (sortOrder) {
+                //WHEN NO SORT
+                case "begin_desc":
+                    query = query.OrderByDescending(s => s.Debtor.LastName);
+                    break;
+                //FIRST NAME
+                case "FirstName":
+                    query = query.OrderBy(s => s.Debtor.FirstName);
+                    break;
+
+                case "firstname_desc":
+                    query = query.OrderByDescending(s => s.Debtor.FirstName);
+                    break;
+                //EMAIL
+                case "Email":
+                    query = query.OrderBy(s => s.Email);
+                    break;
+
+                case "email_desc":
+                    query = query.OrderByDescending(s => s.Email);
+                    break;
+                //CITY
+                case "LastName":
+                    query = query.OrderBy(s => s.Debtor.LastName);
+                    break;
+
+                case "lastname_desc":
+                    query = query.OrderByDescending(s => s.Debtor.LastName);
+                    break;
+                //DEFAUlT
+                default:
+                    query = query.OrderBy(s => s.Debtor.LastName);
+                    break;
+            }
+
+            return View(query);
         }
 
         // GET: User/Details/5

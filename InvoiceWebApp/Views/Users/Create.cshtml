@@ -2,152 +2,113 @@
 @model InvoiceWebApp.Models.User
 
 @{
-    ViewData["Title"] = "Register";
+    ViewData["Title"] = "Register User";
     Layout = "~/Views/Shared/_Layout.cshtml";
 
     AppSettings settings = null;
-    if (SessionHelper.IsExists(Context.Session, "Settings"))
-    {
+    if (SessionHelper.IsExists(Context.Session, "Settings")) {
         settings = SessionHelper.Get<AppSettings>(Context.Session, "Settings");
     }
 }
 
-<div class="container">
-    <div class="row main-reg">
-        <div class="panel-heading">
-            <div class="panel-title text-center">
-                @if (settings.Logo != "" && settings.UseLogo == false)
-                {
-                    <h1 class="title">@settings.CompanyName</h1>
-                }
+<div class="container" id="create-user">
 
-                @if (settings.Logo != "" && settings.UseLogo == true)
-                {
-                    <img src="~/images/@(settings.Logo)" class="img-responsive center-block" />
-                }
-                <h3>Register</h3>
-                <hr style="width:35%;border-top:2px solid #fff;" />
-            </div>
+    <div class="row">
+        <div class="col s12 col m12 center-align">
+            <h4 style="margin-top: 40px;">Create User</h4>
         </div>
+    </div>
 
-        <div class="main-register main-center">
-            <form class="form-horizontal" asp-controller="Users" asp-action="Create">
+    <br />
+
+    <!--Form-->
+    <div class="row" style="margin-top: 5px;">
+        <div class="col s12 col col m10 offset-m1">
+            <form asp-controller="Users" asp-action="Create">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
-                <!--FIRST NAME-->
-                <div class="form-group">
-                    <label asp-for="FirstName" class="cols-sm-2 control-label">Your First Name</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
-                            <input type="text" asp-for="FirstName" class="form-control" id="firstname" placeholder="Enter your first name" />
-                            <span asp-validation-for="FirstName" class="text-danger"></span>
-                        </div>
+                <div class="row">
+                    <div class="input-field col s12 col m4 offset-m2">
+                        <i class="material-icons prefix">person_outline</i>
+                        <input id="icon_prefix" type="text" asp-for="FirstName">
+                        <label for="icon_prefix">First Name</label>
+                    </div>
+                    <div class="input-field col s12 col m4">
+                        <i class="material-icons prefix">person_outline</i>
+                        <input id="icon_prefix" type="text" asp-for="LastName">
+                        <label for="icon_prefix">Last Name</label>
                     </div>
                 </div>
 
-                <!--LAST NAME-->
-                <div class="form-group">
-                    <label asp-for="LastName" class="cols-sm-2 control-label">Your Last Name</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-id-card" aria-hidden="true"></i></span>
-                            <input type="text" asp-for="LastName" class="form-control" id="lastname" placeholder="Enter your last name" />
-                            <span asp-validation-for="LastName" class="text-danger"></span>
-                        </div>
+                <div class="row">
+                    <div class="input-field col s12 col m4 offset-m2">
+                        <i class="material-icons prefix">phone</i>
+                        <input id="icon_prefix" type="text" asp-for="Phone">
+                        <label for="icon_prefix">Phone</label>
+                    </div>
+                    <div class="input-field col s12 col m4">
                     </div>
                 </div>
 
-                <!--ADDRESS-->
-                <div class="form-group">
-                    <label asp-for="Address" class="cols-sm-2 control-label">Your Address</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-envelope-open" aria-hidden="true"></i></span>
-                            <input type="text" asp-for="Address" class="form-control" id="address" placeholder="Enter your address" />
-                            <span asp-validation-for="Address" class="text-danger"></span>
-                        </div>
+                <div class="divider" style="background-color: #cecece;"></div>
+
+                <div class="row">
+                    <div class="input-field col s12 col m4 offset-m2">
+                        <i class="material-icons prefix">email</i>
+                        <input id="icon_prefix" type="email" asp-for="Email" class="validate">
+                        <label for="icon_prefix">Email</label>
+                    </div>
+                    <div class="input-field col s12 col m4">
+                        <i class="material-icons prefix">lock</i>
+                        <input id="icon_prefix" type="password" asp-for="Password" class="validate">
+                        <label for="icon_prefix">Password</label>
                     </div>
                 </div>
 
-                <!--POSTAL CODE-->
-                <div class="form-group">
-                    <label asp-for="PostalCode" class="cols-sm-2 control-label">Your Postal Code</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-envelope-open" aria-hidden="true"></i></span>
-                            <input type="text" asp-for="PostalCode" class="form-control" id="postal" placeholder="Enter your postal code" />
-                            <span asp-validation-for="PostalCode" class="text-danger"></span>
-                        </div>
+                <div class="divider" style="background-color: #cecece;"></div>
+
+                <div class="row">
+                    <div class="input-field col s12 col m4 offset-m2">
+                        <i class="material-icons prefix">place</i>
+                        <input id="icon_prefix" type="text" asp-for="Address">
+                        <label for="icon_prefix">Address</label>
+                    </div>
+                    <div class="input-field col s12 col m4 offset-m2">
+                        <i class="material-icons prefix">place</i>
+                        <input id="icon_prefix" type="text" asp-for="PostalCode">
+                        <label for="icon_prefix">Postal Code</label>
                     </div>
                 </div>
 
-                <!--CITY-->
-                <div class="form-group">
-                    <label asp-for="City" class="cols-sm-2 control-label">Your City</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-envelope-open" aria-hidden="true"></i></span>
-                            <input type="text" asp-for="City" class="form-control" id="city" placeholder="Enter your city" />
-                            <span asp-validation-for="City" class="text-danger"></span>
-                        </div>
+                <div class="row">
+                    <div class="input-field col s12 col m4 offset-m2">
+                        <i class="material-icons prefix">place</i>
+                        <input id="icon_prefix" type="text" asp-for="City">
+                        <label for="icon_prefix">City</label>
+                    </div>
+                    <div class="input-field col s12 col m4 offset-m2">
+                        <i class="material-icons prefix">place</i>
+                        <input id="icon_prefix" type="text" asp-for="Country">
+                        <label for="icon_prefix">Country</label>
                     </div>
                 </div>
 
-                <!--COUNTRY-->
-                <div class="form-group">
-                    <label asp-for="Country" class="cols-sm-2 control-label">Your Country</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-envelope-open" aria-hidden="true"></i></span>
-                            <input type="text" asp-for="Country" class="form-control" id="country" placeholder="Enter your country" />
-                            <span asp-validation-for="Country" class="text-danger"></span>
-                        </div>
+                <div class="divider" style="background-color: #cecece;"></div>
+
+                <div class="row">
+                    <div id="button-area">
+                        <button id="create-admin-btn" type="submit" value="Create"
+                                class="btn-large z-depth-3 waves-effect waves-light light-green">
+                            <i class="material-icons left">create</i>
+                            <span>Create</span>
+                        </button>
+
+                        <br />
+
+                        <a asp-action="Index" class="light-green-text text-darken-2">Back to Overview</a>
                     </div>
-                </div>
-
-                <hr style="width:80%;" />
-
-                <!--EMAIL-->
-                <div class="form-group">
-                    <label asp-for="Email" class="cols-sm-2 control-label">Your Email</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-user" aria-hidden="true"></i></span>
-                            <input type="text" asp-for="Email" class="form-control" id="email" placeholder="Enter your Email" />
-                            <span asp-validation-for="Email" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!--PASSWORD-->
-                <div class="form-group">
-                    <label asp-for="Password" class="cols-sm-2 control-label">Password</label>
-                    <div class="cols-sm-10">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="fa fa-lock" aria-hidden="true"></i></span>
-                            <input type="password" asp-for="Password" class="form-control" id="password" placeholder="Enter your Password" />
-                            <span asp-validation-for="Password" class="text-danger"></span>
-                        </div>
-                    </div>
-                </div>
-
-                <!--REGISTER BUTTON-->
-                <div class="form-group ">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block register-button">Register</button>
-                </div>
-
-                <!--BACK TO LOGIN-->
-                <div class="login-register">
-                    <p>
-                        <a asp-action="Login">Back to Login</a>
-                    </p>
                 </div>
             </form>
         </div>
     </div>
 </div>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

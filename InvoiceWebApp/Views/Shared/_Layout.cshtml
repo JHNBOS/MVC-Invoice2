@@ -80,6 +80,16 @@
             </li>
         </ul>
 
+        <!--Accounts dropdown-->
+        <ul id="dropdown-account" class="dropdown-content collapsible collapsible-accordion">
+            <li class="@(ViewBag.Current == "Users" ? "active" : "")">
+                <a asp-area="" asp-controller="Users" asp-action="Index">Users</a>
+            </li>
+            <li class="@(ViewBag.Current == "Admins" ? "active" : "")">
+                <a asp-area="" asp-controller="Admins" asp-action="Index">Admins</a>
+            </li>
+        </ul>
+
         <!--Mobile Nav-->
         <ul id="mobile-nav" class="side-nav">
             <!--Check if user exist-->
@@ -117,17 +127,34 @@
                     </ul>
                 </li>
                 <!--Products-->
-                    <li class="@(ViewBag.Current == "Products" ? "active" : "")">
-                        <a asp-area="" asp-controller="Products" asp-action="Index">Products</a>
-                    </li>
+                <li class="@(ViewBag.Current == "Products" ? "active" : "")">
+                    <a asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                </li>
                 <!--Invoices-->
-                    <li class="@(ViewBag.Current == "Invoices" ? "active" : "")">
-                        <a asp-area="" asp-controller="Invoices" asp-action="Index">Invoices</a>
-                    </li>
-                <!--Admins-->
-                    <li class="@(ViewBag.Current == "Admins" ? "active" : "")">
-                        <a asp-area="" asp-controller="Admins" asp-action="Index">Admins</a>
-                    </li>
+                <li class="@(ViewBag.Current == "Invoices" ? "active" : "")">
+                    <a asp-area="" asp-controller="Invoices" asp-action="Index">Invoices</a>
+                </li>
+                <!--Accounts-->
+                <li>
+                    <ul id="dropdown-account-slide" class="collapsible collapsible-accordion">
+                        <li>
+                            <a href="#" class="collapsible-header" style="padding-left: 31px;">
+                                Accounts
+                                <i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li class="@(ViewBag.Current == "Users" ? "active" : "")">>
+                                        <a asp-area="" asp-controller="Users" asp-action="Index">Users</a>
+                                    </li>
+                                    <li class="@(ViewBag.Current == "Admins" ? "active" : "")">>
+                                        <a asp-area="" asp-controller="Admins" asp-action="Index">Admins</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
             }
             <!--Check if user exist-->
             @if (user != null) {
@@ -150,7 +177,7 @@
                     </a>
                 </li>
             }
-           
+
             <!--Login/Logout button mobile-->
             <li>
                 <button type="submit" id="account-btn-mobile" asp-controller="Users" asp-action="Login"
@@ -219,21 +246,24 @@
                         <li>
                             <a class="dropdown-button" href="#!" data-activates="dropdown-debtor">
                                 Debtors
-                                <i class="material-icons right">arrow_drop_down</i>
+                                <i class="material-icons right" style="margin-left:3px;">arrow_drop_down</i>
                             </a>
                         </li>
                         <!--Products-->
-                            <li class="@(ViewBag.Current == "Products" ? "active" : "")">
-                                <a asp-area="" asp-controller="Products" asp-action="Index">Products</a>
-                            </li>
+                        <li class="@(ViewBag.Current == "Products" ? "active" : "")">
+                            <a asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                        </li>
                         <!--Invoices-->
-                            <li class="@(ViewBag.Current == "Invoices" ? "active" : "")">
-                                <a asp-area="" asp-controller="Invoices" asp-action="Index">Invoices</a>
-                            </li>
-                        <!--Admins-->
-                            <li class="@(ViewBag.Current == "Admins" ? "active" : "")">
-                                <a asp-area="" asp-controller="Admins" asp-action="Index">Admins</a>
-                            </li>
+                        <li class="@(ViewBag.Current == "Invoices" ? "active" : "")">
+                            <a asp-area="" asp-controller="Invoices" asp-action="Index">Invoices</a>
+                        </li>
+                        <!--Accounts-->
+                        <li>
+                            <a class="dropdown-button" href="#!" data-activates="dropdown-account">
+                                Accounts
+                                <i class="material-icons right" style="margin-left:3px;">arrow_drop_down</i>
+                            </a>
+                        </li>
                     }
                     <!--Check if user exist-->
                     @if (user != null) {
@@ -242,6 +272,7 @@
                             <a asp-area="" asp-controller="MyInvoices" asp-action="Index">Invoices</a>
                         </li>
                     }
+
                     <!--Contact-->
                     <li class="@(ViewBag.Current == "Contact" ? "active" : "")">
                         <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
@@ -251,8 +282,8 @@
                     @if (admin != null) {
                         <li class="@(ViewBag.Current == "Settings" ? "active" : "")">
                             <a id="settings-btn" asp-controller="Admins" asp-action="Settings"
-                                    class="btn-flat waves-effect waves-default tooltipped"
-                                    data-position="bottom" data-delay="50" data-tooltip="Settings">
+                               class="btn-flat waves-effect waves-default tooltipped"
+                               data-position="bottom" data-delay="50" data-tooltip="Settings">
                                 <i class="material-icons">settings</i>
                             </a>
                         </li>
@@ -262,8 +293,7 @@
                     <li>
                         <button type="submit" id="account-btn" asp-controller="Users" asp-action="Login"
                                 class="btn-flat waves-effect waves-default tooltipped"
-                                data-position="bottom" data-delay="50" data-tooltip="Sign in">
-                        </button>
+                                data-position="bottom" data-delay="50" data-tooltip="Sign in"></button>
                     </li>
                 </ul>
             </div>
@@ -300,7 +330,6 @@
     </footer>
 
     <environment names="Development">
-        <!--<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>-->
         <!--jQuery-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
@@ -314,12 +343,6 @@
         <script src="~/js/site.js" asp-append-version="true"></script>
     </environment>
     <environment names="Staging,Production">
-        <!--<script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/bootstrap.min.js"
-                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
-                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
-                crossorigin="anonymous"
-                integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa">
-        </script>-->
         <!--jQuery-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
