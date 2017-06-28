@@ -56,7 +56,8 @@
                 <div class="row">
                     <div id="button-area">
                         <button id="change-admin-btn" type="submit" value="Edit"
-                                class="btn-large light-green waves-effect waves-light">
+                                class="btn-large light-green waves-effect waves-light"
+                                asp-controller="Admins" asp-action="Edit" asp-route-id="@Model.AdminID">
                             <i class="material-icons left">edit</i>
                             <span>Edit</span>
                         </button>

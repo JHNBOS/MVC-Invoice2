@@ -1,499 +1,530 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using System;
+using Microsoft.EntityFrameworkCore.Migrations;
+using InvoiceWebApp.Data;
 
-namespace InvoiceWebApp.Data.Migrations {
-
+namespace InvoiceWebApp.Data.Migrations
+{
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot {
-
-        protected override void BuildModel(ModelBuilder modelBuilder) {
+    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    {
+        protected override void BuildModel(ModelBuilder modelBuilder)
+        {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.2")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("InvoiceWebApp.Models.Admin", b => {
-                b.Property<int>("AdminID")
-                    .ValueGeneratedOnAdd();
+            modelBuilder.Entity("InvoiceWebApp.Models.Admin", b =>
+                {
+                    b.Property<int>("AdminID")
+                        .ValueGeneratedOnAdd();
 
-                b.Property<string>("Email")
-                    .IsRequired();
+                    b.Property<string>("Email")
+                        .IsRequired();
 
-                b.Property<string>("FirstName")
-                    .IsRequired();
+                    b.Property<string>("FirstName")
+                        .IsRequired();
 
-                b.Property<string>("LastName")
-                    .IsRequired();
+                    b.Property<string>("LastName")
+                        .IsRequired();
 
-                b.Property<string>("Password")
-                    .IsRequired();
+                    b.Property<string>("Password")
+                        .IsRequired();
 
-                b.HasKey("AdminID");
+                    b.HasKey("AdminID");
 
-                b.HasAlternateKey("Email")
-                    .HasName("AlternateKey_AdminEmail");
+                    b.HasAlternateKey("Email")
+                        .HasName("AlternateKey_AdminEmail");
 
-                b.ToTable("Admins");
-            });
+                    b.ToTable("Admins");
+                });
 
-            modelBuilder.Entity("InvoiceWebApp.Models.ApplicationUser", b => {
-                b.Property<string>("Id")
-                    .ValueGeneratedOnAdd();
+            modelBuilder.Entity("InvoiceWebApp.Models.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
-                b.Property<int>("AccessFailedCount");
+                    b.Property<int>("AccessFailedCount");
 
-                b.Property<string>("AccountType");
+                    b.Property<string>("AccountType");
 
-                b.Property<string>("ConcurrencyStamp")
-                    .IsConcurrencyToken();
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
 
-                b.Property<int>("DebtorID");
+                    b.Property<int>("DebtorID");
 
-                b.Property<string>("Email")
-                    .HasMaxLength(256);
+                    b.Property<string>("Email")
+                        .HasMaxLength(256);
 
-                b.Property<bool>("EmailConfirmed");
+                    b.Property<bool>("EmailConfirmed");
 
-                b.Property<bool>("LockoutEnabled");
+                    b.Property<bool>("LockoutEnabled");
 
-                b.Property<DateTimeOffset?>("LockoutEnd");
+                    b.Property<DateTimeOffset?>("LockoutEnd");
 
-                b.Property<string>("NormalizedEmail")
-                    .HasMaxLength(256);
+                    b.Property<string>("NormalizedEmail")
+                        .HasMaxLength(256);
 
-                b.Property<string>("NormalizedUserName")
-                    .HasMaxLength(256);
+                    b.Property<string>("NormalizedUserName")
+                        .HasMaxLength(256);
 
-                b.Property<string>("PasswordHash");
+                    b.Property<string>("PasswordHash");
 
-                b.Property<string>("PhoneNumber");
+                    b.Property<string>("PhoneNumber");
 
-                b.Property<bool>("PhoneNumberConfirmed");
+                    b.Property<bool>("PhoneNumberConfirmed");
 
-                b.Property<string>("SecurityStamp");
+                    b.Property<string>("SecurityStamp");
 
-                b.Property<bool>("TwoFactorEnabled");
+                    b.Property<bool>("TwoFactorEnabled");
 
-                b.Property<string>("UserName")
-                    .HasMaxLength(256);
+                    b.Property<string>("UserName")
+                        .HasMaxLength(256);
 
-                b.HasKey("Id");
+                    b.HasKey("Id");
 
-                b.HasIndex("DebtorID");
+                    b.HasIndex("DebtorID");
 
-                b.HasIndex("NormalizedEmail")
-                    .HasName("EmailIndex");
+                    b.HasIndex("NormalizedEmail")
+                        .HasName("EmailIndex");
 
-                b.HasIndex("NormalizedUserName")
-                    .IsUnique()
-                    .HasName("UserNameIndex");
+                    b.HasIndex("NormalizedUserName")
+                        .IsUnique()
+                        .HasName("UserNameIndex");
 
-                b.ToTable("AspNetUsers");
-            });
+                    b.ToTable("AspNetUsers");
+                });
 
-            modelBuilder.Entity("InvoiceWebApp.Models.AppSettings", b => {
-                b.Property<int>("ID")
-                    .ValueGeneratedOnAdd();
+            modelBuilder.Entity("InvoiceWebApp.Models.AppSettings", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
 
-                b.Property<string>("Address");
+                    b.Property<string>("Address");
 
-                b.Property<string>("BankAccountNumber");
+                    b.Property<string>("BankAccountNumber");
 
-                b.Property<string>("BankName");
+                    b.Property<string>("BankName");
 
-                b.Property<string>("City");
+                    b.Property<string>("City");
 
-                b.Property<string>("CompanyName");
+                    b.Property<string>("CompanyName");
 
-                b.Property<string>("Country");
+                    b.Property<string>("Country");
 
-                b.Property<string>("EUFinancialNumber");
+                    b.Property<string>("EUFinancialNumber");
 
-                b.Property<string>("Email");
+                    b.Property<string>("Email");
 
-                b.Property<string>("FinancialNumber");
+                    b.Property<string>("FinancialNumber");
 
-                b.Property<string>("Logo");
+                    b.Property<string>("Logo");
 
-                b.Property<string>("Password");
+                    b.Property<string>("Password");
 
-                b.Property<string>("Phone");
+                    b.Property<string>("Phone");
 
-                b.Property<int>("Port");
+                    b.Property<int>("Port");
 
-                b.Property<string>("PostalCode");
+                    b.Property<string>("PostalCode");
 
-                b.Property<string>("Prefix");
+                    b.Property<string>("Prefix");
 
-                b.Property<string>("RegNumber");
+                    b.Property<string>("RegNumber");
 
-                b.Property<string>("SMTP");
+                    b.Property<string>("SMTP");
 
-                b.Property<bool>("UseLogo");
+                    b.Property<bool>("UseLogo");
 
-                b.Property<string>("Website");
+                    b.Property<string>("Website");
 
-                b.HasKey("ID");
+                    b.HasKey("ID");
 
-                b.ToTable("Settings");
-            });
+                    b.ToTable("Settings");
+                });
 
-            modelBuilder.Entity("InvoiceWebApp.Models.Company", b => {
-                b.Property<int>("CompanyID")
-                    .ValueGeneratedOnAdd();
+            modelBuilder.Entity("InvoiceWebApp.Models.Company", b =>
+                {
+                    b.Property<int>("CompanyID")
+                        .ValueGeneratedOnAdd();
 
-                b.Property<string>("Address")
-                    .IsRequired();
+                    b.Property<string>("Address")
+                        .IsRequired();
 
-                b.Property<string>("BankAccount")
-                    .IsRequired();
+                    b.Property<string>("BankAccount")
+                        .IsRequired();
 
-                b.Property<string>("BankName")
-                    .IsRequired();
+                    b.Property<string>("BankName")
+                        .IsRequired();
 
-                b.Property<string>("City")
-                    .IsRequired();
+                    b.Property<string>("City")
+                        .IsRequired();
 
-                b.Property<string>("CompanyName")
-                    .IsRequired();
+                    b.Property<string>("CompanyName")
+                        .IsRequired();
 
-                b.Property<string>("Country")
-                    .IsRequired();
+                    b.Property<string>("Country")
+                        .IsRequired();
 
-                b.Property<string>("EUFinancialNumber")
-                    .IsRequired();
+                    b.Property<string>("EUFinancialNumber")
+                        .IsRequired();
 
-                b.Property<string>("Email")
-                    .IsRequired();
+                    b.Property<string>("Email")
+                        .IsRequired();
 
-                b.Property<string>("FinancialNumber")
-                    .IsRequired();
+                    b.Property<string>("FinancialNumber")
+                        .IsRequired();
 
-                b.Property<string>("Phone");
+                    b.Property<string>("Phone");
 
-                b.Property<string>("PostalCode")
-                    .IsRequired();
+                    b.Property<string>("PostalCode")
+                        .IsRequired();
 
-                b.Property<string>("RegNumber")
-                    .IsRequired();
+                    b.Property<string>("RegNumber")
+                        .IsRequired();
 
-                b.HasKey("CompanyID");
+                    b.HasKey("CompanyID");
 
-                b.HasAlternateKey("BankAccount")
-                    .HasName("AlternateKey_BankAccount");
+                    b.HasAlternateKey("BankAccount")
+                        .HasName("AlternateKey_BankAccount");
 
-                b.HasAlternateKey("EUFinancialNumber")
-                    .HasName("AlternateKey_EUFinancialNumber");
 
-                b.HasAlternateKey("FinancialNumber")
-                    .HasName("AlternateKey_FinancialNumber");
+                    b.HasAlternateKey("EUFinancialNumber")
+                        .HasName("AlternateKey_EUFinancialNumber");
 
-                b.HasAlternateKey("RegNumber")
-                    .HasName("AlternateKey_RegNumber");
 
-                b.ToTable("Company");
-            });
+                    b.HasAlternateKey("FinancialNumber")
+                        .HasName("AlternateKey_FinancialNumber");
 
-            modelBuilder.Entity("InvoiceWebApp.Models.Debtor", b => {
-                b.Property<int>("DebtorID")
-                    .ValueGeneratedOnAdd();
 
-                b.Property<string>("Address")
-                    .IsRequired();
+                    b.HasAlternateKey("RegNumber")
+                        .HasName("AlternateKey_RegNumber");
 
-                b.Property<string>("BankAccount")
-                    .IsRequired();
+                    b.ToTable("Company");
+                });
 
-                b.Property<string>("City")
-                    .IsRequired();
+            modelBuilder.Entity("InvoiceWebApp.Models.Debtor", b =>
+                {
+                    b.Property<int>("DebtorID")
+                        .ValueGeneratedOnAdd();
 
-                b.Property<string>("Country")
-                    .IsRequired();
+                    b.Property<string>("Address")
+                        .IsRequired();
 
-                b.Property<string>("Email")
-                    .IsRequired();
+                    b.Property<string>("BankAccount")
+                        .IsRequired();
 
-                b.Property<string>("FirstName")
-                    .IsRequired();
+                    b.Property<string>("City")
+                        .IsRequired();
 
-                b.Property<string>("IdNumber")
-                    .IsRequired();
+                    b.Property<string>("Country")
+                        .IsRequired();
 
-                b.Property<string>("LastName")
-                    .IsRequired();
+                    b.Property<string>("Email")
+                        .IsRequired();
 
-                b.Property<string>("Phone");
+                    b.Property<string>("FirstName")
+                        .IsRequired();
 
-                b.Property<string>("PostalCode")
-                    .IsRequired();
+                    b.Property<string>("IdNumber")
+                        .IsRequired();
 
-                b.HasKey("DebtorID");
+                    b.Property<string>("LastName")
+                        .IsRequired();
 
-                b.HasAlternateKey("BankAccount")
-                    .HasName("AlternateKey_BankAccount");
+                    b.Property<string>("Phone");
 
-                b.HasAlternateKey("IdNumber")
-                    .HasName("AlternateKey_IdNumber");
+                    b.Property<string>("PostalCode")
+                        .IsRequired();
 
-                b.ToTable("Debtors");
-            });
+                    b.HasKey("DebtorID");
 
-            modelBuilder.Entity("InvoiceWebApp.Models.Invoice", b => {
-                b.Property<int>("InvoiceNumber")
-                    .ValueGeneratedOnAdd();
+                    b.HasAlternateKey("BankAccount")
+                        .HasName("AlternateKey_BankAccount");
 
-                b.Property<int?>("CompanyID");
 
-                b.Property<DateTime>("CreatedOn");
+                    b.HasAlternateKey("IdNumber")
+                        .HasName("AlternateKey_IdNumber");
 
-                b.Property<int?>("DebtorID");
+                    b.ToTable("Debtors");
+                });
 
-                b.Property<DateTime>("ExpirationDate");
+            modelBuilder.Entity("InvoiceWebApp.Models.Invoice", b =>
+                {
+                    b.Property<int>("InvoiceNumber")
+                        .ValueGeneratedOnAdd();
 
-                b.Property<bool>("Paid");
+                    b.Property<int?>("CompanyID");
 
-                b.Property<decimal>("Total");
+                    b.Property<DateTime>("CreatedOn");
 
-                b.Property<string>("Type");
+                    b.Property<int?>("DebtorID");
 
-                b.HasKey("InvoiceNumber");
+                    b.Property<DateTime>("ExpirationDate");
 
-                b.HasIndex("CompanyID");
+                    b.Property<bool>("Paid");
 
-                b.HasIndex("DebtorID");
+                    b.Property<decimal>("Total");
 
-                b.ToTable("Invoices");
-            });
+                    b.Property<string>("Type");
 
-            modelBuilder.Entity("InvoiceWebApp.Models.InvoiceItem", b => {
-                b.Property<int>("ItemID")
-                    .ValueGeneratedOnAdd();
+                    b.HasKey("InvoiceNumber");
 
-                b.Property<int>("Amount");
+                    b.HasIndex("CompanyID");
 
-                b.Property<int>("InvoiceNumber");
+                    b.HasIndex("DebtorID");
 
-                b.Property<int>("ProductID");
+                    b.ToTable("Invoices");
+                });
 
-                b.HasKey("ItemID");
+            modelBuilder.Entity("InvoiceWebApp.Models.InvoiceItem", b =>
+                {
+                    b.Property<int>("ItemID")
+                        .ValueGeneratedOnAdd();
 
-                b.HasIndex("InvoiceNumber");
+                    b.Property<int>("Amount");
 
-                b.HasIndex("ProductID");
+                    b.Property<int>("InvoiceNumber");
 
-                b.ToTable("InvoiceItems");
-            });
+                    b.Property<int>("ProductID");
 
-            modelBuilder.Entity("InvoiceWebApp.Models.Product", b => {
-                b.Property<int>("ProductID")
-                    .ValueGeneratedOnAdd();
+                    b.HasKey("ItemID");
 
-                b.Property<string>("Description");
+                    b.HasIndex("InvoiceNumber");
 
-                b.Property<string>("Name")
-                    .IsRequired();
+                    b.HasIndex("ProductID");
 
-                b.Property<decimal>("Price");
+                    b.ToTable("InvoiceItems");
+                });
 
-                b.Property<int>("VAT");
+            modelBuilder.Entity("InvoiceWebApp.Models.Product", b =>
+                {
+                    b.Property<int>("ProductID")
+                        .ValueGeneratedOnAdd();
 
-                b.HasKey("ProductID");
+                    b.Property<string>("Description");
 
-                b.HasAlternateKey("Name")
-                    .HasName("AlternateKey_Name");
+                    b.Property<string>("Name")
+                        .IsRequired();
 
-                b.ToTable("Products");
-            });
+                    b.Property<decimal>("Price");
 
-            modelBuilder.Entity("InvoiceWebApp.Models.User", b => {
-                b.Property<int>("ID")
-                    .ValueGeneratedOnAdd();
+                    b.Property<int>("VAT");
 
-                b.Property<string>("AccountType");
+                    b.HasKey("ProductID");
 
-                b.Property<int>("DebtorID");
+                    b.HasAlternateKey("Name")
+                        .HasName("AlternateKey_Name");
 
-                b.Property<string>("Email");
+                    b.ToTable("Products");
+                });
 
-                b.Property<string>("Password");
+            modelBuilder.Entity("InvoiceWebApp.Models.User", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
 
-                b.HasKey("ID");
+                    b.Property<string>("AccountType");
 
-                b.HasIndex("DebtorID");
+                    b.Property<int>("DebtorID");
 
-                b.ToTable("Users");
-            });
+                    b.Property<string>("Email");
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b => {
-                b.Property<string>("Id")
-                    .ValueGeneratedOnAdd();
+                    b.Property<string>("Password");
 
-                b.Property<string>("ConcurrencyStamp")
-                    .IsConcurrencyToken();
+                    b.HasKey("ID");
 
-                b.Property<string>("Name")
-                    .HasMaxLength(256);
+                    b.HasIndex("DebtorID")
+                        .IsUnique();
 
-                b.Property<string>("NormalizedName")
-                    .HasMaxLength(256);
+                    b.ToTable("Users");
+                });
 
-                b.HasKey("Id");
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd();
 
-                b.HasIndex("NormalizedName")
-                    .IsUnique()
-                    .HasName("RoleNameIndex");
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken();
 
-                b.ToTable("AspNetRoles");
-            });
+                    b.Property<string>("Name")
+                        .HasMaxLength(256);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b => {
-                b.Property<int>("Id")
-                    .ValueGeneratedOnAdd();
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256);
 
-                b.Property<string>("ClaimType");
+                    b.HasKey("Id");
 
-                b.Property<string>("ClaimValue");
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasName("RoleNameIndex");
 
-                b.Property<string>("RoleId")
-                    .IsRequired();
+                    b.ToTable("AspNetRoles");
+                });
 
-                b.HasKey("Id");
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
-                b.HasIndex("RoleId");
+                    b.Property<string>("ClaimType");
 
-                b.ToTable("AspNetRoleClaims");
-            });
+                    b.Property<string>("ClaimValue");
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b => {
-                b.Property<int>("Id")
-                    .ValueGeneratedOnAdd();
+                    b.Property<string>("RoleId")
+                        .IsRequired();
 
-                b.Property<string>("ClaimType");
+                    b.HasKey("Id");
 
-                b.Property<string>("ClaimValue");
+                    b.HasIndex("RoleId");
 
-                b.Property<string>("UserId")
-                    .IsRequired();
+                    b.ToTable("AspNetRoleClaims");
+                });
 
-                b.HasKey("Id");
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
 
-                b.HasIndex("UserId");
+                    b.Property<string>("ClaimType");
 
-                b.ToTable("AspNetUserClaims");
-            });
+                    b.Property<string>("ClaimValue");
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b => {
-                b.Property<string>("LoginProvider");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
-                b.Property<string>("ProviderKey");
+                    b.HasKey("Id");
 
-                b.Property<string>("ProviderDisplayName");
+                    b.HasIndex("UserId");
 
-                b.Property<string>("UserId")
-                    .IsRequired();
+                    b.ToTable("AspNetUserClaims");
+                });
 
-                b.HasKey("LoginProvider", "ProviderKey");
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
+                {
+                    b.Property<string>("LoginProvider");
 
-                b.HasIndex("UserId");
+                    b.Property<string>("ProviderKey");
 
-                b.ToTable("AspNetUserLogins");
-            });
+                    b.Property<string>("ProviderDisplayName");
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>", b => {
-                b.Property<string>("UserId");
+                    b.Property<string>("UserId")
+                        .IsRequired();
 
-                b.Property<string>("RoleId");
+                    b.HasKey("LoginProvider", "ProviderKey");
 
-                b.HasKey("UserId", "RoleId");
+                    b.HasIndex("UserId");
 
-                b.HasIndex("RoleId");
+                    b.ToTable("AspNetUserLogins");
+                });
 
-                b.ToTable("AspNetUserRoles");
-            });
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>", b =>
+                {
+                    b.Property<string>("UserId");
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserToken<string>", b => {
-                b.Property<string>("UserId");
+                    b.Property<string>("RoleId");
 
-                b.Property<string>("LoginProvider");
+                    b.HasKey("UserId", "RoleId");
 
-                b.Property<string>("Name");
+                    b.HasIndex("RoleId");
 
-                b.Property<string>("Value");
+                    b.ToTable("AspNetUserRoles");
+                });
 
-                b.HasKey("UserId", "LoginProvider", "Name");
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserToken<string>", b =>
+                {
+                    b.Property<string>("UserId");
 
-                b.ToTable("AspNetUserTokens");
-            });
+                    b.Property<string>("LoginProvider");
 
-            modelBuilder.Entity("InvoiceWebApp.Models.ApplicationUser", b => {
-                b.HasOne("InvoiceWebApp.Models.Debtor", "Debtor")
-                    .WithMany()
-                    .HasForeignKey("DebtorID")
-                    .OnDelete(DeleteBehavior.Cascade);
-            });
+                    b.Property<string>("Name");
 
-            modelBuilder.Entity("InvoiceWebApp.Models.Invoice", b => {
-                b.HasOne("InvoiceWebApp.Models.Company", "Company")
-                    .WithMany()
-                    .HasForeignKey("CompanyID");
+                    b.Property<string>("Value");
 
-                b.HasOne("InvoiceWebApp.Models.Debtor", "Debtor")
-                    .WithMany()
-                    .HasForeignKey("DebtorID");
-            });
+                    b.HasKey("UserId", "LoginProvider", "Name");
 
-            modelBuilder.Entity("InvoiceWebApp.Models.InvoiceItem", b => {
-                b.HasOne("InvoiceWebApp.Models.Invoice", "Invoice")
-                    .WithMany("InvoiceItems")
-                    .HasForeignKey("InvoiceNumber")
-                    .OnDelete(DeleteBehavior.Cascade);
+                    b.ToTable("AspNetUserTokens");
+                });
 
-                b.HasOne("InvoiceWebApp.Models.Product", "Product")
-                    .WithMany("InvoiceItems")
-                    .HasForeignKey("ProductID")
-                    .OnDelete(DeleteBehavior.Cascade);
-            });
+            modelBuilder.Entity("InvoiceWebApp.Models.ApplicationUser", b =>
+                {
+                    b.HasOne("InvoiceWebApp.Models.Debtor", "Debtor")
+                        .WithMany()
+                        .HasForeignKey("DebtorID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
 
-            modelBuilder.Entity("InvoiceWebApp.Models.User", b => {
-                b.HasOne("InvoiceWebApp.Models.Debtor", "Debtor")
-                    .WithMany()
-                    .HasForeignKey("DebtorID")
-                    .OnDelete(DeleteBehavior.Cascade);
-            });
+            modelBuilder.Entity("InvoiceWebApp.Models.Invoice", b =>
+                {
+                    b.HasOne("InvoiceWebApp.Models.Company", "Company")
+                        .WithMany()
+                        .HasForeignKey("CompanyID");
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b => {
-                b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
-                    .WithMany("Claims")
-                    .HasForeignKey("RoleId")
-                    .OnDelete(DeleteBehavior.Cascade);
-            });
+                    b.HasOne("InvoiceWebApp.Models.Debtor", "Debtor")
+                        .WithMany()
+                        .HasForeignKey("DebtorID");
+                });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b => {
-                b.HasOne("InvoiceWebApp.Models.ApplicationUser")
-                    .WithMany("Claims")
-                    .HasForeignKey("UserId")
-                    .OnDelete(DeleteBehavior.Cascade);
-            });
+            modelBuilder.Entity("InvoiceWebApp.Models.InvoiceItem", b =>
+                {
+                    b.HasOne("InvoiceWebApp.Models.Invoice", "Invoice")
+                        .WithMany("InvoiceItems")
+                        .HasForeignKey("InvoiceNumber")
+                        .OnDelete(DeleteBehavior.Cascade);
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b => {
-                b.HasOne("InvoiceWebApp.Models.ApplicationUser")
-                    .WithMany("Logins")
-                    .HasForeignKey("UserId")
-                    .OnDelete(DeleteBehavior.Cascade);
-            });
+                    b.HasOne("InvoiceWebApp.Models.Product", "Product")
+                        .WithMany("InvoiceItems")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>", b => {
-                b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
-                    .WithMany("Users")
-                    .HasForeignKey("RoleId")
-                    .OnDelete(DeleteBehavior.Cascade);
+            modelBuilder.Entity("InvoiceWebApp.Models.User", b =>
+                {
+                    b.HasOne("InvoiceWebApp.Models.Debtor", "Debtor")
+                        .WithOne("User")
+                        .HasForeignKey("InvoiceWebApp.Models.User", "DebtorID")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
 
-                b.HasOne("InvoiceWebApp.Models.ApplicationUser")
-                    .WithMany("Roles")
-                    .HasForeignKey("UserId")
-                    .OnDelete(DeleteBehavior.Cascade);
-            });
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
+                        .WithMany("Claims")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
+                {
+                    b.HasOne("InvoiceWebApp.Models.ApplicationUser")
+                        .WithMany("Claims")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
+                {
+                    b.HasOne("InvoiceWebApp.Models.ApplicationUser")
+                        .WithMany("Logins")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserRole<string>", b =>
+                {
+                    b.HasOne("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole")
+                        .WithMany("Users")
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("InvoiceWebApp.Models.ApplicationUser")
+                        .WithMany("Roles")
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
         }
     }
 }

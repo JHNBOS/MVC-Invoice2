@@ -42,6 +42,8 @@ namespace InvoiceWebApp.Models {
         [Required]
         public string Country { get; set; }
 
+        public virtual User User { get; set; }
+
         public string FullName {
             get {
                 return FirstName + " " + LastName;
