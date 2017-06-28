@@ -1,7 +1,7 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Lato|Montserrat|Overpass|Raleway|Roboto');
 
 body {
-    background: #FFF;
+    background: rgba(243, 243, 243, 0.75);
     font-family: 'Overpass', sans-serif;
     padding-bottom: 0px;
 }
@@ -59,6 +59,12 @@ textarea {
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF NAVBAR CSS */
 
+nav {
+    box-shadow: 0px 7px 18px -6px rgba(0,0,0,0.66);
+    -webkit-box-shadow: 0px 7px 18px -6px rgba(0,0,0,0.66);
+    -moz-box-shadow: 0px 7px 18px -6px rgba(0,0,0,0.66);
+}
+
 .navbar-fixed {
     margin-bottom: 42.5px;
 }
@@ -68,14 +74,14 @@ nav .brand-logo {
     font-weight: 100 !important;
 }
 
-    nav .brand-logo.right {
-        padding-right: 25px;
-    }
+nav .brand-logo.right {
+    padding-right: 25px;
+}
 
-    nav .brand-logo img {
-        vertical-align: middle;
-        padding-bottom: 10px;
-    }
+nav .brand-logo img {
+    vertical-align: middle;
+    padding-bottom: 10px;
+}
 
 nav ul a {
     transition: background-color .3s;
@@ -99,13 +105,13 @@ nav ul a {
     cursor: pointer;
 }
 
-    #settings-btn i {
-        text-shadow: 0px 0px 3px #000;
-    }
+#settings-btn i {
+    text-shadow: 0px 0px 3px #000;
+}
 
-    #settings-btn:hover i {
-        text-shadow: 0px 3px 20px #000;
-    }
+#settings-btn:hover i {
+    text-shadow: 0px 3px 20px #000;
+}
 
 #settings-btn-mobile {
     display: none;
@@ -132,13 +138,13 @@ nav ul a {
     cursor: pointer;
 }
 
-    #account-btn:hover i {
-        text-shadow: 0px 3px 20px #000;
-    }
+#account-btn:hover i {
+    text-shadow: 0px 3px 20px #000;
+}
 
-    #account-btn i {
-        text-shadow: 0px 0px 3px #000;
-    }
+#account-btn i {
+    text-shadow: 0px 0px 3px #000;
+}
 
 #account-btn-mobile {
     display: none;
@@ -170,8 +176,28 @@ nav ul a {
     margin: 0 auto;
     min-height: 250px;
     width: 100%;
-    background-color: #e2e2e2;
+    background-color: #f1f1f1;
+    border: 1px solid #d0d0d0;
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
+
+#home-button {
+    line-height: 50px;
+}
+
+#home-button:hover {
+    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
+}
+
+#home-button i {
+    padding-right: 15px;
+    position: relative;
+    top: 3px;
+}
+
+/* MISCELLANEOUS */
 
 .amcharts-chart-div > a {
     display: none !important;
@@ -190,51 +216,80 @@ nav ul a {
     margin: 0 auto;
 }
 
-/* Placeholder Color */
+fieldset {
+    border: 2px solid rgba(21, 101, 192, 0.2);
+    margin: 0 2px;
+    padding: 20px 15px;
+    width: 90%;
+    margin: 0 auto 5px auto;
+}
+
+legend {
+    font-family: 'Lato';
+    font-weight: 300;
+    padding: 4px 10px 4px 8px;
+}
+
+h4 {
+    font-family: 'Raleway';
+    font-weight: 600;
+}
+
+#button-area {
+    margin-right: 5%;
+    margin-top: 15px;
+    float: right;
+}
+
+#button-area a {
+    font-size: 17px;
+    padding-left: 0px;
+}
+
 ::-webkit-input-placeholder {
     color: #9a9a9a;
 }
-    /* Placeholder Focus Color */
-    ::-webkit-input-placeholder:focus {
-        color: #2b2b2b;
-    }
-/* Input Color Email */
+
+::-webkit-input-placeholder:focus {
+    color: #2b2b2b;
+}
+
 input[type=email]:focus:not([readonly]) {
     border-bottom: 1px solid #7cb342;
     box-shadow: 0 1px 0 0 #7cb342;
 }
-    /* Label Color Email */
-    input[type=email]:focus:not([readonly]) + label {
-        color: #2b2b2b;
-    }
-/* Label Color */
+
+input[type=email]:focus:not([readonly]) + label {
+    color: #2b2b2b;
+}
+
 .input-field label {
     color: #9a9a9a;
 }
-/* Label Focus Color */
+
 .input-field input[type=text]:focus + label {
     color: #2b2b2b;
 }
-/* Label Underline Color */
+
 .input-field input[type=text]:focus {
     border-bottom: 1px solid #7cb342;
     box-shadow: 0 1px 0 0 #7cb342;
 }
-/* Valid Color */
+
 .input-field input[type=text].valid {
     border-bottom: 1px solid #7cb342;
     box-shadow: 0 1px 0 0 #7cb342;
 }
-/* Invalid Color */
+
 .input-field input[type=text].invalid {
     border-bottom: 1px solid #E23834;
     box-shadow: 0 1px 0 0 #E23834;
 }
-/* Icon Prefix Focus Color */
+
 .input-field .prefix.active {
     color: #7cb342;
 }
-/* Checkbox Input Color */
+
 input[type="checkbox"]:checked + label:before {
     border-right: 5px solid #7cb342;
     border-bottom: 5px solid #7cb342;
@@ -249,33 +304,41 @@ input[type="checkbox"]:checked + label:before {
 }
 
 #login-form, #forgot-form {
-    background-color: #e2e2e2;
+    background-color: #f1f1f1;
+    border: 1px solid #d0d0d0;
     padding: 50px 20px 30px 20px;
     max-width: 50%;
     margin: 0 25%;
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
 
-    #login-form .input-field, #forgot-form .input-field {
-        margin: 0px 0px 0px 0px;
-        text-align: center;
-        position: relative;
-        left: 10%;
-    }
+#login-form .input-field, #forgot-form .input-field {
+    margin: 0px 0px 0px 0px;
+    text-align: center;
+    position: relative;
+    left: 10%;
+}
 
-        #login-form .input-field input, #forgot-form .input-field input {
-            min-width: 350px;
-            max-width: 420px;
-            display: block !important;
-        }
+#login-form .input-field input, #forgot-form .input-field input {
+    min-width: 350px;
+    max-width: 420px;
+    display: block !important;
+}
 
-        #login-form .input-field label, #forgot-form .input-field label {
-            display: block !important;
-        }
+#login-form .input-field label, #forgot-form .input-field label {
+    display: block !important;
+}
 
 #login-button, #forgot-button {
     position: relative;
     right: 11%;
     margin-top: 10px;
+}
+
+#login-button:hover, #forgot-button:hover {
+    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
 }
 
 #login-links, #forgot-links {
@@ -286,6 +349,7 @@ input[type="checkbox"]:checked + label:before {
 /* END OF LOGIN CSS */
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF SETTINGS CSS */
+
 #showImg {
     margin-top: 25px;
     max-height: 60%;
@@ -304,7 +368,8 @@ input[type="checkbox"]:checked + label:before {
     margin: 0 auto;
     min-height: 250px;
     width: 100%;
-    background-color: #e2e2e2;
+    background-color: #f1f1f1;
+    border: 1px solid #d0d0d0;
 }
 
 #create-debtor-btn, #edit-debtor-btn,
@@ -313,11 +378,11 @@ input[type="checkbox"]:checked + label:before {
     margin-bottom: 15px;
 }
 
-    #create-debtor-btn > span, #edit-debtor-btn > span,
-    #change-debtor-btn > span, #remove-debtor-btn > span {
-        height: 36px;
-        line-height: 40px;
-    }
+#create-debtor-btn > span, #edit-debtor-btn > span,
+#change-debtor-btn > span, #remove-debtor-btn > span {
+    height: 36px;
+    line-height: 40px;
+}
 
 #details-debtor input[type=text]:disabled, #remove-debtor input[type=text]:disabled,
 #details-debtor input[type=email]:disabled, #remove-debtor input[type=email]:disabled {
@@ -325,10 +390,10 @@ input[type="checkbox"]:checked + label:before {
     border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
 }
 
-    #details-debtor input[type=text]:disabled + label, #remove-debtor input[type=text]:disabled + label,
-    #details-debtor input[type=email]:disabled + label, #remove-debtor input[type=email]:disabled + label {
-        color: rgba(0, 0, 0, 0.50) !important;
-    }
+#details-debtor input[type=text]:disabled + label, #remove-debtor input[type=text]:disabled + label,
+#details-debtor input[type=email]:disabled + label, #remove-debtor input[type=email]:disabled + label {
+    color: rgba(0, 0, 0, 0.50) !important;
+}
 
 #add-debtor-btn, #search-debtor-btn {
     margin-top: -5px;
@@ -347,7 +412,8 @@ input[type="checkbox"]:checked + label:before {
     margin: 0 auto;
     min-height: 250px;
     width: 100%;
-    background-color: #e2e2e2;
+    background-color: #f1f1f1;
+    border: 1px solid #d0d0d0;
 }
 
 #create-product-btn, #edit-product-btn,
@@ -356,11 +422,11 @@ input[type="checkbox"]:checked + label:before {
     margin-bottom: 15px;
 }
 
-    #create-product-btn > span, #edit-product-btn > span,
-    #change-product-btn > span, #remove-product-btn > span {
-        height: 36px;
-        line-height: 40px;
-    }
+#create-product-btn > span, #edit-product-btn > span,
+#change-product-btn > span, #remove-product-btn > span {
+    height: 36px;
+    line-height: 40px;
+}
 
 #details-product input[type=text]:disabled, #remove-product input[type=text]:disabled,
 #details-product input[type=email]:disabled, #remove-product input[type=email]:disabled,
@@ -369,11 +435,11 @@ input[type="checkbox"]:checked + label:before {
     border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
 }
 
-    #details-product input[type=text]:disabled + label, #remove-product input[type=text]:disabled + label,
-    #details-product input[type=email]:disabled + label, #remove-product input[type=email]:disabled + label,
-    #details-product textarea:disabled + label, #remove-product textarea:disabled + label {
-        color: rgba(0, 0, 0, 0.50) !important;
-    }
+#details-product input[type=text]:disabled + label, #remove-product input[type=text]:disabled + label,
+#details-product input[type=email]:disabled + label, #remove-product input[type=email]:disabled + label,
+#details-product textarea:disabled + label, #remove-product textarea:disabled + label {
+    color: rgba(0, 0, 0, 0.50) !important;
+}
 
 #create-product #form .input-field, #edit-product #form .input-field,
 #details-product #form .input-field, #remove-product #form .input-field {
@@ -397,7 +463,8 @@ input[type="checkbox"]:checked + label:before {
     margin: 0 auto;
     min-height: 250px;
     width: 100%;
-    background-color: #e2e2e2;
+    background-color: #f1f1f1;
+    border: 1px solid #d0d0d0;
 }
 
 #create-company-btn, #edit-company-btn,
@@ -406,11 +473,11 @@ input[type="checkbox"]:checked + label:before {
     margin-bottom: 15px;
 }
 
-    #create-company-btn > span, #edit-company-btn > span,
-    #change-company-btn > span, #remove-company-btn > span {
-        height: 36px;
-        line-height: 40px;
-    }
+#create-company-btn > span, #edit-company-btn > span,
+#change-company-btn > span, #remove-company-btn > span {
+    height: 36px;
+    line-height: 40px;
+}
 
 #details-company input[type=text]:disabled, #remove-company input[type=text]:disabled,
 #details-company input[type=email]:disabled, #remove-company input[type=email]:disabled {
@@ -418,10 +485,10 @@ input[type="checkbox"]:checked + label:before {
     border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
 }
 
-    #details-company input[type=text]:disabled + label, #remove-company input[type=text]:disabled + label,
-    #details-company input[type=email]:disabled + label, #remove-company input[type=email]:disabled + label {
-        color: rgba(0, 0, 0, 0.50) !important;
-    }
+#details-company input[type=text]:disabled + label, #remove-company input[type=text]:disabled + label,
+#details-company input[type=email]:disabled + label, #remove-company input[type=email]:disabled + label {
+    color: rgba(0, 0, 0, 0.50) !important;
+}
 
 #add-company-btn, #search-company-btn {
     margin-top: -5px;
@@ -440,7 +507,11 @@ input[type="checkbox"]:checked + label:before {
     margin: 0 auto;
     min-height: 250px;
     width: 100%;
-    background-color: #e2e2e2;
+    background-color: #f1f1f1;
+    border: 1px solid #d0d0d0;
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
 
 #create-user-btn, #edit-user-btn,
@@ -449,41 +520,35 @@ input[type="checkbox"]:checked + label:before {
     margin-bottom: 25px;
 }
 
-    #create-user-btn > span, #edit-user-btn > span,
-    #change-user-btn > span, #remove-user-btn > span {
-        height: 36px;
-        line-height: 40px;
-    }
+#create-user-btn:hover, #edit-user-btn:hover,
+#change-user-btn:hover, #remove-user-btn:hover {
+    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
+}
 
-#details-user input[type=text]:disabled, #remove-user input[type=text]:disabled,
-#details-user input[type=email]:disabled, #remove-user input[type=email]:disabled,
-#details-user input[type=password]:disabled, #remove-user input[type=password]:disabled {
+#create-user-btn > span, #edit-user-btn > span,
+#change-user-btn > span, #remove-user-btn > span {
+    height: 36px;
+    line-height: 40px;
+}
+
+#details-user input[type=text]:disabled, #remove-user input[type=text]:disabled, #edit-user input[type=text]:disabled,
+#details-user input[type=email]:disabled, #remove-user input[type=email]:disabled, #edit-user input[type=email]:disabled,
+#details-user input[type=password]:disabled, #remove-user input[type=password]:disabled, #edit-user input[type=password]:disabled {
     color: rgba(0, 0, 0, 0.65) !important;
     border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
 }
 
-    #details-user input[type=text]:disabled + label, #remove-user input[type=text]:disabled + label,
-    #details-user input[type=email]:disabled + label, #remove-user input[type=email]:disabled + label,
-    #details-user input[type=password]:disabled + label, #remove-user input[type=password]:disabled + label {
-        color: rgba(0, 0, 0, 0.50) !important;
-    }
+#details-user input[type=text]:disabled + label, #remove-user input[type=text]:disabled + label, #edit-user input[type=text]:disabled + label,
+#details-user input[type=email]:disabled + label, #remove-user input[type=email]:disabled + label, #edit-user input[type=email]:disabled + label,
+#details-user input[type=password]:disabled + label, #remove-user input[type=password]:disabled + label, #edit-user input[type=password]:disabled + label {
+    color: rgba(0, 0, 0, 0.50) !important;
+}
 
 #add-user-btn, #search-user-btn {
     margin-top: -5px;
     width: 120px;
     vertical-align: middle;
 }
-
-#button-area {
-    margin-right: 5%;
-    margin-top: 15px;
-    float: right;
-}
-
-    #button-area a {
-        font-size: 17px;
-        padding-left: 25px;
-    }
 
 /* END OF USER CSS */
 /*-------------------------------------------------------------------------------------*/
@@ -498,7 +563,8 @@ input[type="checkbox"]:checked + label:before {
     margin: 0 auto;
     min-height: 250px;
     width: 100%;
-    background-color: #e2e2e2;
+    background-color: #f1f1f1;
+    border: 1px solid #d0d0d0;
 }
 
 #create-admin-btn, #edit-admin-btn,
@@ -508,12 +574,18 @@ input[type="checkbox"]:checked + label:before {
     margin-bottom: 25px;
 }
 
-    #create-admin-btn > span, #edit-admin-btn > span,
-    #change-admin-btn > span, #remove-admin-btn > span,
-    #save-settings-btn > span {
-        height: 36px;
-        line-height: 40px;
-    }
+#create-admin-btn:hover, #edit-admin-btn:hover,
+#change-admin-btn:hover, #remove-admin-btn:hover,
+#save-settings-btn:hover {
+    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
+}
+
+#create-admin-btn > span, #edit-admin-btn > span,
+#change-admin-btn > span, #remove-admin-btn > span,
+#save-settings-btn > span {
+    height: 36px;
+    line-height: 40px;
+}
 
 #details-admin input[type=text]:disabled, #remove-admin input[type=text]:disabled,
 #details-admin input[type=email]:disabled, #remove-admin input[type=email]:disabled,
@@ -522,28 +594,17 @@ input[type="checkbox"]:checked + label:before {
     border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
 }
 
-    #details-admin input[type=text]:disabled + label, #remove-admin input[type=text]:disabled + label,
-    #details-admin input[type=email]:disabled + label, #remove-admin input[type=email]:disabled + label,
-    #details-admin input[type=password]:disabled + label, #remove-admin input[type=password]:disabled + label {
-        color: rgba(0, 0, 0, 0.50) !important;
-    }
+#details-admin input[type=text]:disabled + label, #remove-admin input[type=text]:disabled + label,
+#details-admin input[type=email]:disabled + label, #remove-admin input[type=email]:disabled + label,
+#details-admin input[type=password]:disabled + label, #remove-admin input[type=password]:disabled + label {
+    color: rgba(0, 0, 0, 0.50) !important;
+}
 
 #add-admin-btn, #search-admin-btn {
     margin-top: -5px;
     width: 120px;
     vertical-align: middle;
 }
-
-#button-area {
-    margin-right: 5%;
-    margin-top: 15px;
-    float: right;
-}
-
-    #button-area a {
-        font-size: 17px;
-        padding-left: 25px;
-    }
 
 /* END OF ADMIN CSS */
 /*-------------------------------------------------------------------------------------*/
@@ -554,7 +615,8 @@ input[type="checkbox"]:checked + label:before {
     margin: 0 auto;
     min-height: 250px;
     width: 100%;
-    background-color: #e2e2e2;
+    background-color: #f1f1f1;
+    border: 1px solid #d0d0d0;
 }
 
 #add-invoice-btn, #search-invoice-btn {
@@ -572,7 +634,8 @@ input[type="checkbox"]:checked + label:before {
     margin: 0 auto;
     min-height: 250px;
     width: 100%;
-    background-color: #e2e2e2;
+    background-color: #f1f1f1;
+    border: 1px solid #d0d0d0;
 }
 
 #search-myinvoice-btn {
@@ -616,23 +679,23 @@ input[type="checkbox"]:checked + label:before {
         padding-top: 20px;
     }
 
-        #login-form .input-field, #forgot-form .input-field {
-            left: 0%;
-            margin: 10px auto 0 auto;
-        }
+    #login-form .input-field, #forgot-form .input-field {
+        left: 0%;
+        margin: 10px auto 0 auto;
+    }
 
-            #login-form .input-field input, #forgot-form .input-field input {
-                min-width: 80%;
-                max-width: 90%;
-                display: block !important;
-                margin: 0 auto;
-            }
+    #login-form .input-field input, #forgot-form .input-field input {
+        min-width: 80%;
+        max-width: 90%;
+        display: block !important;
+        margin: 0 auto;
+    }
 
-            #login-form .input-field label, #forgot-form .input-field label {
-                display: inline-block !important;
-                margin: 0 auto;
-                padding-left: 20px;
-            }
+    #login-form .input-field label, #forgot-form .input-field label {
+        display: inline-block !important;
+        margin: 0 auto;
+        padding-left: 20px;
+    }
 
     #login-links, #forgot-links {
         right: 28%;
@@ -658,15 +721,15 @@ input[type="checkbox"]:checked + label:before {
         margin-right: 0;
     }
 
-        #button-area button i {
-            display: none;
-        }
+    #button-area button i {
+        display: none;
+    }
 
-        #button-area a {
-            padding-left: 140px;
-            font-size: 15px;
-            font-weight: bold;
-        }
+    #button-area a {
+        padding-left: 140px;
+        font-size: 15px;
+        font-weight: bold;
+    }
 
     /*------USER--------*/
     #search-user-btn {

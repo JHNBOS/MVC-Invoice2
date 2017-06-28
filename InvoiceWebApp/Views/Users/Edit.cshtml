@@ -33,49 +33,95 @@
         <div class="col s12 col col m10 offset-m1">
             <form asp-controller="Users" asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-                <input type="hidden" asp-for="UserID" />
+                <input type="hidden" asp-for="ID" />
+                <input type="hidden" asp-for="AccountType" />
 
-                <div class="row">
-                    <div class="input-field col s12 col m4 offset-m2">
-                        <i class="material-icons prefix">email</i>
-                        <input id="icon_prefix" type="email" asp-for="Email" class="validate">
-                        <label for="icon_prefix">Email</label>
-                    </div>
-                    <div class="input-field col s12 col m4">
-                        <i class="material-icons prefix">lock</i>
-                        <input id="icon_prefix" type="password" asp-for="Password" class="validate">
-                        <label for="icon_prefix">Password</label>
-                    </div>
-                </div>
+                <fieldset>
+                    <legend>Personal Information</legend>
 
-                <div class="divider" style="background-color: #cecece;"></div>
-
-                <div class="row">
-                    <div class="input-field col s12 col m4 offset-m2">
-                        <i class="material-icons prefix">person_pin</i>
-                        <input id="icon_prefix" type="text" asp-for="AccountType">
-                        <label for="icon_prefix">Account Type</label>
+                    <div class="row">
+                        <div class="input-field col s12 col m4 offset-m2">
+                            <i class="material-icons prefix">person_outline</i>
+                            @Html.TextBoxFor(m => m.Debtor.FirstName, new { @id = "icon_prefix", @disabled = "disabled", @class = "no-submit" })
+                            <label for="icon_prefix">First Name</label>
+                        </div>
+                        <div class="input-field col s12 col m4">
+                            <i class="material-icons prefix">person_outline</i>
+                            @Html.TextBoxFor(m => m.Debtor.LastName, new { @id = "icon_prefix", @disabled = "disabled", @class = "no-submit" })
+                            <label for="icon_prefix">Last Name</label>
+                        </div>
                     </div>
-                    <div class="input-field col s12 col m4 offset-m2">
-                    </div>
-                </div>
 
-                <div class="divider" style="background-color: #cecece;"></div>
+                    <div class="row">
+                        <div class="input-field col s12 col m4 offset-m2">
+                            <i class="material-icons prefix">email</i>
+                            <input id="icon_prefix" type="email" asp-for="Email" class="validate" disabled>
+                            <label for="icon_prefix">Email</label>
+                        </div>
+                        <div class="input-field col s12 col m4">
+                            <i class="material-icons prefix">lock</i>
+                            <input id="icon_prefix" type="text" asp-for="Password" class="validate">
+                            <label for="icon_prefix">Password</label>
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Address</legend>
+                    <div class="row">
+                        <div class="input-field col s12 col m4 offset-m2">
+                            <i class="material-icons prefix">place</i>
+                            @Html.TextBoxFor(m => m.Debtor.Address, new { @id = "icon_prefix", @disabled = "disabled", @class = "no-submit" })
+                            <label for="icon_prefix">Address</label>
+                        </div>
+                        <div class="input-field col s12 col m4">
+                            <i class="material-icons prefix">place</i>
+                            @Html.TextBoxFor(m => m.Debtor.PostalCode, new { @id = "icon_prefix", @disabled = "disabled", @class = "no-submit" })
+                            <label for="icon_prefix">Postal Code</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12 col m4 offset-m2">
+                            <i class="material-icons prefix">place</i>
+                            @Html.TextBoxFor(m => m.Debtor.City, new { @id = "icon_prefix", @disabled = "disabled", @class = "no-submit" })
+                            <label for="icon_prefix">City</label>
+                        </div>
+                        <div class="input-field col s12 col m4">
+                            <i class="material-icons prefix">place</i>
+                            @Html.TextBoxFor(m => m.Debtor.Country, new { @id = "icon_prefix", @disabled = "disabled", @class = "no-submit" })
+                            <label for="icon_prefix">Country</label>
+                        </div>
+                    </div>
+                </fieldset>
 
                 <div class="row">
                     <div id="button-area">
-                        <button id="edit-admin-btn" type="submit" value="Save"
-                                class="btn-large z-depth-3 waves-effect waves-light light-green">
+                        <button id="edit-user-btn" type="submit" value="Save"
+                                class="btn-large light-green waves-effect waves-light">
                             <i class="material-icons left">save</i>
                             <span>Save</span>
                         </button>
 
                         <br />
 
-                        <a asp-action="Index" class="light-green-text text-darken-2">Back to Overview</a>
+                        <a asp-action="Index" class="light-green-text">Back to Overview</a>
                     </div>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    
+    <script>
+        $("form").submit(() => {
+            $(".no-submit").remove();
+        });
+    </script>
+}
+
+
+

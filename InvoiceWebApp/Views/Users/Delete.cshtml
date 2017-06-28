@@ -34,73 +34,76 @@
             <form asp-controller="Users" asp-action="Delete" onsubmit="return confirm('Are you sure you want to delete this user?');">
                 <input type="hidden" asp-for="ID" />
 
-                <div class="row">
-                    <div class="input-field col s12 col m4 offset-m2">
-                        <i class="material-icons prefix">person_outline</i>
-                        @Html.TextBoxFor(m => m.Debtor.FirstName, new { @id = "icon_prefix", @disabled = "disabled" })
-                        <label for="icon_prefix">First Name</label>
-                    </div>
-                    <div class="input-field col s12 col m4">
-                        <i class="material-icons prefix">person_outline</i>
-                        @Html.TextBoxFor(m => m.Debtor.LastName, new { @id = "icon_prefix", @disabled = "disabled" })
-                        <label for="icon_prefix">Last Name</label>
-                    </div>
-                </div>
+                <fieldset>
+                    <legend>Personal Information</legend>
 
-                <div class="row">
-                    <div class="input-field col s12 col m4 offset-m2">
-                        <i class="material-icons prefix">email</i>
-                        <input id="icon_prefix" type="email" asp-for="Email" class="validate" disabled>
-                        <label for="icon_prefix">Email</label>
+                    <div class="row">
+                        <div class="input-field col s12 col m4 offset-m2">
+                            <i class="material-icons prefix">person_outline</i>
+                            @Html.TextBoxFor(m => m.Debtor.FirstName, new { @id = "icon_prefix", @disabled = "disabled" })
+                            <label for="icon_prefix">First Name</label>
+                        </div>
+                        <div class="input-field col s12 col m4">
+                            <i class="material-icons prefix">person_outline</i>
+                            @Html.TextBoxFor(m => m.Debtor.LastName, new { @id = "icon_prefix", @disabled = "disabled" })
+                            <label for="icon_prefix">Last Name</label>
+                        </div>
                     </div>
-                    <div class="input-field col s12 col m4">
-                        <i class="material-icons prefix">lock</i>
-                        <input id="icon_prefix" type="text" asp-for="Password" class="validate" disabled>
-                        <label for="icon_prefix">Password</label>
-                    </div>
-                </div>
 
-                <div class="divider" style="background-color: #cecece;"></div>
+                    <div class="row">
+                        <div class="input-field col s12 col m4 offset-m2">
+                            <i class="material-icons prefix">email</i>
+                            <input id="icon_prefix" type="email" asp-for="Email" class="validate" disabled>
+                            <label for="icon_prefix">Email</label>
+                        </div>
+                        <div class="input-field col s12 col m4">
+                            <i class="material-icons prefix">lock</i>
+                            <input id="icon_prefix" type="text" asp-for="Password" class="validate" disabled>
+                            <label for="icon_prefix">Password</label>
+                        </div>
+                    </div>
+                </fieldset>
 
-                <div class="row">
-                    <div class="input-field col s12 col m4 offset-m2">
-                        <i class="material-icons prefix">place</i>
-                        @Html.TextBoxFor(m => m.Debtor.Address, new { @id = "icon_prefix", @disabled = "disabled" })
-                        <label for="icon_prefix">Address</label>
+                <fieldset>
+                    <legend>Address</legend>
+                    <div class="row">
+                        <div class="input-field col s12 col m4 offset-m2">
+                            <i class="material-icons prefix">place</i>
+                            @Html.TextBoxFor(m => m.Debtor.Address, new { @id = "icon_prefix", @disabled = "disabled" })
+                            <label for="icon_prefix">Address</label>
+                        </div>
+                        <div class="input-field col s12 col m4">
+                            <i class="material-icons prefix">place</i>
+                            @Html.TextBoxFor(m => m.Debtor.PostalCode, new { @id = "icon_prefix", @disabled = "disabled" })
+                            <label for="icon_prefix">Postal Code</label>
+                        </div>
                     </div>
-                    <div class="input-field col s12 col m4">
-                        <i class="material-icons prefix">place</i>
-                        @Html.TextBoxFor(m => m.Debtor.PostalCode, new { @id = "icon_prefix", @disabled = "disabled" })
-                        <label for="icon_prefix">Postal Code</label>
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="input-field col s12 col m4 offset-m2">
-                        <i class="material-icons prefix">place</i>
-                        @Html.TextBoxFor(m => m.Debtor.City, new { @id = "icon_prefix", @disabled = "disabled" })
-                        <label for="icon_prefix">City</label>
+                    <div class="row">
+                        <div class="input-field col s12 col m4 offset-m2">
+                            <i class="material-icons prefix">place</i>
+                            @Html.TextBoxFor(m => m.Debtor.City, new { @id = "icon_prefix", @disabled = "disabled" })
+                            <label for="icon_prefix">City</label>
+                        </div>
+                        <div class="input-field col s12 col m4">
+                            <i class="material-icons prefix">place</i>
+                            @Html.TextBoxFor(m => m.Debtor.Country, new { @id = "icon_prefix", @disabled = "disabled" })
+                            <label for="icon_prefix">Country</label>
+                        </div>
                     </div>
-                    <div class="input-field col s12 col m4">
-                        <i class="material-icons prefix">place</i>
-                        @Html.TextBoxFor(m => m.Debtor.Country, new { @id = "icon_prefix", @disabled = "disabled" })
-                        <label for="icon_prefix">Country</label>
-                    </div>
-                </div>
-
-                <div class="divider" style="background-color: #cecece;"></div>
+                </fieldset>
 
                 <div class="row">
                     <div id="button-area">
                         <button id="remove-user-btn" type="submit" value="Remove"
-                                class="btn-large z-depth-3 waves-effect waves-light light-green">
+                                class="btn-large light-green waves-effect waves-light">
                             <i class="material-icons left">delete</i>
                             <span>Remove</span>
                         </button>
 
                         <br />
 
-                        <a asp-action="Index" class="light-green-text text-darken-2">Back to Overview</a>
+                        <a asp-action="Index" class="light-green-text">Back to Overview</a>
                     </div>
                 </div>
             </form>

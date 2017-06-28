@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace InvoiceWebApp.Controllers {
@@ -93,6 +94,10 @@ namespace InvoiceWebApp.Controllers {
 
                 _context.Invoices.RemoveRange(invoices);
                 _context.Users.Remove(_context.Users.Single(s => s.Email == debtor.Email));
+                await _context.SaveChangesAsync();
+
+                Thread.Sleep(1500);
+
                 _context.Debtors.Remove(debtor);
                 await _context.SaveChangesAsync();
             } catch (Exception ex) {
