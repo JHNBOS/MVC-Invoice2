@@ -16,79 +16,78 @@
 
     <!--Form-->
     <div class="row" style="margin-top: 5px;">
-        <div class="col s12 col col m10 offset-m1">
+        <div class="col s12 col m12 col l10 offset-l1">
             <form asp-controller="Debtors" asp-action="Create">
 
                 <fieldset>
                     <legend>Personal Information</legend>
 
                     <div class="row">
-                        <div class="input-field col s6 col m6">
+                        <div class="input-field col s12 col m12 col l6">
                             <i class="material-icons prefix">perm_identity</i>
-                            <input id="icon_prefix" type="text" asp-for="IdNumber" />
-                            <label for="icon_prefix">Personal ID Number</label>
+                            <input id="icon_id" type="text" asp-for="IdNumber" />
+                            <label for="icon_id">Personal ID Number</label>
                         </div>
-                        <div class="input-field col s6 col m6">
+                        <div class="input-field col s12 col m12 col l6">
                             <i class="material-icons prefix">credit_card</i>
-                            <input id="icon_prefix" type="text" asp-for="BankAccount" />
-                            <label for="icon_prefix">Bank Account No</label>
+                            <input id="icon_bank" type="text" asp-for="BankAccount" />
+                            <label for="icon_bank">Bank Account No</label>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="input-field col s6 col m6">
+                        <div class="input-field col s12 col m12 col l6">
                             <i class="material-icons prefix">person_outline</i>
-                            <input id="icon_prefix" type="text" asp-for="FirstName" />
-                            <label for="icon_prefix">First Name</label>
+                            <input id="icon_first" type="text" asp-for="FirstName" />
+                            <label for="icon_first">First Name</label>
                         </div>
-                        <div class="input-field col s6 col m6">
+                        <div class="input-field col s12 col m12 col l6">
                             <i class="material-icons prefix">person_outline</i>
-                            <input id="icon_prefix" type="text" asp-for="LastName" />
-                            <label for="icon_prefix">Last Name</label>
+                            <input id="icon_last" type="text" asp-for="LastName" />
+                            <label for="icon_last">Last Name</label>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="input-field col s6 col m6">
+                        <div class="input-field col s12 col m12 col l6">
                             <i class="material-icons prefix">email</i>
-                            <input id="icon_prefix" type="email" asp-for="Email" class="validate" />
-                            <label for="icon_prefix">Email</label>
+                            <input id="icon_email" type="email" asp-for="Email" class="validate" />
+                            <label for="icon_email">Email</label>
                         </div>
-                        <div class="input-field col s6 col m6">
+                        <div class="input-field col s12 col m12 col l6">
                             <i class="material-icons prefix">phone</i>
-                            <input id="icon_prefix" type="text" asp-for="Phone" />
-                            <label for="icon_prefix">Phone</label>
+                            <input id="icon_phone" type="text" asp-for="Phone" />
+                            <label for="icon_phone">Phone</label>
                         </div>
                     </div>
-
                 </fieldset>
 
                 <fieldset>
                     <legend>Address</legend>
 
                     <div class="row">
-                        <div class="input-field col s6 col m6">
+                        <div class="input-field col s12 col m12 col l6">
                             <i class="material-icons prefix">place</i>
-                            <input id="icon_prefix" type="text" asp-for="Address" />
-                            <label for="icon_prefix">Address</label>
+                            <input id="icon_address" type="text" asp-for="Address" />
+                            <label for="icon_address">Address</label>
                         </div>
-                        <div class="input-field col s6 col m6">
+                        <div class="input-field col s12 col m12 col l6">
                             <i class="material-icons prefix">place</i>
-                            <input id="icon_prefix" type="text" asp-for="PostalCode" />
-                            <label for="icon_prefix">Postal Code</label>
+                            <input id="icon_postal" type="text" asp-for="PostalCode" />
+                            <label for="icon_postal">Postal Code</label>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="input-field col s6 col m6">
+                        <div class="input-field col s12 col m12 col l6">
                             <i class="material-icons prefix">place</i>
-                            <input id="icon_prefix" type="text" asp-for="City" />
-                            <label for="icon_prefix">City</label>
+                            <input id="icon_city" type="text" asp-for="City" />
+                            <label for="icon_city">City</label>
                         </div>
-                        <div class="input-field col s6 col m6">
+                        <div class="input-field col s12 col m12 col l6">
                             <i class="material-icons prefix">place</i>
-                            <input id="icon_prefix" type="text" asp-for="Country" />
-                            <label for="icon_prefix">Country</label>
+                            <input id="icon_country" type="text" asp-for="Country" />
+                            <label for="icon_country">Country</label>
                         </div>
                     </div>
                 </fieldset>

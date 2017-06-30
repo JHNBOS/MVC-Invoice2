@@ -18,31 +18,25 @@
     <div class="row" style="margin-top: 5px;">
         <div class="col s12 col m12">
             @using (Html.BeginForm()) {
-                <!--Spacer-->
-                <div class="col s2 col m2"></div>
-
                 <!--Input-->
-                <div class="input-field col s12 col m4" id="search-form">
+                <div class="input-field offset-l2 col s12 col m12 col l4" id="search-form">
                     <input id="searchQuery" type="text" placeholder="Search..." style="max-width: 300px;">
                 </div>
 
                 <!--Buttons-->
-                <div class="input-field col s12 col m4 center-align">
+                <div class="input-field col s12 col m12 col l4 center-align" id="button-field">
                     <button id="search-company-btn" type="submit" value="Search"
-                            class="btn-large amber tooltipped waves-effect waves-light"
+                            class="btn-large light-green tooltipped waves-effect waves-light"
                             data-position="top" data-delay="50" data-tooltip="Search for Company">
                         <i class="material-icons">search</i>
                     </button>
 
                     <a id="add-company-btn" asp-action="Create" value="Create Company"
-                       class="btn-large amber tooltipped waves-effect waves-light"
+                       class="btn-large light-green tooltipped waves-effect waves-light"
                        data-position="top" data-delay="50" data-tooltip="Create Company">
                         <i class="material-icons">add_box</i>
                     </a>
                 </div>
-
-                <!--Spacer-->
-                <div class="col s2 col m2"></div>
             }
         </div>
     </div>

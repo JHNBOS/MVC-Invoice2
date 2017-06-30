@@ -16,7 +16,7 @@
 
     <!--Form-->
     <div class="row" style="margin-top: 5px;">
-        <div class="col s12 col col m10 offset-m1">
+        <div class="col s12 col m12 col l12">
             <form asp-controller="Admins" asp-action="Settings" method="post" enctype="multipart/form-data">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
 
@@ -24,12 +24,12 @@
                     <legend>Company Information</legend>
 
                     <div class="row">
-                        <div class="input-field col s12 col m4 offset-m2">
+                        <div class="input-field col s12 col m10 col l4 offset-m1 offset-l2">
                             <i class="material-icons prefix">business</i>
                             <input id="icon_prefix" type="text" asp-for="CompanyName">
                             <label for="icon_prefix">Name</label>
                         </div>
-                        <div class="input-field col s12 col m4">
+                        <div class="input-field col s12 col m10 col l4 offset-m1">
                             <i class="material-icons prefix">mouse</i>
                             <input id="icon_prefix" type="text" asp-for="Website">
                             <label for="icon_prefix">Website</label>
@@ -37,12 +37,12 @@
                     </div>
 
                     <div class="row">
-                        <div class="input-field col s12 col m4 offset-m2">
+                        <div class="input-field col s12 col m10 col l4 offset-m1 offset-l2">
                             <i class="material-icons prefix">phone</i>
                             <input id="icon_prefix" type="text" asp-for="Phone">
                             <label for="icon_prefix">Phone</label>
                         </div>
-                        <div class="input-field col s12 col m4">
+                        <div class="input-field col s12 col m10 col l4 offset-m1">
                         </div>
                     </div>
                 </fieldset>
@@ -53,12 +53,12 @@
                     <legend>Email</legend>
 
                     <div class="row">
-                        <div class="input-field col s12 col m4 offset-m2">
+                        <div class="input-field col s12 col m10 col l4 offset-m1 offset-l2">
                             <i class="material-icons prefix">email</i>
                             <input id="icon_prefix" type="email" asp-for="Email" class="validate">
                             <label for="icon_prefix">Email</label>
                         </div>
-                        <div class="input-field col s12 col m4">
+                        <div class="input-field col s12 col m10 col l4 offset-m1">
                             <i class="material-icons prefix">lock</i>
                             <input id="icon_prefix" type="password" asp-for="Password">
                             <label for="icon_prefix">Password</label>
@@ -66,12 +66,12 @@
                     </div>
 
                     <div class="row">
-                        <div class="input-field col s12 col m4 offset-m2">
+                        <div class="input-field col s12 col m10 col l4 offset-m1 offset-l2">
                             <i class="material-icons prefix">email</i>
                             <input id="icon_prefix" type="text" asp-for="SMTP">
                             <label for="icon_prefix">SMTP</label>
                         </div>
-                        <div class="input-field col s12 col m4">
+                        <div class="input-field col s12 col m10 col l4 offset-m1">
                             <i class="material-icons prefix">exposure_plus_2</i>
                             <input id="icon_prefix" type="text" asp-for="Port">
                             <label for="icon_prefix">SMTP Port</label>
@@ -85,12 +85,12 @@
                     <legend>Address</legend>
 
                     <div class="row">
-                        <div class="input-field col s12 col m4 offset-m2">
+                        <div class="input-field col s12 col m10 col l4 offset-m1 offset-l2">
                             <i class="material-icons prefix">place</i>
                             <input id="icon_prefix" type="text" asp-for="Address">
                             <label for="icon_prefix">Address</label>
                         </div>
-                        <div class="input-field col s12 col m4">
+                        <div class="input-field col s12 col m10 col l4 offset-m1">
                             <i class="material-icons prefix">place</i>
                             <input id="icon_prefix" type="text" asp-for="PostalCode">
                             <label for="icon_prefix">Postal Code</label>
@@ -98,12 +98,12 @@
                     </div>
 
                     <div class="row">
-                        <div class="input-field col s12 col m4 offset-m2">
+                        <div class="input-field col s12 col m10 col l4 offset-m1 offset-l2">
                             <i class="material-icons prefix">place</i>
                             <input id="icon_prefix" type="text" asp-for="City">
                             <label for="icon_prefix">City</label>
                         </div>
-                        <div class="input-field col s12 col m4">
+                        <div class="input-field col s12 col m10 col l4 offset-m1">
                             <i class="material-icons prefix">place</i>
                             <input id="icon_prefix" type="text" asp-for="Country">
                             <label for="icon_prefix">Country</label>
@@ -118,7 +118,7 @@
 
                     <!--Image upload-->
                     <div class="row">
-                        <div class="file-field input-field col s12 col m6 offset-m2">
+                        <div class="file-field input-field col s12 col m12 col l4 offset-l2">
                             <div class="btn light-green waves-effect waves-light">
                                 <span>Select an image</span>
                                 <input type="file" id="fileUpload" name="file">
@@ -128,7 +128,7 @@
                             </div>
                         </div>
 
-                        <div class="input-field col s12 col m2">
+                        <div class="input-field col s12 col m12 col l2 offset-l1">
                             <input type="checkbox" asp-for="UseLogo"
                                    id="box" checked="checked" />
                             <label for="box">Use Logo</label>
@@ -137,7 +137,7 @@
 
                     <!--Preview Box-->
                     <div class="row center-align">
-                        <div id="col s12 col m8 offset-m2">
+                        <div id="col s12 col m10 col l8 offset-m1 offset-l2">
                             <img id="showImageBox" src="#" alt="Logo"
                                  style="background-color: transparent;max-width: 36%;height: auto;"
                                  data-adaptive-background />

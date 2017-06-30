@@ -167,10 +167,14 @@ nav ul a {
     background-color: #e2ffd5;
 }
 
+.side-nav .collapsible-body > ul:not(.collapsible) > li.active a, .side-nav.fixed .collapsible-body > ul:not(.collapsible) > li.active a {
+    color: #6e1abb;
+    font-weight: bold;
+}
+
 /* END OF NAVBAR CSS */
 /*-------------------------------------------------------------------------------------*/
-/* BEGIN OF MAIN CSS */
-
+/* BEGIN OF HOME CSS */
 #home {
     padding: 40px 40px;
     margin: 0 auto;
@@ -197,12 +201,15 @@ nav ul a {
     top: 3px;
 }
 
-/* MISCELLANEOUS */
+/* END OF HOME CSS */
+/*-------------------------------------------------------------------------------------*/
+/* BEGIN OF MAIN CSS */
 
+/*--------------- AMCHARTS -----------------*/
 .amcharts-chart-div > a {
     display: none !important;
 }
-
+/*--------------- SEARCH -----------------*/
 #search-form {
     text-align: right;
 }
@@ -211,17 +218,26 @@ nav ul a {
     color: rgba(0, 0, 0, 0.5);
 }
 
+#button-field {
+    white-space: nowrap;
+}
+/*--------------- TITLE -----------------*/
+h4 {
+    font-family: 'Raleway';
+    font-weight: 600;
+}
+/*--------------- TABLE -----------------*/
 .responsive-table {
     width: 80%;
     margin: 0 auto;
 }
-
+/*--------------- FIELDSET -----------------*/
 fieldset {
     border: 2px solid rgba(21, 101, 192, 0.2);
     margin: 0 2px;
-    padding: 20px 15px;
-    width: 90%;
-    margin: 0 auto 5px auto;
+    padding: 20px 24px;
+    width: 100%;
+    margin: 0 auto;
 }
 
 legend {
@@ -229,12 +245,7 @@ legend {
     font-weight: 300;
     padding: 4px 10px 4px 8px;
 }
-
-h4 {
-    font-family: 'Raleway';
-    font-weight: 600;
-}
-
+/*--------------- BUTTONS -----------------*/
 #button-area {
     margin-right: 5%;
     margin-top: 15px;
@@ -244,6 +255,10 @@ h4 {
 #button-area a {
     font-size: 17px;
     padding-left: 0px;
+}
+/*--------------- INPUT -----------------*/
+input, select, textarea {
+    max-width: 75%;
 }
 
 ::-webkit-input-placeholder {
@@ -298,7 +313,6 @@ input[type="checkbox"]:checked + label:before {
 /* END OF MAIN CSS */
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF LOGIN CSS */
-
 #login-row {
     width: 100%;
 }
@@ -370,12 +384,20 @@ input[type="checkbox"]:checked + label:before {
     width: 100%;
     background-color: #f1f1f1;
     border: 1px solid #d0d0d0;
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
 
 #create-debtor-btn, #edit-debtor-btn,
 #change-debtor-btn, #remove-debtor-btn {
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+#create-debtor-btn:hover, #edit-debtor-btn:hover,
+#change-debtor-btn:hover, #remove-debtor-btn:hover {
+    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
 }
 
 #create-debtor-btn > span, #edit-debtor-btn > span,
@@ -414,12 +436,20 @@ input[type="checkbox"]:checked + label:before {
     width: 100%;
     background-color: #f1f1f1;
     border: 1px solid #d0d0d0;
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
 
 #create-product-btn, #edit-product-btn,
 #change-product-btn, #remove-product-btn {
     margin-top: 15px;
     margin-bottom: 15px;
+}
+
+#create-product-btn:hover, #edit-product-btn:hover,
+#change-product-btn:hover, #remove-product-btn:hover {
+    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
 }
 
 #create-product-btn > span, #edit-product-btn > span,
@@ -465,6 +495,9 @@ input[type="checkbox"]:checked + label:before {
     width: 100%;
     background-color: #f1f1f1;
     border: 1px solid #d0d0d0;
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
 
 #create-company-btn, #edit-company-btn,
@@ -565,6 +598,9 @@ input[type="checkbox"]:checked + label:before {
     width: 100%;
     background-color: #f1f1f1;
     border: 1px solid #d0d0d0;
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
 
 #create-admin-btn, #edit-admin-btn,
@@ -617,6 +653,9 @@ input[type="checkbox"]:checked + label:before {
     width: 100%;
     background-color: #f1f1f1;
     border: 1px solid #d0d0d0;
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
 
 #add-invoice-btn, #search-invoice-btn {
@@ -636,6 +675,9 @@ input[type="checkbox"]:checked + label:before {
     width: 100%;
     background-color: #f1f1f1;
     border: 1px solid #d0d0d0;
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
 
 #search-myinvoice-btn {
@@ -647,6 +689,72 @@ input[type="checkbox"]:checked + label:before {
 /* END OF MY INVOICES CSS */
 /*-------------------------------------------------------------------------------------*/
 /* BEGIN OF MOBILE AND TABLET CSS */
+@media screen and (max-width: 640px) {
+    .row .col.s12 {
+        padding: 0;
+    }
+
+    input, select, textarea {
+        max-width: 80%;
+    }
+}
+
+@media screen and (min-width: 641px) and (max-width: 767px) {
+    #searchQuery {
+        position: relative;
+        left: -28%;
+    }
+
+    fieldset {
+        width: 100%;
+        margin: 0 auto;
+        padding: 10px 10px;
+    }
+
+    input, select, textarea {
+        max-width: 75%;
+    }
+
+    /*------------ DEBTORS ---------------*/
+    #details-debtor form .row .input-field label,
+    #remove-debtor form .row .input-field label {
+        padding-left: 13% !important;
+    }
+
+    #create-debtor form .row .input-field,
+    #edit-debtor form .row .input-field,
+    #details-debtor form .row .input-field,
+    #remove-debtor form .row .input-field {
+        padding-left: 15% !important;
+    }
+
+    #create-debtor form .row .input-field label,
+    #edit-debtor form .row .input-field label,
+    #details-debtor form .row .input-field label,
+    #remove-debtor form .row .input-field label {
+        padding-left: 15%;
+    }
+
+    /*------------ COMPANIES ---------------*/
+    #details-product form .row .input-field label,
+    #remove-product form .row .input-field label {
+        padding-left: 13% !important;
+    }
+
+    #create-product form .row .input-field,
+    #edit-product form .row .input-field,
+    #details-product form .row .input-field,
+    #remove-product form .row .input-field {
+        padding-left: 15% !important;
+    }
+
+        #create-product form .row .input-field label,
+        #edit-product form .row .input-field label,
+        #details-product form .row .input-field label,
+        #remove-product form .row .input-field label {
+            padding-left: 15%;
+        }
+}
 
 @media screen and (max-width: 768px) {
     .body-content {
@@ -664,7 +772,18 @@ input[type="checkbox"]:checked + label:before {
         width: 100%;
     }
 
-    /*------LOGIN--------*/
+    #button-field {
+        white-space: normal;
+    }
+
+    #searchQuery {
+        position: relative;
+        left: 0%;
+        max-width: inherit !important;
+        margin: 0 auto;
+    }
+
+    /*------------ LOGIN ---------------*/
     #login-row, #forgot-row {
         max-width: 100vw;
         width: 100%;
@@ -710,56 +829,81 @@ input[type="checkbox"]:checked + label:before {
         margin-bottom: 20px;
     }
 
-    /*------ADMIN--------*/
+    /*------------ ADMINS ---------------*/
     #add-admin-btn, #search-admin-btn, #create-admin-btn {
         margin-top: 10px;
         width: 100%;
     }
 
+    /*------------ BUTTONS ---------------*/
     #button-area {
         float: none;
         margin-right: 0;
     }
 
-    #button-area button i {
-        display: none;
-    }
+        #button-area button i {
+            display: none;
+        }
 
-    #button-area a {
-        padding-left: 140px;
-        font-size: 15px;
-        font-weight: bold;
-    }
+        #button-area a {
+            padding-left: 140px;
+            font-size: 15px;
+            font-weight: bold;
+        }
 
-    /*------USER--------*/
+    /*------------ USER ---------------*/
     #search-user-btn {
         margin-top: 10px;
         width: 100%;
     }
 
-    /*------DEBTOR--------*/
+    /*------------ DEBTORS ---------------*/
+    #debtor-index,
+    #create-debtor, #edit-debtor,
+    #details-debtor, #remove-debtor {
+        padding: 20px 15px;
+    }
+
     #add-debtor-btn, #search-debtor-btn {
         margin-top: 10px;
         width: 100%;
     }
 
-    /*------COMPANY--------*/
+    /*------------ COMPANIES ---------------*/
+    #company-index,
+    #create-company, #edit-company,
+    #details-company, #remove-company {
+        padding: 20px 15px;
+    }
+
     #add-company-btn, #search-company-btn {
         margin-top: 10px;
         width: 100%;
     }
 
-    /*------INVOICE--------*/
+    /*------------ INVOICES ---------------*/
+    #invoice-index,
+    #create-invoice, #edit-invoice,
+    #details-invoice, #remove-invoice {
+        padding: 20px 15px;
+    }
+
     #add-invoice-btn, #search-invoice-btn {
         margin-top: 10px;
         width: 100%;
     }
 
-    /*------PRODUCT--------*/
-    #create-product #form .input-field, #edit-product #form .input-field,
-    #details-product #form .input-field, #remove-product #form .input-field {
-        left: 0%;
+    /*------------ PRODUCTS ---------------*/
+    #product-index,
+    #create-product, #edit-product,
+    #details-product, #remove-product {
+        padding: 20px 15px;
     }
+
+        #create-product #form .input-field, #edit-product #form .input-field,
+        #details-product #form .input-field, #remove-product #form .input-field {
+            left: 0%;
+        }
 }
 
 /* END OF MOBILE AND TABLET CSS */
