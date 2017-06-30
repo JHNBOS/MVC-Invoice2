@@ -246,24 +246,35 @@ namespace InvoiceWebApp.Controllers {
         //POST: User/Login
         [HttpPost]
         public ActionResult Login(User user) {
-            User login = null;
+            User userLogin = null;
+            Admin adminLogin = null;
             Debtor debtor = null;
 
             try {
-                login = _context.Users.SingleOrDefault(u => u.Email == user.Email && u.Password == user.Password);
-                debtor = _context.Debtors.SingleOrDefault(d => d.DebtorID == login.DebtorID);
+                userLogin = _context.Users.SingleOrDefault(u => u.Email == user.Email && u.Password == user.Password);
 
-                login.Debtor = debtor;
+                if (userLogin != null) {
+                    debtor = _context.Debtors.SingleOrDefault(d => d.DebtorID == userLogin.DebtorID);
+                    userLogin.Debtor = debtor;
+                } else {
+                    adminLogin = _context.Admins.SingleOrDefault(u => u.Email == user.Email 
+                                                    && u.Password == user.Password);
+                }
+                
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
 
-            if (login != null) {
-                SessionHelper.Set(this.HttpContext.Session, "User", login);
-                return RedirectToAction("Index", "Home", new { email = login.Email });
+            if (userLogin != null) {
+                SessionHelper.Set(this.HttpContext.Session, "User", userLogin);
+                return RedirectToAction("Index", "Home", new { email = userLogin.Email });
+            }
+            if (adminLogin != null) {
+                SessionHelper.Set(this.HttpContext.Session, "Admin", adminLogin);
+                return RedirectToAction("Index", "Home", new { email = adminLogin.Email });
             }
 
-            return View(login);
+            return View(userLogin);
         }
 
         //GET: User/Logout
@@ -284,28 +295,42 @@ namespace InvoiceWebApp.Controllers {
         //POST: User/ForgotPassword
         [HttpPost]
         public ActionResult ForgotPassword(string email, string password) {
-            User user = null;
+            User userLogin = null;
+            Admin adminLogin = null;
 
             try {
-                user = _context.Users.SingleOrDefault(m => m.Email == email);
+                userLogin = _context.Users.SingleOrDefault(s => s.Email == email);
+
+                if (userLogin == null) {
+                    adminLogin = _context.Admins.SingleOrDefault(s => s.Email == email);
+                }
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
 
-            if (user == null) {
+            if (userLogin == null && adminLogin == null) {
                 return NotFound();
             }
 
             try {
-                user.Password = password;
-                _context.Update(user);
+                if (userLogin != null) {
+                    userLogin.Password = password;
+                    _context.Update(userLogin);
+                    
+                } else if (adminLogin != null) {
+                    adminLogin.Password = password;
+                    _context.Update(adminLogin);
+                }
+
                 _context.SaveChanges();
 
                 return RedirectToAction("Login", "Users", new { area = "" });
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
-                return View(user);
+                return View(userLogin);
             }
         }
+
+
     }
 }

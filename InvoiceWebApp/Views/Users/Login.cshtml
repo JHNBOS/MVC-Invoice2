@@ -2,6 +2,7 @@
 @inject ApplicationDbContext _context
 @using System.Diagnostics
 @using InvoiceWebApp.Data
+@using InvoiceWebApp.Models
 
 @{
     ViewData["Title"] = "Login";
@@ -20,7 +21,6 @@
 <div>
     <div class="section center-align" style="font-family:Roboto, sans-serif;">
         <h4>Sign In</h4>
-        <h5 style="font-weight: 300;">Client</h5>
     </div>
 
     <div class="row" id="login-row">
@@ -62,8 +62,6 @@
     <div class="row right">
         <div id="login-links">
             <a asp-action="ForgotPassword" style="font-weight: bold;" class="light-green-text">Forgot Password?</a>
-            |
-            <a asp-controller="Admins" asp-action="Login" style="font-weight: bold;" class="light-green-text">Admin Login</a>
         </div>
     </div>
 

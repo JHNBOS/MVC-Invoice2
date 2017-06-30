@@ -1,35 +1,64 @@
 ﻿@import url('https://fonts.googleapis.com/css?family=Lato|Montserrat|Overpass|Raleway|Roboto');
 
+/**
+    // Elements
+    * Body
+    * Default CSS
+    * Navigation
+    * Title
+    * Table
+    * Fieldset
+    * Buttons
+    * Input
+    * Chart
+    * Login and Forgot
+    * Search Form
+
+    // Pages
+    * Page: Home
+    * Page: Settings
+    * Page: Debtor
+    * Page: Product
+    * Page: Company
+    * Page: User
+    * Page: Admins
+    * Page: Invoice
+    * Page: My Invoice
+
+    * Media Queries
+**/
+
+/*-----------------------------------------------------------------------------------
+    Body CSS
+-----------------------------------------------------------------------------------*/
 body {
     background: rgba(243, 243, 243, 0.75);
     font-family: 'Overpass', sans-serif;
     padding-bottom: 0px;
 }
 
-/* Wrapping element */
-/* Set some basic padding to keep content from hitting the edges */
+/*-----------------------------------------------------------------------------------
+    Default CSS
+-----------------------------------------------------------------------------------*/
 .body-content {
     padding-left: 75px;
     padding-right: 75px;
     width: 100%;
     margin: 0 auto;
-    margin-bottom: 42.5px;
+    margin-bottom: 35px;
 }
 
-/* Set widths on the form inputs since otherwise they're 100% wide */
 input,
 select,
 textarea {
     max-width: 280px;
 }
 
-/* Carousel */
 .carousel-caption p {
     font-size: 20px;
     line-height: 1.4;
 }
 
-/* buttons and links extension to use brackets: [ click me ] */
 .btn-bracketed::before {
     display: inline-block;
     content: "[";
@@ -42,23 +71,19 @@ textarea {
     padding-left: 0.5em;
 }
 
-/* Make .svg files in the carousel display properly in older browsers */
 .carousel-inner .item img[src$=".svg"] {
     width: 100%;
 }
 
-/* Hide/rearrange for smaller screens */
 @media screen and (max-width: 767px) {
-    /* Hide captions */
     .carousel-caption {
         display: none;
     }
 }
 
-/*-------------------------------------------------------------------------------------*/
-/*-------------------------------------------------------------------------------------*/
-/* BEGIN OF NAVBAR CSS */
-
+/*-----------------------------------------------------------------------------------
+    Navigation CSS
+-----------------------------------------------------------------------------------*/
 nav {
     box-shadow: 0px 7px 18px -6px rgba(0,0,0,0.66);
     -webkit-box-shadow: 0px 7px 18px -6px rgba(0,0,0,0.66);
@@ -66,7 +91,7 @@ nav {
 }
 
 .navbar-fixed {
-    margin-bottom: 42.5px;
+    margin-bottom: 50px;
 }
 
 nav .brand-logo {
@@ -172,66 +197,25 @@ nav ul a {
     font-weight: bold;
 }
 
-/* END OF NAVBAR CSS */
-/*-------------------------------------------------------------------------------------*/
-/* BEGIN OF HOME CSS */
-#home {
-    padding: 40px 40px;
-    margin: 0 auto;
-    min-height: 250px;
-    width: 100%;
-    background-color: #f1f1f1;
-    border: 1px solid #d0d0d0;
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-}
-
-#home-button {
-    line-height: 50px;
-}
-
-#home-button:hover {
-    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
-}
-
-#home-button i {
-    padding-right: 15px;
-    position: relative;
-    top: 3px;
-}
-
-/* END OF HOME CSS */
-/*-------------------------------------------------------------------------------------*/
-/* BEGIN OF MAIN CSS */
-
-/*--------------- AMCHARTS -----------------*/
-.amcharts-chart-div > a {
-    display: none !important;
-}
-/*--------------- SEARCH -----------------*/
-#search-form {
-    text-align: right;
-}
-
-#searchQuery::-webkit-input-placeholder {
-    color: rgba(0, 0, 0, 0.5);
-}
-
-#button-field {
-    white-space: nowrap;
-}
-/*--------------- TITLE -----------------*/
+/*-----------------------------------------------------------------------------------
+    Title CSS
+-----------------------------------------------------------------------------------*/
 h4 {
     font-family: 'Raleway';
     font-weight: 600;
 }
-/*--------------- TABLE -----------------*/
+
+/*-----------------------------------------------------------------------------------
+    Table CSS
+-----------------------------------------------------------------------------------*/
 .responsive-table {
     width: 80%;
     margin: 0 auto;
 }
-/*--------------- FIELDSET -----------------*/
+
+/*-----------------------------------------------------------------------------------
+    Fieldset CSS
+-----------------------------------------------------------------------------------*/
 fieldset {
     border: 2px solid rgba(21, 101, 192, 0.2);
     margin: 0 2px;
@@ -245,18 +229,29 @@ legend {
     font-weight: 300;
     padding: 4px 10px 4px 8px;
 }
-/*--------------- BUTTONS -----------------*/
+
+/*-----------------------------------------------------------------------------------
+    Buttons CSS
+-----------------------------------------------------------------------------------*/
 #button-area {
     margin-right: 5%;
     margin-top: 15px;
     float: right;
+    text-align: right;
 }
 
 #button-area a {
     font-size: 17px;
     padding-left: 0px;
 }
-/*--------------- INPUT -----------------*/
+
+#button-field {
+    white-space: nowrap;
+}
+
+/*-----------------------------------------------------------------------------------
+    Input CSS
+-----------------------------------------------------------------------------------*/
 input, select, textarea {
     max-width: 75%;
 }
@@ -310,9 +305,17 @@ input[type="checkbox"]:checked + label:before {
     border-bottom: 5px solid #7cb342;
 }
 
-/* END OF MAIN CSS */
-/*-------------------------------------------------------------------------------------*/
-/* BEGIN OF LOGIN CSS */
+/*-----------------------------------------------------------------------------------
+    Chart CSS
+-----------------------------------------------------------------------------------*/
+.amcharts-chart-div > a {
+    display: none !important;
+}
+
+
+/*-----------------------------------------------------------------------------------
+    Page: Login and Forgot
+-----------------------------------------------------------------------------------*/
 #login-row {
     width: 100%;
 }
@@ -339,6 +342,7 @@ input[type="checkbox"]:checked + label:before {
     min-width: 350px;
     max-width: 420px;
     display: block !important;
+    padding-left: 10px;
 }
 
 #login-form .input-field label, #forgot-form .input-field label {
@@ -360,21 +364,76 @@ input[type="checkbox"]:checked + label:before {
     right: 31%;
 }
 
-/* END OF LOGIN CSS */
-/*-------------------------------------------------------------------------------------*/
-/* BEGIN OF SETTINGS CSS */
+/*-----------------------------------------------------------------------------------
+    Search Form CSS
+-----------------------------------------------------------------------------------*/
+#search-form {
+    text-align: right;
+}
 
+#searchQuery::-webkit-input-placeholder {
+    color: rgba(0, 0, 0, 0.5);
+}
+
+/*-----------------------------------------------------------------------------------
+    Pages: Home
+-----------------------------------------------------------------------------------*/
+#home {
+    padding: 40px 40px;
+    margin: 0 auto;
+    min-height: 250px;
+    width: 100%;
+    background-color: #f1f1f1;
+    border: 1px solid #d0d0d0;
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+}
+
+/*----- Buttons --------------*/
+#home-button {
+    line-height: 50px;
+}
+
+#home-button:hover {
+    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 
+        0 3px 14px 2px rgba(0,0,0,0.12), 
+        0 5px 5px -3px rgba(0,0,0,0.3);
+}
+
+#home-button i {
+    padding-right: 15px;
+    position: relative;
+    top: 3px;
+}
+
+/*-----------------------------------------------------------------------------------
+    Pages: Contact
+-----------------------------------------------------------------------------------*/
+#contact {
+    padding: 40px 40px;
+    margin: 0 auto;
+    min-height: 250px;
+    width: 100%;
+    background-color: #f1f1f1;
+    border: 1px solid #d0d0d0;
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+}
+
+/*-----------------------------------------------------------------------------------
+    Pages: Settings
+-----------------------------------------------------------------------------------*/
 #showImg {
     margin-top: 25px;
     max-height: 60%;
     max-width: 60%;
 }
 
-/* END OF SETTINGS CSS */
-/*-------------------------------------------------------------------------------------*/
-/*-------------------------------------------------------------------------------------*/
-/* BEGIN OF DEBTOR CSS */
-
+/*-----------------------------------------------------------------------------------
+    Pages: Debtor
+-----------------------------------------------------------------------------------*/
 #debtor-index,
 #create-debtor, #edit-debtor,
 #details-debtor, #remove-debtor {
@@ -389,10 +448,12 @@ input[type="checkbox"]:checked + label:before {
     box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
 
+/*----- Buttons --------------*/
 #create-debtor-btn, #edit-debtor-btn,
 #change-debtor-btn, #remove-debtor-btn {
     margin-top: 15px;
     margin-bottom: 15px;
+    width: 170px;
 }
 
 #create-debtor-btn:hover, #edit-debtor-btn:hover,
@@ -406,6 +467,13 @@ input[type="checkbox"]:checked + label:before {
     line-height: 40px;
 }
 
+#add-debtor-btn, #search-debtor-btn {
+    margin-top: -5px;
+    width: 120px;
+    vertical-align: middle;
+}
+
+/*----- Input --------------*/
 #details-debtor input[type=text]:disabled, #remove-debtor input[type=text]:disabled,
 #details-debtor input[type=email]:disabled, #remove-debtor input[type=email]:disabled {
     color: rgba(0, 0, 0, 0.65) !important;
@@ -417,16 +485,9 @@ input[type="checkbox"]:checked + label:before {
     color: rgba(0, 0, 0, 0.50) !important;
 }
 
-#add-debtor-btn, #search-debtor-btn {
-    margin-top: -5px;
-    width: 120px;
-    vertical-align: middle;
-}
-
-/* END OF DEBTOR CSS */
-/*-------------------------------------------------------------------------------------*/
-/* BEGIN OF PRODUCT CSS */
-
+/*-----------------------------------------------------------------------------------
+    Pages: Product
+-----------------------------------------------------------------------------------*/
 #product-index,
 #create-product, #edit-product,
 #details-product, #remove-product {
@@ -441,10 +502,12 @@ input[type="checkbox"]:checked + label:before {
     box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
 
+/*----- Buttons --------------*/
 #create-product-btn, #edit-product-btn,
 #change-product-btn, #remove-product-btn {
     margin-top: 15px;
     margin-bottom: 15px;
+    width: 170px;
 }
 
 #create-product-btn:hover, #edit-product-btn:hover,
@@ -458,6 +521,13 @@ input[type="checkbox"]:checked + label:before {
     line-height: 40px;
 }
 
+#add-product-btn, #search-product-btn {
+    margin-top: -5px;
+    width: 120px;
+    vertical-align: middle;
+}
+
+/*----- Input --------------*/
 #details-product input[type=text]:disabled, #remove-product input[type=text]:disabled,
 #details-product input[type=email]:disabled, #remove-product input[type=email]:disabled,
 #details-product textarea:disabled, #remove-product textarea:disabled {
@@ -471,21 +541,15 @@ input[type="checkbox"]:checked + label:before {
     color: rgba(0, 0, 0, 0.50) !important;
 }
 
-#create-product #form .input-field, #edit-product #form .input-field,
-#details-product #form .input-field, #remove-product #form .input-field {
+#create-product form .input-field, #edit-product #form .input-field,
+#details-product form .input-field, #remove-product #form .input-field {
     position: relative;
-    left: 31%;
+    left: 3%;
 }
 
-#add-product-btn, #search-product-btn {
-    margin-top: -5px;
-    width: 120px;
-    vertical-align: middle;
-}
-
-/* END OF PRODUCT CSS */
-/*-------------------------------------------------------------------------------------*/
-/* BEGIN OF COMPANY CSS */
+/*-----------------------------------------------------------------------------------
+    Pages: Company
+-----------------------------------------------------------------------------------*/
 #company-index,
 #create-company, #edit-company,
 #details-company, #remove-company {
@@ -500,10 +564,12 @@ input[type="checkbox"]:checked + label:before {
     box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
 
+/*----- Buttons --------------*/
 #create-company-btn, #edit-company-btn,
 #change-company-btn, #remove-company-btn {
     margin-top: 15px;
     margin-bottom: 15px;
+    width: 170px;
 }
 
 #create-company-btn > span, #edit-company-btn > span,
@@ -512,6 +578,13 @@ input[type="checkbox"]:checked + label:before {
     line-height: 40px;
 }
 
+#add-company-btn, #search-company-btn {
+    margin-top: -5px;
+    width: 120px;
+    vertical-align: middle;
+}
+
+/*----- Input --------------*/
 #details-company input[type=text]:disabled, #remove-company input[type=text]:disabled,
 #details-company input[type=email]:disabled, #remove-company input[type=email]:disabled {
     color: rgba(0, 0, 0, 0.65) !important;
@@ -523,16 +596,9 @@ input[type="checkbox"]:checked + label:before {
     color: rgba(0, 0, 0, 0.50) !important;
 }
 
-#add-company-btn, #search-company-btn {
-    margin-top: -5px;
-    width: 120px;
-    vertical-align: middle;
-}
-
-/* END OF COMPANY CSS */
-/*-------------------------------------------------------------------------------------*/
-/* BEGIN OF USER CSS */
-
+/*-----------------------------------------------------------------------------------
+    Pages: User
+-----------------------------------------------------------------------------------*/
 #user-index,
 #create-user, #edit-user,
 #details-user, #remove-user {
@@ -547,10 +613,12 @@ input[type="checkbox"]:checked + label:before {
     box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
 
+/*----- Buttons --------------*/
 #create-user-btn, #edit-user-btn,
 #change-user-btn, #remove-user-btn {
     margin-top: 15px;
     margin-bottom: 25px;
+    width: 170px;
 }
 
 #create-user-btn:hover, #edit-user-btn:hover,
@@ -564,6 +632,13 @@ input[type="checkbox"]:checked + label:before {
     line-height: 40px;
 }
 
+#add-user-btn, #search-user-btn {
+    margin-top: -5px;
+    width: 120px;
+    vertical-align: middle;
+}
+
+/*----- Input --------------*/
 #details-user input[type=text]:disabled, #remove-user input[type=text]:disabled, #edit-user input[type=text]:disabled,
 #details-user input[type=email]:disabled, #remove-user input[type=email]:disabled, #edit-user input[type=email]:disabled,
 #details-user input[type=password]:disabled, #remove-user input[type=password]:disabled, #edit-user input[type=password]:disabled {
@@ -577,17 +652,9 @@ input[type="checkbox"]:checked + label:before {
     color: rgba(0, 0, 0, 0.50) !important;
 }
 
-#add-user-btn, #search-user-btn {
-    margin-top: -5px;
-    width: 120px;
-    vertical-align: middle;
-}
-
-/* END OF USER CSS */
-/*-------------------------------------------------------------------------------------*/
-/*-------------------------------------------------------------------------------------*/
-/* BEGIN OF ADMIN CSS */
-
+/*-----------------------------------------------------------------------------------
+    Pages: Admin
+-----------------------------------------------------------------------------------*/
 #admin-index,
 #create-admin, #edit-admin,
 #details-admin, #remove-admin,
@@ -603,11 +670,13 @@ input[type="checkbox"]:checked + label:before {
     box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
 
+/*----- Buttons --------------*/
 #create-admin-btn, #edit-admin-btn,
 #change-admin-btn, #remove-admin-btn,
 #save-settings-btn {
     margin-top: 15px;
     margin-bottom: 25px;
+    width: 170px;
 }
 
 #create-admin-btn:hover, #edit-admin-btn:hover,
@@ -623,6 +692,13 @@ input[type="checkbox"]:checked + label:before {
     line-height: 40px;
 }
 
+#add-admin-btn, #search-admin-btn {
+    margin-top: -5px;
+    width: 120px;
+    vertical-align: middle;
+}
+
+/*----- Input --------------*/
 #details-admin input[type=text]:disabled, #remove-admin input[type=text]:disabled,
 #details-admin input[type=email]:disabled, #remove-admin input[type=email]:disabled,
 #details-admin input[type=password]:disabled, #remove-admin input[type=password]:disabled {
@@ -636,16 +712,9 @@ input[type="checkbox"]:checked + label:before {
     color: rgba(0, 0, 0, 0.50) !important;
 }
 
-#add-admin-btn, #search-admin-btn {
-    margin-top: -5px;
-    width: 120px;
-    vertical-align: middle;
-}
-
-/* END OF ADMIN CSS */
-/*-------------------------------------------------------------------------------------*/
-/* BEGIN OF INVOICE CSS */
-
+/*-----------------------------------------------------------------------------------
+    Pages: Invoice
+-----------------------------------------------------------------------------------*/
 #invoice-index {
     padding: 40px 40px;
     margin: 0 auto;
@@ -658,16 +727,16 @@ input[type="checkbox"]:checked + label:before {
     box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
 
+/*----- Buttons --------------*/
 #add-invoice-btn, #search-invoice-btn {
     margin-top: -5px;
     width: 120px;
     vertical-align: middle;
 }
 
-/* END OF INVOICE CSS */
-/*-------------------------------------------------------------------------------------*/
-/* BEGIN OF MY INVOICES CSS */
-
+/*-----------------------------------------------------------------------------------
+    Pages: My Invoice
+-----------------------------------------------------------------------------------*/
 #myinvoice-index {
     padding: 40px 40px;
     margin: 0 auto;
@@ -680,15 +749,16 @@ input[type="checkbox"]:checked + label:before {
     box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
 
+/*----- Buttons --------------*/
 #search-myinvoice-btn {
     margin-top: -5px;
     width: 160px;
     vertical-align: middle;
 }
 
-/* END OF MY INVOICES CSS */
-/*-------------------------------------------------------------------------------------*/
-/* BEGIN OF MOBILE AND TABLET CSS */
+/*-----------------------------------------------------------------------------------
+    Media Queries
+-----------------------------------------------------------------------------------*/
 @media screen and (max-width: 640px) {
     .row .col.s12 {
         padding: 0;
@@ -700,6 +770,25 @@ input[type="checkbox"]:checked + label:before {
 }
 
 @media screen and (min-width: 641px) and (max-width: 767px) {
+    .body-content {
+        width: 100%;
+        margin: 0 auto;
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+
+    #search-form {
+        text-align: center;
+    }
+
+    .responsive-table {
+        width: 100%;
+    }
+
+    #button-field {
+        white-space: nowrap;
+    }
+
     #searchQuery {
         position: relative;
         left: -28%;
@@ -748,12 +837,12 @@ input[type="checkbox"]:checked + label:before {
         padding-left: 15% !important;
     }
 
-        #create-product form .row .input-field label,
-        #edit-product form .row .input-field label,
-        #details-product form .row .input-field label,
-        #remove-product form .row .input-field label {
-            padding-left: 15%;
-        }
+    #create-product form .row .input-field label,
+    #edit-product form .row .input-field label,
+    #details-product form .row .input-field label,
+    #remove-product form .row .input-field label {
+        padding-left: 15%;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -841,15 +930,20 @@ input[type="checkbox"]:checked + label:before {
         margin-right: 0;
     }
 
-        #button-area button i {
-            display: none;
-        }
+    #button-area button {
+        width: 100%;
+    }
 
-        #button-area a {
-            padding-left: 140px;
-            font-size: 15px;
-            font-weight: bold;
-        }
+    #button-area button i {
+        display: none;
+    }
+
+    #button-area a {
+        position: relative;
+        left: 40%;
+        font-size: 15px;
+        font-weight: bold;
+    }
 
     /*------------ USER ---------------*/
     #search-user-btn {
@@ -900,11 +994,29 @@ input[type="checkbox"]:checked + label:before {
         padding: 20px 15px;
     }
 
-        #create-product #form .input-field, #edit-product #form .input-field,
-        #details-product #form .input-field, #remove-product #form .input-field {
-            left: 0%;
-        }
+    #create-product #form .input-field, #edit-product #form .input-field,
+    #details-product #form .input-field, #remove-product #form .input-field {
+        left: 0%;
+    }
 }
 
-/* END OF MOBILE AND TABLET CSS */
-/*-------------------------------------------------------------------------------------*/
+@media screen and (min-width: 769px) and (max-width: 992px){
+    #button-field {
+        white-space: normal;
+    }
+
+    #button-field button {
+        width: 90%;
+        margin: 3px auto;
+    }
+
+    #button-field a {
+        width: 90%;
+        margin: 3px auto;
+    }
+
+    #searchQuery {
+        position: relative;
+        left: -11%;
+    }
+}

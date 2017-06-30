@@ -16,41 +16,41 @@
 
     <!--Form-->
     <div class="row" style="margin-top: 5px;">
-        <div class="col s12 col col m10 offset-m1">
+        <div class="col s12 col m12 col l10 offset-l1">
             <form asp-controller="Products" asp-action="Create">
 
                 <fieldset>
                     <legend>Product Information</legend>
 
                     <div class="row">
-                        <div class="input-field col s12 col m8 offset-m3">
+                        <div class="input-field col s12 col m12 col l8 offset-l2">
                             <i class="material-icons prefix">motorcycle</i>
-                            <input id="icon_prefix" type="text" asp-for="Name" />
-                            <label for="icon_prefix">Product Name</label>
+                            <input id="icon_name" type="text" asp-for="Name" />
+                            <label for="icon_name">Product Name</label>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="input-field col s12 col m8 offset-m3">
+                        <div class="input-field col s12 col m12 col l8 offset-l2">
                             <i class="material-icons prefix">border_color</i>
-                            <input id="icon_prefix" type="text" asp-for="Description" />
-                            <label for="icon_prefix">Description</label>
+                            <input id="icon_desc" type="text" asp-for="Description" />
+                            <label for="icon_desc">Description</label>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="input-field col s12 col m8 offset-m3">
+                        <div class="input-field col s12 col m12 col l8 offset-l2">
                             <i class="material-icons prefix">euro_symbol</i>
-                            <input id="icon_prefix price" type="text" name="price" asp-for="Price" />
-                            <label for="icon_prefix">Price</label>
+                            <input id="icon_price price" type="text" name="price" asp-for="Price" />
+                            <label for="icon_price">Price</label>
                         </div>
                     </div>
 
                     <div class="row">
-                        <div class="input-field col s12 col m8 offset-m3">
+                        <div class="input-field col s12 col m12 col l8 offset-l2">
                             <i class="material-icons prefix">exposure_plus_2</i>
-                            <input id="icon_prefix" type="text" name="vat" asp-for="VAT" />
-                            <label for="icon_prefix">VAT Percentage</label>
+                            <input id="icon_vat" type="text" name="vat" asp-for="VAT" />
+                            <label for="icon_vat">VAT Percentage</label>
                         </div>
                     </div>
                 </fieldset>
