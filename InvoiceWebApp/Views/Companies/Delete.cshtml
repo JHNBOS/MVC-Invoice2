@@ -16,7 +16,7 @@
 
     <!--Form-->
     <div class="row" style="margin-top: 5px;">
-        <div class="col s12 col m10 offset-m1">
+        <div class="col s12 col m12 col l10 offset-l1">
             <form asp-controller="Companies" asp-action="Delete" onsubmit="return confirm('Are you sure you want to delete this company and all his invoices?');">
                 <input type="hidden" asp-for="CompanyID" />
 
@@ -26,52 +26,52 @@
                     <div class="row">
                         <div class="input-field col s12 col m12 col l6">
                             <i class="material-icons prefix">business</i>
-                            <input id="icon_prefix" type="text" asp-for="CompanyName" disabled />
-                            <label for="icon_prefix">Company Name</label>
+                            <input id="icon_name" type="text" asp-for="CompanyName" disabled />
+                            <label for="icon_name">Company Name</label>
                         </div>
                         <div class="input-field col s12 col m12 col l6">
                             <i class="material-icons prefix">markunread_mailbox</i>
-                            <input id="icon_prefix" type="text" asp-for="RegNumber" disabled />
-                            <label for="icon_prefix">Registration Number</label>
+                            <input id="icon_reg" type="text" asp-for="RegNumber" disabled />
+                            <label for="icon_reg">Registration Number</label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="input-field col s12 col m12 col l6">
                             <i class="material-icons prefix">email</i>
-                            <input id="icon_prefix" type="email" asp-for="Email" class="validate" disabled />
-                            <label for="icon_prefix">Email</label>
+                            <input id="icon_email" type="email" asp-for="Email" class="validate" disabled />
+                            <label for="icon_email">Email</label>
                         </div>
                         <div class="input-field col s12 col m12 col l6">
                             <i class="material-icons prefix">phone</i>
-                            <input id="icon_prefix" type="text" asp-for="Phone" disabled />
-                            <label for="icon_prefix">Phone</label>
+                            <input id="icon_phone" type="text" asp-for="Phone" disabled />
+                            <label for="icon_phone">Phone</label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="input-field col s12 col m12 col l6">
                             <i class="material-icons prefix">credit_card</i>
-                            <input id="icon_prefix" type="text" asp-for="BankAccount" disabled />
-                            <label for="icon_prefix">Bank Account No</label>
+                            <input id="icon_bank" type="text" asp-for="BankAccount" disabled />
+                            <label for="icon_bank">Bank Account No</label>
                         </div>
                         <div class="input-field col s12 col m12 col l6">
                             <i class="material-icons prefix">account_balance</i>
-                            <input id="icon_prefix" type="text" asp-for="BankName" disabled />
-                            <label for="icon_prefix">Name of Bank</label>
+                            <input id="icon_bank-name" type="text" asp-for="BankName" disabled />
+                            <label for="icon_bank-name">Name of Bank</label>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="input-field col s12 col m12 col l6">
                             <i class="material-icons prefix">card_membership</i>
-                            <input id="icon_prefix" type="text" asp-for="FinancialNumber" disabled />
-                            <label for="icon_prefix">Financial No</label>
+                            <input id="icon_fin" type="text" asp-for="FinancialNumber" disabled />
+                            <label for="icon_fin">Financial No</label>
                         </div>
                         <div class="input-field col s12 col m12 col l6">
                             <i class="material-icons prefix">card_membership</i>
-                            <input id="icon_prefix" type="text" asp-for="EUFinancialNumber" disabled />
-                            <label for="icon_prefix">EU Financial No</label>
+                            <input id="icon_eu-fin" type="text" asp-for="EUFinancialNumber" disabled />
+                            <label for="icon_eu-fin">EU Financial No</label>
                         </div>
                     </div>
                 </fieldset>
