@@ -192,7 +192,8 @@ nav ul a {
     background-color: #e2ffd5;
 }
 
-.side-nav .collapsible-body > ul:not(.collapsible) > li.active a, .side-nav.fixed .collapsible-body > ul:not(.collapsible) > li.active a {
+.side-nav .collapsible-body > ul:not(.collapsible) > li.active a, 
+.side-nav.fixed .collapsible-body > ul:not(.collapsible) > li.active a {
     color: #6e1abb;
     font-weight: bold;
 }
@@ -323,36 +324,43 @@ input[type="checkbox"]:checked + label:before {
 #login-form, #forgot-form {
     background-color: #f1f1f1;
     border: 1px solid #d0d0d0;
-    padding: 50px 20px 30px 20px;
-    max-width: 50%;
-    margin: 0 25%;
+    padding: 50px 0 20px 0;
+    margin: 0 auto;
+    padding-bottom: 15px;
     -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
     -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
     box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
 
-#login-form .input-field, #forgot-form .input-field {
-    margin: 0px 0px 0px 0px;
+#login-form .input-field,
+#forgot-form .input-field {
+    margin: 0 auto;
     text-align: center;
     position: relative;
-    left: 10%;
+    left: 50%;
+    top: 0%;
+    transform: translate(-50%, 0%);
 }
 
-#login-form .input-field input, #forgot-form .input-field input {
-    min-width: 350px;
-    max-width: 420px;
-    display: block !important;
+#login-form .input-field input,
+#forgot-form .input-field input {
+    max-width: 100%;
+    width: 100%;
+    display: inline-block !important;
     padding-left: 10px;
 }
 
-#login-form .input-field label, #forgot-form .input-field label {
+#login-form .input-field label,
+#forgot-form .input-field label {
     display: block !important;
 }
 
 #login-button, #forgot-button {
     position: relative;
-    right: 11%;
+    right: 16%;
     margin-top: 10px;
+    width: 180px;
+    margin-bottom: 0px;
 }
 
 #login-button:hover, #forgot-button:hover {
@@ -360,8 +368,9 @@ input[type="checkbox"]:checked + label:before {
 }
 
 #login-links, #forgot-links {
-    position: absolute;
-    right: 31%;
+    position: relative;
+    left: 66%;
+    bottom: 0%;
 }
 
 /*-----------------------------------------------------------------------------------
@@ -474,14 +483,20 @@ input[type="checkbox"]:checked + label:before {
 }
 
 /*----- Input --------------*/
-#details-debtor input[type=text]:disabled, #remove-debtor input[type=text]:disabled,
-#details-debtor input[type=email]:disabled, #remove-debtor input[type=email]:disabled {
+/* Color of disabled input on detail and delete view*/
+#details-debtor input[type=text]:disabled,
+#remove-debtor input[type=text]:disabled,
+#details-debtor input[type=email]:disabled,
+#remove-debtor input[type=email]:disabled {
     color: rgba(0, 0, 0, 0.65) !important;
     border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
 }
 
-#details-debtor input[type=text]:disabled + label, #remove-debtor input[type=text]:disabled + label,
-#details-debtor input[type=email]:disabled + label, #remove-debtor input[type=email]:disabled + label {
+/* Label color of disabled on detail and delete view*/
+#details-debtor input[type=text]:disabled + label,
+#remove-debtor input[type=text]:disabled + label,
+#details-debtor input[type=email]:disabled + label,
+#remove-debtor input[type=email]:disabled + label {
     color: rgba(0, 0, 0, 0.50) !important;
 }
 
@@ -528,21 +543,31 @@ input[type="checkbox"]:checked + label:before {
 }
 
 /*----- Input --------------*/
-#details-product input[type=text]:disabled, #remove-product input[type=text]:disabled,
-#details-product input[type=email]:disabled, #remove-product input[type=email]:disabled,
-#details-product textarea:disabled, #remove-product textarea:disabled {
+/* Color of disabled input on detail and delete view*/
+#details-product input[type=text]:disabled,
+#remove-product input[type=text]:disabled,
+#details-product input[type=email]:disabled,
+#remove-product input[type=email]:disabled,
+#details-product textarea:disabled,
+#remove-product textarea:disabled {
     color: rgba(0, 0, 0, 0.65) !important;
     border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
 }
 
-#details-product input[type=text]:disabled + label, #remove-product input[type=text]:disabled + label,
-#details-product input[type=email]:disabled + label, #remove-product input[type=email]:disabled + label,
-#details-product textarea:disabled + label, #remove-product textarea:disabled + label {
+/* Label color of disabled on detail and delete view*/
+#details-product input[type=text]:disabled + label,
+#remove-product input[type=text]:disabled + label,
+#details-product input[type=email]:disabled + label,
+#remove-product input[type=email]:disabled + label,
+#details-product textarea:disabled + label,
+#remove-product textarea:disabled + label {
     color: rgba(0, 0, 0, 0.50) !important;
 }
 
-#create-product form .input-field, #edit-product #form .input-field,
-#details-product form .input-field, #remove-product #form .input-field {
+#create-product form .input-field,
+#edit-product #form .input-field,
+#details-product form .input-field,
+#remove-product #form .input-field {
     position: relative;
     left: 3%;
 }
@@ -572,8 +597,10 @@ input[type="checkbox"]:checked + label:before {
     width: 170px;
 }
 
-#create-company-btn > span, #edit-company-btn > span,
-#change-company-btn > span, #remove-company-btn > span {
+#create-company-btn > span, 
+#edit-company-btn > span,
+#change-company-btn > span, 
+#remove-company-btn > span {
     height: 36px;
     line-height: 40px;
 }
@@ -585,14 +612,20 @@ input[type="checkbox"]:checked + label:before {
 }
 
 /*----- Input --------------*/
-#details-company input[type=text]:disabled, #remove-company input[type=text]:disabled,
-#details-company input[type=email]:disabled, #remove-company input[type=email]:disabled {
+/* Color of disabled input on detail and delete view*/
+#details-company input[type=text]:disabled, 
+#remove-company input[type=text]:disabled,
+#details-company input[type=email]:disabled, 
+#remove-company input[type=email]:disabled {
     color: rgba(0, 0, 0, 0.65) !important;
     border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
 }
 
-#details-company input[type=text]:disabled + label, #remove-company input[type=text]:disabled + label,
-#details-company input[type=email]:disabled + label, #remove-company input[type=email]:disabled + label {
+/* Label color of disabled on detail and delete view*/
+#details-company input[type=text]:disabled + label, 
+#remove-company input[type=text]:disabled + label,
+#details-company input[type=email]:disabled + label, 
+#remove-company input[type=email]:disabled + label {
     color: rgba(0, 0, 0, 0.50) !important;
 }
 
@@ -639,16 +672,30 @@ input[type="checkbox"]:checked + label:before {
 }
 
 /*----- Input --------------*/
-#details-user input[type=text]:disabled, #remove-user input[type=text]:disabled, #edit-user input[type=text]:disabled,
-#details-user input[type=email]:disabled, #remove-user input[type=email]:disabled, #edit-user input[type=email]:disabled,
-#details-user input[type=password]:disabled, #remove-user input[type=password]:disabled, #edit-user input[type=password]:disabled {
+/* Color of disabled input on detail and delete view*/
+#details-user input[type=text]:disabled, 
+#remove-user input[type=text]:disabled, 
+#edit-user input[type=text]:disabled,
+#details-user input[type=email]:disabled, 
+#remove-user input[type=email]:disabled, 
+#edit-user input[type=email]:disabled,
+#details-user input[type=password]:disabled, 
+#remove-user input[type=password]:disabled, 
+#edit-user input[type=password]:disabled {
     color: rgba(0, 0, 0, 0.65) !important;
     border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
 }
 
-#details-user input[type=text]:disabled + label, #remove-user input[type=text]:disabled + label, #edit-user input[type=text]:disabled + label,
-#details-user input[type=email]:disabled + label, #remove-user input[type=email]:disabled + label, #edit-user input[type=email]:disabled + label,
-#details-user input[type=password]:disabled + label, #remove-user input[type=password]:disabled + label, #edit-user input[type=password]:disabled + label {
+/* Label color of disabled on detail and delete view*/
+#details-user input[type=text]:disabled + label, 
+#remove-user input[type=text]:disabled + label, 
+#edit-user input[type=text]:disabled + label,
+#details-user input[type=email]:disabled + label, 
+#remove-user input[type=email]:disabled + label, 
+#edit-user input[type=email]:disabled + label,
+#details-user input[type=password]:disabled + label, 
+#remove-user input[type=password]:disabled + label, 
+#edit-user input[type=password]:disabled + label {
     color: rgba(0, 0, 0, 0.50) !important;
 }
 
@@ -699,6 +746,7 @@ input[type="checkbox"]:checked + label:before {
 }
 
 /*----- Input --------------*/
+/* Color of disabled input on detail and delete view*/
 #details-admin input[type=text]:disabled, #remove-admin input[type=text]:disabled,
 #details-admin input[type=email]:disabled, #remove-admin input[type=email]:disabled,
 #details-admin input[type=password]:disabled, #remove-admin input[type=password]:disabled {
@@ -706,6 +754,7 @@ input[type="checkbox"]:checked + label:before {
     border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
 }
 
+/* Label color of disabled on detail and delete view*/
 #details-admin input[type=text]:disabled + label, #remove-admin input[type=text]:disabled + label,
 #details-admin input[type=email]:disabled + label, #remove-admin input[type=email]:disabled + label,
 #details-admin input[type=password]:disabled + label, #remove-admin input[type=password]:disabled + label {
@@ -874,7 +923,6 @@ input[type="checkbox"]:checked + label:before {
 
     /*------------ LOGIN ---------------*/
     #login-row, #forgot-row {
-        max-width: 100vw;
         width: 100%;
         margin: 0 auto;
     }
@@ -882,19 +930,21 @@ input[type="checkbox"]:checked + label:before {
     #login-form, #forgot-form {
         margin-left: 0px;
         margin-right: 0px;
+        margin-bottom: 40px;
         padding: 0;
         max-width: 100%;
         padding-top: 20px;
+        padding-bottom: 15px;
     }
 
     #login-form .input-field, #forgot-form .input-field {
-        left: 0%;
+        left: 50%;
         margin: 10px auto 0 auto;
     }
 
     #login-form .input-field input, #forgot-form .input-field input {
         min-width: 80%;
-        max-width: 90%;
+        max-width: 85%;
         display: block !important;
         margin: 0 auto;
     }
@@ -902,11 +952,13 @@ input[type="checkbox"]:checked + label:before {
     #login-form .input-field label, #forgot-form .input-field label {
         display: inline-block !important;
         margin: 0 auto;
-        padding-left: 20px;
+        padding-left: 40px;
     }
 
     #login-links, #forgot-links {
-        right: 28%;
+        position: relative;
+        left: 42%;
+        bottom: 0%;
     }
 
     #login-button, #forgot-button {
@@ -915,7 +967,7 @@ input[type="checkbox"]:checked + label:before {
         margin-top: 10px;
         float: left !important;
         width: 90%;
-        margin-bottom: 20px;
+        margin-bottom: 15px;
     }
 
     /*------------ ADMINS ---------------*/
@@ -1018,5 +1070,20 @@ input[type="checkbox"]:checked + label:before {
     #searchQuery {
         position: relative;
         left: -11%;
+    }
+
+    #login-form .input-field label,
+    #forgot-form .input-field label {
+        display: block !important;
+        position: absolute;
+        left: 12%;
+    }
+
+    #login-form .input-field input,
+    #forgot-form .input-field input {
+        max-width: 80%;
+        width: 100%;
+        display: inline-block !important;
+        padding-left: 10px;
     }
 }

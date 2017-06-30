@@ -24,12 +24,12 @@
     </div>
 
     <div class="row" id="login-row">
-        <div class="col s12 col m12">
+        <div class="col s12 col m12 col l8 offset-l2">
             <form id="login-form" asp-controller="Users" asp-action="Login">
 
                 <!--Email-->
                 <div class="row">
-                    <div class="input-field col s12 col m12">
+                    <div class="input-field col s12 col m12 col l8 offset-l2">
                         <input asp-for="Email" id="email" type="email" class="validate grey-text text-darken-3">
                         <label class="grey-text text-darken-3" for="email">Email</label>
                     </div>
@@ -37,7 +37,7 @@
 
                 <!--Password-->
                 <div class="row">
-                    <div class="input-field col s12 col m12">
+                    <div class="input-field col s12 col m12 col l8 offset-l2">
                         <input asp-for="Password" id="password" type="password" class="validate grey-text text-darken-3">
                         <label class="grey-text text-darken-3" for="password">Password</label>
                     </div>
@@ -48,25 +48,12 @@
                     <button id="login-button" type="submit"
                         class="btn light-green right white-text waves-effect waves-light">LOGIN</button>
                 </div>
+
+                <a id="forgot-links" asp-action="ForgotPassword" style="font-weight: bold;" class="light-green-text">Forgot Password?</a>
             </form>
         </div>
     </div>
 
-    <br />
-
-    <div class="divider">
-    </div>
-
-    <br />
-
-    <div class="row right">
-        <div id="login-links">
-            <a asp-action="ForgotPassword" style="font-weight: bold;" class="light-green-text">Forgot Password?</a>
-        </div>
-    </div>
-
-    <br />
-    <br />
 </div>
 
 @section Scripts {
