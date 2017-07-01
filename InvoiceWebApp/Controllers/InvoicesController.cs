@@ -130,7 +130,10 @@ namespace InvoiceWebApp.Controllers {
                 }
 
                 if (isEmpty == false) {
-                    Invoice invoiceBeforeUpdate = _context.Invoices.Single(s => s.InvoiceNumber == invoice.InvoiceNumber);
+                    Invoice invoiceBeforeUpdate = _context.Invoices
+                                                .Include(s => s.Debtor)
+                                                .Include(s => s.InvoiceItems)
+                                                .Single(s => s.InvoiceNumber == invoice.InvoiceNumber);
 
                     invoiceBeforeUpdate.InvoiceNumber = invoice.InvoiceNumber;
                     invoiceBeforeUpdate.DebtorID = invoice.DebtorID;
@@ -451,10 +454,11 @@ namespace InvoiceWebApp.Controllers {
                 await UpdateInvoice(invoice, pids, amounts, total);
 
                 //SEND MAIL TO DEBTOR NOTIFYING ABOUT INVOICE
-                if (invoice.Type == "Final" && invoiceBeforeUpdate.Type != "Final" && !String.IsNullOrEmpty(invoice.DebtorID.ToString())) {
+                if (invoice.Type == "Final" && invoiceBeforeUpdate.Type != "Final" && !String.IsNullOrEmpty(invoice.CompanyID.ToString())) {
                     Debtor debtor = _context.Debtors.Single(s => s.DebtorID == invoice.DebtorID);
                     AuthMessageSender email = new AuthMessageSender(_settings);
                     await email.SendInvoiceEmailAsync(debtor.Email);
+
                 } else if (invoice.Type == "Final" && invoiceBeforeUpdate.Type != "Final" && String.IsNullOrEmpty(invoice.DebtorID.ToString())) {
                     Company company = _context.Company.Single(s => s.CompanyID == invoice.CompanyID);
                     AuthMessageSender email = new AuthMessageSender(_settings);

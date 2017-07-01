@@ -90,6 +90,11 @@ nav {
     -moz-box-shadow: 0px 7px 18px -6px rgba(0,0,0,0.66);
 }
 
+nav .nav-wrapper {
+    width: 94%;
+    margin: auto;
+}
+
 .navbar-fixed {
     margin-bottom: 50px;
 }
@@ -779,7 +784,8 @@ input[type="checkbox"]:checked + label:before {
     box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
 
-#create-invoice, #edit-invoice {
+#create-invoice, #details-invoice,
+#edit-invoice, #remove-invoice {
     padding: 40px 50px;
     margin: 0 auto 40px auto;
     min-height: 250px;

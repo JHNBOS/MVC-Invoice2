@@ -18,7 +18,7 @@
     <!--Form-->
     <div class="row" style="margin-top: 5px;">
         <div class="col s12 col m12 col l12">
-            <form asp-controller="Invoices" asp-action="Edit">
+            <form id="form" asp-controller="Invoices" asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="InvoiceNumber" />
 
@@ -51,7 +51,7 @@
                                 <label for="icon_created" style="padding-left: 57px;">Invoice Date</label>
                                 <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
                                     <i class="material-icons prefix">today</i>
-                                    <input asp-for="CreatedOn" id="icon_created createdon" disabled />
+                                    <input asp-for="CreatedOn" id="icon_created createdon" />
                                 </div>
                             </div>
 
@@ -59,7 +59,7 @@
                                 <label for="icon_expired" style="padding-left: 57px;">Invoice Expiration Date</label>
                                 <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
                                     <i class="material-icons prefix">today</i>
-                                    <input asp-for="ExpirationDate" id="icon_expired expired" disabled />
+                                    <input asp-for="ExpirationDate" id="icon_expired expired" />
                                 </div>
                             </div>
 
@@ -74,7 +74,7 @@
                             <div class="row" id="type-row">
                                 <div class="input-field col s12 col m12 col l12">
                                     <i class="material-icons prefix">save</i>
-                                    <select id="select_type" asp-for="Type" disabled>
+                                    <select id="select_type" asp-for="Type">
                                         <option value="Concept">Concept</option>
                                         <option value="Final">Final</option>
                                     </select>
@@ -156,12 +156,14 @@
         $("#product-control").hide();
 
         $(document).ready(() => {
+
             // Variables
             var total = t;
             var count = 0;
             var productArray = new Array();
             var amountArray = new Array();
 
+            //Total
             var t = "@(ViewBag.Total)";
             $("#total").val(t);
 
@@ -219,11 +221,19 @@
             $("#edit-invoice-btn").on("click", () => {
                 $("#products option:selected").each(function () {
                     productArray.push($(this).val().split('_')[0]);
-                })
+                });
+
+                $("#products [id^=_product-]").each(function () {
+                    var text = $(this).val();
+                    var id = $(this).attr("id");
+                    var pid = id.split("x")[1];
+
+                    productArray.push(pid);
+                });
 
                 $("#products #_amount").each(function () {
                     amountArray.push($(this).val());
-                })
+                });
 
                 productArray.splice(0, 1);
                 amountArray.splice(0, 1);
@@ -234,32 +244,11 @@
                 console.log(amountArray.toString());
                 console.log(totalPrice.toString());
 
-                $("#form").attr("action", "Edit/?pids=" + productArray.toString() + "&amounts=" + amountArray.toString() + "&total=" + totalPrice.toString());
+                $("#form").append('<input type="hidden" name="total" value="' + totalPrice + '" /> ');
+                $("#form").append('<input type="hidden" name="pids" value="' + productArray.toString() + '" /> ');
+                $("#form").append('<input type="hidden" name="amounts" value="' + amountArray.toString() + '" /> ');
 
                 $("#form").submit();
-
-                /*
-                $("#products option:selected").each(function () {
-                    productArray.push($(this).val().split('_')[0]);
-                });
-
-                $("#products #_amount").each(function () {
-                    amountArray.push($(this).val());
-                });
-
-                productArray.splice(0, 1);
-                amountArray.splice(0, 1);
-
-                console.log(productArray.toString());
-                console.log(amountArray.toString());
-                console.log(total);
-
-                $(this).append('<input type="hidden" name="total" value="' + total + '" /> ');
-                $(this).append('<input type="hidden" name="pids" value="' + productArray.toString() + '" /> ');
-                $(this).append('<input type="hidden" name="amounts" value="' + amountArray.toString() + '" /> ');
-
-                $("#form").submit();
-                */
             });
 
             /*-------------------------------------------------------------------------------------------*/
@@ -309,11 +298,14 @@
 
                 for (var i = 0; i < amounts.length; i++) {
                     var amount = amounts[i];
+                    var pid = pids[i];
+
+                    var elementID = "_product-" + i.toString() + "x" + pid.split("_")[0];
 
                     var html = `
                         <div id="product-row-` + i + `" class="row">
                             <div class="input-field col s12 col m8 col l8">
-                                <input id="_product-` + i + `" />
+                                <input id="` + elementID.toString() + `"  />
                             </div>
 
                             <div class="input-field col s8 col m2 col l2">
@@ -336,7 +328,10 @@
                     var pid = pids[i];
                     var pname = pnames[i];
 
-                    var element = "#products #product-row-" + i.toString() + " #_product-" + i.toString();
+                    //var element = "#products #product-row-" + i.toString() + "#" + pid.toString();
+                    var element = "#products #product-row-" + i.toString() + " #_product-" + i.toString() + "x" + pid.split("_")[0];
+
+                    console.log("Element: " + element.toString());
 
                     $(element).prop("value", pname);
                     $(element).prop("disabled", true);
@@ -359,15 +354,25 @@
 
                 $("#products option:selected").each(function () {
                     var id = $(this).val();
+
                     console.log("product: " + id);
+
                     pids.push($(this).val());
-                })
+                });
+
+                $("#products [id^=_product-]").each(function () {
+                    var text = $(this).val();
+                    var id = $(this).attr("id");
+                    var pid = id.split("x")[1];
+
+                    pids.push(pid);
+                });
 
                 $("#products #_amount").each(function () {
                     var amount = $(this).val();
                     console.log("amount: " + amount);
                     amounts.push($(this).val());
-                })
+                });
 
                 pids.splice(0, 1);
                 amounts.splice(0, 1);
