@@ -49,7 +49,7 @@
                                 <label for="icon_created" style="padding-left: 57px;">Invoice Date</label>
                                 <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
                                     <i class="material-icons prefix">today</i>
-                                    <input asp-for="CreatedOn" id="icon_created" />
+                                    <input asp-for="CreatedOn" id="icon_created createdon" />
                                 </div>
                             </div>
 
@@ -57,11 +57,12 @@
                                 <label for="icon_expired" style="padding-left: 57px;">Invoice Expiration Date</label>
                                 <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
                                     <i class="material-icons prefix">today</i>
-                                    <input asp-for="ExpirationDate" id="icon_expired" />
+                                    <input asp-for="ExpirationDate" id="icon_expired expired" />
                                 </div>
                             </div>
 
                             <div class="row">
+                                <label id="total-label" for="total">Total</label>
                                 <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">euro_symbol</i>
                                     <input id="total" name="total" type="text" readonly />
@@ -90,6 +91,7 @@
                                 <div id="product-control" class="row">
                                     <div class="input-field col s12 col m8 col l8">
                                         <select id="_product" asp-items="ViewBag.Products">
+                                            <option value="-1">--</option>
                                         </select>
                                         <label>Product</label>
                                     </div>
@@ -152,6 +154,7 @@
             var productArray = new Array();
             var amountArray = new Array();
 
+            /*-------------------------------------------------------------------------------------------*/
             /* SET ON OF THE SELECTS READ-ONLY BASED ON SELECTION */
             $("#debtor-row #select_debtor").change(function () {
                 var optionSelected = $(this).find("option:selected");
@@ -179,9 +182,10 @@
                 }
             });
 
+            /*-------------------------------------------------------------------------------------------*/
             /* AUTOMATICALLY SET EXPIRATION DATE */
-            $("#icon_created").on("change", function () {
-                var value = $("#icon_created").val();
+            $("#createdon").on("change", function () {
+                var value = $("#createdon").val();
 
                 var day = value.split('-')[2];
                 var month = value.split('-')[1];
@@ -197,10 +201,11 @@
 
                 var newDate = year + "-" + num + "-" + day;
 
-                $("#icon_expired").val(newDate);
-                $("#icon_expired").text(newDate);
+                $("#expired").val(newDate);
+                $("#expired").text(newDate);
             });
 
+            /*-------------------------------------------------------------------------------------------*/
             /* SET PRODUCT VALUE */
             $("#products option:selected").each(function () {
                 $("#product").on('change', function () {
@@ -208,18 +213,20 @@
                 });
             })
 
+            /*-------------------------------------------------------------------------------------------*/
             /* SET AMOUNT VALUE */
-            $("#products input").on('change', function () {
+            $("#products #_amount").on('change', function () {
                 calcTotal();
             });
 
+            /*-------------------------------------------------------------------------------------------*/
             /* CHANGE FORM URL WHEN CLICKED ON CREATE */
             $("#create-invoice-btn").on("click", function () {
                 $("#products option:selected").each(function () {
                     productArray.push($(this).val().split('_')[0]);
                 })
 
-                $("#products input").each(function () {
+                $("#products #_amount").each(function () {
                     amountArray.push($(this).val());
                 })
 
@@ -237,6 +244,7 @@
                 $("#form").submit();
             });
 
+            /*-------------------------------------------------------------------------------------------*/
             /* ADD NEW DIV INSIDE #products*/
             $("#add-row-btn").on("click", function () {
                 @{cnt++;}
@@ -248,6 +256,7 @@
                 $("#products select").material_select();
             });
 
+            /*-------------------------------------------------------------------------------------------*/
             /* REMOVE DIV INSIDE #products*/
             $("#delete-row-btn").on("click", function () {
                 @{cnt--;}

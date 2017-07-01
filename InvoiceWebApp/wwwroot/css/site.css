@@ -779,7 +779,7 @@ input[type="checkbox"]:checked + label:before {
     box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
 
-#create-invoice {
+#create-invoice, #edit-invoice {
     padding: 40px 50px;
     margin: 0 auto 40px auto;
     min-height: 250px;
@@ -796,6 +796,21 @@ input[type="checkbox"]:checked + label:before {
     max-width: 100%;
 }
 
+/* Color of disabled input on detail and delete view*/
+#edit-invoice input[type=text]:disabled, #edit-invoice input[type=date]:disabled, #edit-invoice input:not([type]):disabled,
+#details-invoice input[type=text]:disabled, #details-invoice input[type=date]:disabled, #details-invoice input:not([type]):disabled,
+#remove-invoice input[type=text]:disabled, #remove-invoice input[type=date]:disabled, #remove-invoice input:not([type]):disabled {
+    color: rgba(0, 0, 0, 0.65) !important;
+    border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
+}
+
+/* Label color of disabled on detail and delete view*/
+#edit-invoice input[type=text]:disabled + label, #edit-invoice input[type=date]:disabled + label, #edit-invoice input:not([type]):disabled + label,
+#details-invoice input[type=text]:disabled + label, #details-invoice input[type=date]:disabled + label, #details-invoice input:not([type]):disabled + label,
+#remove-invoice input[type=text]:disabled + label, #remove-invoice input[type=date]:disabled + label, #remove-invoice input:not([type]):disabled + label {
+    color: rgba(0, 0, 0, 0.50) !important;
+}
+
 /*----- Buttons --------------*/
 #add-invoice-btn, #search-invoice-btn {
     margin-top: -5px;
@@ -808,6 +823,27 @@ input[type="checkbox"]:checked + label:before {
     padding-left: 15px;
     padding-right: 15px;
     float: right;
+}
+
+#create-invoice-btn, #edit-invoice-btn,
+#change-invoice-btn, #remove-invoice-btn {
+    margin-top: 15px;
+    margin-bottom: 15px;
+    width: 170px;
+}
+
+#create-invoice-btn > span,
+#edit-invoice-btn > span,
+#change-invoice-btn > span,
+#remove-invoice-btn > span {
+    height: 36px;
+    line-height: 40px;
+}
+
+/*----- Labels --------------*/
+#total-label {
+    position: relative;
+    left: -36%;
 }
 
 /*-----------------------------------------------------------------------------------
@@ -1072,6 +1108,11 @@ input[type="checkbox"]:checked + label:before {
     #add-invoice-btn, #search-invoice-btn {
         margin-top: 10px;
         width: 100%;
+    }
+
+    #total-label {
+        position: relative;
+        left: 9%;
     }
 
     /*------------ PRODUCTS ---------------*/

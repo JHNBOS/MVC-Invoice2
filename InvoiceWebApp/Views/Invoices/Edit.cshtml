@@ -1,172 +1,140 @@
 @model InvoiceWebApp.Models.Invoice
 
 @{
-    ViewData["Title"] = "Edit Invoice";
+    ViewData["Title"] = "Manage Invoice";
     var cnt = 0;
 }
 
-<div class="container">
-    <div class="row main">
-        <div class="panel-heading">
-            <div class="panel-title text-center">
-                <h1 class="title">Edit Invoice</h1>
-                <hr style="width:60%;border-top:2px solid #fff;" />
-            </div>
+<div class="container" id="edit-invoice">
+
+    <div class="row">
+        <div class="col s12 col m12 center-align">
+            <h4 style="margin-top: 40px;">Manage Invoice</h4>
         </div>
+    </div>
 
-        <div class="main-large-invoice main-center">
-            <form id="form" class="form-horizontal" asp-controller="Invoices" asp-action="Edit" method="post">
+    <br />
 
+    <!--Form-->
+    <div class="row" style="margin-top: 5px;">
+        <div class="col s12 col m12 col l12">
+            <form asp-controller="Invoices" asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="InvoiceNumber" />
 
                 <div class="row">
-                    <!--BEGIN COLUMN 1-->
-                    <div class="col-sm-6 col-md-6">
+                    <div class="col s12 col m12 col l5">
+                        <fieldset>
+                            <legend>Invoice Information</legend>
 
-                        <!---DEBTOR-->
-                        <div class="form-group">
-                            <label asp-for="DebtorID" class="col-md-2 control-label"></label>
-                            <div class="col-md-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-users fa-lg" aria-hidden="true"></i>
-                                    </span>
-                                    <select id="debtor_select" asp-for="DebtorID" class="form-control"
-                                            asp-items="ViewBag.DebtorID">
+                            <div class="row" id="debtor-row">
+                                <div class="input-field col s12 col m12 col l12">
+                                    <i class="material-icons prefix">perm_identity</i>
+                                    <select id="select_debtor" asp-for="DebtorID" asp-items="ViewBag.DebtorID" disabled>
                                         <option value="-1">--</option>
                                     </select>
+                                    <label for="select_debtor">Choose Debtor</label>
                                 </div>
                             </div>
-                        </div>
 
-                        <!---COMPANY-->
-                        <div class="form-group">
-                            <label asp-for="CompanyID" class="col-md-2 control-label"></label>
-                            <div class="col-md-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-users fa-lg" aria-hidden="true"></i>
-                                    </span>
-                                    <select asp-for="CompanyID" class="form-control" asp-items="ViewBag.CompanyID"                  disabled>
+                            <div class="row" id="company-row">
+                                <div class="input-field col s12 col m12 col l12">
+                                    <i class="material-icons prefix">business</i>
+                                    <select id="select_company" asp-for="CompanyID" asp-items="ViewBag.CompanyID" disabled>
                                         <option value="-1">--</option>
                                     </select>
+                                    <label for="select_company">Choose Company</label>
                                 </div>
                             </div>
-                        </div>
 
-                        <hr class="text-center" style="width:65%;border-top:1px solid rgba(57, 57, 57, 0.30) !important;" />
-
-                        <!---INVOICE DATE-->
-                        <div class="form-group">
-                            <label asp-for="CreatedOn" class="col-md-2 control-label"></label>
-                            <div class="col-md-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-calendar fa-lg" aria-hidden="true"></i>
-                                    </span>
-                                    <input asp-for="CreatedOn" class="form-control" id="creation"
-                                           placeholder="Enter invoice date" />
-                                    <span asp-validation-for="CreatedOn" class="text-danger" />
+                            <div class="row">
+                                <label for="icon_created" style="padding-left: 57px;">Invoice Date</label>
+                                <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
+                                    <i class="material-icons prefix">today</i>
+                                    <input asp-for="CreatedOn" id="icon_created createdon" disabled />
                                 </div>
                             </div>
-                        </div>
 
-                        <!---EXPIRATION DATE-->
-                        <div class="form-group">
-                            <label asp-for="ExpirationDate" class="col-md-2 control-label"></label>
-                            <div class="col-md-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-calendar fa-lg" aria-hidden="true"></i>
-                                    </span>
-                                    <input asp-for="ExpirationDate" class="form-control" id="expiration"                            placeholder="Enter expiration date" />
-                                    <span asp-validation-for="ExpirationDate" class="text-danger" />
+                            <div class="row">
+                                <label for="icon_expired" style="padding-left: 57px;">Invoice Expiration Date</label>
+                                <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
+                                    <i class="material-icons prefix">today</i>
+                                    <input asp-for="ExpirationDate" id="icon_expired expired" disabled />
                                 </div>
                             </div>
-                        </div>
 
-                        <!---TOTAL-->
-                        <div class="form-group">
-                            <label asp-for="Total" class="col-md-2 control-label"></label>
-                            <div class="col-md-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon" style="padding-right:21px;padding-left:21px;">
-                                        <i class="fa fa-eur fa-lg" aria-hidden="true"></i>
-                                    </span>
-                                    <input id="total" name="total" type="text" class="form-control" />
-                                    <span asp-validation-for="Total" class="text-danger" />
+                            <div class="row">
+                                <div class="input-field col s12 col m12 col l6">
+                                    <i class="material-icons prefix">euro_symbol</i>
+                                    <input id="total" name="total" type="text" disabled />
+                                    <label for="total">Total</label>
                                 </div>
                             </div>
-                        </div>
 
-                        <!---TYPE-->
-                        <div class="form-group">
-                            <label asp-for="Type" class="col-md-2 control-label"></label>
-                            <div class="col-md-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon">
-                                        <i class="fa fa-floppy-o fa-lg" aria-hidden="true"></i>
-                                    </span>
-                                    <select asp-for="Type" class="form-control">
+                            <div class="row" id="type-row">
+                                <div class="input-field col s12 col m12 col l12">
+                                    <i class="material-icons prefix">save</i>
+                                    <select id="select_type" asp-for="Type" disabled>
                                         <option value="Concept">Concept</option>
                                         <option value="Final">Final</option>
                                     </select>
-                                    <span asp-validation-for="Type" class="text-danger" />
+                                    <label for="select_type">Save As</label>
                                 </div>
                             </div>
-                        </div>
 
-                        <!--SUBMIT BUTTON-->
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <input id="edit_inv_btn" type="button" value="Save" class="btn btn-primary" />
-                            </div>
-                        </div>
-
-                        <br />
-                        <br />
-
-                        <div>
-                            <a asp-action="Index">Back to Overview</a>
-                        </div>
+                        </fieldset>
                     </div>
-                    <!--END COLUMN 1-->
-                    <!----------------------------------------------------------->
-                    <!--BEGIN COLUMN 2-->
-                    <div class="col-sm-6 col-md-6">
+                    <div class="col s12 col m12 col l7">
 
-                        <div id="products">
+                        <fieldset>
+                            <legend>Products</legend>
 
-                            <!--PRODUCT ROW @(cnt)-->
-                            <div id="productRow0" style="display:none;">
-                                <div class="col-sm-7 col-md-7" style="padding-right:2px;">
-                                    <select id="_product" class="form-control" asp-items="ViewBag.Products"></select>
-                                </div>
-                                <div class="col-sm-3 col-md-3" style="padding-right:2px;padding-left:2px;">
-                                    <input id="_amount" class="form-control" placeholder="Qnt" />
-                                </div>
-                                <div class="col-sm-2 col-md-2" style="padding-left:2px;">
-                                    <!--REMOVE ROW BUTTON-->
-                                    <a href="#" id="del_row_btn" class="btn">
-                                        <span class="glyphicon glyphicon-minus" style="color:orangered;"></span>
-                                    </a>
-                                </div>
+                            <div id="products">
+                                <div id="product-control" class="row">
+                                    <div class="input-field col s12 col m8 col l8">
+                                        <select id="_product" asp-items="ViewBag.Products">
+                                            <option value="-1">--</option>
+                                        </select>
+                                        <label>Product</label>
+                                    </div>
 
-                                <br />
-                                <br />
+                                    <div class="input-field col s8 col m2 col l2">
+                                        <input id="_amount" placeholder="Qnt." />
+                                    </div>
+
+                                    <div class="input-field col s4 col m2 col l2">
+                                        <a href="#" id="delete-row-btn"
+                                           class="btn red darken-1 waves-effect waves-light">
+                                            <i class="material-icons">remove</i>
+                                        </a>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <hr style="margin-bottom:0;margin-top:10px;" />
+                            <br />
 
-                        <!--ADD ROW BUTTON-->
-                        <a href="#" id="add_row_btn" class="btn" style="margin-left:15px;">
-                            <span class="glyphicon glyphicon-plus" style="color:limegreen;"></span>
-                        </a>
+                            <a href="#" id="add-row-btn" class="btn light-green waves-effect waves-light">
+                                <i class="material-icons">add</i>
+                            </a>
+                        </fieldset>
+
                     </div>
-                    <!--END COLUMN 2-->
                 </div>
+
+                <div class="row">
+                    <div id="button-area">
+                        <button id="edit-invoice-btn" type="button" value="Save"
+                                class="btn-large light-green waves-effect waves-light">
+                            <i class="material-icons left">save</i>
+                            <span>Save</span>
+                        </button>
+
+                        <br />
+
+                        <a asp-action="Index" class="light-green-text">Back to Overview</a>
+                    </div>
+                </div>
+
             </form>
         </div>
     </div>
@@ -175,11 +143,19 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-<script>
+    <script>
+        $("#products select").material_select();
+        $("#debtor-row #select_debtor").material_select();
+        $("#company-row #select_company").material_select();
+        $("#type-row #select_type").material_select();
+
         //Variables
         var firstRun = true;
 
-        $(document).ready(function () {
+        //Hide product-control row
+        $("#product-control").hide();
+
+        $(document).ready(() => {
             // Variables
             var total = t;
             var count = 0;
@@ -194,9 +170,9 @@
             }
 
             /*-------------------------------------------------------------------------------------------*/
-            // AUTOMATICALLY SET EXPIRATION DATE
-            $("#creation").on("change", function () {
-                var value = $("#creation").val();
+            /* AUTOMATICALLY SET EXPIRATION DATE */
+            $("#createdon").on("change", () => {
+                var value = $("#createdon").val();
 
                 var day = value.split('-')[2];
                 var month = value.split('-')[1];
@@ -212,40 +188,62 @@
 
                 var newDate = year + "-" + num + "-" + day;
 
-                $("#expiration").val(newDate);
-                $("#expiration").text(newDate);
+                $("#expired").val(newDate);
+                $("#expired").text(newDate);
             });
 
             /*-------------------------------------------------------------------------------------------*/
             // SET PRODUCT VALUE
-            $("#products option:selected").each(function () {
-                $("select[id*='products']").on('change', function () {
+            $("#products option:selected").each(() => {
+                $("#product").on('change', () => {
                     calcTotal();
                 });
             })
 
-            $(document).on("change", "#products option:selected", function () {
+            $(document).on("change", "#products option:selected", () => {
                 calcTotal();
             });
 
             /*-------------------------------------------------------------------------------------------*/
             // SET AMOUNT VALUE
-            $("#products input[id*='amount']").on('change', function () {
+            $("#products #_amount").on('change', () => {
                 calcTotal();
             });
 
-            $(document).on("change", "#products input[id*='amount']", function () {
+            $(document).on("change", "#products #_amount", () => {
                 calcTotal();
             });
 
             /*-------------------------------------------------------------------------------------------*/
             // CHANGE FORM URL WHEN CLICKED ON CREATE
-            $("#edit_inv_btn").on("click", function () {
+            $("#edit-invoice-btn").on("click", () => {
+                $("#products option:selected").each(function () {
+                    productArray.push($(this).val().split('_')[0]);
+                })
+
+                $("#products #_amount").each(function () {
+                    amountArray.push($(this).val());
+                })
+
+                productArray.splice(0, 1);
+                amountArray.splice(0, 1);
+
+                var totalPrice = $("#total").val();
+
+                console.log(productArray.toString());
+                console.log(amountArray.toString());
+                console.log(totalPrice.toString());
+
+                $("#form").attr("action", "Edit/?pids=" + productArray.toString() + "&amounts=" + amountArray.toString() + "&total=" + totalPrice.toString());
+
+                $("#form").submit();
+
+                /*
                 $("#products option:selected").each(function () {
                     productArray.push($(this).val().split('_')[0]);
                 });
 
-                $("#products input[id*='amount']").each(function () {
+                $("#products #_amount").each(function () {
                     amountArray.push($(this).val());
                 });
 
@@ -261,23 +259,29 @@
                 $(this).append('<input type="hidden" name="amounts" value="' + amountArray.toString() + '" /> ');
 
                 $("#form").submit();
+                */
             });
 
             /*-------------------------------------------------------------------------------------------*/
             // ADD NEW DIV INSIDE #products
-            $("#add_row_btn").on("click", () => {
+            $("#add-row-btn").on("click", function () {
                 @{cnt++;}
-                var copy = $("#productRow0").clone(true).show().appendTo("#products").find("input").val("");
+
+                $("#product-control").show();
+                var copy = $("#product-control").clone(true).appendTo("#products").prop("id", "product-row").find("input").val("");
+                $("#product-control").hide();
+
+                $("#products #product-row select").material_select();
             });
 
             /*-------------------------------------------------------------------------------------------*/
             /* REMOVE DIV INSIDE #products*/
-            $("#del_row_btn").on("click", function () {
+            $(document).on("click", "#delete-row-btn", function () {
                 @{cnt--;}
                 $(this).parent().parent().remove();
 
                 calcTotal();
-            });
+            })
 
             /*-------------------------------------------------------------------------------------------*/
             //SET PRODUCT ROWS
@@ -307,26 +311,37 @@
                     var amount = amounts[i];
 
                     var html = `
-                        <div id="productRow">
-                            <div class="col-sm-7 col-md-7" style="padding-right:2px;">
-                                <select id="products` + i + `" name="products" class="form-control" disabled></select>
+                        <div id="product-row-` + i + `" class="row">
+                            <div class="input-field col s12 col m8 col l8">
+                                <input id="_product-` + i + `" />
                             </div>
-                            <div class="col-sm-3 col-md-3" style="padding-right:2px;padding-left:2px;">
-                                <input id="amount" value="` + amount + `" name="amount" class="form-control" readonly />
+
+                            <div class="input-field col s8 col m2 col l2">
+                                <input id="_amount" placeholder="Qnt." value="` + amount + `" disabled />
                             </div>
-                            <br />
-                            <br />
-                        </div>`;
+
+                            <div class="input-field col s4 col m2 col l2">
+                                <a href="#" id="delete-row-btn"
+                                    class="btn red darken-1 waves-effect waves-light">
+                                    <i class="material-icons">remove</i>
+                                </a>
+                            </div>
+                        </div>
+                    `;
 
                     $("#products").append(html);
                 }
 
-                for (var i = 0; i < pnames.length; i++) {
+                for (var i = 0; i < amounts.length; i++) {
                     var pid = pids[i];
                     var pname = pnames[i];
 
-                    $("#products #products" + i).append("<option value='" + pid + "' selected>" + pname + "</option>");
+                    var element = "#products #product-row-" + i.toString() + " #_product-" + i.toString();
 
+                    $(element).prop("value", pname);
+                    $(element).prop("disabled", true);
+
+                    //Reset variables
                     pid = "";
                     pname = "";
                 }
@@ -338,32 +353,42 @@
             // FUNCTION TO CALCULATE TOTAL AND SHOW IN TOTAL BOX
             function calcTotal() {
 
-                $("#total").val("");
                 var amounts = new Array();
                 var pids = new Array();
                 var totalPrice = Number.parseFloat("0");
 
                 $("#products option:selected").each(function () {
-                    pids.push($(this).val().split('_')[1]);
-                });
+                    var id = $(this).val();
+                    console.log("product: " + id);
+                    pids.push($(this).val());
+                })
 
-                $("#products input[id*='amount']").each(function () {
+                $("#products #_amount").each(function () {
+                    var amount = $(this).val();
+                    console.log("amount: " + amount);
                     amounts.push($(this).val());
-                });
+                })
 
                 pids.splice(0, 1);
                 amounts.splice(0, 1);
 
                 for (var i = 0; i < pids.length; i++) {
-                    var price = Number.parseFloat(pids[i]).toFixed(2);
+                    var id = pids[i].split('_')[0];
+                    var p = pids[i].split('_')[1];
+                    var price = Number.parseFloat(p).toFixed(2);
                     var amount = Number.parseInt(amounts[i]);
 
                     totalPrice += (price * amount);
                 }
 
+                $("#total").prop("readonly", false);
                 $("#total").val(totalPrice.toLocaleString("nl-NL", { minimumFractionDigits: 2 }));
                 total = totalPrice.toLocaleString("nl-NL", { minimumFractionDigits: 2 });
+                $("#total").prop("readonly", true);
+
+                console.log('calculated: ' + total);
             }
+
         });
-</script>
+    </script>
 }
