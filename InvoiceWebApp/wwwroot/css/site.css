@@ -210,7 +210,7 @@ h4 {
     Table CSS
 -----------------------------------------------------------------------------------*/
 .responsive-table {
-    width: 80%;
+    width: 90%;
     margin: 0 auto;
 }
 
@@ -253,8 +253,8 @@ legend {
 /*-----------------------------------------------------------------------------------
     Input CSS
 -----------------------------------------------------------------------------------*/
-input, select, textarea {
-    max-width: 75%;
+input, select, textarea, input[type=date]:not(.browser-default) {
+    max-width: 100%;
 }
 
 ::-webkit-input-placeholder {
@@ -306,13 +306,16 @@ input[type="checkbox"]:checked + label:before {
     border-bottom: 5px solid #7cb342;
 }
 
+.select-dropdown {
+    max-width: 100%;
+}
+
 /*-----------------------------------------------------------------------------------
     Chart CSS
 -----------------------------------------------------------------------------------*/
 .amcharts-chart-div > a {
     display: none !important;
 }
-
 
 /*-----------------------------------------------------------------------------------
     Page: Login and Forgot
@@ -389,7 +392,7 @@ input[type="checkbox"]:checked + label:before {
 -----------------------------------------------------------------------------------*/
 #home {
     padding: 40px 40px;
-    margin: 0 auto;
+    margin: 0 auto 40px auto;
     min-height: 250px;
     width: 100%;
     background-color: #f1f1f1;
@@ -421,7 +424,7 @@ input[type="checkbox"]:checked + label:before {
 -----------------------------------------------------------------------------------*/
 #contact {
     padding: 40px 40px;
-    margin: 0 auto;
+    margin: 0 auto 40px auto;
     min-height: 250px;
     width: 100%;
     background-color: #f1f1f1;
@@ -447,7 +450,7 @@ input[type="checkbox"]:checked + label:before {
 #create-debtor, #edit-debtor,
 #details-debtor, #remove-debtor {
     padding: 40px 40px;
-    margin: 0 auto;
+    margin: 0 auto 40px auto;
     min-height: 250px;
     width: 100%;
     background-color: #f1f1f1;
@@ -507,7 +510,7 @@ input[type="checkbox"]:checked + label:before {
 #create-product, #edit-product,
 #details-product, #remove-product {
     padding: 40px 40px;
-    margin: 0 auto;
+    margin: 0 auto 40px auto;
     min-height: 250px;
     width: 100%;
     background-color: #f1f1f1;
@@ -579,7 +582,7 @@ input[type="checkbox"]:checked + label:before {
 #create-company, #edit-company,
 #details-company, #remove-company {
     padding: 40px 40px;
-    margin: 0 auto;
+    margin: 0 auto 40px auto;
     min-height: 250px;
     width: 100%;
     background-color: #f1f1f1;
@@ -636,7 +639,7 @@ input[type="checkbox"]:checked + label:before {
 #create-user, #edit-user,
 #details-user, #remove-user {
     padding: 40px 40px;
-    margin: 0 auto;
+    margin: 0 auto 40px auto;
     min-height: 250px;
     width: 100%;
     background-color: #f1f1f1;
@@ -707,7 +710,7 @@ input[type="checkbox"]:checked + label:before {
 #details-admin, #remove-admin,
 #settings-admin {
     padding: 40px 40px;
-    margin: 0 auto;
+    margin: 0 auto 40px auto;
     min-height: 250px;
     width: 100%;
     background-color: #f1f1f1;
@@ -776,6 +779,23 @@ input[type="checkbox"]:checked + label:before {
     box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
 }
 
+#create-invoice {
+    padding: 40px 50px;
+    margin: 0 auto 40px auto;
+    min-height: 250px;
+    width: 100%;
+    background-color: #f1f1f1;
+    border: 1px solid #d0d0d0;
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+}
+
+/*----- Input --------------*/
+#_amount{
+    max-width: 100%;
+}
+
 /*----- Buttons --------------*/
 #add-invoice-btn, #search-invoice-btn {
     margin-top: -5px;
@@ -783,12 +803,19 @@ input[type="checkbox"]:checked + label:before {
     vertical-align: middle;
 }
 
+#delete-row-btn {
+    margin-top: 10px;
+    padding-left: 15px;
+    padding-right: 15px;
+    float: right;
+}
+
 /*-----------------------------------------------------------------------------------
     Pages: My Invoice
 -----------------------------------------------------------------------------------*/
 #myinvoice-index {
     padding: 40px 40px;
-    margin: 0 auto;
+    margin: 0 auto 40px auto;
     min-height: 250px;
     width: 100%;
     background-color: #f1f1f1;
@@ -810,10 +837,14 @@ input[type="checkbox"]:checked + label:before {
 -----------------------------------------------------------------------------------*/
 @media screen and (max-width: 640px) {
     .row .col.s12 {
-        padding: 0;
+        padding: 0 10px;
     }
 
-    input, select, textarea {
+    input, select, textarea, input[type=date]:not(.browser-default) {
+        max-width: 80%;
+    }
+
+    .select-wrapper {
         max-width: 80%;
     }
 }
@@ -849,7 +880,11 @@ input[type="checkbox"]:checked + label:before {
         padding: 10px 10px;
     }
 
-    input, select, textarea {
+    input, select, textarea, input[type=date]:not(.browser-default) {
+        max-width: 75%;
+    }
+
+    .select-wrapper {
         max-width: 75%;
     }
 
