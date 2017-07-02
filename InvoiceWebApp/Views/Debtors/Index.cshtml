@@ -73,7 +73,10 @@
                     @foreach (var item in Model) {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.IdNumber)
+                                <a class="tooltipped" asp-action="Details" asp-route-id="@item.DebtorID"
+                                   data-position="top" data-delay="50" data-tooltip="View Details">
+                                    @Html.DisplayFor(modelItem => item.IdNumber)
+                                </a>
                             </td>
                             <td>
                                 <a class="tooltipped" asp-action="Details" asp-route-id="@item.DebtorID"

@@ -49,7 +49,7 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.DisplayNameFor(model => model.RegNumber)
+                            @Html.Raw("Company ID")                        
                         </th>
                         <th>
                             @Html.ActionLink("Company Name", "Index", new { sortOrder = ViewBag.CompanyNameSortParm })
@@ -70,7 +70,10 @@
                     @foreach (var item in Model) {
                         <tr>
                             <td>
-                                @Html.DisplayFor(modelItem => item.RegNumber)
+                                <a class="tooltipped" asp-action="Details" asp-route-id="@item.CompanyID"
+                                   data-position="top" data-delay="50" data-tooltip="View Details">
+                                    @Html.DisplayFor(modelItem => item.RegNumber)
+                                </a>
                             </td>
                             <td>
                                 <a class="tooltipped" asp-action="Details" asp-route-id="@item.CompanyID"

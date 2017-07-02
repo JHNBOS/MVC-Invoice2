@@ -412,6 +412,7 @@ namespace InvoiceWebApp.Controllers {
                 _settings.RegNumber = AppSettings.RegNumber;
                 _settings.FinancialNumber = AppSettings.FinancialNumber;
                 _settings.EUFinancialNumber = AppSettings.EUFinancialNumber;
+                _settings.BankAccountNumber = AppSettings.BankAccountNumber;
                 _settings.BankName = AppSettings.BankName;
                 _settings.Prefix = AppSettings.Prefix;
 

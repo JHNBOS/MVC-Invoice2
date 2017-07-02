@@ -36,7 +36,7 @@ namespace InvoiceWebApp.Models {
         public string Country { get; set; }
 
         [Required]
-        [Display(Name = "Registration Number")]
+        [Display(Name = "Company ID")]
         public string RegNumber { get; set; }
 
         [Required]

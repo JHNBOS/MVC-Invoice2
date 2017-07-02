@@ -1,7 +1,20 @@
 @model IEnumerable<InvoiceWebApp.Models.Invoice>
+@inject ApplicationDbContext _context
+@using System.Diagnostics
+@using InvoiceWebApp.Data
+@using InvoiceWebApp.Models
 
 @{
     ViewData["Title"] = "Invoices";
+
+    AppSettings settings = null;
+    if (SessionHelper.IsExists(Context.Session, "Settings")) {
+        settings = SessionHelper.Get<AppSettings>(Context.Session, "Settings");
+    }
+    if (!SessionHelper.IsExists(Context.Session, "Settings")) {
+        settings = _context.Settings.FirstOrDefault();
+        SessionHelper.Set(Context.Session, "Settings", settings);
+    }
 }
 
 <div class="container" id="invoice-index">
@@ -58,9 +71,6 @@
                             @Html.DisplayNameFor(model => model.CreatedOn)
                         </th>
                         <th>
-                            @Html.DisplayNameFor(model => model.ExpirationDate)
-                        </th>
-                        <th>
                             @Html.Raw("Status")
                         </th>
                         <th>
@@ -81,7 +91,7 @@
                             <td>
                                 <a class="tooltipped" asp-action="Details" asp-route-id="@item.InvoiceNumber"
                                    data-position="top" data-delay="50" data-tooltip="View Details">
-                                    @Html.DisplayFor(modelItem => item.InvoiceNumber)
+                                    @Html.Raw(settings.Prefix + "-")@Html.DisplayFor(modelItem => item.InvoiceNumber)
                                 </a>
                             </td>
                             <td>
@@ -95,9 +105,6 @@
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.CreatedOn)
-                            </td>
-                            <td>
-                                @Html.DisplayFor(modelItem => item.ExpirationDate)
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.Type)
@@ -119,6 +126,11 @@
                                 }
                             </td>
                             <td>
+                                <a class="tooltipped" asp-action="Download" asp-route-id="@item.InvoiceNumber"
+                                   data-position="top" data-delay="50" data-tooltip="Download PDF"
+                                   style="padding-right: 2px;">
+                                    <i class="material-icons light-green-text">file_download</i>
+                                </a>
                                 <a class="tooltipped" asp-action="Edit" asp-route-id="@item.InvoiceNumber"
                                    data-position="top" data-delay="50" data-tooltip="Edit Invoice"
                                    style="padding-right: 2px;">

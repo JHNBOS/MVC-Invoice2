@@ -609,6 +609,13 @@ namespace InvoiceWebApp.Controllers {
 
         //---------------------------------
 
+        //GET => Invoices/Download/5
+        public IActionResult Download(int id) {
+            PDF pdf = new PDF(_context);
+            return pdf.CreatePDF(id);
+        }
+
+        //---------------------------------
         private bool InvoiceExists(int id) {
             return _context.Invoices.Any(e => e.InvoiceNumber == id);
         }
