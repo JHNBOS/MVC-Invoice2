@@ -68,15 +68,18 @@
                         <a asp-action="Index" class="light-green-text">Back to Overview</a>
                     </div>
                 </div>
+
             </form>
         </div>
     </div>
+
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
+        //Add parameters to form
         $("#create-product-btn").on("click", function () {
             var price = $("#price").val();
             $("#form").attr("asp-route-price", price);

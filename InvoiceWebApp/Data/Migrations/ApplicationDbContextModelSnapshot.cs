@@ -460,11 +460,11 @@ namespace InvoiceWebApp.Data.Migrations
             modelBuilder.Entity("InvoiceWebApp.Models.Invoice", b =>
                 {
                     b.HasOne("InvoiceWebApp.Models.Company", "Company")
-                        .WithMany()
+                        .WithMany("Invoices")
                         .HasForeignKey("CompanyID");
 
                     b.HasOne("InvoiceWebApp.Models.Debtor", "Debtor")
-                        .WithMany()
+                        .WithMany("Invoices")
                         .HasForeignKey("DebtorID");
                 });
 

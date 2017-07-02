@@ -28,9 +28,8 @@
                             <div class="row" id="debtor-row">
                                 <div class="input-field col s12 col m12 col l12">
                                     <i class="material-icons prefix">perm_identity</i>
-                                    <select id="select_debtor" asp-for="DebtorID" asp-items="ViewBag.DebtorID">
-                                        <option value="-1">--</option>
-                                    </select>
+                                    @Html.DropDownListFor(m => m.DebtorID, (SelectList)ViewBag.DebtorID, 
+                                                "Select Debtor", new { @id = "select_debtor" })
                                     <label for="select_debtor">Choose Debtor</label>
                                 </div>
                             </div>
@@ -38,9 +37,8 @@
                             <div class="row" id="company-row">
                                 <div class="input-field col s12 col m12 col l12">
                                     <i class="material-icons prefix">business</i>
-                                    <select id="select_company" asp-for="CompanyID" asp-items="ViewBag.CompanyID">
-                                        <option value="-1">--</option>
-                                    </select>
+                                    @Html.DropDownListFor(m => m.CompanyID, (SelectList)ViewBag.CompanyID, 
+                                                "Select Company", new { @id = "select_company" })
                                     <label for="select_company">Choose Company</label>
                                 </div>
                             </div>
@@ -49,7 +47,7 @@
                                 <label for="icon_created" style="padding-left: 57px;">Invoice Date</label>
                                 <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
                                     <i class="material-icons prefix">today</i>
-                                    <input asp-for="CreatedOn" id="icon_created createdon" />
+                                    <input asp-for="CreatedOn" id="icon_created" />
                                 </div>
                             </div>
 
@@ -57,7 +55,7 @@
                                 <label for="icon_expired" style="padding-left: 57px;">Invoice Expiration Date</label>
                                 <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
                                     <i class="material-icons prefix">today</i>
-                                    <input asp-for="ExpirationDate" id="icon_expired expired" />
+                                    <input asp-for="ExpirationDate" id="icon_expired" />
                                 </div>
                             </div>
 
@@ -79,11 +77,9 @@
                                     <label for="select_type">Save As</label>
                                 </div>
                             </div>
-
                         </fieldset>
                     </div>
                     <div class="col s12 col m12 col l7">
-
                         <fieldset>
                             <legend>Products</legend>
 
@@ -115,7 +111,6 @@
                                 <i class="material-icons">add</i>
                             </a>
                         </fieldset>
-                       
                     </div>
                 </div>
 
@@ -136,161 +131,148 @@
             </form>
         </div>
     </div>
+
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
+        //Variables
+        var total = "";
+        var count = 0;
+        var productArray = new Array();
+        var amountArray = new Array();
+
+        //Run when page has loaded
         $(document).ready(function () {
             $("#products select").material_select();
             $("#debtor-row #select_debtor").material_select();
             $("#company-row #select_company").material_select();
             $("#type-row #select_type").material_select();
-
-            /* VARIABLES */
-            var total = "";
-            var count = 0;
-            var productArray = new Array();
-            var amountArray = new Array();
-
-            /*-------------------------------------------------------------------------------------------*/
-            /* SET ON OF THE SELECTS READ-ONLY BASED ON SELECTION */
-            $("#debtor-row #select_debtor").change(function () {
-                var optionSelected = $(this).find("option:selected");
-                var valueSelected = optionSelected.val();
-                var textSelected = optionSelected.text();
-
-                if (textSelected != "--") {
-                    $("#company-row > div > div > input").prop("disabled", true);
-                }
-                if (textSelected == "--") {
-                    $("#company-row > div > div > input").prop("disabled", false);
-                }
-            });
-
-            $("#company-row #select_company").change(function () {
-                var optionSelected = $(this).find("option:selected");
-                var valueSelected = optionSelected.val();
-                var textSelected = optionSelected.text();
-
-                if (textSelected != "--") {
-                    $("#debtor-row > div > div > input").prop("disabled", true);
-                }
-                if (textSelected == "--") {
-                    $("#debtor-row > div > div > input").prop("disabled", false);
-                }
-            });
-
-            /*-------------------------------------------------------------------------------------------*/
-            /* AUTOMATICALLY SET EXPIRATION DATE */
-            $("#createdon").on("change", function () {
-                var value = $("#createdon").val();
-
-                var day = value.split('-')[2];
-                var month = value.split('-')[1];
-                var year = value.split('-')[0];
-
-                var num = Number.parseInt(month) + 1;
-
-                if (num < 10) {
-                    num = "0" + num.toString();
-                } else {
-                    num = num.toString();
-                }
-
-                var newDate = year + "-" + num + "-" + day;
-
-                $("#expired").val(newDate);
-                $("#expired").text(newDate);
-            });
-
-            /*-------------------------------------------------------------------------------------------*/
-            /* SET PRODUCT VALUE */
-            $("#products option:selected").each(function () {
-                $("#product").on('change', function () {
-                    calcTotal();
-                });
-            })
-
-            /*-------------------------------------------------------------------------------------------*/
-            /* SET AMOUNT VALUE */
-            $("#products #_amount").on('change', function () {
-                calcTotal();
-            });
-
-            /*-------------------------------------------------------------------------------------------*/
-            /* CHANGE FORM URL WHEN CLICKED ON CREATE */
-            $("#create-invoice-btn").on("click", function () {
-                $("#products option:selected").each(function () {
-                    productArray.push($(this).val().split('_')[0]);
-                })
-
-                $("#products #_amount").each(function () {
-                    amountArray.push($(this).val());
-                })
-
-                productArray.splice(0, 1);
-                amountArray.splice(0, 1);
-
-                var totalPrice = $("#total").val();
-
-                console.log(productArray.toString());
-                console.log(amountArray.toString());
-                console.log(totalPrice.toString());
-
-                $("#form").attr("action", "Create/?pids=" + productArray.toString() + "&amounts=" + amountArray.toString() + "&total=" + totalPrice.toString());
-
-                $("#form").submit();
-            });
-
-            /*-------------------------------------------------------------------------------------------*/
-            /* ADD NEW DIV INSIDE #products*/
-            $("#add-row-btn").on("click", function () {
-                @{cnt++;}
-
-                $("#product-control").show();
-                var copy = $("#product-control").clone(true).appendTo("#products").prop("id", "product-row").find("input").val("");
-                $("#product-control").hide();
-
-                $("#products select").material_select();
-            });
-
-            /*-------------------------------------------------------------------------------------------*/
-            /* REMOVE DIV INSIDE #products*/
-            $("#delete-row-btn").on("click", function () {
-                @{cnt--;}
-                $(this).parent().parent().remove();
-
-                calcTotal();
-                $("#products select").material_select();
-            });
-
         });
 
-        /*-------------------------------------------------------------------------------------------*/
+        //-------------------------------------------------------------------------------------------
+        //Disable the other dropdownlist when on has an selected item
+        $("#debtor-row #select_debtor").change(function () {
+            var optionSelected = $(this).find("option:selected");
+            var valueSelected = optionSelected.val();
+            var textSelected = optionSelected.text();
 
-        /* FUNCTION TO CALCULATE TOTAL AND SHOW IN TOTAL BOX */
+            if (textSelected != "--") {
+                $("#company-row > div > div > input").prop("disabled", true);
+            }
+            if (textSelected == "--") {
+                $("#company-row > div > div > input").prop("disabled", false);
+            }
+        });
+
+        $("#company-row #select_company").change(function () {
+            var optionSelected = $(this).find("option:selected");
+            var valueSelected = optionSelected.val();
+            var textSelected = optionSelected.text();
+
+            if (textSelected != "--") {
+                $("#debtor-row > div > div > input").prop("disabled", true);
+            }
+            if (textSelected == "--") {
+                $("#debtor-row > div > div > input").prop("disabled", false);
+            }
+        });
+
+        //-------------------------------------------------------------------------------------------
+        // Automatically set expiration date based on selected invoice date
+        $("#icon_created").on("change", () => {
+            var selectedDate = new Date($("#icon_created").val());
+
+            selectedDate.setDate(selectedDate.getDate() + 30);
+            selectedDate.setMonth(selectedDate.getMonth() + 1);
+
+            var day = selectedDate.getDate();
+            var month = selectedDate.getMonth();
+            var year = selectedDate.getFullYear();
+
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+
+            var today = year + "-" + month + "-" + day;
+
+            $("#icon_expired").val(today);
+        });
+
+        //-------------------------------------------------------------------------------------------
+        //Calculate the total amount when adding a new product
+        $("#products option:selected").each(function () {
+            $("#product").on('change', function () {
+                calcTotal();
+            });
+        })
+
+        //-------------------------------------------------------------------------------------------
+        //Calculate the total amount when changing the amount of product(s)
+        $("#products #_amount").on('change', function () {
+            calcTotal();
+        });
+
+        //-------------------------------------------------------------------------------------------
+        //Add parameters to form and submit
+        $("#create-invoice-btn").on("click", function () {
+            $("#products option:selected").each(function () {
+                productArray.push($(this).val().split('_')[0]);
+            })
+
+            $("#products #_amount").each(function () {
+                amountArray.push($(this).val());
+            })
+
+            var totalPrice = $("#total").val();
+            var companyID = $().val();
+
+            $("#form").attr("action", "Create/?pids=" + productArray.toString() + "&amounts=" + amountArray.toString() + "&total=" + totalPrice.toString());
+            $("#form").submit();
+        });
+
+        //-------------------------------------------------------------------------------------------
+        //Add a new product row
+        $("#add-row-btn").on("click", function () {
+            @{cnt++;}
+
+            $("#product-control").show();
+            var copy = $("#product-control")
+                .clone(true)
+                .appendTo("#products")
+                .prop("id", "product-row")
+                .find("input").val("");
+
+            $("#product-control").hide();
+            $("#products select").material_select();
+        });
+
+        //-------------------------------------------------------------------------------------------
+        //Remove a product row
+        $("#delete-row-btn").on("click", function () {
+            @{cnt--;}
+            $(this).parent().parent().remove();
+
+            calcTotal();
+        });
+
+        //-------------------------------------------------------------------------------------------
+        //Calculate total amount based on selected products and their quantities
         function calcTotal() {
-
             var amounts = new Array();
             var pids = new Array();
             var totalPrice = Number.parseFloat("0");
 
             $("#products option:selected").each(function () {
                 var id = $(this).val();
-                console.log("product: "+ id);
                 pids.push($(this).val());
             })
 
             $("#products #_amount").each(function () {
                 var amount = $(this).val();
-                console.log("amount: " + amount);
                 amounts.push($(this).val());
             })
-
-            //pids.splice(0, 1);
-            //amounts.splice(0, 1);
 
             for (var i = 0; i < pids.length; i++) {
                 var id = pids[i].split('_')[0];
@@ -303,10 +285,9 @@
 
             $("#total").prop("readonly", false);
             $("#total").val(totalPrice.toLocaleString("nl-NL", { minimumFractionDigits: 2 }));
+
             total = totalPrice.toLocaleString("nl-NL", { minimumFractionDigits: 2 });
             $("#total").prop("readonly", true);
-
-            console.log('calculated: ' + total);
         }
     </script>
 }

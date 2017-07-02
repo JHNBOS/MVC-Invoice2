@@ -83,38 +83,20 @@
                         </fieldset>
                     </div>
                     <div class="col s12 col m12 col l7">
-
                         <fieldset>
                             <legend>Products</legend>
 
-                            <div id="products">
-                                <div id="product-control" class="row">
-                                    <div class="input-field col s12 col m8 col l8">
-                                        <select id="_product" asp-items="ViewBag.Products">
-                                            <option value="-1">--</option>
-                                        </select>
-                                        <label>Product</label>
-                                    </div>
-
-                                    <div class="input-field col s12 col m4 col l4">
-                                        <input id="_amount" placeholder="Qnt." />
-                                    </div>
-                                </div>
-                            </div>
-
+                            <div id="products"></div>
                         </fieldset>
-
                     </div>
                 </div>
 
                 <div class="row">
                     <div id="button-area">
-                        <button id="change-invoice-btn" type="submit" value="Edit"
-                                asp-controller="Invoices" asp-action="Edit"
-                                asp-route-id="@Model.InvoiceNumber"
+                        <button id="change-invoice-btn" type="submit" value="Remove"
                                 class="btn-large light-green waves-effect waves-light">
-                            <i class="material-icons left">edit</i>
-                            <span>Edit</span>
+                            <i class="material-icons left">delete</i>
+                            <span>Remove</span>
                         </button>
 
                         <br />
@@ -126,87 +108,84 @@
             </form>
         </div>
     </div>
+
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
+        //Variables
         var firstRun = true;
 
+        //Run when page has loaded
         $(document).ready(function () {
             $("#products select").material_select();
             $("#debtor-row #select_debtor").material_select();
             $("#company-row #select_company").material_select();
             $("#type-row #select_type").material_select();
 
-            //Total
-            var t = "@(ViewBag.Total)";
-            $("#total").val(t);
+            //Set value of the total amount in the input box
+            var totalAmount = "@(ViewBag.Total)";
+            $("#total").val(totalAmount);
 
+            //Set product rows is this is the first run
             if (firstRun == true) {
                 setRows();
             }
-    });
+        });
 
-/*-------------------------------------------------------------------------------------------*/
+        //-------------------------------------------------------------------------------------------
+        //Create new product rows based on the products selected when creating this invoice
+        function setRows() {
+            var pids = new Array();
+            var amounts = new Array();
+            var pnames = new Array();
 
-    /* SET PRODUCT ROWS */
-    function setRows() {
-        var pids = new Array();
-        var amounts = new Array();
-        var pnames = new Array();
-
-        @foreach (var pid in ViewBag.PIDs)
-        {
-            @:pids.push('@(pid)');
-        }
-        @foreach (var amount in ViewBag.Amounts)
-        {
-            @:amounts.push('@(amount)');
-        }
+            @foreach (var pid in ViewBag.PIDs)
+            {
+                @:pids.push('@(pid)');
+            }
+            @foreach (var amount in ViewBag.Amounts)
+            {
+                @:amounts.push('@(amount)');
+            }
             @foreach (var name in ViewBag.Names)
-        {
-            @:pnames.push('@(name)');
-        }
+            {
+                @:pnames.push('@(name)');
+            }
 
-        console.log("PIDs: " + pids);
-        console.log("Amounts: " + amounts);
-        console.log("PNames: " + pnames);
+            for (var i = 0; i < amounts.length; i++) {
+                var amount = amounts[i];
 
-        for (var i = 0; i < amounts.length; i++) {
-            var amount = amounts[i];
+                var html = `
+                    <div id="product-row-` + i + `" class="row">
+                        <div class="input-field col s12 col m8 col l8">
+                            <input id="_product-` + i + `" disabled/>
+                        </div>
 
-            var html = `
-                <div id="product-row-` + i + `" class="row">
-                    <div class="input-field col s12 col m8 col l8">
-                        <input id="_product-` + i + `" disabled/>
+                        <div class="input-field col s8 col m2 col l2">
+                            <input id="_amount" placeholder="Qnt." value="` + amount + `" disabled />
+                        </div>
                     </div>
+                `;
 
-                    <div class="input-field col s8 col m2 col l2">
-                        <input id="_amount" placeholder="Qnt." value="` + amount + `" disabled />
-                    </div>
-                </div>
-            `;
+                $("#products").append(html);
+            }
 
-            $("#products").append(html);
+            for (var i = 0; i < amounts.length; i++) {
+                var pid = pids[i];
+                var pname = pnames[i];
+
+                var element = "#products #product-row-" + i.toString() + " #_product-" + i.toString();
+
+                $(element).prop("value", pname);
+                $(element).prop("disabled", true);
+
+                //Reset variables
+                pid = "";
+                pname = "";
+            }
         }
-
-        for (var i = 0; i < amounts.length; i++) {
-            var pid = pids[i];
-            var pname = pnames[i];
-
-            var element = "#products #product-row-" + i.toString() + " #_product-" + i.toString();
-
-            $(element).prop("value", pname);
-            $(element).prop("disabled", true);
-
-            //Reset variables
-            pid = "";
-            pname = "";
-        }
-
-    }
-/*-------------------------------------------------------------------------------------------*/
     </script>
 }

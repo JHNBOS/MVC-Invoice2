@@ -26,9 +26,12 @@ namespace InvoiceWebApp.Controllers {
 
         //Get all invoices
         private async Task<List<Invoice>> GetInvoices() {
-            List<Invoice> invoiceList = await _context.Invoices.Include(s => s.Debtor)
+            List<Invoice> invoiceList = await _context.Invoices
+                                .Include(s => s.Debtor)
+                                .Include(s => s.Company)
                                 .Include(s => s.InvoiceItems)
-                                .ThenInclude(s => s.Product).ToListAsync();
+                                    .ThenInclude(s => s.Product)
+                                .ToListAsync();
             return invoiceList;
         }
 
@@ -36,9 +39,11 @@ namespace InvoiceWebApp.Controllers {
             Invoice invoice = null;
 
             try {
-                invoice = await _context.Invoices.Include(s => s.Debtor)
+                invoice = await _context.Invoices
+                                    .Include(s => s.Debtor)
+                                    .Include(s => s.Company)
                                     .Include(s => s.InvoiceItems)
-                                    .ThenInclude(s => s.Product)
+                                        .ThenInclude(s => s.Product)
                                     .SingleOrDefaultAsync(s => s.InvoiceNumber == id);
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
@@ -63,8 +68,19 @@ namespace InvoiceWebApp.Controllers {
 
         //Create new invoice
         private async Task CreateInvoice(Invoice invoice, string pids, string amounts, string total) {
-            Debug.WriteLine("CreateInvoice method has been reached!");
+            Debug.WriteLine("DebtorID before: " + invoice.DebtorID);
+            Debug.WriteLine("CompanyID before: " + invoice.CompanyID);
 
+            //Check if one of these is null or empty
+            if (invoice.DebtorID == -1 || invoice.DebtorID == null 
+                || String.IsNullOrEmpty(invoice.DebtorID.ToString())) {
+                invoice.DebtorID = null;
+            } else if (invoice.CompanyID == -1 || invoice.CompanyID == null 
+                || String.IsNullOrEmpty(invoice.CompanyID.ToString())) {
+                invoice.CompanyID = null;
+            }
+
+            //Variables
             string[] pidArray = null;
             string[] amountArray = null;
             List<InvoiceItem> items = new List<InvoiceItem>();
@@ -73,9 +89,11 @@ namespace InvoiceWebApp.Controllers {
                 invoice.Total = decimal.Parse(total);
                 invoice.Paid = false;
 
+                //Save invoice to database
                 _context.Invoices.Add(invoice);
                 await _context.SaveChangesAsync();
 
+                //Check is products were added
                 if (pids.Contains(',')) {
                     pidArray = pids.Split(',');
                 }
@@ -108,6 +126,7 @@ namespace InvoiceWebApp.Controllers {
                 }
 
                 await _context.SaveChangesAsync();
+
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
@@ -132,11 +151,11 @@ namespace InvoiceWebApp.Controllers {
                 if (isEmpty == false) {
                     Invoice invoiceBeforeUpdate = _context.Invoices
                                                 .Include(s => s.Debtor)
+                                                .Include(s => s.Company)
                                                 .Include(s => s.InvoiceItems)
                                                 .Single(s => s.InvoiceNumber == invoice.InvoiceNumber);
 
                     invoiceBeforeUpdate.InvoiceNumber = invoice.InvoiceNumber;
-                    invoiceBeforeUpdate.DebtorID = invoice.DebtorID;
                     invoiceBeforeUpdate.CreatedOn = invoice.CreatedOn;
                     invoiceBeforeUpdate.ExpirationDate = invoice.ExpirationDate;
                     invoiceBeforeUpdate.Type = invoice.Type;
@@ -337,10 +356,11 @@ namespace InvoiceWebApp.Controllers {
         public async Task<IActionResult> Create(
             [Bind("InvoiceNumber,CreatedOn,DebtorID,CompanyID,Paid,ExpirationDate,Type")] Invoice invoice,
             string total, string pids, string amounts) {
+
             if (ModelState.IsValid) {
                 if (invoice.DebtorID is int) {
                     invoice.CompanyID = null;
-                } else {
+                } else if (invoice.CompanyID is int) {
                     invoice.DebtorID = null;
                 }
 
@@ -352,7 +372,7 @@ namespace InvoiceWebApp.Controllers {
                         Debtor debtor = _context.Debtors.Single(s => s.DebtorID == invoice.DebtorID);
                         AuthMessageSender email = new AuthMessageSender(_settings);
                         await email.SendInvoiceEmailAsync(debtor.Email);
-                    } else {
+                    } else if (invoice.CompanyID is int) {
                         Company company = _context.Company.Single(s => s.CompanyID == invoice.CompanyID);
                         AuthMessageSender email = new AuthMessageSender(_settings);
                         await email.SendInvoiceEmailAsync(company.Email);
@@ -454,12 +474,12 @@ namespace InvoiceWebApp.Controllers {
                 await UpdateInvoice(invoice, pids, amounts, total);
 
                 //SEND MAIL TO DEBTOR NOTIFYING ABOUT INVOICE
-                if (invoice.Type == "Final" && invoiceBeforeUpdate.Type != "Final" && !String.IsNullOrEmpty(invoice.CompanyID.ToString())) {
+                if (invoice.Type == "Final" && invoiceBeforeUpdate.Type != "Final" && !String.IsNullOrEmpty(invoice.DebtorID.ToString())) {
                     Debtor debtor = _context.Debtors.Single(s => s.DebtorID == invoice.DebtorID);
                     AuthMessageSender email = new AuthMessageSender(_settings);
                     await email.SendInvoiceEmailAsync(debtor.Email);
 
-                } else if (invoice.Type == "Final" && invoiceBeforeUpdate.Type != "Final" && String.IsNullOrEmpty(invoice.DebtorID.ToString())) {
+                } else if (invoice.Type == "Final" && invoiceBeforeUpdate.Type != "Final" && String.IsNullOrEmpty(invoice.CompanyID.ToString())) {
                     Company company = _context.Company.Single(s => s.CompanyID == invoice.CompanyID);
                     AuthMessageSender email = new AuthMessageSender(_settings);
                     await email.SendInvoiceEmailAsync(company.Email);

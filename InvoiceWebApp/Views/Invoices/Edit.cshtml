@@ -30,9 +30,8 @@
                             <div class="row" id="debtor-row">
                                 <div class="input-field col s12 col m12 col l12">
                                     <i class="material-icons prefix">perm_identity</i>
-                                    <select id="select_debtor" asp-for="DebtorID" asp-items="ViewBag.DebtorID" disabled>
-                                        <option value="-1">--</option>
-                                    </select>
+                                    @Html.DropDownListFor(m => m.DebtorID, (SelectList)ViewBag.DebtorID,
+                                                "Select Debtor", new { @id = "select_debtor", @disabled = "disabled" })
                                     <label for="select_debtor">Choose Debtor</label>
                                 </div>
                             </div>
@@ -40,9 +39,8 @@
                             <div class="row" id="company-row">
                                 <div class="input-field col s12 col m12 col l12">
                                     <i class="material-icons prefix">business</i>
-                                    <select id="select_company" asp-for="CompanyID" asp-items="ViewBag.CompanyID" disabled>
-                                        <option value="-1">--</option>
-                                    </select>
+                                    @Html.DropDownListFor(m => m.CompanyID, (SelectList)ViewBag.CompanyID,
+                                                "Select Company", new { @id = "select_company", @disabled = "disabled" })
                                     <label for="select_company">Choose Company</label>
                                 </div>
                             </div>
@@ -51,7 +49,7 @@
                                 <label for="icon_created" style="padding-left: 57px;">Invoice Date</label>
                                 <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
                                     <i class="material-icons prefix">today</i>
-                                    <input asp-for="CreatedOn" id="icon_created createdon" />
+                                    <input asp-for="CreatedOn" id="icon_created" />
                                 </div>
                             </div>
 
@@ -59,7 +57,7 @@
                                 <label for="icon_expired" style="padding-left: 57px;">Invoice Expiration Date</label>
                                 <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
                                     <i class="material-icons prefix">today</i>
-                                    <input asp-for="ExpirationDate" id="icon_expired expired" />
+                                    <input asp-for="ExpirationDate" id="icon_expired" />
                                 </div>
                             </div>
 
@@ -85,7 +83,6 @@
                         </fieldset>
                     </div>
                     <div class="col s12 col m12 col l7">
-
                         <fieldset>
                             <legend>Products</legend>
 
@@ -117,7 +114,6 @@
                                 <i class="material-icons">add</i>
                             </a>
                         </fieldset>
-
                     </div>
                 </div>
 
@@ -138,262 +134,240 @@
             </form>
         </div>
     </div>
+
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
-        $("#products select").material_select();
-        $("#debtor-row #select_debtor").material_select();
-        $("#company-row #select_company").material_select();
-        $("#type-row #select_type").material_select();
-
         //Variables
         var firstRun = true;
+        var total = t;
+        var count = 0;
+        var productArray = new Array();
+        var amountArray = new Array();
 
         //Hide product-control row
         $("#product-control").hide();
 
+        //Run when page has loaded
         $(document).ready(() => {
+            $("#products select").material_select();
+            $("#debtor-row #select_debtor").material_select();
+            $("#company-row #select_company").material_select();
+            $("#type-row #select_type").material_select();
 
-            // Variables
-            var total = t;
-            var count = 0;
-            var productArray = new Array();
-            var amountArray = new Array();
+            //Set value of the total amount in the input box
+            var totalAmount = "@(ViewBag.Total)";
+            $("#total").val(totalAmount);
 
-            //Total
-            var t = "@(ViewBag.Total)";
-            $("#total").val(t);
-
+            //Set product rows is this is the first run
             if (firstRun == true) {
                 setRows();
             }
-
-            /*-------------------------------------------------------------------------------------------*/
-            /* AUTOMATICALLY SET EXPIRATION DATE */
-            $("#createdon").on("change", () => {
-                var value = $("#createdon").val();
-
-                var day = value.split('-')[2];
-                var month = value.split('-')[1];
-                var year = value.split('-')[0];
-
-                var num = Number.parseInt(month) + 1;
-
-                if (num < 10) {
-                    num = "0" + num.toString();
-                } else {
-                    num = num.toString();
-                }
-
-                var newDate = year + "-" + num + "-" + day;
-
-                $("#expired").val(newDate);
-                $("#expired").text(newDate);
-            });
-
-            /*-------------------------------------------------------------------------------------------*/
-            // SET PRODUCT VALUE
-            $("#products option:selected").each(() => {
-                $("#product").on('change', () => {
-                    calcTotal();
-                });
-            })
-
-            $(document).on("change", "#products option:selected", () => {
-                calcTotal();
-            });
-
-            /*-------------------------------------------------------------------------------------------*/
-            // SET AMOUNT VALUE
-            $("#products #_amount").on('change', () => {
-                calcTotal();
-            });
-
-            $(document).on("change", "#products #_amount", () => {
-                calcTotal();
-            });
-
-            /*-------------------------------------------------------------------------------------------*/
-            // CHANGE FORM URL WHEN CLICKED ON CREATE
-            $("#edit-invoice-btn").on("click", () => {
-                $("#products option:selected").each(function () {
-                    productArray.push($(this).val().split('_')[0]);
-                });
-
-                $("#products [id^=_product-]").each(function () {
-                    var text = $(this).val();
-                    var id = $(this).attr("id");
-                    var pid = id.split("x")[1];
-
-                    productArray.push(pid);
-                });
-
-                $("#products #_amount").each(function () {
-                    amountArray.push($(this).val());
-                });
-
-                productArray.splice(0, 1);
-                amountArray.splice(0, 1);
-
-                var totalPrice = $("#total").val();
-
-                console.log(productArray.toString());
-                console.log(amountArray.toString());
-                console.log(totalPrice.toString());
-
-                $("#form").append('<input type="hidden" name="total" value="' + totalPrice + '" /> ');
-                $("#form").append('<input type="hidden" name="pids" value="' + productArray.toString() + '" /> ');
-                $("#form").append('<input type="hidden" name="amounts" value="' + amountArray.toString() + '" /> ');
-
-                $("#form").submit();
-            });
-
-            /*-------------------------------------------------------------------------------------------*/
-            // ADD NEW DIV INSIDE #products
-            $("#add-row-btn").on("click", function () {
-                @{cnt++;}
-
-                $("#product-control").show();
-                var copy = $("#product-control").clone(true).appendTo("#products").prop("id", "product-row").find("input").val("");
-                $("#product-control").hide();
-
-                $("#products #product-row select").material_select();
-            });
-
-            /*-------------------------------------------------------------------------------------------*/
-            /* REMOVE DIV INSIDE #products*/
-            $(document).on("click", "#delete-row-btn", function () {
-                @{cnt--;}
-                $(this).parent().parent().remove();
-
-                calcTotal();
-            })
-
-            /*-------------------------------------------------------------------------------------------*/
-            //SET PRODUCT ROWS
-            function setRows() {
-                var pids = new Array();
-                var amounts = new Array();
-                var pnames = new Array();
-
-                @foreach (var pid in ViewBag.PIDs)
-                {
-                    @:pids.push('@(pid)');
-                }
-                @foreach (var amount in ViewBag.Amounts)
-                {
-                    @:amounts.push('@(amount)');
-                }
-                    @foreach (var name in ViewBag.Names)
-                {
-                    @:pnames.push('@(name)');
-                }
-
-                console.log("PIDs: " + pids);
-                console.log("Amounts: " + amounts);
-                console.log("PNames: " + pnames);
-
-                for (var i = 0; i < amounts.length; i++) {
-                    var amount = amounts[i];
-                    var pid = pids[i];
-
-                    var elementID = "_product-" + i.toString() + "x" + pid.split("_")[0];
-
-                    var html = `
-                        <div id="product-row-` + i + `" class="row">
-                            <div class="input-field col s12 col m8 col l8">
-                                <input id="` + elementID.toString() + `"  />
-                            </div>
-
-                            <div class="input-field col s8 col m2 col l2">
-                                <input id="_amount" placeholder="Qnt." value="` + amount + `" disabled />
-                            </div>
-
-                            <div class="input-field col s4 col m2 col l2">
-                                <a href="#" id="delete-row-btn"
-                                    class="btn red darken-1 waves-effect waves-light">
-                                    <i class="material-icons">remove</i>
-                                </a>
-                            </div>
-                        </div>
-                    `;
-
-                    $("#products").append(html);
-                }
-
-                for (var i = 0; i < amounts.length; i++) {
-                    var pid = pids[i];
-                    var pname = pnames[i];
-
-                    //var element = "#products #product-row-" + i.toString() + "#" + pid.toString();
-                    var element = "#products #product-row-" + i.toString() + " #_product-" + i.toString() + "x" + pid.split("_")[0];
-
-                    console.log("Element: " + element.toString());
-
-                    $(element).prop("value", pname);
-                    $(element).prop("disabled", true);
-
-                    //Reset variables
-                    pid = "";
-                    pname = "";
-                }
-
-                @{cnt++; }
-            }
-
-            /*-------------------------------------------------------------------------------------------*/
-            // FUNCTION TO CALCULATE TOTAL AND SHOW IN TOTAL BOX
-            function calcTotal() {
-
-                var amounts = new Array();
-                var pids = new Array();
-                var totalPrice = Number.parseFloat("0");
-
-                $("#products option:selected").each(function () {
-                    var id = $(this).val();
-
-                    console.log("product: " + id);
-
-                    pids.push($(this).val());
-                });
-
-                $("#products [id^=_product-]").each(function () {
-                    var text = $(this).val();
-                    var id = $(this).attr("id");
-                    var pid = id.split("x")[1];
-
-                    pids.push(pid);
-                });
-
-                $("#products #_amount").each(function () {
-                    var amount = $(this).val();
-                    console.log("amount: " + amount);
-                    amounts.push($(this).val());
-                });
-
-                pids.splice(0, 1);
-                amounts.splice(0, 1);
-
-                for (var i = 0; i < pids.length; i++) {
-                    var id = pids[i].split('_')[0];
-                    var p = pids[i].split('_')[1];
-                    var price = Number.parseFloat(p).toFixed(2);
-                    var amount = Number.parseInt(amounts[i]);
-
-                    totalPrice += (price * amount);
-                }
-
-                $("#total").prop("readonly", false);
-                $("#total").val(totalPrice.toLocaleString("nl-NL", { minimumFractionDigits: 2 }));
-                total = totalPrice.toLocaleString("nl-NL", { minimumFractionDigits: 2 });
-                $("#total").prop("readonly", true);
-
-                console.log('calculated: ' + total);
-            }
-
         });
+
+        //-------------------------------------------------------------------------------------------
+        // Automatically set expiration date based on selected invoice date
+        $("#icon_created").on("change", () => {
+            var selectedDate = new Date($("#icon_created").val());
+
+            var day = selectedDate.getDate() + 30;
+            var month = selectedDate.getMonth() + 1;
+            var year = selectedDate.getFullYear();
+
+            if (month < 10) month = "0" + month;
+            if (day < 10) day = "0" + day;
+
+            var today = year + "-" + month + "-" + day;
+            $("#icon_expired").val(today);
+        });
+
+        //-------------------------------------------------------------------------------------------
+        //Calculate the total amount when adding a new product
+        $("#products option:selected").each(() => {
+            $("#product").on('change', () => {
+                calcTotal();
+            });
+        })
+
+        $(document).on("change", "#products option:selected", () => {
+            calcTotal();
+        });
+
+        //-------------------------------------------------------------------------------------------
+        //Calculate the total amount when changing the amount of product(s)
+        $("#products #_amount").on('change', () => {
+            calcTotal();
+        });
+
+        $(document).on("change", "#products #_amount", () => {
+            calcTotal();
+        });
+
+        //-------------------------------------------------------------------------------------------
+        //Add parameters to form and submit
+        $("#edit-invoice-btn").on("click", () => {
+            $("#products option:selected").each(function () {
+                productArray.push($(this).val().split('_')[0]);
+            });
+
+            $("#products [id^=_product-]").each(function () {
+                var text = $(this).val();
+                var id = $(this).attr("id");
+                var pid = id.split("x")[1];
+
+                productArray.push(pid);
+            });
+
+            $("#products #_amount").each(function () {
+                amountArray.push($(this).val());
+            });
+
+            productArray.splice(0, 1);
+            amountArray.splice(0, 1);
+
+            var totalPrice = $("#total").val();
+
+            $("#form").append('<input type="hidden" name="total" value="' + totalPrice + '" /> ');
+            $("#form").append('<input type="hidden" name="pids" value="' + productArray.toString() + '" /> ');
+            $("#form").append('<input type="hidden" name="amounts" value="' + amountArray.toString() + '" /> ');
+
+            $("#form").submit();
+        });
+
+        //-------------------------------------------------------------------------------------------
+        //Add a new product row
+        $("#add-row-btn").on("click", function () {
+            @{cnt++;}
+
+            $("#product-control").show();
+            var copy = $("#product-control")
+                .clone(true)
+                .appendTo("#products")
+                .prop("id", "product-row")
+                .find("input").val("");
+
+            $("#product-control").hide();
+            $("#products #product-row select").material_select();
+        });
+
+        //-------------------------------------------------------------------------------------------
+        //Remove a product row
+        $(document).on("click", "#delete-row-btn", function () {
+            @{cnt--;}
+            $(this).parent().parent().remove();
+
+            calcTotal();
+        })
+
+        //-------------------------------------------------------------------------------------------
+        //Create new product rows based on the products selected when creating this invoice
+        function setRows() {
+            var pids = new Array();
+            var amounts = new Array();
+            var pnames = new Array();
+
+            @foreach (var pid in ViewBag.PIDs)
+            {
+                @:pids.push('@(pid)');
+            }
+            @foreach (var amount in ViewBag.Amounts)
+            {
+                @:amounts.push('@(amount)');
+            }
+                @foreach (var name in ViewBag.Names)
+            {
+                @:pnames.push('@(name)');
+            }
+
+            for (var i = 0; i < amounts.length; i++) {
+                var amount = amounts[i];
+                var pid = pids[i];
+
+                var elementID = "_product-" + i.toString() + "x" + pid.split("_")[0];
+
+                var html = `
+                    <div id="product-row-` + i + `" class="row">
+                        <div class="input-field col s12 col m8 col l8">
+                            <input id="` + elementID.toString() + `"  />
+                        </div>
+
+                        <div class="input-field col s8 col m2 col l2">
+                            <input id="_amount" placeholder="Qnt." value="` + amount + `" disabled />
+                        </div>
+
+                        <div class="input-field col s4 col m2 col l2">
+                            <a href="#" id="delete-row-btn"
+                                class="btn red darken-1 waves-effect waves-light">
+                                <i class="material-icons">remove</i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+
+                $("#products").append(html);
+            }
+
+            for (var i = 0; i < amounts.length; i++) {
+                var pid = pids[i];
+                var pname = pnames[i];
+
+                var element = "#products #product-row-" + i.toString() + " #_product-" + i.toString() + "x" + pid.split("_")[0];
+
+                $(element).prop("value", pname);
+                $(element).prop("disabled", true);
+
+                pid = "";
+                pname = "";
+            }
+
+            @{cnt++; }
+        }
+
+        //-------------------------------------------------------------------------------------------
+        //Calculate total amount based on selected products and their quantities
+        function calcTotal() {
+            var amounts = new Array();
+            var pids = new Array();
+            var totalPrice = Number.parseFloat("0");
+
+            $("#products option:selected").each(function () {
+                var id = $(this).val();
+                pids.push($(this).val());
+            });
+
+            $("#products [id^=_product-]").each(function () {
+                var text = $(this).val();
+                var id = $(this).attr("id");
+                var pid = id.split("x")[1];
+
+                pids.push(pid);
+            });
+
+            $("#products #_amount").each(function () {
+                var amount = $(this).val();
+                amounts.push($(this).val());
+            });
+
+            pids.splice(0, 1);
+            amounts.splice(0, 1);
+
+            for (var i = 0; i < pids.length; i++) {
+                var id = pids[i].split('_')[0];
+                var p = pids[i].split('_')[1];
+                var price = Number.parseFloat(p).toFixed(2);
+                var amount = Number.parseInt(amounts[i]);
+
+                totalPrice += (price * amount);
+            }
+
+            $("#total").prop("readonly", false);
+            $("#total").val(totalPrice.toLocaleString("nl-NL", { minimumFractionDigits: 2 }));
+            total = totalPrice.toLocaleString("nl-NL", { minimumFractionDigits: 2 });
+
+            $("#total").prop("readonly", true);
+        }
     </script>
 }

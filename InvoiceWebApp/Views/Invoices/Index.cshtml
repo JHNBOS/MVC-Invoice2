@@ -49,7 +49,7 @@
                 <thead>
                     <tr>
                         <th>
-                            @Html.ActionLink("Invoice Number", "Index", new { sortOrder = ViewBag.NumberSortParm })
+                            @Html.ActionLink("Invoice No", "Index", new { sortOrder = ViewBag.NumberSortParm })
                         </th>
                         <th>
                             @Html.ActionLink("Debtor", "Index", new { sortOrder = ViewBag.DebtorSortParm })
@@ -85,7 +85,13 @@
                                 </a>
                             </td>
                             <td>
-                                @Html.DisplayFor(modelItem => item.Debtor.FullName)
+                                @if (item.DebtorID != null || !String.IsNullOrEmpty(item.DebtorID.ToString())){
+		                             @Html.DisplayFor(modelItem => item.Debtor.FullName)
+                                }
+
+                                @if (item.CompanyID != null || !String.IsNullOrEmpty(item.CompanyID.ToString())) {
+                                    @Html.DisplayFor(modelItem => item.Company.CompanyName)
+                                }
                             </td>
                             <td>
                                 @Html.DisplayFor(modelItem => item.CreatedOn)

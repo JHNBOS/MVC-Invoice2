@@ -17,7 +17,7 @@
     <!--Form-->
     <div class="row" style="margin-top: 5px;">
         <div class="col s12 col m12 col l10 offset-l1">
-            <form asp-controller="Products" asp-action="Edit">
+            <form id="form" asp-controller="Products" asp-action="Edit">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <input type="hidden" asp-for="ProductID" />
 
@@ -70,9 +70,11 @@
                         <a asp-action="Index" class="light-green-text">Back to Overview</a>
                     </div>
                 </div>
+
             </form>
         </div>
     </div>
+
 </div>
 
 
@@ -80,14 +82,18 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
+        //Run when page has loaded
         $(document).ready(function () {
+            //Set value of price input
             var price = "@(ViewBag.Price)";
             $("#price").val(price);
 
+            //Set value of vat input
             var vat = "@(ViewBag.VAT)";
             $("#vat").val(vat);
         });
 
+        //Add parameters to form
         $("edit-product-btn").on("click", function () {
             var price = $("#price").val();
             $("#form").attr("asp-route-price", price);

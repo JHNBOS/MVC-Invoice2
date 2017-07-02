@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace InvoiceWebApp.Models {
 
@@ -49,5 +50,7 @@ namespace InvoiceWebApp.Models {
         [Required]
         [Display(Name = "Bank Name")]
         public string BankName { get; set; }
+
+        public virtual ICollection<Invoice> Invoices { get; set; }
     }
 }

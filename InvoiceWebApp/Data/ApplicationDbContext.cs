@@ -16,7 +16,9 @@ namespace InvoiceWebApp.Data {
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
 
-            //--------Debtor Unique Keys-------------
+
+            //--------------------------------------
+            //-------- Debtor ----------------------
             builder.Entity<Debtor>()
             .HasAlternateKey(c => c.IdNumber)
             .HasName("AlternateKey_IdNumber");
@@ -24,13 +26,15 @@ namespace InvoiceWebApp.Data {
             builder.Entity<Debtor>()
             .HasAlternateKey(c => c.BankAccount)
             .HasName("AlternateKey_BankAccount");
-            /*-------------------------------------*/
-            //--------Product Unique Keys-------------
+
+            //--------------------------------------
+            //-------- Product ---------------------
             builder.Entity<Product>()
             .HasAlternateKey(c => c.Name)
             .HasName("AlternateKey_Name");
-            /*-------------------------------------*/
-            //--------Company Unique Keys-------------
+
+            //--------------------------------------
+            //-------- Company ---------------------
             builder.Entity<Company>()
             .HasAlternateKey(c => c.RegNumber)
             .HasName("AlternateKey_RegNumber");
@@ -46,12 +50,23 @@ namespace InvoiceWebApp.Data {
             builder.Entity<Company>()
             .HasAlternateKey(c => c.BankAccount)
             .HasName("AlternateKey_BankAccount");
-            /*-------------------------------------*/
-            //--------Admin Unique Keys-------------
+
+            //--------------------------------------
+            //-------- Admin -----------------------
             builder.Entity<Admin>()
             .HasAlternateKey(c => c.Email)
             .HasName("AlternateKey_AdminEmail");
-            /*-------------------------------------*/
+            //--------------------------------------
+            //-------- Invoice ---------------------
+            builder.Entity<Company>()
+                .HasMany(c => c.Invoices)
+                    .WithOne(c => c.Company)
+                    .IsRequired(false);
+
+            builder.Entity<Debtor>()
+                .HasMany(c => c.Invoices)
+                    .WithOne(c => c.Debtor)
+                    .IsRequired(false);
         }
 
         public DbSet<Debtor> Debtors { get; set; }

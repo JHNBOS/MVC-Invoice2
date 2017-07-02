@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace InvoiceWebApp.Models {
 
@@ -11,10 +12,12 @@ namespace InvoiceWebApp.Models {
         public int InvoiceNumber { get; set; }
 
         [Display(Name = "Debtor")]
-        public Nullable<int> DebtorID { get; set; }
+        [ForeignKey("Debtor"), Column(Order = 0)]
+        public int? DebtorID { get; set; }
 
         [Display(Name = "Company")]
-        public Nullable<int> CompanyID { get; set; }
+        [ForeignKey("Company"), Column(Order = 1)]
+        public int? CompanyID { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Invoice Date")]

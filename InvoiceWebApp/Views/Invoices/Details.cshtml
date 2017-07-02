@@ -20,16 +20,15 @@
             <form>
 
                 <div class="row">
-                    <div class="col s12 col m12 col l6">
+                    <div class="col s12 col m12 col l5">
                         <fieldset>
                             <legend>Invoice Information</legend>
 
                             <div class="row" id="debtor-row">
                                 <div class="input-field col s12 col m12 col l12">
                                     <i class="material-icons prefix">perm_identity</i>
-                                    <select id="select_debtor" asp-for="DebtorID" asp-items="ViewBag.DebtorID" disabled>
-                                        <option value="-1">--</option>
-                                    </select>
+                                    @Html.DropDownListFor(m => m.DebtorID, (SelectList)ViewBag.DebtorID,
+                                                "Select Debtor", new { @id = "select_debtor", @disabled = "disabled" })
                                     <label for="select_debtor">Choose Debtor</label>
                                 </div>
                             </div>
@@ -37,9 +36,8 @@
                             <div class="row" id="company-row">
                                 <div class="input-field col s12 col m12 col l12">
                                     <i class="material-icons prefix">business</i>
-                                    <select id="select_company" asp-for="CompanyID" asp-items="ViewBag.CompanyID" disabled>
-                                        <option value="-1">--</option>
-                                    </select>
+                                    @Html.DropDownListFor(m => m.CompanyID, (SelectList)ViewBag.CompanyID,
+                                                "Select Company", new { @id = "select_company", @disabled = "disabled" })
                                     <label for="select_company">Choose Company</label>
                                 </div>
                             </div>
@@ -78,10 +76,9 @@
                                     <label for="select_type">Save As</label>
                                 </div>
                             </div>
-
                         </fieldset>
                     </div>
-                    <div class="col s12 col m12 col l6">
+                    <div class="col s12 col m12 col l7">
                         <fieldset>
                             <legend>Products</legend>
 
@@ -109,87 +106,84 @@
             </form>
         </div>
     </div>
+
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
+        //Variables
         var firstRun = true;
 
+        //Run when page has loaded
         $(document).ready(function () {
             $("#products select").material_select();
             $("#debtor-row #select_debtor").material_select();
             $("#company-row #select_company").material_select();
             $("#type-row #select_type").material_select();
 
-            //Total
-            var t = "@(ViewBag.Total)";
-            $("#total").val(t);
+            //Set value of the total amount in the input box
+            var totalAmount = "@(ViewBag.Total)";
+            $("#total").val(totalAmount);
 
+            //Set product rows is this is the first run
             if (firstRun == true) {
                 setRows();
             }
-    });
+        });
 
-/*-------------------------------------------------------------------------------------------*/
+        //-------------------------------------------------------------------------------------------
+        //Create new product rows based on the products selected when creating this invoice
+        function setRows() {
+            var pids = new Array();
+            var amounts = new Array();
+            var pnames = new Array();
 
-    /* SET PRODUCT ROWS */
-    function setRows() {
-        var pids = new Array();
-        var amounts = new Array();
-        var pnames = new Array();
-
-        @foreach (var pid in ViewBag.PIDs)
-        {
-            @:pids.push('@(pid)');
-        }
-        @foreach (var amount in ViewBag.Amounts)
-        {
-            @:amounts.push('@(amount)');
-        }
+            @foreach (var pid in ViewBag.PIDs)
+            {
+                @:pids.push('@(pid)');
+            }
+            @foreach (var amount in ViewBag.Amounts)
+            {
+                @:amounts.push('@(amount)');
+            }
             @foreach (var name in ViewBag.Names)
-        {
-            @:pnames.push('@(name)');
-        }
+            {
+                @:pnames.push('@(name)');
+            }
 
-        console.log("PIDs: " + pids);
-        console.log("Amounts: " + amounts);
-        console.log("PNames: " + pnames);
+            for (var i = 0; i < amounts.length; i++) {
+                var amount = amounts[i];
 
-        for (var i = 0; i < amounts.length; i++) {
-            var amount = amounts[i];
+                var html = `
+                    <div id="product-row-` + i + `" class="row">
+                        <div class="input-field col s12 col m8 col l8">
+                            <input id="_product-` + i + `" disabled/>
+                        </div>
 
-            var html = `
-                <div id="product-row-` + i + `" class="row">
-                    <div class="input-field col s12 col m8 col l8">
-                        <input id="_product-` + i + `" disabled/>
+                        <div class="input-field col s8 col m2 col l2">
+                            <input id="_amount" placeholder="Qnt." value="` + amount + `" disabled />
+                        </div>
                     </div>
+                `;
 
-                    <div class="input-field col s8 col m2 col l2">
-                        <input id="_amount" placeholder="Qnt." value="` + amount + `" disabled />
-                    </div>
-                </div>
-            `;
+                $("#products").append(html);
+            }
 
-            $("#products").append(html);
+            for (var i = 0; i < amounts.length; i++) {
+                var pid = pids[i];
+                var pname = pnames[i];
+
+                var element = "#products #product-row-" + i.toString() + " #_product-" + i.toString();
+
+                $(element).prop("value", pname);
+                $(element).prop("disabled", true);
+
+                //Reset variables
+                pid = "";
+                pname = "";
+            }
         }
-
-        for (var i = 0; i < amounts.length; i++) {
-            var pid = pids[i];
-            var pname = pnames[i];
-
-            var element = "#products #product-row-" + i.toString() + " #_product-" + i.toString();
-
-            $(element).prop("value", pname);
-            $(element).prop("disabled", true);
-
-            //Reset variables
-            pid = "";
-            pname = "";
-        }
-
-    }
-/*-------------------------------------------------------------------------------------------*/
     </script>
 }
