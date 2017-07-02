@@ -18,14 +18,15 @@ namespace InvoiceWebApp.Controllers {
             _context = context;
         }
 
-        /*----------------------------------------------------------------------*/
-        //DATABASE ACTION METHODS
+        //------------------------------------------------------------------------
+        //Database action methods
 
+        //Get a list of all items
         private async Task<List<InvoiceItem>> GetItems() {
-            List<InvoiceItem> itemList = await _context.InvoiceItems.ToListAsync();
-            return itemList;
+            return await _context.InvoiceItems.ToListAsync();
         }
 
+        //Get item based on id
         private async Task<InvoiceItem> GetItem(int? id) {
             InvoiceItem item = null;
 
@@ -38,6 +39,7 @@ namespace InvoiceWebApp.Controllers {
             return item;
         }
 
+        //Add item to the database
         private async Task CreateItem(InvoiceItem item) {
             try {
                 _context.InvoiceItems.Add(item);
@@ -47,6 +49,7 @@ namespace InvoiceWebApp.Controllers {
             }
         }
 
+        //Update existing debtor
         private async Task UpdateItem(InvoiceItem item) {
             try {
                 _context.Update(item);
@@ -56,6 +59,7 @@ namespace InvoiceWebApp.Controllers {
             }
         }
 
+        //Remove existing item from the database
         private async Task DeleteItem(int id) {
             InvoiceItem item = await GetItem(id);
 
@@ -67,8 +71,8 @@ namespace InvoiceWebApp.Controllers {
             }
         }
 
-        /*----------------------------------------------------------------------*/
-        //CONTROLLER ACTIONS
+        //------------------------------------------------------------------------
+        //Controller actions
 
         // GET: InvoiceItem
         public async Task<IActionResult> Index() {

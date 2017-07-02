@@ -10,6 +10,8 @@ using System.Linq;
 namespace InvoiceWebApp.Controllers {
 
     public class HomeController : Controller {
+
+        //Instances
         private ApplicationDbContext _context;
 
         public HomeController(ApplicationDbContext context) {
@@ -17,7 +19,8 @@ namespace InvoiceWebApp.Controllers {
         }
 
         public IActionResult Index(string email) {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Home";
 
             if (email != "") {
@@ -31,7 +34,8 @@ namespace InvoiceWebApp.Controllers {
         }
 
         public IActionResult About() {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "About";
 
             ViewData["Message"] = "Your application description page.";
@@ -40,7 +44,8 @@ namespace InvoiceWebApp.Controllers {
         }
 
         public IActionResult Contact() {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Contact";
 
             return View();
@@ -50,7 +55,7 @@ namespace InvoiceWebApp.Controllers {
             return View();
         }
 
-        //Get Invoices based on logged in client
+        //Get invoices based on logged in client
         private void GetInvoices(string email) {
             decimal total = 0;
             List<Invoice> invoiceList = null;
@@ -58,6 +63,7 @@ namespace InvoiceWebApp.Controllers {
             int unpaid = 0;
 
             try {
+                //Get all final invoices paid and not paid
                 invoiceList = _context.Invoices.Include(inv => inv.Debtor).Where(inv => inv.Debtor.Email == email && inv.Paid == false && inv.Type != "Concept").ToList();
                 paid = _context.Invoices.Include(inv => inv.Debtor).Where(inv => inv.Debtor.Email == email && inv.Paid == true && inv.Type == "Final").ToList().Count;
                 unpaid = _context.Invoices.Include(inv => inv.Debtor).Where(inv => inv.Debtor.Email == email && inv.Paid == false && inv.Type == "Final").ToList().Count;
@@ -132,5 +138,6 @@ namespace InvoiceWebApp.Controllers {
                 Debug.WriteLine(ex);
             }
         }
+
     }
 }

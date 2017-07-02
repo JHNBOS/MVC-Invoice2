@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 namespace InvoiceWebApp.Controllers {
 
     public class UsersController : Controller {
+
+        //Instances
         private ApplicationDbContext _context;
         private AppSettings _settings;
         private IHostingEnvironment _env;
@@ -23,14 +25,15 @@ namespace InvoiceWebApp.Controllers {
             _settings = _context.Settings.SingleOrDefault();
         }
 
-        /*----------------------------------------------------------------------*/
-        //DATABASE ACTION METHODS
+        //------------------------------------------------------------------------
+        //Database action methods
 
+        //Get a list of all users
         private async Task<List<User>> GetUsers() {
-            List<User> userList = await _context.Users.Include(s => s.Debtor).ToListAsync();
-            return userList;
+            return await _context.Users.Include(s => s.Debtor).ToListAsync();
         }
 
+        //Get user based on id
         private async Task<User> GetUser(int? id) {
             User user = null;
 
@@ -43,7 +46,9 @@ namespace InvoiceWebApp.Controllers {
             return user;
         }
 
+        //Add user to the database
         private async Task CreateUser(User user) {
+            //Set account type
             user.AccountType = "Client";
 
             try {
@@ -54,6 +59,7 @@ namespace InvoiceWebApp.Controllers {
             }
         }
 
+        //Update existing user
         private async Task UpdateUser(User user) {
             try {
                 _context.Update(user);
@@ -63,6 +69,7 @@ namespace InvoiceWebApp.Controllers {
             }
         }
 
+        //Remove existing user from the database
         private async Task DeleteUser(int id) {
             User user = await GetUser(id);
 
@@ -74,25 +81,26 @@ namespace InvoiceWebApp.Controllers {
             }
         }
 
-        /*----------------------------------------------------------------------*/
-        //CONTROLLER ACTIONS
+        //------------------------------------------------------------------------
+        //Controller actions
 
-        // GET: User
+        //GET => Users/Index
         public async Task<IActionResult> Index(string sortOrder, string searchQuery) {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Users";
 
-            //SORTING OPTIONS ADMIN LIST
+            //Sort function
             ViewBag.BeginSortParm = String.IsNullOrEmpty(sortOrder) ? "begin_desc" : "";
             ViewBag.FirstNameSortParm = sortOrder == "FirstName" ? "firstname_desc" : "FirstName";
             ViewBag.LastNameSortParm = sortOrder == "LastName" ? "lastname_desc" : "LastName";
             ViewBag.EmailSortParm = sortOrder == "Email" ? "email_desc" : "Email";
 
+            //Search function
             var users = await GetUsers();
             var query = from user in users
                         select user;
 
-            //SEARCH OPTION ADMIN LIST
             if (!String.IsNullOrEmpty(searchQuery)) {
                 query = query.Where(s => s.Debtor.FirstName.Contains(searchQuery)
                                        || s.Email.Contains(searchQuery)
@@ -103,35 +111,36 @@ namespace InvoiceWebApp.Controllers {
             }
 
             switch (sortOrder) {
-                //WHEN NO SORT
+                //Default
                 case "begin_desc":
                     query = query.OrderByDescending(s => s.Debtor.LastName);
                     break;
-                //FIRST NAME
+
+                //Sort on first name
                 case "FirstName":
                     query = query.OrderBy(s => s.Debtor.FirstName);
                     break;
-
                 case "firstname_desc":
                     query = query.OrderByDescending(s => s.Debtor.FirstName);
                     break;
-                //EMAIL
+
+                //Sort on email
                 case "Email":
                     query = query.OrderBy(s => s.Email);
                     break;
-
                 case "email_desc":
                     query = query.OrderByDescending(s => s.Email);
                     break;
-                //CITY
+
+                //Sort on last name
                 case "LastName":
                     query = query.OrderBy(s => s.Debtor.LastName);
                     break;
-
                 case "lastname_desc":
                     query = query.OrderByDescending(s => s.Debtor.LastName);
                     break;
-                //DEFAUlT
+
+                //Default
                 default:
                     query = query.OrderBy(s => s.Debtor.LastName);
                     break;
@@ -140,12 +149,19 @@ namespace InvoiceWebApp.Controllers {
             return View(query);
         }
 
-        // GET: User/Details/5
+        //---------------------------------
+
+        //GET => Users/Details/5
         public async Task<IActionResult> Details(int? id) {
+
+            //Current page
+            ViewBag.Current = "Users";
+
             if (id == null) {
                 return NotFound();
             }
 
+            //Get user
             var user = await GetUser(id);
 
             if (user == null) {
@@ -155,16 +171,26 @@ namespace InvoiceWebApp.Controllers {
             return View(user);
         }
 
-        // GET: User/Create
+        //---------------------------------
+
+        //GET => Users/Create
         public IActionResult Create() {
+
+            //Current page
+            ViewBag.Current = "Users";
+
             return View();
         }
 
-        // POST: User/Create
+        //---------------------------------
+
+        //POST => Users/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("ID,Email,Password")] User user) {
+
             if (ModelState.IsValid) {
+                //Add user to database
                 await CreateUser(user);
                 return RedirectToAction("Login", "Users", new { area = "" });
             }
@@ -172,15 +198,19 @@ namespace InvoiceWebApp.Controllers {
             return View(user);
         }
 
-        // GET: User/Edit/5
+        //---------------------------------
+
+        //GET => Users/Edit/5
         public async Task<IActionResult> Edit(int? id) {
-            //CURRENT PAGE
-            ViewBag.Current = "UserManage";
+
+            //Current page
+            ViewBag.Current = "Users";
 
             if (id == null) {
                 return NotFound();
             }
 
+            //Get user
             var user = await GetUser(id);
 
             if (user == null) {
@@ -190,16 +220,28 @@ namespace InvoiceWebApp.Controllers {
             return View(user);
         }
 
-        // POST: User/Edit/5
+        //---------------------------------
+
+        //POST => Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("ID,AccountType,Address,City,Country,Email,FirstName,LastName,Password,PostalCode")] User user) {
+
             if (id != user.ID) {
                 return NotFound();
             }
 
             if (ModelState.IsValid) {
                 await UpdateUser(user);
+
+                try {
+                    //Update user
+                    await UpdateUser(user);
+                } catch (DbUpdateConcurrencyException) {
+                    if (!UserExists(user.ID)) {
+                        return NotFound();
+                    } else { throw; }
+                }
 
                 User currentUser = SessionHelper.Get<User>(this.HttpContext.Session, "User");
                 return RedirectToAction("Index", "Home", new { email = currentUser.Email });
@@ -208,12 +250,19 @@ namespace InvoiceWebApp.Controllers {
             return View(user);
         }
 
-        // GET: User/Delete/5
+        //---------------------------------
+
+        //GET => Users/Delete/5
         public async Task<IActionResult> Delete(int? id) {
+
+            //Current page
+            ViewBag.Current = "Users";
+
             if (id == null) {
                 return NotFound();
             }
 
+            //Get user
             var user = await GetUser(id);
 
             if (user == null) {
@@ -223,27 +272,32 @@ namespace InvoiceWebApp.Controllers {
             return View(user);
         }
 
-        // POST: User/Delete/5
+        //---------------------------------
+
+        //POST => Users/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id) {
+
+            //Delete user from database
             await DeleteUser(id);
             return RedirectToAction("Login", "Users", new { area = "" });
         }
 
-        private bool UserExists(int id) {
-            return _context.Users.Any(e => e.ID == id);
-        }
+        //---------------------------------
 
-        //GET: User/Login
+        //GET => Users/Login
         public ActionResult Login() {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Login";
 
             return View();
         }
 
-        //POST: User/Login
+        //---------------------------------
+
+        //POST => Users/Login
         [HttpPost]
         public ActionResult Login(User user) {
             User userLogin = null;
@@ -251,20 +305,20 @@ namespace InvoiceWebApp.Controllers {
             Debtor debtor = null;
 
             try {
+                //Find user based on email and password
                 userLogin = _context.Users.SingleOrDefault(u => u.Email == user.Email && u.Password == user.Password);
 
                 if (userLogin != null) {
                     debtor = _context.Debtors.SingleOrDefault(d => d.DebtorID == userLogin.DebtorID);
                     userLogin.Debtor = debtor;
                 } else {
-                    adminLogin = _context.Admins.SingleOrDefault(u => u.Email == user.Email 
-                                                    && u.Password == user.Password);
+                    adminLogin = _context.Admins.SingleOrDefault(u => u.Email == user.Email && u.Password == user.Password);
                 }
-                
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
 
+            //Set session variables
             if (userLogin != null) {
                 SessionHelper.Set(this.HttpContext.Session, "User", userLogin);
                 return RedirectToAction("Index", "Home", new { email = userLogin.Email });
@@ -277,28 +331,38 @@ namespace InvoiceWebApp.Controllers {
             return View(userLogin);
         }
 
-        //GET: User/Logout
+        //---------------------------------
+
+        //POST => Users/Logout
         public ActionResult Logout() {
+
+            //Remove session variables and return to login page
             HttpContext.Session.Remove("User");
             HttpContext.Session.Remove("Admin");
             return RedirectToAction("Login", "Users", new { area = "" });
         }
 
-        //GET: User/ForgotPassword
+        //---------------------------------
+
+        //GET => Users/ForgotPassword
         public ActionResult ForgotPassword() {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Login";
 
             return View();
         }
 
-        //POST: User/ForgotPassword
+        //---------------------------------
+
+        //POST => Users/ForgotPassword
         [HttpPost]
         public ActionResult ForgotPassword(string email, string password) {
             User userLogin = null;
             Admin adminLogin = null;
 
             try {
+                //Find user based on email
                 userLogin = _context.Users.SingleOrDefault(s => s.Email == email);
 
                 if (userLogin == null) {
@@ -313,10 +377,11 @@ namespace InvoiceWebApp.Controllers {
             }
 
             try {
+                //Update password
                 if (userLogin != null) {
                     userLogin.Password = password;
                     _context.Update(userLogin);
-                    
+
                 } else if (adminLogin != null) {
                     adminLogin.Password = password;
                     _context.Update(adminLogin);
@@ -331,6 +396,11 @@ namespace InvoiceWebApp.Controllers {
             }
         }
 
+        //---------------------------------
+
+        private bool UserExists(int id) {
+            return _context.Users.Any(e => e.ID == id);
+        }
 
     }
 }

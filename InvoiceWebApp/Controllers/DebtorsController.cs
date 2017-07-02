@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 namespace InvoiceWebApp.Controllers {
 
     public class DebtorsController : Controller {
+
+        //Instances
         private ApplicationDbContext _context;
         private AppSettings _settings;
 
@@ -21,14 +23,15 @@ namespace InvoiceWebApp.Controllers {
             _settings = _context.Settings.FirstOrDefault();
         }
 
-        /*----------------------------------------------------------------------*/
-        //DATABASE ACTION METHODS
+        //------------------------------------------------------------------------
+        //Database action methods
 
+        //Get a list of all debtors
         private async Task<List<Debtor>> GetDebtors() {
-            List<Debtor> debtorList = await _context.Debtors.ToListAsync();
-            return debtorList;
+            return await _context.Debtors.ToListAsync();
         }
 
+        //Get debtor based on id
         private async Task<Debtor> GetDebtor(int? id) {
             Debtor debtor = null;
 
@@ -41,6 +44,7 @@ namespace InvoiceWebApp.Controllers {
             return debtor;
         }
 
+        //Add debtor to the database
         private async Task CreateDebtor(Debtor debtor) {
             try {
                 _context.Debtors.Add(debtor);
@@ -52,6 +56,7 @@ namespace InvoiceWebApp.Controllers {
             }
         }
 
+        //Create new login for debtor
         private async Task CreateLogin(Debtor debtor) {
             try {
                 User user = new User();
@@ -63,6 +68,7 @@ namespace InvoiceWebApp.Controllers {
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
 
+                //Send email with username and password
                 AuthMessageSender email = new AuthMessageSender(_settings);
                 await email.SendLoginEmailAsync(user.Email, user.Password);
             } catch (Exception ex) {
@@ -70,6 +76,7 @@ namespace InvoiceWebApp.Controllers {
             }
         }
 
+        //Update existing debtor
         private async Task UpdateDebtor(Debtor debtor) {
             try {
                 _context.Update(debtor);
@@ -79,6 +86,7 @@ namespace InvoiceWebApp.Controllers {
             }
         }
 
+        //Remove existing debtor and all his invoices and login from the database
         private async Task DeleteDebtor(int id) {
             Debtor debtor = await GetDebtor(id);
             List<Invoice> invoices = null;
@@ -86,7 +94,7 @@ namespace InvoiceWebApp.Controllers {
             try {
                 invoices = _context.Invoices.Where(s => s.DebtorID == debtor.DebtorID).ToList();
 
-                //REMOVE ALL INVOICE ITEMS
+                //Remove all invoices and invoice items related to this debtor
                 foreach (var invoice in invoices) {
                     _context.InvoiceItems.RemoveRange(_context.InvoiceItems.Where(s => s.InvoiceNumber == invoice.InvoiceNumber));
                     await _context.SaveChangesAsync();
@@ -105,26 +113,27 @@ namespace InvoiceWebApp.Controllers {
             }
         }
 
-        /*----------------------------------------------------------------------*/
-        //CONTROLLER ACTIONS
+        //------------------------------------------------------------------------
+        //Controller actions
 
-        // GET: Debtor
+        //GET => Debtors/Index
         public async Task<IActionResult> Index(string sortOrder, string searchQuery) {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Debtors";
 
-            //SORTING OPTIONS DEBTOR LIST
+            //Sort function
             ViewBag.BeginSortParm = String.IsNullOrEmpty(sortOrder) ? "begin_desc" : "";
             ViewBag.FirstNameSortParm = sortOrder == "FirstName" ? "firstname_desc" : "FirstName";
             ViewBag.LastNameSortParm = sortOrder == "LastName" ? "lastname_desc" : "LastName";
             ViewBag.CityNameSortParm = sortOrder == "City" ? "city_desc" : "City";
             ViewBag.EmailSortParm = sortOrder == "Email" ? "email_desc" : "Email";
 
+            //Search function
             var debtors = await GetDebtors();
             var query = from debtor in debtors
                         select debtor;
 
-            //SEARCH OPTION PRODUCT LIST
             if (!String.IsNullOrEmpty(searchQuery)) {
                 query = query.Where(s => s.FirstName.Contains(searchQuery)
                                        || s.LastName.Contains(searchQuery)
@@ -133,43 +142,44 @@ namespace InvoiceWebApp.Controllers {
             }
 
             switch (sortOrder) {
-                //WHEN NO SORT
+                //Default
                 case "begin_desc":
                     query = query.OrderByDescending(s => s.LastName);
                     break;
-                //FIRST NAME
+
+                //Sort on first name
                 case "FirstName":
                     query = query.OrderBy(s => s.FirstName);
                     break;
-
                 case "firstname_desc":
                     query = query.OrderByDescending(s => s.FirstName);
                     break;
-                //LAST NAME
+
+                //Sort on last name
                 case "LastName":
                     query = query.OrderBy(s => s.LastName);
                     break;
-
                 case "lastname_desc":
                     query = query.OrderByDescending(s => s.LastName);
                     break;
-                //EMAIL
+
+                //Sort on email
                 case "Email":
                     query = query.OrderBy(s => s.Email);
                     break;
-
                 case "email_desc":
                     query = query.OrderByDescending(s => s.Email);
                     break;
-                //CITY
+
+                //Sort on city
                 case "City":
                     query = query.OrderBy(s => s.City);
                     break;
-
                 case "city_desc":
                     query = query.OrderByDescending(s => s.City);
                     break;
-                //DEFAUlT
+
+                //Default
                 default:
                     query = query.OrderBy(s => s.FirstName);
                     break;
@@ -178,15 +188,19 @@ namespace InvoiceWebApp.Controllers {
             return View(query);
         }
 
-        // GET: Debtor/Details/5
+        //---------------------------------
+
+        //GET => Debtors/Details/5
         public async Task<IActionResult> Details(int? id) {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Debtors";
 
             if (id == null) {
                 return NotFound();
             }
 
+            //Get debtor
             var debtor = await GetDebtor(id);
 
             if (debtor == null) {
@@ -196,19 +210,26 @@ namespace InvoiceWebApp.Controllers {
             return View(debtor);
         }
 
-        // GET: Debtor/Create
+        //---------------------------------
+
+        //GET => Debtors/Create
         public IActionResult Create() {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Debtors";
 
             return View();
         }
 
-        // POST: Debtor/Create
+        //---------------------------------
+
+        //POST => Debtors/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("DebtorID,FirstName,LastName,IdNumber,Email,Phone,BankAccount,Address,PostalCode,City,Country")] Debtor debtor) {
+
             if (ModelState.IsValid) {
+                //Add debtor to database
                 await CreateDebtor(debtor);
                 return RedirectToAction("Index", "Debtors", null);
             }
@@ -216,15 +237,19 @@ namespace InvoiceWebApp.Controllers {
             return View(debtor);
         }
 
-        // GET: Debtor/Edit/5
+        //---------------------------------
+
+        //GET => Debtor/Edit/5        
         public async Task<IActionResult> Edit(int? id) {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Debtors";
 
             if (id == null) {
                 return NotFound();
             }
 
+            //Get debtor
             var debtor = await GetDebtor(id);
 
             if (debtor == null) {
@@ -234,31 +259,46 @@ namespace InvoiceWebApp.Controllers {
             return View(debtor);
         }
 
-        // POST: Debtor/Edit/5
+        //---------------------------------
+
+        //POST => Debtors/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("DebtorID,FirstName,LastName,IdNumber,Email,Phone,BankAccount,Address,PostalCode,City,Country")] Debtor debtor) {
+
             if (id != debtor.DebtorID) {
                 return NotFound();
             }
 
             if (ModelState.IsValid) {
-                await UpdateDebtor(debtor);
+                try {
+                    //Update debtor
+                    await UpdateDebtor(debtor);
+                } catch (DbUpdateConcurrencyException) {
+                    if (!DebtorExists(debtor.DebtorID)) {
+                        return NotFound();
+                    } else { throw; }
+                }
+
                 return RedirectToAction("Index", "Debtors", null);
             }
 
             return View(debtor);
         }
 
-        // GET: Debtor/Delete/5
+        //---------------------------------
+
+        //GET => Debtors/Delete/5
         public async Task<IActionResult> Delete(int? id) {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Debtors";
 
             if (id == null) {
                 return NotFound();
             }
 
+            //Get debtor
             var debtor = await GetDebtor(id);
 
             if (debtor == null) {
@@ -268,16 +308,24 @@ namespace InvoiceWebApp.Controllers {
             return View(debtor);
         }
 
-        // POST: Debtor/Delete/5
+        //---------------------------------
+
+        //POST => Debtors/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id) {
+
+            //Delete administrator from database
             await DeleteDebtor(id);
+
             return RedirectToAction("Index", "Debtors", null);
         }
+
+        //---------------------------------
 
         private bool DebtorExists(int id) {
             return _context.Debtors.Any(e => e.DebtorID == id);
         }
+
     }
 }

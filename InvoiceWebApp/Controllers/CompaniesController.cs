@@ -11,39 +11,87 @@ using System.Threading.Tasks;
 namespace InvoiceWebApp.Controllers {
 
     public class CompaniesController : Controller {
+
+        //Instances
         private ApplicationDbContext _context;
 
         public CompaniesController(ApplicationDbContext context) {
             _context = context;
         }
 
-        /*----------------------------------------------------------------------*/
-        //DATABASE ACTION METHODS
+        //------------------------------------------------------------------------
+        //Database action methods
 
+        //Get a list of all companies
         private async Task<List<Company>> GetCompanies() {
-            List<Company> companyList = await _context.Company.ToListAsync();
-            return companyList;
+            return await _context.Company.ToListAsync();
         }
 
-        /*----------------------------------------------------------------------*/
-        //CONTROLLER METHODS
+        //Get company based on id
+        private async Task<Company> GetCompany(int? id) {
+            Company company = null;
 
-        // GET: Companies
+            try {
+                company = await _context.Company.SingleOrDefaultAsync(s => s.CompanyID == id);
+            } catch (Exception ex) {
+                Debug.WriteLine(ex);
+            }
+
+            return company;
+        }
+
+        //Add company to the database
+        private async Task CreateCompany(Company company) {
+            try {
+                _context.Company.Add(company);
+                await _context.SaveChangesAsync();
+            } catch (Exception ex) {
+                Debug.WriteLine(ex);
+            }
+        }
+
+        //Update existing company
+        private async Task UpdateCompany(Company company) {
+            try {
+                _context.Update(company);
+                await _context.SaveChangesAsync();
+            } catch (DbUpdateConcurrencyException ex) {
+                Debug.WriteLine(ex);
+            }
+        }
+
+        //Remove existing company from the database
+        private async Task DeleteCompany(int id) {
+            Company company = await GetCompany(id);
+
+            try {
+                _context.Company.Remove(company);
+                await _context.SaveChangesAsync();
+            } catch (Exception ex) {
+                Debug.WriteLine(ex);
+            }
+        }
+
+        //------------------------------------------------------------------------
+        //Controller actions
+
+        //GET => Companies/Index
         public async Task<IActionResult> Index(string sortOrder, string searchQuery) {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Companies";
 
-            //SORTING OPTIONS DEBTOR LIST
+            //Sort function
             ViewBag.BeginSortParm = String.IsNullOrEmpty(sortOrder) ? "begin_desc" : "";
             ViewBag.CompanyNameSortParm = sortOrder == "CompanyName" ? "companyname_desc" : "CompanyName";
             ViewBag.CityNameSortParm = sortOrder == "City" ? "city_desc" : "City";
             ViewBag.EmailSortParm = sortOrder == "Email" ? "email_desc" : "Email";
 
+            //Search function
             var companies = await GetCompanies();
             var query = from company in companies
                         select company;
 
-            //SEARCH OPTION PRODUCT LIST
             if (!String.IsNullOrEmpty(searchQuery)) {
                 query = query.Where(s => s.CompanyName.Contains(searchQuery)
                                        || s.Email.Contains(searchQuery)
@@ -51,19 +99,20 @@ namespace InvoiceWebApp.Controllers {
             }
 
             switch (sortOrder) {
-                //WHEN NO SORT
+                //Default
                 case "begin_desc":
                     query = query.OrderByDescending(s => s.CompanyName);
                     break;
-                //COMPANY NAME
+
+                //Sort on name
                 case "CompanyName":
                     query = query.OrderBy(s => s.CompanyName);
                     break;
-
                 case "companyname_desc":
                     query = query.OrderByDescending(s => s.CompanyName);
                     break;
-                //EMAIL
+
+                //Sort on email
                 case "Email":
                     query = query.OrderBy(s => s.Email);
                     break;
@@ -71,7 +120,8 @@ namespace InvoiceWebApp.Controllers {
                 case "email_desc":
                     query = query.OrderByDescending(s => s.Email);
                     break;
-                //CITY
+
+                //Sort on city
                 case "City":
                     query = query.OrderBy(s => s.City);
                     break;
@@ -79,7 +129,8 @@ namespace InvoiceWebApp.Controllers {
                 case "city_desc":
                     query = query.OrderByDescending(s => s.City);
                     break;
-                //DEFAUlT
+
+                //Default
                 default:
                     query = query.OrderBy(s => s.CompanyName);
                     break;
@@ -88,17 +139,21 @@ namespace InvoiceWebApp.Controllers {
             return View(query);
         }
 
-        // GET: Companies/Details/5
+        //---------------------------------
+
+        //GET => Companies/Details/5
         public async Task<IActionResult> Details(int? id) {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Companies";
 
             if (id == null) {
                 return NotFound();
             }
 
-            var company = await _context.Company
-                .SingleOrDefaultAsync(m => m.CompanyID == id);
+            //Get company
+            var company = await GetCompany(id);
+
             if (company == null) {
                 return NotFound();
             }
@@ -106,79 +161,48 @@ namespace InvoiceWebApp.Controllers {
             return View(company);
         }
 
-        // GET: Companies/Create
+        //---------------------------------
+
+        //GET => Companies/Create
         public IActionResult Create() {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Companies";
 
             return View();
         }
 
-        // POST: Companies/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //---------------------------------
+
+        //POST => Companies/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("CompanyID,CompanyName,Email,Phone,BankAccount,Address,PostalCode,City,Country,RegNumber,FinancialNumber,EUFinancialNumber,BankName")] Company company) {
+
             if (ModelState.IsValid) {
-                _context.Add(company);
-                await _context.SaveChangesAsync();
+                //Add company to database
+                await CreateCompany(company);
                 return RedirectToAction("Index");
             }
+
             return View(company);
         }
 
-        // GET: Companies/Edit/5
+        //---------------------------------
+
+        //GET => Companies/Edit/5
         public async Task<IActionResult> Edit(int? id) {
-            if (id == null) {
-                return NotFound();
-            }
 
-            var company = await _context.Company.SingleOrDefaultAsync(m => m.CompanyID == id);
-            if (company == null) {
-                return NotFound();
-            }
-            return View(company);
-        }
-
-        // POST: Companies/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CompanyID,CompanyName,Email,Phone,BankAccount,Address,PostalCode,City,Country,RegNumber,FinancialNumber,EUFinancialNumber,BankName")] Company company) {
-            if (id != company.CompanyID) {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid) {
-
-                try {
-                    _context.Update(company);
-                    await _context.SaveChangesAsync();
-                } catch (DbUpdateConcurrencyException) {
-                    if (!CompanyExists(company.CompanyID)) {
-                        return NotFound();
-                    } else {
-                        throw;
-                    }
-                }
-                return RedirectToAction("Index");
-            }
-            return View(company);
-        }
-
-        // GET: Companies/Delete/5
-        public async Task<IActionResult> Delete(int? id) {
-            //CURRENT PAGE
+            //Current page
             ViewBag.Current = "Companies";
 
             if (id == null) {
                 return NotFound();
             }
 
-            var company = await _context.Company
-                .SingleOrDefaultAsync(m => m.CompanyID == id);
+            //Get company
+            var company = await GetCompany(id);
+
             if (company == null) {
                 return NotFound();
             }
@@ -186,18 +210,72 @@ namespace InvoiceWebApp.Controllers {
             return View(company);
         }
 
-        // POST: Companies/Delete/5
+        //---------------------------------
+
+        //POST => Companies/Edit/5
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(int id, [Bind("CompanyID,CompanyName,Email,Phone,BankAccount,Address,PostalCode,City,Country,RegNumber,FinancialNumber,EUFinancialNumber,BankName")] Company company) {
+
+            if (id != company.CompanyID) {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid) {
+                try {
+                    //Update administrator
+                    await UpdateCompany(company);
+                } catch (DbUpdateConcurrencyException) {
+                    if (!CompanyExists(company.CompanyID)) {
+                        return NotFound();
+                    } else { throw; }
+                }
+
+                return RedirectToAction("Index");
+            }
+
+            return View(company);
+        }
+
+        //---------------------------------
+
+        //GET => Companies/Delete/5
+        public async Task<IActionResult> Delete(int? id) {
+
+            //Current page
+            ViewBag.Current = "Companies";
+
+            if (id == null) {
+                return NotFound();
+            }
+
+            var company = await GetCompany(id);
+
+            if (company == null) {
+                return NotFound();
+            }
+
+            return View(company);
+        }
+
+        //---------------------------------
+
+        //POST => Companies/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id) {
-            var company = await _context.Company.SingleOrDefaultAsync(m => m.CompanyID == id);
-            _context.Company.Remove(company);
-            await _context.SaveChangesAsync();
+
+            //Delete administrator from database
+            await DeleteCompany(id);
+
             return RedirectToAction("Index");
         }
+
+        //---------------------------------
 
         private bool CompanyExists(int id) {
             return _context.Company.Any(e => e.CompanyID == id);
         }
+
     }
 }

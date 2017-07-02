@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 namespace InvoiceWebApp.Controllers {
 
     public class InvoicesController : Controller {
+
+        //Instances
         private ApplicationDbContext _context;
         private AppSettings _settings;
 
@@ -21,30 +23,30 @@ namespace InvoiceWebApp.Controllers {
             _settings = _context.Settings.FirstOrDefault();
         }
 
-        /*----------------------------------------------------------------------*/
-        //DATABASE ACTION METHODS
+        //------------------------------------------------------------------------
+        //Database action methods
 
-        //Get all invoices
+        //Get a list of all invoices
         private async Task<List<Invoice>> GetInvoices() {
-            List<Invoice> invoiceList = await _context.Invoices
-                                .Include(s => s.Debtor)
-                                .Include(s => s.Company)
-                                .Include(s => s.InvoiceItems)
-                                    .ThenInclude(s => s.Product)
-                                .ToListAsync();
-            return invoiceList;
+            return await _context.Invoices
+                        .Include(s => s.Debtor)
+                        .Include(s => s.Company)
+                        .Include(s => s.InvoiceItems)
+                        .ThenInclude(s => s.Product)
+                        .ToListAsync();
         }
 
+        //Get invoice based on invoice number
         private async Task<Invoice> GetInvoice(int? id) {
             Invoice invoice = null;
 
             try {
                 invoice = await _context.Invoices
-                                    .Include(s => s.Debtor)
-                                    .Include(s => s.Company)
-                                    .Include(s => s.InvoiceItems)
-                                        .ThenInclude(s => s.Product)
-                                    .SingleOrDefaultAsync(s => s.InvoiceNumber == id);
+                        .Include(s => s.Debtor)
+                        .Include(s => s.Company)
+                        .Include(s => s.InvoiceItems)
+                        .ThenInclude(s => s.Product)
+                        .SingleOrDefaultAsync(s => s.InvoiceNumber == id);
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
@@ -52,13 +54,15 @@ namespace InvoiceWebApp.Controllers {
             return invoice;
         }
 
+        //Get a list of all invoices items based on invoice number
         private async Task<List<InvoiceItem>> GetInvoiceItems(int? id) {
             List<InvoiceItem> itemList = null;
 
             try {
-                itemList = await _context.InvoiceItems.Include(d => d.Product)
-                                        .Where(s => s.InvoiceNumber == id)
-                                        .ToListAsync();
+                itemList = await _context.InvoiceItems
+                            .Include(d => d.Product)
+                            .Where(s => s.InvoiceNumber == id)
+                            .ToListAsync();
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
@@ -66,16 +70,14 @@ namespace InvoiceWebApp.Controllers {
             return itemList;
         }
 
-        //Create new invoice
+        //Add invoice and invoice items to the database
         private async Task CreateInvoice(Invoice invoice, string pids, string amounts, string total) {
-            Debug.WriteLine("DebtorID before: " + invoice.DebtorID);
-            Debug.WriteLine("CompanyID before: " + invoice.CompanyID);
 
             //Check if one of these is null or empty
-            if (invoice.DebtorID == -1 || invoice.DebtorID == null 
+            if (invoice.DebtorID == -1 || invoice.DebtorID == null
                 || String.IsNullOrEmpty(invoice.DebtorID.ToString())) {
                 invoice.DebtorID = null;
-            } else if (invoice.CompanyID == -1 || invoice.CompanyID == null 
+            } else if (invoice.CompanyID == -1 || invoice.CompanyID == null
                 || String.IsNullOrEmpty(invoice.CompanyID.ToString())) {
                 invoice.CompanyID = null;
             }
@@ -103,6 +105,7 @@ namespace InvoiceWebApp.Controllers {
                 }
 
                 if (pidArray != null) {
+                    //Add all items to the database
                     for (int i = 0; i < pidArray.Length; i++) {
                         int pid = int.Parse(pidArray[i]);
                         int amount = int.Parse(amountArray[i]);
@@ -117,6 +120,7 @@ namespace InvoiceWebApp.Controllers {
 
                     _context.AddRange(items);
                 } else {
+                    //Add only one item to the database
                     InvoiceItem item = new InvoiceItem();
                     item.Amount = int.Parse(amounts);
                     item.InvoiceNumber = invoice.InvoiceNumber;
@@ -132,16 +136,14 @@ namespace InvoiceWebApp.Controllers {
             }
         }
 
-        //Update Invoice
+        //Update existing invoice
         private async Task UpdateInvoice(Invoice invoice, string pids, string amounts, string total) {
+
+            //Variables
             bool isEmpty = false;
             string[] pidArray = null;
             string[] amountArray = null;
             List<InvoiceItem> items = new List<InvoiceItem>();
-
-            Debug.WriteLine("pid: " + pids);
-            Debug.WriteLine("amount: " + amounts);
-            Debug.WriteLine("total: " + total);
 
             try {
                 if (pids == "" || pids == null) {
@@ -150,11 +152,12 @@ namespace InvoiceWebApp.Controllers {
 
                 if (isEmpty == false) {
                     Invoice invoiceBeforeUpdate = _context.Invoices
-                                                .Include(s => s.Debtor)
-                                                .Include(s => s.Company)
-                                                .Include(s => s.InvoiceItems)
-                                                .Single(s => s.InvoiceNumber == invoice.InvoiceNumber);
+                                .Include(s => s.Debtor)
+                                .Include(s => s.Company)
+                                .Include(s => s.InvoiceItems)
+                                .Single(s => s.InvoiceNumber == invoice.InvoiceNumber);
 
+                    //Update invoice with new values
                     invoiceBeforeUpdate.InvoiceNumber = invoice.InvoiceNumber;
                     invoiceBeforeUpdate.CreatedOn = invoice.CreatedOn;
                     invoiceBeforeUpdate.ExpirationDate = invoice.ExpirationDate;
@@ -168,7 +171,6 @@ namespace InvoiceWebApp.Controllers {
                     if (pids.Length > 1) {
                         pidArray = pids.Split(',');
                     }
-
                     if (amounts.Length > 1) {
                         amountArray = amounts.Split(',');
                     }
@@ -188,6 +190,7 @@ namespace InvoiceWebApp.Controllers {
 
                         _context.InvoiceItems.AddRange(items);
                         await _context.SaveChangesAsync();
+
                     } else if (pidArray == null && (pids != "" || pids != null)) {
                         InvoiceItem item = new InvoiceItem();
                         item.Amount = int.Parse(amounts);
@@ -203,7 +206,7 @@ namespace InvoiceWebApp.Controllers {
             }
         }
 
-        //Delete invoice
+        //Remove existing invoice and all it's items from the database
         private async Task DeleteInvoice(int id) {
             Invoice invoice = await GetInvoice(id);
             List<InvoiceItem> itemList = await GetInvoiceItems(id);
@@ -217,25 +220,26 @@ namespace InvoiceWebApp.Controllers {
             }
         }
 
-        /*----------------------------------------------------------------------*/
-        //CONTROLLER ACTIONS
+        //------------------------------------------------------------------------
+        //Controller actions
 
-        // GET: Invoice
+        //GET => Invoices/Index
         public async Task<IActionResult> Index(string sortOrder, string searchQuery) {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Invoices";
 
-            //SORTING OPTIONS INVOICE LIST
+            //Sort function
             ViewBag.BeginSortParm = String.IsNullOrEmpty(sortOrder) ? "begin_desc" : "";
             ViewBag.NumberSortParm = sortOrder == "Number" ? "number_desc" : "Number";
             ViewBag.TotalSortParm = sortOrder == "Total" ? "total_desc" : "Total";
             ViewBag.DebtorSortParm = sortOrder == "Debtor" ? "debtor_desc" : "Debtor";
 
+            //Search function
             var invoices = await GetInvoices();
             var query = from invoice in invoices
                         select invoice;
 
-            //SEARCH OPTION INVOICE LIST
             if (!String.IsNullOrEmpty(searchQuery)) {
                 query = query.Where(s => s.Debtor.FullName.Contains(searchQuery)
                                     || s.InvoiceNumber.ToString().Contains(searchQuery)
@@ -243,35 +247,36 @@ namespace InvoiceWebApp.Controllers {
             }
 
             switch (sortOrder) {
-                //WHEN NO SORT
+                //Default
                 case "begin_desc":
                     query = query.OrderBy(s => s.InvoiceNumber);
                     break;
-                //INVOICE NUMBER
+
+                //Sort on invoice number
                 case "Number":
                     query = query.OrderBy(s => s.InvoiceNumber);
                     break;
-
                 case "number_desc":
                     query = query.OrderByDescending(s => s.InvoiceNumber);
                     break;
-                //DEBTOR
+
+                //Sort on debtor
                 case "Debtor":
                     query = query.OrderBy(s => s.Debtor.FullName);
                     break;
-
                 case "debtor_desc":
                     query = query.OrderByDescending(s => s.Debtor.FullName);
                     break;
-                //TOTAL
+
+                //Sort on total amount
                 case "Total":
                     query = query.OrderBy(s => s.Total);
                     break;
-
                 case "total_desc":
                     query = query.OrderByDescending(s => s.Total);
                     break;
-                //DEFAUlT
+
+                //Default
                 default:
                     query = query.OrderBy(s => s.InvoiceNumber);
                     break;
@@ -280,15 +285,19 @@ namespace InvoiceWebApp.Controllers {
             return View(query);
         }
 
-        // GET: Invoice/Details/5
+        //---------------------------------
+
+        //GET => Invoices/Details/5
         public async Task<IActionResult> Details(int? id) {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Invoices";
 
             if (id == null) {
                 return NotFound();
             }
 
+            //Get invoice, invoice items and related products
             Invoice invoice = await GetInvoice(id);
             List<InvoiceItem> invoiceItems = await GetInvoiceItems(id);
             List<Product> productList = new List<Product>();
@@ -296,6 +305,7 @@ namespace InvoiceWebApp.Controllers {
             if (invoice == null) {
                 return NotFound();
             }
+
             foreach (var item in invoiceItems) {
                 Product product = _context.Products.SingleOrDefault(s => s.ProductID == item.ProductID);
                 productList.Add(product);
@@ -310,6 +320,7 @@ namespace InvoiceWebApp.Controllers {
                 cnt++;
             }
 
+            //Viewbags and viewdata
             ViewBag.PIDs = pids;
             ViewBag.Amounts = invoiceItems.Select(s => s.Amount).ToArray();
             ViewBag.Names = invoiceItems.Select(s => s.Product.Name).ToArray();
@@ -324,25 +335,29 @@ namespace InvoiceWebApp.Controllers {
             return View(invoice);
         }
 
-        // GET: Invoice/Create
+        //---------------------------------
+
+        //GET => Invoices/Create
         public IActionResult Create() {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Invoices";
 
+            //Create selectlist with all products
             var products = _context.Products
                 .Select(s => new SelectListItem {
                     Value = s.ProductID.ToString() + "_" + s.Price.ToString(),
                     Text = s.Name
                 });
 
+            //Create selectlist with all companies
             var companies = _context.Company
                 .Select(s => new SelectListItem {
                     Value = s.CompanyID.ToString(),
                     Text = s.CompanyName.ToString() + " in " + s.City.ToString()
                 });
 
-            //----------------------------------------------------------------------------------------------
-            // VIEWBAGS AND VIEWDATA
+            //Viewbags and viewdata
             ViewBag.Products = new SelectList(products, "Value", "Text");
             ViewData["CompanyID"] = new SelectList(companies, "Value", "Text");
             ViewData["DebtorID"] = new SelectList(_context.Debtors, "DebtorID", "FullName");
@@ -350,7 +365,9 @@ namespace InvoiceWebApp.Controllers {
             return View();
         }
 
-        // POST: Invoice/Create
+        //---------------------------------
+
+        //POST => Invoices/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
@@ -358,15 +375,17 @@ namespace InvoiceWebApp.Controllers {
             string total, string pids, string amounts) {
 
             if (ModelState.IsValid) {
+                //Check if debtor or company id is null
                 if (invoice.DebtorID is int) {
                     invoice.CompanyID = null;
                 } else if (invoice.CompanyID is int) {
                     invoice.DebtorID = null;
                 }
 
+                //Add invoice to database
                 await CreateInvoice(invoice, pids, amounts, total);
 
-                //SEND MAIL TO DEBTOR NOTIFYING ABOUT INVOICE
+                //Send email to debtor about new invoice
                 if (invoice.Type == "Final") {
                     if (invoice.DebtorID is int) {
                         Debtor debtor = _context.Debtors.Single(s => s.DebtorID == invoice.DebtorID);
@@ -378,26 +397,25 @@ namespace InvoiceWebApp.Controllers {
                         await email.SendInvoiceEmailAsync(company.Email);
                     }
                 }
+
                 return RedirectToAction("Index");
             }
 
-            //----------------------------------------------------------------------------------------------
-            // BEGIN OF DROPDOWN LISTS
+            //Create selectlist with all products
             var products = _context.Products
                 .Select(s => new SelectListItem {
                     Value = s.ProductID.ToString() + "_" + s.Price.ToString(),
                     Text = s.Name
                 });
 
+            //Create selectlist with all companies
             var companies = _context.Company
                 .Select(s => new SelectListItem {
                     Value = s.CompanyID.ToString(),
                     Text = s.CompanyName.ToString() + " in " + s.City.ToString()
                 });
 
-            // END OF DROPDOWN LISTS
-            //----------------------------------------------------------------------------------------------
-            // VIEWBAGS AND VIEWDATA
+            //Viewbags and viewdata
             ViewBag.Products = new SelectList(products, "Value", "Text", pids);
             ViewData["CompanyID"] = new SelectList(companies, "Value", "Text", invoice.CompanyID);
             ViewData["DebtorID"] = new SelectList(_context.Debtors, "DebtorID", "FullName", invoice.DebtorID);
@@ -405,15 +423,19 @@ namespace InvoiceWebApp.Controllers {
             return View(invoice);
         }
 
-        // GET: Invoice/Edit/5
+        //---------------------------------
+
+        //GET => Invoices/Edit/5
         public async Task<IActionResult> Edit(int? id) {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Invoices";
 
             if (id == null) {
                 return NotFound();
             }
 
+            //Get invoice and invoice items
             var invoice = await GetInvoice(id);
             var items = await GetInvoiceItems(id);
 
@@ -421,6 +443,7 @@ namespace InvoiceWebApp.Controllers {
                 return NotFound();
             }
 
+            //Get product id's and create unique id
             var p = _context.Products;
             string[] pids = new string[p.Count()];
 
@@ -431,22 +454,21 @@ namespace InvoiceWebApp.Controllers {
                 cnt++;
             }
 
-            //----------------------------------------------------------------------------------------------
-            // BEGIN OF DROPDOWN LISTS
+            //Create selectlist with all products
             var products = _context.Products
                  .Select(s => new SelectListItem {
                      Value = s.ProductID.ToString() + "_" + s.Price.ToString(),
                      Text = s.Name
                  });
 
+            //Create selectlist with all companies
             var companies = _context.Company
                 .Select(s => new SelectListItem {
                     Value = s.CompanyID.ToString(),
                     Text = s.CompanyName.ToString() + " in " + s.City.ToString()
                 });
 
-            //----------------------------------------------------------------------------------------------
-            // VIEWBAGS AND VIEWDATA
+            //Viewbags and viewdata
             ViewBag.PIDs = pids;
             ViewBag.Amounts = items.Select(s => s.Amount).ToArray();
             ViewBag.Names = items.Select(s => s.Product.Name).ToArray();
@@ -459,21 +481,25 @@ namespace InvoiceWebApp.Controllers {
             return View(invoice);
         }
 
-        // POST: Invoice/Edit/5
+        //---------------------------------
+
+        //POST => Invoices/Edit/5        
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id,
             [Bind("InvoiceNumber,CreatedOn,DebtorID,CompanyID,Paid,ExpirationDate,Type")] Invoice invoice,
             string pids, string amounts, string total) {
+
             if (id != invoice.InvoiceNumber) {
                 return NotFound();
             }
 
             if (ModelState.IsValid) {
+                //Update invoice
                 Invoice invoiceBeforeUpdate = _context.Invoices.Single(s => s.InvoiceNumber == invoice.InvoiceNumber);
                 await UpdateInvoice(invoice, pids, amounts, total);
 
-                //SEND MAIL TO DEBTOR NOTIFYING ABOUT INVOICE
+                //Send email to debtor about new invoice
                 if (invoice.Type == "Final" && invoiceBeforeUpdate.Type != "Final" && !String.IsNullOrEmpty(invoice.DebtorID.ToString())) {
                     Debtor debtor = _context.Debtors.Single(s => s.DebtorID == invoice.DebtorID);
                     AuthMessageSender email = new AuthMessageSender(_settings);
@@ -488,31 +514,33 @@ namespace InvoiceWebApp.Controllers {
                 return RedirectToAction("Index");
             }
 
-            //----------------------------------------------------------------------------------------------
-            // BEGIN OF DROPDOWN LISTS
+            //Create selectlist with all companies
             var companies = _context.Company
                 .Select(s => new SelectListItem {
                     Value = s.CompanyID.ToString(),
                     Text = s.CompanyName.ToString() + " in " + s.City.ToString()
                 });
 
-            //----------------------------------------------------------------------------------------------
-            // VIEWBAGS AND VIEWDATA
+            //Viewbags and viewdata
             ViewData["CompanyID"] = new SelectList(companies, "Value", "Text", invoice.CompanyID);
             ViewData["DebtorID"] = new SelectList(_context.Debtors, "DebtorID", "FullName", invoice.DebtorID);
 
             return View(invoice);
         }
 
-        // GET: Invoice/Delete/5
+        //---------------------------------
+
+        //GET => Invoices/Delete/5
         public async Task<IActionResult> Delete(int? id) {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Invoices";
 
             if (id == null) {
                 return NotFound();
             }
 
+            //Get invoice and invoice items
             Invoice invoice = await GetInvoice(id);
             List<InvoiceItem> invoiceItems = await GetInvoiceItems(id);
             List<Product> productList = new List<Product>();
@@ -520,13 +548,14 @@ namespace InvoiceWebApp.Controllers {
             if (invoice == null) {
                 return NotFound();
             }
+
+            //Get product based on id and add these to a list
             foreach (var item in invoiceItems) {
                 Product product = _context.Products.SingleOrDefault(s => s.ProductID == item.ProductID);
                 productList.Add(product);
             }
 
-            //----------------------------------------------------------------------------------------------
-            // BEGIN OF DROPDOWN LISTS
+            //Create selectlist with all products
             int cnt = 0;
             string[] pids = new string[invoiceItems.Count];
 
@@ -536,8 +565,7 @@ namespace InvoiceWebApp.Controllers {
                 cnt++;
             }
 
-            //----------------------------------------------------------------------------------------------
-            // VIEWBAGS AND VIEWDATA
+            //Viewbags and viewdata
             ViewBag.PIDs = pids;
             ViewBag.Amounts = invoiceItems.Select(s => s.Amount).ToArray();
             ViewBag.Names = invoiceItems.Select(s => s.Product.Name).ToArray();
@@ -552,16 +580,24 @@ namespace InvoiceWebApp.Controllers {
             return View(invoice);
         }
 
-        // POST: Invoice/Delete/5
+        //---------------------------------
+
+        //POST => Invoices/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id) {
+
+            //Delete invoice from database
             await DeleteInvoice(id);
             return RedirectToAction("Index");
         }
 
-        // POST: Invoice/Pay
+        //---------------------------------
+
+        //POST => Invoices/Pay/5
         public IActionResult Pay(int id) {
+
+            //Update invoice
             Invoice invoiceBeforeUpdate = _context.Invoices.Single(s => s.InvoiceNumber == id);
             invoiceBeforeUpdate.Paid = true;
 
@@ -571,8 +607,11 @@ namespace InvoiceWebApp.Controllers {
             return RedirectToAction("Index", "MyInvoice", null);
         }
 
+        //---------------------------------
+
         private bool InvoiceExists(int id) {
             return _context.Invoices.Any(e => e.InvoiceNumber == id);
         }
+
     }
 }

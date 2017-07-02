@@ -14,6 +14,8 @@ using System.Threading.Tasks;
 namespace InvoiceWebApp.Controllers {
 
     public class AdminsController : Controller {
+
+        //Instances
         private ApplicationDbContext _context;
         private AppSettings _settings;
         private IHostingEnvironment _env;
@@ -24,14 +26,15 @@ namespace InvoiceWebApp.Controllers {
             _settings = _context.Settings.SingleOrDefault();
         }
 
-        /*----------------------------------------------------------------------*/
-        //DATABASE ACTION METHODS
+        //------------------------------------------------------------------------
+        //Database action methods
 
+        //Get a list of all administrators
         private async Task<List<Admin>> GetAdmins() {
-            List<Admin> adminList = await _context.Admins.ToListAsync();
-            return adminList;
+            return await _context.Admins.ToListAsync();
         }
 
+        //Get administrator based on id
         private async Task<Admin> GetAdmin(int? id) {
             Admin admin = null;
 
@@ -44,6 +47,7 @@ namespace InvoiceWebApp.Controllers {
             return admin;
         }
 
+        //Add administrator to the database
         private async Task CreateAdmin(Admin admin) {
             try {
                 _context.Admins.Add(admin);
@@ -53,6 +57,7 @@ namespace InvoiceWebApp.Controllers {
             }
         }
 
+        //Update existing administrator
         private async Task UpdateAdmin(Admin admin) {
             try {
                 _context.Update(admin);
@@ -62,6 +67,7 @@ namespace InvoiceWebApp.Controllers {
             }
         }
 
+        //Remove existing administrator from the database
         private async Task DeleteAdmin(int id) {
             Admin admin = await GetAdmin(id);
 
@@ -73,25 +79,26 @@ namespace InvoiceWebApp.Controllers {
             }
         }
 
-        /*----------------------------------------------------------------------*/
-        //CONTROLLER ACTIONS
+        //------------------------------------------------------------------------
+        //Controller actions
 
-        // GET: Admins
+        //GET => Admins/Index
         public async Task<IActionResult> Index(string sortOrder, string searchQuery) {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Admins";
 
-            //SORTING OPTIONS ADMIN LIST
+            //Sort function
             ViewBag.BeginSortParm = String.IsNullOrEmpty(sortOrder) ? "begin_desc" : "";
             ViewBag.FirstNameSortParm = sortOrder == "FirstName" ? "firstname_desc" : "FirstName";
             ViewBag.LastNameSortParm = sortOrder == "LastName" ? "lastname_desc" : "LastName";
             ViewBag.EmailSortParm = sortOrder == "Email" ? "email_desc" : "Email";
 
+            //Search function
             var admins = await GetAdmins();
             var query = from admin in admins
                         select admin;
 
-            //SEARCH OPTION ADMIN LIST
             if (!String.IsNullOrEmpty(searchQuery)) {
                 query = query.Where(s => s.FirstName.Contains(searchQuery)
                                        || s.Email.Contains(searchQuery)
@@ -99,35 +106,36 @@ namespace InvoiceWebApp.Controllers {
             }
 
             switch (sortOrder) {
-                //WHEN NO SORT
+                //Default
                 case "begin_desc":
                     query = query.OrderByDescending(s => s.LastName);
                     break;
-                //FIRST NAME
+
+                //Sort on first name
                 case "FirstName":
                     query = query.OrderBy(s => s.FirstName);
                     break;
-
                 case "firstname_desc":
                     query = query.OrderByDescending(s => s.FirstName);
                     break;
-                //EMAIL
+
+                //Sort on email
                 case "Email":
                     query = query.OrderBy(s => s.Email);
                     break;
-
                 case "email_desc":
                     query = query.OrderByDescending(s => s.Email);
                     break;
-                //CITY
+
+                //Sort on last name
                 case "LastName":
                     query = query.OrderBy(s => s.LastName);
                     break;
-
                 case "lastname_desc":
                     query = query.OrderByDescending(s => s.LastName);
                     break;
-                //DEFAUlT
+
+                //Default
                 default:
                     query = query.OrderBy(s => s.LastName);
                     break;
@@ -136,17 +144,21 @@ namespace InvoiceWebApp.Controllers {
             return View(query);
         }
 
-        // GET: Admins/Details/5
+        //---------------------------------
+
+        //GET => Admins/Details/5
         public async Task<IActionResult> Details(int? id) {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Admins";
 
             if (id == null) {
                 return NotFound();
             }
 
-            var admin = await _context.Admins
-                .SingleOrDefaultAsync(m => m.AdminID == id);
+            //Get administrator
+            var admin = await GetAdmin(id);
+
             if (admin == null) {
                 return NotFound();
             }
@@ -154,80 +166,97 @@ namespace InvoiceWebApp.Controllers {
             return View(admin);
         }
 
-        // GET: Admins/Create
+        //---------------------------------
+
+        //GET => Admins/Create
         public IActionResult Create() {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Admins";
 
             return View();
         }
 
-        // POST: Admins/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //---------------------------------
+
+        //POST => Admins/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("AdminID,FirstName,LastName,Email,Password")] Admin admin) {
+
             if (ModelState.IsValid) {
+                //Add administrator to database
                 await CreateAdmin(admin);
                 return RedirectToAction("Login", new { area = "" });
             }
+
             return View(admin);
         }
 
-        // GET: Admins/Edit/5
+        //---------------------------------
+
+        //GET => Admins/Edit/5
         public async Task<IActionResult> Edit(int? id) {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Manage";
 
             if (id == null) {
                 return NotFound();
             }
 
+            //Get administrator
             var admin = await GetAdmin(id);
 
             if (admin == null) {
                 return NotFound();
             }
+
             return View(admin);
         }
 
-        // POST: Admins/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        //---------------------------------
+
+        //POST => Admins/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("AdminID,FirstName,LastName,Email,Password")] Admin admin) {
+
             if (id != admin.AdminID) {
                 return NotFound();
             }
 
             if (ModelState.IsValid) {
                 try {
+                    //Update administrator
                     await UpdateAdmin(admin);
                 } catch (DbUpdateConcurrencyException) {
                     if (!AdminExists(admin.AdminID)) {
                         return NotFound();
-                    } else {
-                        throw;
-                    }
+                    } else { throw; }
                 }
+
                 return RedirectToAction("Index", "Home", new { area = "" });
             }
+
             return View(admin);
         }
 
-        // GET: Admins/Delete/5
+        //---------------------------------
+
+        //GET => Admins/Delete/5
         public async Task<IActionResult> Delete(int? id) {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Admins";
 
             if (id == null) {
                 return NotFound();
             }
 
-            var admin = await _context.Admins
-                .SingleOrDefaultAsync(m => m.AdminID == id);
+            //Get administrator
+            var admin = await GetAdmin(id);
+
             if (admin == null) {
                 return NotFound();
             }
@@ -235,35 +264,47 @@ namespace InvoiceWebApp.Controllers {
             return View(admin);
         }
 
-        // POST: Admins/Delete/5
+        //---------------------------------
+
+        //POST => Admins/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id) {
-            var admin = await _context.Admins.SingleOrDefaultAsync(m => m.AdminID == id);
-            _context.Admins.Remove(admin);
-            await _context.SaveChangesAsync();
+
+            //Delete administrator from database
+            await DeleteAdmin(id);
+
             return RedirectToAction("Index");
         }
 
-        //GET: Admins/Login
+        //---------------------------------
+
+        //GET => Admins/Login
         public ActionResult Login() {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "AdminLogin";
 
             return View();
         }
 
-        //POST: User/Login
+        //---------------------------------
+
+        //POST => Admins/Login
         [HttpPost]
         public ActionResult Login(Admin admin) {
+
             Admin login = null;
 
             try {
-                login = _context.Admins.Where(a => a.Email == admin.Email && a.Password == admin.Password).FirstOrDefault();
+                //Get admin based on email and password
+                login = _context.Admins.Where(a => a.Email == admin.Email && a.Password == admin.Password)
+                    .FirstOrDefault();
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
 
+            //Set admin session variable
             if (login != null) {
                 SessionHelper.Set(this.HttpContext.Session, "Admin", login);
                 return RedirectToAction("Index", "Home", new { email = login.Email });
@@ -272,27 +313,38 @@ namespace InvoiceWebApp.Controllers {
             return View(login);
         }
 
-        //GET: Admins/Logout
+        //---------------------------------
+
+        //POST => Admins/Logout
         public ActionResult Logout() {
+
+            //Remove session variables and return to sign in view
             HttpContext.Session.Remove("Admin");
             HttpContext.Session.Remove("User");
             return RedirectToAction("Login", "Admins", new { area = "" });
         }
 
-        //GET: Admins/ForgotPassword
+        //---------------------------------
+
+        //GET => Admins/ForgotPassword
         public ActionResult ForgotPassword() {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "AdminLogin";
 
             return View();
         }
 
-        //POST: Admins/ForgotPassword
+        //---------------------------------
+
+        //POST => Admins/ForgotPassword
         [HttpPost]
         public ActionResult ForgotPassword(string email, string password) {
+
             Admin admin = null;
 
             try {
+                //Get admin based on email
                 admin = _context.Admins.SingleOrDefault(m => m.Email == email);
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
@@ -303,6 +355,7 @@ namespace InvoiceWebApp.Controllers {
             }
 
             try {
+                //Update administrator with new password
                 admin.Password = password;
                 _context.Update(admin);
                 _context.SaveChanges();
@@ -314,17 +367,23 @@ namespace InvoiceWebApp.Controllers {
             }
         }
 
-        //GET: User/Settings
+        //---------------------------------
+
+        //GET => Admins/Settings
         public ActionResult Settings() {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "Settings";
 
             return View(_settings);
         }
 
-        //POST: User/Settings
+        //---------------------------------
+
+        //POST => Admins/Settings
         [HttpPost]
         public async Task<ActionResult> Settings(AppSettings AppSettings, IFormFile file) {
+
             if (AppSettings != null) {
                 try {
                     if (file != null) {
@@ -343,6 +402,7 @@ namespace InvoiceWebApp.Controllers {
                     Debug.WriteLine(ex);
                 }
 
+                //Update settings with new value(s)
                 _settings.Address = AppSettings.Address;
                 _settings.PostalCode = AppSettings.PostalCode;
                 _settings.City = AppSettings.City;
@@ -388,8 +448,11 @@ namespace InvoiceWebApp.Controllers {
             return View();
         }
 
+        //---------------------------------
+
         private bool AdminExists(int id) {
             return _context.Admins.Any(e => e.AdminID == id);
         }
+
     }
 }
