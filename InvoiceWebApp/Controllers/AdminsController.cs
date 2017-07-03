@@ -421,6 +421,7 @@ namespace InvoiceWebApp.Controllers {
                 }
 
                 _settings.UseLogo = AppSettings.UseLogo;
+                _settings.UseLogoInPDF = AppSettings.UseLogoInPDF;
 
                 _settings.Website = AppSettings.Website;
                 _settings.Phone = AppSettings.Phone;

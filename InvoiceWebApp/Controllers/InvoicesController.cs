@@ -1,6 +1,7 @@
 using InvoiceWebApp.Data;
 using InvoiceWebApp.Models;
 using InvoiceWebApp.Services;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
@@ -17,10 +18,12 @@ namespace InvoiceWebApp.Controllers {
         //Instances
         private ApplicationDbContext _context;
         private AppSettings _settings;
+        private IHostingEnvironment _env;
 
-        public InvoicesController(ApplicationDbContext context) {
+        public InvoicesController(ApplicationDbContext context, IHostingEnvironment env) {
             _context = context;
             _settings = _context.Settings.FirstOrDefault();
+            _env = env;
         }
 
         //------------------------------------------------------------------------
@@ -611,7 +614,7 @@ namespace InvoiceWebApp.Controllers {
 
         //GET => Invoices/Download/5
         public IActionResult Download(int id) {
-            PDF pdf = new PDF(_context);
+            PDF pdf = new PDF(_context, _env);
             return pdf.CreatePDF(id);
         }
 

@@ -138,6 +138,8 @@ namespace InvoiceWebApp.Data.Migrations
 
                     b.Property<bool>("UseLogo");
 
+                    b.Property<bool>("UseLogoInPDF");
+
                     b.Property<string>("Website");
 
                     b.HasKey("ID");

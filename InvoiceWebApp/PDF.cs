@@ -1,5 +1,7 @@
 ﻿using InvoiceWebApp.Data;
 using InvoiceWebApp.Models;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -14,16 +16,21 @@ namespace InvoiceWebApp {
         //Instances
         private ApplicationDbContext _context;
         private AppSettings _settings;
+        private IHostingEnvironment _env;
 
-        public PDF(ApplicationDbContext context) {
+        public PDF(ApplicationDbContext context, IHostingEnvironment env) {
             _context = context;
             _settings = _context.Settings.FirstOrDefault();
+            _env = env;
         }
 
         public IActionResult CreatePDF(int id) {
 
             //Variables
             string invoiceNumber = "";
+            string logo = Path.Combine(_env.WebRootPath, "images/" + _settings.Logo);
+            
+            //Instances
             Invoice invoice = _context.Invoices.Single(s => s.InvoiceNumber == id);
             Debtor debtor = _context.Debtors.Single(s => s.DebtorID == invoice.DebtorID);
             List<InvoiceItem> invoiceItems = _context.InvoiceItems.Where(s => s.InvoiceNumber == invoice.InvoiceNumber).ToList();
@@ -74,6 +81,13 @@ namespace InvoiceWebApp {
                     color: #333;
                     float: left;
                     width: 80%;
+                    text-align: left;
+                }
+                .invoice-box table .top td .logo {
+                    padding-left: 0px !important;
+                    float: left;
+                    max-width: 65%;
+                    height: auto;
                     text-align: left;
                 }
                 .invoice-box table .top .company {
@@ -236,9 +250,16 @@ namespace InvoiceWebApp {
                 <td colspan=2>
                 <table>
                 <tr>
-                <td class=title>
-                <h2>" + _settings.CompanyName + "</h2>"
-                + "</td>"
+                <td class=title>";
+
+            if (_settings.UseLogoInPDF == true) {
+                companyString += "<img class=logo src=" + logo + " />";
+            } else {
+                companyString += "<h2>" + _settings.CompanyName + "</h2>";
+            }
+
+            companyString += 
+                "</td>"
                 + "<td class=company>"
                 + _settings.CompanyName
                 + "<hr />"

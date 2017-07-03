@@ -35,8 +35,8 @@
 
         //Logo
         public string Logo { get; set; }
-
         public bool UseLogo { get; set; }
+        public bool UseLogoInPDF { get; set; }
 
         //Invoice Prefix
         public string Prefix { get; set; }

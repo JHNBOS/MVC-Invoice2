@@ -257,7 +257,7 @@ namespace InvoiceWebApp.Controllers {
         }
 
         public IActionResult DownloadPDF(int id) {
-            PDF pdf = new PDF(_context);
+            PDF pdf = new PDF(_context, _env);
             return pdf.CreatePDF(id);
         }
 
