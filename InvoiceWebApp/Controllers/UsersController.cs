@@ -38,7 +38,9 @@ namespace InvoiceWebApp.Controllers {
             User user = null;
 
             try {
-                user = await _context.Users.Include(s => s.Debtor).SingleOrDefaultAsync(s => s.ID == id);
+                user = await _context.Users
+                        .Include(s => s.Debtor)
+                        .SingleOrDefaultAsync(s => s.ID == id);
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
@@ -225,7 +227,7 @@ namespace InvoiceWebApp.Controllers {
         //POST => Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,AccountType,Address,City,Country,Email,FirstName,LastName,Password,PostalCode")] User user) {
+        public async Task<IActionResult> Edit(int id, [Bind("ID,DebtorID,Email,Password,AccountType")] User user) {
 
             if (id != user.ID) {
                 return NotFound();
@@ -243,8 +245,7 @@ namespace InvoiceWebApp.Controllers {
                     } else { throw; }
                 }
 
-                User currentUser = SessionHelper.Get<User>(this.HttpContext.Session, "User");
-                return RedirectToAction("Index", "Home", new { email = currentUser.Email });
+                return RedirectToAction("Index");
             }
 
             return View(user);
@@ -302,31 +303,51 @@ namespace InvoiceWebApp.Controllers {
         public ActionResult Login(User user) {
             User userLogin = null;
             Admin adminLogin = null;
-            Debtor debtor = null;
 
             try {
                 //Find user based on email and password
-                userLogin = _context.Users.SingleOrDefault(u => u.Email == user.Email && u.Password == user.Password);
+                userLogin = _context.Users
+                                .Include(s => s.Debtor)
+                                .SingleOrDefault(u => u.Email == user.Email && u.Password == user.Password);
 
-                if (userLogin != null) {
-                    debtor = _context.Debtors.SingleOrDefault(d => d.DebtorID == userLogin.DebtorID);
-                    userLogin.Debtor = debtor;
+                if (userLogin == null) {
+                    adminLogin = _context.Admins
+                                    .SingleOrDefault(u => u.Email == user.Email && u.Password == user.Password);
                 } else {
-                    adminLogin = _context.Admins.SingleOrDefault(u => u.Email == user.Email && u.Password == user.Password);
+                    SessionHelper.Set(this.HttpContext.Session, "User", userLogin);
+                    return RedirectToAction("Index", "Home", new { email = userLogin.Email });
                 }
+
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
 
             //Set session variables
+            /*
             if (userLogin != null) {
-                SessionHelper.Set(this.HttpContext.Session, "User", userLogin);
+                var isExist = SessionHelper.IsExists(this.HttpContext.Session, "User");
+
+                if (isExist == false) {
+                    SessionHelper.Set(this.HttpContext.Session, "User", userLogin);
+                } else {
+                    SessionHelper.Set(this.HttpContext.Session, "User", null);
+                    SessionHelper.Set(this.HttpContext.Session, "User", userLogin);
+                }
+
                 return RedirectToAction("Index", "Home", new { email = userLogin.Email });
-            }
-            if (adminLogin != null) {
-                SessionHelper.Set(this.HttpContext.Session, "Admin", adminLogin);
+            } else if (adminLogin != null) {
+                var isExist = SessionHelper.IsExists(this.HttpContext.Session, "Admin");
+
+                if (isExist == false) {
+                    SessionHelper.Set(this.HttpContext.Session, "Admin", adminLogin);
+                } else {
+                    SessionHelper.Set(this.HttpContext.Session, "Admin", null);
+                    SessionHelper.Set(this.HttpContext.Session, "Admin", adminLogin);
+                }
+
                 return RedirectToAction("Index", "Home", new { email = adminLogin.Email });
             }
+            */
 
             return View(userLogin);
         }

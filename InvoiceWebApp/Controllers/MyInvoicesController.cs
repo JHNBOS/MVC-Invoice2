@@ -15,6 +15,8 @@ using WkWrap.Core;
 namespace InvoiceWebApp.Controllers {
 
     public class MyInvoicesController : Controller {
+
+        //Instances
         private ApplicationDbContext _context;
         private AppSettings _settings;
         private IHostingEnvironment _env;
@@ -27,17 +29,32 @@ namespace InvoiceWebApp.Controllers {
             _viewRenderService = viewRenderService;
         }
 
-        /*----------------------------------------------------------------------*/
-        //DATABASE ACTION METHODS
+        //------------------------------------------------------------------------
+        //Database action methods
 
+        //Get a list of all invoices
+        private async Task<List<Invoice>> GetInvoices(string email) {
+            return await _context.Invoices
+                        .Include(s => s.Debtor)
+                        .Include(s => s.Company)
+                        .Include(s => s.InvoiceItems)
+                            .ThenInclude(s => s.Product)
+                        .Where(s => s.Debtor.Email == email 
+                                && s.Type == "Final")
+                        .ToListAsync();
+        }
+
+        //Get invoice based on invoice number
         private async Task<Invoice> GetInvoice(int? id) {
             Invoice invoice = null;
 
             try {
-                invoice = await _context.Invoices.Include(s => s.Debtor)
-                                    .Include(s => s.InvoiceItems)
-                                    .ThenInclude(s => s.Product)
-                                    .SingleOrDefaultAsync(s => s.InvoiceNumber == id);
+                invoice = await _context.Invoices
+                        .Include(s => s.Debtor)
+                        .Include(s => s.Company)
+                        .Include(s => s.InvoiceItems)
+                            .ThenInclude(s => s.Product)
+                        .SingleOrDefaultAsync(s => s.InvoiceNumber == id);
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
@@ -45,13 +62,15 @@ namespace InvoiceWebApp.Controllers {
             return invoice;
         }
 
+        //Get a list of all invoices items based on invoice number
         private async Task<List<InvoiceItem>> GetInvoiceItems(int? id) {
             List<InvoiceItem> itemList = null;
 
             try {
-                itemList = await _context.InvoiceItems.Include(d => d.Product)
-                                        .Where(s => s.InvoiceNumber == id)
-                                        .ToListAsync();
+                itemList = await _context.InvoiceItems
+                            .Include(d => d.Product)
+                            .Where(s => s.InvoiceNumber == id)
+                            .ToListAsync();
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
@@ -59,27 +78,26 @@ namespace InvoiceWebApp.Controllers {
             return itemList;
         }
 
-        /*----------------------------------------------------------------------*/
-        //CONTROLLER ACTIONS
+        //------------------------------------------------------------------------
+        //Controller actions
 
-        // GET: MyInvoice
+        //GET => MyInvoices/Index
         public async Task<IActionResult> Index(string sortOrder, string searchQuery) {
-            //CURRENT PAGE
+
+            //Current page
             ViewBag.Current = "MyInvoices";
 
+            //Set session variable
             var currentUser = SessionHelper.Get<User>(this.HttpContext.Session, "User");
-            ViewBag.BeginSortParm = String.IsNullOrEmpty(sortOrder) ? "begin_desc" : "";
 
+            //Sort function
+            ViewBag.BeginSortParm = String.IsNullOrEmpty(sortOrder) ? "begin_desc" : "";
             ViewBag.NumberSortParm = sortOrder == "Number" ? "number_desc" : "Number";
             ViewBag.TotalSortParm = sortOrder == "Total" ? "total_desc" : "Total";
             ViewBag.DebtorSortParm = sortOrder == "Debtor" ? "debtor_desc" : "Debtor";
 
-            var invoices = _context.Invoices
-                .Include(i => i.Debtor)
-                .Include(i => i.InvoiceItems)
-                    .ThenInclude(c => c.Product)
-                .Where(d => d.Debtor.Email == currentUser.Email && d.Type == "Final");
-
+            //Search function
+            var invoices = await GetInvoices(currentUser.Email);
             var query = from invoice in invoices
                         select invoice;
 
@@ -89,44 +107,49 @@ namespace InvoiceWebApp.Controllers {
             }
 
             switch (sortOrder) {
-                //WHEN NO SORT
+                //Default
                 case "begin_desc":
                     query = query.OrderBy(s => s.InvoiceNumber);
                     break;
-                //INVOICE NUMBER
+
+                //Sort on invoice number
                 case "Number":
                     query = query.OrderBy(s => s.InvoiceNumber);
                     break;
-
                 case "number_desc":
                     query = query.OrderByDescending(s => s.InvoiceNumber);
                     break;
-                //TOTAL
+
+                //Sort on total amount
                 case "Total":
                     query = query.OrderBy(s => s.Total);
                     break;
-
                 case "total_desc":
                     query = query.OrderByDescending(s => s.Total);
                     break;
-                //DEFAUlT
+
+                //Default
                 default:
                     query = query.OrderBy(s => s.InvoiceNumber);
                     break;
             }
 
-            return View(await query.ToListAsync());
+            return View(query);
         }
 
-        // GET: Invoice/Details/5
+        //---------------------------------
+
+        //GET => MyInvoices/Details/5
         public async Task<IActionResult> Details(int? id) {
-            //CURRENT PAGE
+            
+            //Current page
             ViewBag.Current = "MyInvoices";
 
             if (id == null) {
                 return NotFound();
             }
 
+            //Get invoice, invoice items and related products
             Invoice invoice = await GetInvoice(id);
             List<InvoiceItem> invoiceItems = await GetInvoiceItems(id);
             List<Product> productList = new List<Product>();
@@ -134,6 +157,7 @@ namespace InvoiceWebApp.Controllers {
             if (invoice == null) {
                 return NotFound();
             }
+
             foreach (var item in invoiceItems) {
                 Product product = _context.Products.SingleOrDefault(s => s.ProductID == item.ProductID);
                 productList.Add(product);
@@ -148,6 +172,7 @@ namespace InvoiceWebApp.Controllers {
                 cnt++;
             }
 
+            //Viewbags and viewdata
             ViewBag.PIDs = pids;
             ViewBag.Amounts = invoiceItems.Select(s => s.Amount).ToArray();
             ViewBag.Names = invoiceItems.Select(s => s.Product.Name).ToArray();
@@ -161,108 +186,12 @@ namespace InvoiceWebApp.Controllers {
             return View(invoice);
         }
 
-        // GET: MyInvoice/Create
-        public IActionResult Create() {
-            //CURRENT PAGE
-            ViewBag.Current = "MyInvoices";
+        //---------------------------------
 
-            ViewData["DebtorID"] = new SelectList(_context.Debtors, "DebtorID", "Address");
-            return View();
-        }
-
-        // POST: MyInvoice/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("InvoiceNumber,CreatedOn,DebtorID,ExpirationDate,Total,Type")] Invoice invoice) {
-            if (ModelState.IsValid) {
-                _context.Add(invoice);
-                await _context.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            ViewData["DebtorID"] = new SelectList(_context.Debtors, "DebtorID", "Address", invoice.DebtorID);
-            return View(invoice);
-        }
-
-        // GET: MyInvoice/Edit/5
-        public async Task<IActionResult> Edit(int? id) {
-            //CURRENT PAGE
-            ViewBag.Current = "MyInvoices";
-
-            if (id == null) {
-                return NotFound();
-            }
-
-            var invoice = await _context.Invoices.SingleOrDefaultAsync(m => m.InvoiceNumber == id);
-            if (invoice == null) {
-                return NotFound();
-            }
-            ViewData["DebtorID"] = new SelectList(_context.Debtors, "DebtorID", "Address", invoice.DebtorID);
-            return View(invoice);
-        }
-
-        // POST: MyInvoice/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("InvoiceNumber,CreatedOn,DebtorID,ExpirationDate,Total,Type")] Invoice invoice) {
-            if (id != invoice.InvoiceNumber) {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid) {
-                try {
-                    _context.Update(invoice);
-                    await _context.SaveChangesAsync();
-                } catch (DbUpdateConcurrencyException) {
-                    if (!InvoiceExists(invoice.InvoiceNumber)) {
-                        return NotFound();
-                    } else {
-                        throw;
-                    }
-                }
-                return RedirectToAction("Index");
-            }
-            ViewData["DebtorID"] = new SelectList(_context.Debtors, "DebtorID", "Address", invoice.DebtorID);
-            return View(invoice);
-        }
-
-        // GET: MyInvoice/Delete/5
-        public async Task<IActionResult> Delete(int? id) {
-            //CURRENT PAGE
-            ViewBag.Current = "MyInvoices";
-
-            if (id == null) {
-                return NotFound();
-            }
-
-            var invoice = await _context.Invoices.SingleOrDefaultAsync(m => m.InvoiceNumber == id);
-            if (invoice == null) {
-                return NotFound();
-            }
-
-            return View(invoice);
-        }
-
-        // POST: MyInvoice/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id) {
-            var invoice = await _context.Invoices.SingleOrDefaultAsync(m => m.InvoiceNumber == id);
-            _context.Invoices.Remove(invoice);
-            await _context.SaveChangesAsync();
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult DownloadPDF(int id) {
-            PDF pdf = new PDF(_context, _env);
-            return pdf.CreatePDF(id);
-        }
-
-        // POST: Invoice/Pay
+        //POST => MyInvoices/Pay/5
         public IActionResult Pay(int id) {
+
+            //Update invoice
             Invoice invoiceBeforeUpdate = _context.Invoices.Single(s => s.InvoiceNumber == id);
             invoiceBeforeUpdate.Paid = true;
 
@@ -272,8 +201,19 @@ namespace InvoiceWebApp.Controllers {
             return RedirectToAction("Index");
         }
 
+        //---------------------------------
+
+        //GET => MyInvoices/Download/5
+        public IActionResult Download(int id) {
+            PDF pdf = new PDF(_context, _env);
+            return pdf.CreatePDF(id);
+        }
+
+        //---------------------------------
+
         private bool InvoiceExists(int id) {
             return _context.Invoices.Any(e => e.InvoiceNumber == id);
         }
+
     }
 }

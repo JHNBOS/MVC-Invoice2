@@ -185,7 +185,7 @@
         <nav class="blue-grey darken-2">
             <div class="nav-wrapper">
                 @if (user != null) {
-                    <a href="#" class="brand-logo" asp-controller="Home" asp-action="Index"
+                    <a class="brand-logo" asp-controller="Home" asp-action="Index" 
                        asp-route-email="@(user.Email)">
                         <!--BEGIN OF LOGO-->
                         @if (settings.Logo != "" && settings.UseLogo == true) {

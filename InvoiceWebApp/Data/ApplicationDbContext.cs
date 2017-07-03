@@ -15,8 +15,6 @@ namespace InvoiceWebApp.Data {
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
-
-
             //--------------------------------------
             //-------- Debtor ----------------------
             builder.Entity<Debtor>()
@@ -26,6 +24,11 @@ namespace InvoiceWebApp.Data {
             builder.Entity<Debtor>()
             .HasAlternateKey(c => c.BankAccount)
             .HasName("AlternateKey_BankAccount");
+
+            builder.Entity<Debtor>()
+                .HasOne(c => c.User)
+                    .WithOne(c => c.Debtor)
+                    .IsRequired(true);
 
             //--------------------------------------
             //-------- Product ---------------------

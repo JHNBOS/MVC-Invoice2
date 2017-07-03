@@ -619,6 +619,7 @@ namespace InvoiceWebApp.Controllers {
         }
 
         //---------------------------------
+
         private bool InvoiceExists(int id) {
             return _context.Invoices.Any(e => e.InvoiceNumber == id);
         }

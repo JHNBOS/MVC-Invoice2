@@ -1,10 +1,24 @@
 @model IEnumerable<InvoiceWebApp.Models.Invoice>
+@inject ApplicationDbContext _context
+@using System.Diagnostics
+@using InvoiceWebApp.Data
+@using InvoiceWebApp.Models
 
 @{
     ViewData["Title"] = "Invoices";
+
+    AppSettings settings = null;
+    if (SessionHelper.IsExists(Context.Session, "Settings")) {
+        settings = SessionHelper.Get<AppSettings>(Context.Session, "Settings");
+    }
+    if (!SessionHelper.IsExists(Context.Session, "Settings")) {
+        settings = _context.Settings.FirstOrDefault();
+        SessionHelper.Set(Context.Session, "Settings", settings);
+    }
 }
 
 <div class="container" id="myinvoice-index">
+
     <div class="row">
         <div class="col s12 col m12 center-align">
             <h4 style="margin-top: 40px;">Invoices</h4>
@@ -15,27 +29,21 @@
 
     <!--Top Form-->
     <div class="row" style="margin-top: 5px;">
-        <div class="col s12 col m12">
+        <div class="col s12 col m12 col l12">
             @using (Html.BeginForm()) {
-                <!--Spacer-->
-                <div class="col s2 col m2"></div>
-
                 <!--Input-->
-                <div class="input-field col s12 col m4" id="search-form">
+                <div class="input-field offset-l2 col s12 col m12 col l4" id="search-form">
                     <input id="searchQuery" type="text" placeholder="Search...">
                 </div>
 
                 <!--Buttons-->
-                <div class="input-field col s12 col m4 center-align">
-                    <button id="search-myinvoice-btn" type="submit" value="Search"
-                            class="btn-large amber tooltipped waves-effect waves-light"
-                            data-position="top" data-delay="50" data-tooltip="Search for Invoices">
+                <div class="input-field col s12 col m12 col l4 center-align" id="button-field">
+                    <button id="search-invoice-btn" type="submit" value="Search"
+                            class="btn-large light-green tooltipped waves-effect waves-light"
+                            data-position="top" data-delay="50" data-tooltip="Search for Invoice">
                         <i class="material-icons">search</i>
                     </button>
                 </div>
-
-                <!--Spacer-->
-                <div class="col s2 col m2"></div>
             }
         </div>
     </div>
@@ -43,12 +51,12 @@
     <div class="divider" style="background-color:#c2c2c2;margin-bottom:35px;"></div>
 
     <div class="row">
-        <div class="col s12 col m12">
+        <div class="col s12 col m12 col l12">
             <table class="responsive-table bordered highlight">
                 <thead>
                     <tr>
                         <th>
-                            @Html.ActionLink("Invoice Number", "Index", new { sortOrder = ViewBag.NumberSortParm })
+                            @Html.ActionLink("Invoice No", "Index", new { sortOrder = ViewBag.NumberSortParm })
                         </th>
                         <th>
                             @Html.DisplayNameFor(model => model.CreatedOn)
@@ -56,14 +64,14 @@
                         <th>
                             @Html.DisplayNameFor(model => model.ExpirationDate)
                         </th>
-                        <td>
+                        <th>
                             @Html.Raw("<b>Paid</b>")
-                        </td>
+                        </th>
                         <th>
                             @Html.ActionLink("Total", "Index", new { sortOrder = ViewBag.TotalSortParm })
                         </th>
                         <th>
-                            @Html.Raw("Download")
+                            @Html.Raw("Products")
                         </th>
                         <th></th>
                     </tr>
@@ -72,8 +80,9 @@
                     @foreach (var item in Model) {
                         <tr>
                             <td>
-                                <a asp-action="Details" asp-route-id="@item.InvoiceNumber">
-                                    @Html.DisplayFor(modelItem => item.InvoiceNumber)
+                                <a class="tooltipped" asp-action="Details" asp-route-id="@item.InvoiceNumber"
+                                   data-position="top" data-delay="50" data-tooltip="View Details">
+                                    @Html.Raw(settings.Prefix + "-")@Html.DisplayFor(modelItem => item.InvoiceNumber)
                                 </a>
                             </td>
                             <td>
@@ -93,7 +102,17 @@
                                 @Html.Raw(String.Format("{0:C2}", item.Total))
                             </td>
                             <td>
-                                <a asp-action="DownloadPDF" asp-route-id="@item.InvoiceNumber">Download PDF</a>
+                                @foreach (var items in item.InvoiceItems) {
+                                    Product product = items.Product;
+                                    @Html.Raw(items.Amount + "x " + product.Name + "<br />")
+                                }
+                            </td>
+                            <td>
+                                <a class="tooltipped" asp-action="Download" asp-route-id="@item.InvoiceNumber"
+                                   data-position="top" data-delay="50" data-tooltip="Download PDF"
+                                   style="padding-right: 2px;">
+                                    <i class="material-icons light-green-text">file_download</i>
+                                </a>
                             </td>
                         </tr>
                     }
@@ -101,4 +120,15 @@
             </table>
         </div>
     </div>
+
 </div>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            $('.tooltipped').tooltip({ delay: 50 });
+        });
+    </script>
+}

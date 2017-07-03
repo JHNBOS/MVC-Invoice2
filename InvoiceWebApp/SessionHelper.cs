@@ -7,6 +7,12 @@ namespace InvoiceWebApp {
     public static class SessionHelper {
 
         public static void Set(this ISession session, string key, object value) {
+            var settings = new JsonSerializerSettings();
+            settings.ReferenceLoopHandling = ReferenceLoopHandling.Serialize;
+            settings.PreserveReferencesHandling = PreserveReferencesHandling.All;
+
+            JsonConvert.DefaultSettings = () => settings;
+
             string json = JsonConvert.SerializeObject(value);
             byte[] serializedResult = System.Text.Encoding.UTF8.GetBytes(json);
 

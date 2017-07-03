@@ -4,122 +4,128 @@
     ViewData["Title"] = "Invoice Details";
 }
 
-<div class="container">
-    <div class="row main">
-        <div class="panel-heading">
-            <div class="panel-title text-center">
-                <h1 class="title">Invoice Details</h1>
-                <hr style="width:60%;border-top:2px solid #fff;" />
-            </div>
-        </div>
+<div class="container" id="details-myinvoice">
 
-        <div class="main-large main-center">
-            <form id="form" class="form-horizontal">
+    <div class="row">
+        <div class="col s12 col m12 center-align">
+            <h4 style="margin-top: 40px;">Invoice Details</h4>
+        </div>
+    </div>
+
+    <br />
+
+    <!--Form-->
+    <div class="row" style="margin-top: 5px;">
+        <div class="col s12 col m12 col l12">
+            <form>
 
                 <div class="row">
-                    <!--BEGIN COLUMN 1-->
-                    <div class="col-sm-6 col-md-6">
+                    <div class="col s12 col m12 col l5">
+                        <fieldset>
+                            <legend>Invoice Information</legend>
 
-                        <!---DEBTOR-->
-                        <div class="form-group">
-                            <label asp-for="DebtorID" class="col-md-2 control-label"></label>
-                            <div class="col-md-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-users fa-lg" aria-hidden="true"></i></span>
-                                    <select asp-for="DebtorID" class="form-control" asp-items="ViewBag.DebtorID" disabled></select>
+                            @if (Model.DebtorID != null) {
+                                <div class="row" id="debtor-row">
+                                    <label for="debtor" style="padding-left: 57px;">Debtor</label>
+                                    <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
+                                        <i class="material-icons prefix">perm_identity</i>
+                                        <input id="debtor" value="@(Model.Debtor.FullName)" disabled />
+                                    </div>
+                                </div>
+                            }
+
+                            @if (Model.CompanyID != null) {
+                                <div class="row" id="company-row">
+                                    <label for="company" style="padding-left: 57px;">Company</label>
+                                    <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
+                                        <i class="material-icons prefix">business</i>
+                                        <input id="company" value="@(Model.Company.CompanyName)" disabled />
+                                    </div>
+                                </div>
+                            }
+
+                            <div class="row">
+                                <label for="icon_created" style="padding-left: 57px;">Invoice Date</label>
+                                <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
+                                    <i class="material-icons prefix">today</i>
+                                    <input asp-for="CreatedOn" id="icon_created createdon" disabled />
                                 </div>
                             </div>
-                        </div>
 
-                        <!---INVOICE DATE-->
-                        <div class="form-group">
-                            <label asp-for="CreatedOn" class="col-md-2 control-label"></label>
-                            <div class="col-md-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-calendar fa-lg" aria-hidden="true"></i></span>
-                                    <input type="text" asp-for="CreatedOn" class="form-control" name="creation" id="creation" readonly />
+                            <div class="row">
+                                <label for="icon_expired" style="padding-left: 57px;">Expiration Date</label>
+                                <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
+                                    <i class="material-icons prefix">today</i>
+                                    <input asp-for="ExpirationDate" id="icon_expired expired" disabled />
                                 </div>
                             </div>
-                        </div>
 
-                        <!---EXPIRATION DATE-->
-                        <div class="form-group">
-                            <label asp-for="ExpirationDate" class="col-md-2 control-label"></label>
-                            <div class="col-md-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-calendar fa-lg" aria-hidden="true"></i></span>
-                                    <input type="text" asp-for="ExpirationDate" class="form-control" name="expiration" id="expiration" readonly />
-                                    <span asp-validation-for="ExpirationDate" class="text-danger" />
+                            <div class="row">
+                                <div class="input-field col s12 col m12 col l6">
+                                    <i class="material-icons prefix">euro_symbol</i>
+                                    <input id="total" name="total" type="text" disabled />
+                                    <label for="total">Total</label>
                                 </div>
                             </div>
-                        </div>
 
-                        <!---TOTAL-->
-                        <div class="form-group">
-                            <label asp-for="Total" class="col-md-2 control-label"></label>
-                            <div class="col-md-10">
-                                <div class="input-group">
-                                    <span class="input-group-addon" style="padding-right:19px;"><i class="fa fa-eur fa-lg" aria-hidden="true"></i></span>
-                                    <input id="total" name="total" type="text" class="form-control" readonly />
-                                    <span asp-validation-for="Total" class="text-danger" />
-                                </div>
-                            </div>
-                        </div>
-
-                        <br />
-
-                        <!--PAY BUTTON-->
-                        <div class="form-group">
-                            <div class="col-md-offset-2 col-md-10">
-                                <a id="pay_inv_btn" class="btn btn-primary">
-                                    <span class="fa fa-credit-card fa-lg"></span>
-                                    &nbsp;Pay
-                                </a>
-                            </div>
-                        </div>
-
-                        <br />
-                        <br />
-
-                        <div>
-                            <a asp-action="Index">Back to Overview</a>
-                        </div>
+                        </fieldset>
                     </div>
-                    <!--END COLUMN 1-->
-                    <!----------------------------------------------------------->
-                    <!--BEGIN COLUMN 2-->
-                    <div class="col-sm-6 col-md-6">
+                    <div class="col s12 col m12 col l7">
+                        <fieldset>
+                            <legend>Products</legend>
 
-                        <div id="products">
-                        </div>
-
-                        <hr style="margin-bottom:0;margin-top:10px;" />
+                            <div id="products"></div>
+                        </fieldset>
                     </div>
-                    <!--END COLUMN 2-->
                 </div>
+
+                <div class="row">
+                    <div id="button-area">
+                        <button id="pay-invoice-btn" type="submit" value="Pay"
+                                asp-controller="MyInvoices" asp-action="Pay"
+                                asp-route-id="@Model.InvoiceNumber"
+                                class="btn-large light-green waves-effect waves-light">
+                            <i class="material-icons left">attach_money</i>
+                            <span>Pay</span>
+                        </button>
+
+                        <br />
+
+                        <a asp-action="Index" class="light-green-text">Back to Overview</a>
+                    </div>
+                </div>
+
             </form>
         </div>
     </div>
+
 </div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
     <script>
+        //Variables
+        var firstRun = true;
+
+        //Run when page has loaded
         $(document).ready(function () {
-            setRows();
+            $("#products select").material_select();
+            $("#debtor-row #select_debtor").material_select();
+            $("#company-row #select_company").material_select();
 
-            var t = "@(ViewBag.Total)";
-            $("#total").val(t);
+            //Set value of the total amount in the input box
+            var totalAmount = "@(ViewBag.Total)";
+            $("#total").val(totalAmount);
 
-            var s = "@(Model.Paid)";
-
-            if (s == "True" || s == "true") {
-                $("#pay_inv_btn").hide();
+            //Set product rows is this is the first run
+            if (firstRun == true) {
+                setRows();
             }
         });
 
-        /* SET PRODUCT ROWS */
+        //-------------------------------------------------------------------------------------------
+        //Create new product rows based on the products selected when creating this invoice
         function setRows() {
             var pids = new Array();
             var amounts = new Array();
@@ -138,45 +144,45 @@
                 @:pnames.push('@(name)');
             }
 
-            console.log("PIDs: " + pids);
-            console.log("Amounts: " + amounts);
-            console.log("PNames: " + pnames);
-
             for (var i = 0; i < amounts.length; i++) {
                 var amount = amounts[i];
 
-                var html = `<div id='productRow'>
-                    <div class="col-sm-7 col-md-7" style="padding-right:2px;">
-                    <select id="products` + i + `" name="products" class="form-control" disabled></select>
+                var html = `
+                    <div id="product-row-` + i + `" class="row">
+                        <div class="input-field col s12 col m8 col l8">
+                            <input id="_product-` + i + `" disabled/>
+                        </div>
+
+                        <div class="input-field col s8 col m2 col l2">
+                            <input id="_amount" placeholder="Qnt." value="` + amount + `" disabled />
+                        </div>
                     </div>
-                    <div class="col-sm-3 col-md-3" style="padding-right:2px;padding-left:2px;">
-                    <input id="amount" value="` + amount + `" name="amount" class="form-control" readonly />
-                    </div>
-                    <br />
-                    <br />
-                    </div>`;
+                `;
 
                 $("#products").append(html);
             }
 
-            for (var i = 0; i < pnames.length; i++) {
+            for (var i = 0; i < amounts.length; i++) {
                 var pid = pids[i];
                 var pname = pnames[i];
 
-                $("#products #products" + i).append("<option value='" + pid + "' selected>" + pname + "</option>");
+                var element = "#products #product-row-" + i.toString() + " #_product-" + i.toString();
 
+                $(element).prop("value", pname);
+                $(element).prop("disabled", true);
+
+                //Reset variables
                 pid = "";
                 pname = "";
             }
         }
 
-    /*-------------------------------------------------------------------------------------------*/
-
-        $("#pay_inv_btn").on("click", function () {
+        //-------------------------------------------------------------------------------------------
+        //Pay this invoice
+        $("#pay-invoice-btn").on("click", function () {
             var id = @(Model.InvoiceNumber);
 
-            $.ajax(
-            {
+            $.ajax({
                 type: "POST",
                 url: '@Url.Action("Pay")',
                 data: {
@@ -186,6 +192,5 @@
                 error: function() { alert('An error occured while paying. Please try again!');}
             });
         })
-    /*-------------------------------------------------------------------------------------------*/
     </script>
 }

@@ -5,10 +5,16 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
+using System.Buffers;
 
 namespace InvoiceWebApp {
 
@@ -30,9 +36,11 @@ namespace InvoiceWebApp {
 
             builder.AddEnvironmentVariables();
             Configuration = builder.Build();
+
         }
 
         public IConfigurationRoot Configuration { get; }
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services) {
@@ -53,7 +61,6 @@ namespace InvoiceWebApp {
 
             services.AddDistributedMemoryCache();
             services.AddSession();
-            services.AddMvc();
 
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -63,6 +70,10 @@ namespace InvoiceWebApp {
 
             // Add Applciation Services
             services.AddScoped<IViewRenderService, ViewRenderService>();
+
+            services.AddMvc()
+                        .AddJsonOptions(options => options.SerializerSettings.ReferenceLoopHandling = Newtonsoft.Json.ReferenceLoopHandling.Ignore
+            );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

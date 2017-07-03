@@ -1,5 +1,7 @@
 ﻿@using System.Diagnostics
 @using InvoiceWebApp.Data
+@using InvoiceWebApp.Models
+@using static InvoiceWebApp.Models.Debtor
 @inject ApplicationDbContext _context
 
 @{
@@ -31,6 +33,16 @@
 
 @section HEAD{
     <link href="https://www.amcharts.com/lib/3/plugins/export/export.css" rel="stylesheet" type="text/css">
+
+    <!-- amCharts javascript code -->
+    <script type="text/javascript" src="http://www.amcharts.com/lib/3/amcharts.js"></script>
+    <script type="text/javascript" src="http://www.amcharts.com/lib/3/pie.js"></script>
+    <script type="text/javascript" src="http://cdn.amcharts.com/lib/3/gauge.js"></script>
+    <script type="text/javascript" src="http://www.amcharts.com/lib/3/serial.js"></script>
+    <script type="text/javascript" src="http://www.amcharts.com/lib/3/themes/light.js"></script>
+    <script type="text/javascript" src="http://www.amcharts.com/lib/3/themes/dark.js"></script>
+    <script type="text/javascript" src="http://www.amcharts.com/lib/3/themes/black.js"></script>
+    <script src="https://www.amcharts.com/lib/3/plugins/export/export.js" type="text/javascript"></script>
 }
 
 <div class="container" id="home">
@@ -55,7 +67,7 @@
 
     <div class="divider"></div>
 
-    @if (user != null && user.AccountType == "Client") {
+    @if (user != null) {
         <div class="row">
             <div class="col s3 col m3"></div>
             <div class="col s12 col m12 center-align">
@@ -82,7 +94,7 @@
 @section Scripts{
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-    <script>
+<script>
         $(document).ready(function () {
             var user = null;
             var admin = null;
@@ -178,7 +190,7 @@
                 }
             }
 
-            if (paidArray > 0 && unpaidArray >= 0) {
+            if (paidArray >= 0 && unpaidArray >= 0) {
                 AmCharts.makeChart("chartdiv",
                     {
                         "type": "pie",
@@ -438,15 +450,5 @@
 
             }
         }
-    </script>
-
-    <!-- amCharts javascript code -->
-    <script type="text/javascript" src="http://www.amcharts.com/lib/3/amcharts.js"></script>
-    <script type="text/javascript" src="http://www.amcharts.com/lib/3/pie.js"></script>
-    <script type="text/javascript" src="http://cdn.amcharts.com/lib/3/gauge.js"></script>
-    <script type="text/javascript" src="http://www.amcharts.com/lib/3/serial.js"></script>
-    <script type="text/javascript" src="http://www.amcharts.com/lib/3/themes/light.js"></script>
-    <script type="text/javascript" src="http://www.amcharts.com/lib/3/themes/dark.js"></script>
-    <script type="text/javascript" src="http://www.amcharts.com/lib/3/themes/black.js"></script>
-    <script src="https://www.amcharts.com/lib/3/plugins/export/export.js" type="text/javascript"></script>
+</script>
 }
