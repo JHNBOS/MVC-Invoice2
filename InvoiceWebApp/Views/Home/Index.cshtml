@@ -27,8 +27,6 @@
         settings = _context.Settings.FirstOrDefault();
         SessionHelper.Set(Context.Session, "Settings", settings);
     }
-
-    var count = ViewBag.invoiceList.Count;
 }
 
 @section HEAD{
@@ -94,36 +92,27 @@
 @section Scripts{
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
 
-<script>
+    <script>
         $(document).ready(function () {
             var user = null;
             var admin = null;
 
-            @if (user != null)
-            {
+            @if (user != null) {
                 <text>
                     user = "@user.Email";
                 </text>
             }
-
-            @if (admin != null)
-            {
+            @if (admin != null) {
                 <text>
                     admin = "@admin.Email";
                 </text>
             }
 
-            if (user != null)
-            {
-                setText();
-                $("#chartdiv").show();
-                showClientChart();
+            if (user != null) {
+                setClientHome();
             }
-            if (admin != null)
-            {
-                $("#admin_chartdiv").show();
-                $("#admin_chartdiv2").show();
-                showAdminChart();
+            if (admin != null) {
+                setAdminHome();
             }
             if (user == null && admin == null) {
                 var noUserText = `With this application it is possible to view and pay your invoices
@@ -132,7 +121,7 @@
                             <br /><br /><br />
                             <a href="@Url.Action("Login", "Users")"
                                 id="home-button"
-                                class="btn-large light-green waves-effect waves-light">
+                                class="btn-large green darken-1 waves-effect waves-light">
                                     <i class="fa fa-sign-in"></i>
                                     Sign In
                             </a>`;
@@ -140,40 +129,45 @@
             }
         });
 
-        function setText(){
-            //Set text according to items inside invoices
-            @if (user != null && (count == 0 || ViewBag.invoiceList == null))
-            {
+        //Setup text and charts when logged in client reaches home page
+        function setClientHome() {
+            var paidArray = "";
+            var unpaidArray = "";
+
+            //-----------------------------------------------------------------
+            //Set text according to paid and unpaid invoices
+
+            @if (ViewBag.clientNotPaidCount == 0){
                 <text>
                     $("#invoiceText").html("There are no unpaid invoices found at the moment.");
                 </text>
             }
-
-            //Set text according to items inside invoices
-            @if (user != null && count == 1)
-            {
+            @if (ViewBag.clientNotPaidCount == 1) {
                 <text>
-                    $("#invoiceText").html("You have 1 unpaid invoice." + "<br />" + "To be paid: &euro; @(ViewBag.total)");
+                    $("#invoiceText").html("You have 1 unpaid invoice."
+                        + "<br />"
+                        + "Total paid: &euro; @(ViewBag.clientPaid)");
+                         "<br />"
+                        + "To be paid: &euro;  @(ViewBag.clientNotPaid)");
                 </text>
             }
-
-            //Set text according to items inside invoices
-            @if (user != null && count > 1)
-            {
+            @if (ViewBag.clientNotPaidCount > 1) {
                 <text>
-                    $("#invoiceText").html("You have @(count) unpaid invoices." + "<br />" + "To be paid: &euro;  @(ViewBag.total)");
+                    $("#invoiceText").html("You have @(ViewBag.clientNotPaidCount) unpaid invoices."
+                        + "<br />"
+                        + "Total paid: &euro; @(ViewBag.clientPaid)");
+                        + "<br />"
+                        + "To be paid: &euro;  @(ViewBag.clientNotPaid)");
                 </text>
             }
-        };
+            //-----------------------------------------------------------------
+            //Show chart based on invoices
 
-        /* BEGIN OF SCRIPT FOR CHART */
-        function showClientChart() {
-            var paidArray = "";
-            var unpaidArray = "";
+            $("#chartdiv").show();
 
             @{
-                int? paid = ViewBag.paid;
-                int? unPaid = ViewBag.unpaid;
+                int? paid = ViewBag.clientPaidCount;
+                int? unpaid = ViewBag.clientNotPaidCount;
 
                 if (paid != null)
                 {
@@ -181,15 +175,16 @@
                         paidArray = @paid;
                     </text>
                 }
-
-                if (unPaid != null)
+                if (unpaid != null)
                 {
                     <text>
-                        unpaidArray = @unPaid;
+                        unpaidArray = @unpaid;
                     </text>
                 }
             }
 
+            //-----------------------------------------------------------------
+            //Chart one of one
             if (paidArray >= 0 && unpaidArray >= 0) {
                 AmCharts.makeChart("chartdiv",
                     {
@@ -232,28 +227,55 @@
             }
         }
 
-        function showAdminChart() {
-            var total = "";
+        //Setup text and charts when logged in admin reaches home page
+        function setAdminHome() {
+            var noInvoicesText = "";
             var paidCount = "";
             var unpaidCount = "";
+            var total = "";
             var totalPaid = "";
-            var totalAmount = "";
             var totalAmountFormatted = "";
-            var conceptCount = "";
+
+            //-----------------------------------------------------------------
+            //Set text according to paid and unpaid invoices
+            @if (ViewBag.finalCount == 0) {
+                <text>
+                    $("#admin_chartdiv").hide();
+                    $("#admin_chartdiv2").hide();
+                    noInvoicesText += "There are currently no invoices.";
+                </text>
+            }
+            @if (ViewBag.conceptCount == 0){
+                <text>
+                    noInvoicesText += "";
+                </text>
+            }
+            @if (ViewBag.conceptCount == 1) {
+                <text>
+                    noInvoicesText += "<br /> You have 1 invoice saved as 'concept'.";
+                </text>
+            }
+            @if (ViewBag.conceptCount > 1) {
+                <text>
+                    noInvoicesText += "<br /> You have @(ViewBag.conceptCount) invoices saved as 'concept'.";
+                </text>
+            }
+
+            $("#invoiceText").html(noInvoicesText);
+
+            //-----------------------------------------------------------------
+            //Show chart based on invoices
+
+            $("#admin_chartdiv").show();
+            $("#admin_chartdiv2").show();
 
             @{
-                int? totalPercentage = ViewBag.totalPercentage;
-                int? paidInvoiceCount = ViewBag.totalPaidCount;
-                int? unpaidInvoiceCount = ViewBag.totalUnPaidCount;
-                int? conceptInvoiceCount = ViewBag.conceptCount;
-                decimal? totalInvoicePaid = ViewBag.totalPaid;
-                decimal? totalInvoiceAmount = ViewBag.totalAmount;
+                int? paidInvoiceCount = ViewBag.adminPaidCount;
+                int? unpaidInvoiceCount = ViewBag.adminNotPaidCount;
 
-                if (totalPercentage != null){
-                    <text>
-                        total = @totalPercentage;
-                    </text>
-                }
+                decimal? totalPaid = ViewBag.totalPaid;
+                decimal? totalAmount = ViewBag.total;
+
                 if (paidInvoiceCount != null){
                     <text>
                         paidCount = @paidInvoiceCount;
@@ -264,34 +286,30 @@
                         unpaidCount = @unpaidInvoiceCount;
                     </text>
                 }
-                if (totalInvoicePaid != null){
+                if (totalPaid != null){
                     <text>
-                        totalPaid = @totalInvoicePaid;
+                        totalPaid = @totalPaid;
                     </text>
                 }
-                if (totalInvoiceAmount != null){
+                if (totalAmount != null){
                     <text>
-                        totalAmount = @totalInvoiceAmount;
-                    </text>
-                }
-                if (conceptInvoiceCount != null)
-                {
-                    <text>
-                        conceptCount = @conceptInvoiceCount;
-                        console.log("conceptCount: " + conceptCount);
+                        total = @totalAmount;
                     </text>
                 }
             }
 
-            if (totalAmount >= 0) {
-                totalAmountFormatted = AmCharts.formatNumber(totalAmount, {
+            //Format to two decimal number
+            if (total > 0) {
+                totalAmountFormatted = AmCharts.formatNumber(total, {
                     precision: -1,
                     decimalSeparator: ",",
                     thousandsSeparator: "."
                 }, 2);
             }
 
-            if (totalAmount > 0 && totalPaid >= 0) {
+            //-----------------------------------------------------------------
+            //Chart one of two
+            if (total > 0 && totalPaid >= 0) {
                 AmCharts.makeChart("admin_chartdiv",
                     {
                         "type": "serial",
@@ -353,13 +371,13 @@
                                 "lineAlpha": 1,
                                 "lineColor": "#FFFF00",
                                 "lineThickness": 3,
-                                "value": totalAmount
+                                "value": total
                             }
                         ],
                         "valueAxes": [
                             {
                                 "id": "ValueAxis-1",
-                                "maximum": totalAmount,
+                                "maximum": total,
                                 "minimum": (totalPaid - (totalPaid / 3)),
                                 "precision": 2,
                                 "unit": "€",
@@ -388,7 +406,9 @@
                 );
             }
 
-            if (paidCount >= 0 && unpaidCount > 0) {
+            //-----------------------------------------------------------------
+            //Chart two of two
+            if (paidCount >= 0 && unpaidCount >= 0) {
                 AmCharts.makeChart("admin_chartdiv2",
                     {
                         "type": "pie",
@@ -431,24 +451,6 @@
                         ]
                     });
             }
-
-            if ($("#admin_chartdiv").is(":empty") && $("#admin_chartdiv2").is(":empty")) {
-                $("#admin_chartdiv").hide();
-                $("#admin_chartdiv2").hide();
-                var noInvoicesText = "There are currently no invoices.";
-
-                if (conceptCount == 0) {
-                    noInvoicesText += "<br /> You have 0 invoices saved as 'concept'.";
-                }
-                else if (conceptCount == 1) {
-                    noInvoicesText += "<br /> You have " + conceptCount + " invoice saved as 'concept'.";
-                } else {
-                    noInvoicesText += "<br /> You have " + conceptCount + " invoices saved as 'concept'.";
-                }
-
-                $("#invoiceText").html(noInvoicesText);
-
-            }
         }
-</script>
+    </script>
 }

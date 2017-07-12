@@ -182,7 +182,7 @@
         </ul>
 
         <!--Navbar-->
-        <nav class="blue-grey darken-2">
+        <nav class="grey darken-2">
             <div class="nav-wrapper">
                 @if (user != null) {
                     <a class="brand-logo" asp-controller="Home" asp-action="Index" 
@@ -229,6 +229,11 @@
                     @if (user != null) {
                         <li class="@(ViewBag.Current == "Home" ? "active" : "")">
                             <a asp-area="" asp-controller="Home" asp-route-email="@(user.Email)"
+                               asp-action="Index">Home</a>
+                        </li>
+                    } else if (admin != null) {
+                        <li class="@(ViewBag.Current == "Home" ? "active" : "")">
+                            <a asp-area="" asp-controller="Home" asp-route-email="@(admin.Email)"
                                asp-action="Index">Home</a>
                         </li>
                     } else {
@@ -302,7 +307,7 @@
 
     <div class="divider"></div>
 
-    <footer class="page-footer blue-grey darken-2">
+    <footer class="page-footer grey darken-2">
         <div class="container">
             <div class="row">
                 <div class="col l6 s12">

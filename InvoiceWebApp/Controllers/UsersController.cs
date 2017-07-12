@@ -313,6 +313,8 @@ namespace InvoiceWebApp.Controllers {
                 if (userLogin == null) {
                     adminLogin = _context.Admins
                                     .SingleOrDefault(u => u.Email == user.Email && u.Password == user.Password);
+                    SessionHelper.Set(this.HttpContext.Session, "Admin", adminLogin);
+                    return RedirectToAction("Index", "Home", new { email = adminLogin.Email });
                 } else {
                     SessionHelper.Set(this.HttpContext.Session, "User", userLogin);
                     return RedirectToAction("Index", "Home", new { email = userLogin.Email });

@@ -24,11 +24,22 @@ namespace InvoiceWebApp.Controllers {
             ViewBag.Current = "Home";
 
             if (email != "") {
-                GetInvoices(email);
-            }
+                User user = null;
+                Admin admin = null;
 
-            GetPaidInvoices();
-            GetConceptInvoiceCount();
+                try {
+                    user = _context.Users.SingleOrDefault(s => s.Email == email);
+                    admin = _context.Admins.SingleOrDefault(s => s.Email == email);
+                } catch (Exception ex) {
+                    Debug.WriteLine(ex);
+                }
+
+                if (user != null) {
+                    GetClientPage(email);
+                } else if (admin != null) {
+                    GetAdminPage();
+                }
+            }
 
             return View();
         }
@@ -56,88 +67,97 @@ namespace InvoiceWebApp.Controllers {
         }
 
         //Get invoices based on logged in client
-        private void GetInvoices(string email) {
-            decimal total = 0;
+        private void GetClientPage(string email) {
             List<Invoice> invoiceList = null;
-            int paid = 0;
-            int unpaid = 0;
+            int paidCount = 0;
+            int unpaidCount = 0;
 
             try {
-                //Get all final invoices paid and not paid
-                invoiceList = _context.Invoices.Include(inv => inv.Debtor).Where(inv => inv.Debtor.Email == email && inv.Paid == false && inv.Type != "Concept").ToList();
-                paid = _context.Invoices.Include(inv => inv.Debtor).Where(inv => inv.Debtor.Email == email && inv.Paid == true && inv.Type == "Final").ToList().Count;
-                unpaid = _context.Invoices.Include(inv => inv.Debtor).Where(inv => inv.Debtor.Email == email && inv.Paid == false && inv.Type == "Final").ToList().Count;
+                //Get all final invoices paid and not paid with type of final
+                invoiceList = _context.Invoices
+                    .Where(inv => inv.Debtor.Email == email && inv.Type == "Final").ToList();
 
-                ViewBag.paid = paid;
-                ViewBag.unpaid = unpaid;
-                ViewBag.invoiceList = invoiceList;
+                paidCount = invoiceList.Where(inv => inv.Paid == true).Count();
+                unpaidCount = invoiceList.Where(inv => inv.Paid == false).Count();
 
-                total = CalculateTotal(invoiceList);
-                ViewBag.total = String.Format("{0:N2}", total);
+                ViewBag.clientPaidCount = paidCount;
+                ViewBag.clientNotPaidCount = unpaidCount;
+                ViewBag.clientInvoices = invoiceList;
+
+                ViewBag.clientPaid = String.Format("{0:N2}", CalculatePaid(invoiceList));
+                ViewBag.clientNotPaid = String.Format("{0:N2}", CalculateToBePaid(invoiceList));
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
         }
 
-        //Calculate the total amount of all the invoices
+        //Get invoices based on logged in client
+        private void GetAdminPage() {
+            List<Invoice> invoiceList = null;
+            int paidCount = 0;
+            int unpaidCount = 0;
+            int conceptCount = 0;
+            int finalCount = 0;
+
+            try {
+                //Get all invoices
+                invoiceList = _context.Invoices.ToList();
+
+                paidCount = invoiceList.Where(inv => inv.Paid == true && inv.Type == "Final").Count();
+                unpaidCount = invoiceList.Where(inv => inv.Paid == false && inv.Type == "Final").Count();
+                conceptCount = invoiceList.Where(inv => inv.Type == "Concept").Count();
+                finalCount = invoiceList.Where(inv => inv.Type == "Final").Count();
+
+                ViewBag.conceptCount = conceptCount;
+                ViewBag.finalCount = finalCount;
+
+                ViewBag.adminPaidCount = paidCount;
+                ViewBag.adminNotPaidCount = unpaidCount;
+
+                ViewBag.total = CalculateTotal(invoiceList);
+                ViewBag.totalPaid = CalculatePaid(invoiceList);
+                ViewBag.totalNotPaid = CalculateToBePaid(invoiceList);
+            } catch (Exception ex) {
+                Debug.WriteLine(ex);
+            }
+        }
+
+        //Calculate the amount to be paid
+        private decimal CalculateToBePaid(List<Invoice> invoices) {
+            decimal total = 0;
+
+            foreach (var invoice in invoices) {
+                if (invoice.Type == "Final" && invoice.Paid == false) {
+                    total += invoice.Total;
+                }
+            }
+            return total;
+        }
+
+        //Calculate the amount of already paid invoices
+        private decimal CalculatePaid(List<Invoice> invoices) {
+            decimal total = 0;
+
+            foreach (var invoice in invoices) {
+                if (invoice.Type == "Final" && invoice.Paid == true) {
+                    total += invoice.Total;
+                }
+            }
+            return total;
+        }
+
+        //Calculate the total amount of all invoices
         private decimal CalculateTotal(List<Invoice> invoices) {
             decimal total = 0;
 
             foreach (var invoice in invoices) {
-                total += invoice.Total;
+                if (invoice.Type == "Final") {
+                    total += invoice.Total;
+                }
             }
-
             return total;
         }
 
-        //Get number of concept invoices
-        private void GetConceptInvoiceCount() {
-            int count = 0;
-
-            try {
-                List<Invoice> invoices = _context.Invoices.Where(s => s.Type == "Concept").ToList();
-                count = invoices.Count;
-                ViewBag.conceptCount = count;
-            } catch (Exception ex) {
-                Debug.WriteLine(ex);
-            }
-        }
-
-        //Get all paid invoices
-        private void GetPaidInvoices() {
-            int total = 0;
-            int paid = 0;
-            int unpaid = 0;
-            decimal totalAmount = 0;
-            decimal totalPaid = 0;
-
-            try {
-                List<Invoice> invoices = _context.Invoices.ToList();
-
-                total = invoices.Count();
-                paid = invoices.Where(s => s.Paid == true && s.Type == "Final").Count();
-                unpaid = invoices.Where(s => s.Paid == false && s.Type == "Final").Count();
-
-                foreach (var inv in invoices.Where(s => s.Paid == true).ToList()) {
-                    totalPaid += inv.Total;
-                }
-
-                foreach (var inv in invoices.Where(s => s.Type == "Final").ToList()) {
-                    totalAmount += inv.Total;
-                }
-
-                int percent = (100 * paid) / total;
-
-                ViewBag.totalPercentage = percent;
-                ViewBag.totalPaidCount = paid;
-                ViewBag.totalUnPaidCount = unpaid;
-
-                ViewBag.totalPaid = totalPaid;
-                ViewBag.totalAmount = totalAmount;
-            } catch (Exception ex) {
-                Debug.WriteLine(ex);
-            }
-        }
 
     }
 }
