@@ -5,6 +5,7 @@
     * Body
     * Default CSS
     * Navigation
+    * Footer
     * Title
     * Table
     * Fieldset
@@ -31,10 +32,18 @@
 /*-----------------------------------------------------------------------------------
     Body CSS
 -----------------------------------------------------------------------------------*/
+html, body {
+    height: 100%;
+}
+
 body {
-    background: rgba(243, 243, 243, 0.75);
     font-family: 'Overpass', sans-serif;
     padding-bottom: 0px;
+
+    /* Background */
+    background: #5f2c82; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #49a09d, #5f2c82); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #49a09d, #5f2c82); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
 }
 
 /*-----------------------------------------------------------------------------------
@@ -45,7 +54,6 @@ body {
     padding-right: 75px;
     width: 100%;
     margin: 0 auto;
-    margin-bottom: 35px;
 }
 
 input,
@@ -85,6 +93,9 @@ textarea {
     Navigation CSS
 -----------------------------------------------------------------------------------*/
 nav {
+    background: rgba(255, 255, 255, 0.25);
+
+    /* Shadows */
     box-shadow: 0px 7px 18px -6px rgba(0,0,0,0.66);
     -webkit-box-shadow: 0px 7px 18px -6px rgba(0,0,0,0.66);
     -moz-box-shadow: 0px 7px 18px -6px rgba(0,0,0,0.66);
@@ -100,7 +111,7 @@ nav .nav-wrapper {
 }
 
 nav .brand-logo {
-    font-family: 'Montserrat', RaleWay, sans-serif;
+    font-family: 'Montserrat', Raleway, sans-serif;
     font-weight: 100 !important;
 }
 
@@ -116,7 +127,7 @@ nav .brand-logo img {
 nav ul a {
     transition: background-color .3s;
     font-size: 14px;
-    color: #fff;
+    color: #FFF;
     display: block;
     padding: 0 12px;
     cursor: pointer;
@@ -169,11 +180,10 @@ nav ul a {
 }
 
 #account-btn:hover i {
-    text-shadow: 0px 3px 20px #000;
+    font-size: 1.5rem;
 }
 
 #account-btn i {
-    text-shadow: 0px 0px 3px #000;
 }
 
 #account-btn-mobile {
@@ -204,10 +214,34 @@ nav ul a {
 }
 
 /*-----------------------------------------------------------------------------------
+    Footer CSS
+-----------------------------------------------------------------------------------*/
+.page-footer {
+    min-height: initial;
+    height: 50px !important;
+    padding-top: 0px;
+    background: rgba(255, 255, 255, 0);
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    overflow: hidden;
+}
+
+.footer-copyright {
+    background: rgba(255, 255, 255, 0.25) !important;
+
+    /* Shadows */
+    box-shadow: 0px -7px 18px -6px rgba(0,0,0,0.66);
+    -webkit-box-shadow: 0px -7px 18px -6px rgba(0,0,0,0.66);
+    -moz-box-shadow: 0px -7px 18px -6px rgba(0,0,0,0.66);
+}
+
+/*-----------------------------------------------------------------------------------
     Title CSS
 -----------------------------------------------------------------------------------*/
 h4 {
-    font-family: 'Raleway';
+    font-family: 'Overpass';
     font-weight: 600;
 }
 
@@ -325,19 +359,20 @@ input[type="checkbox"]:checked + label:before {
 /*-----------------------------------------------------------------------------------
     Page: Login and Forgot
 -----------------------------------------------------------------------------------*/
-#login-row {
-    width: 100%;
+#login-row, #forgot-row {
+    width: 60%;
 }
 
 #login-form, #forgot-form {
-    background-color: #f1f1f1;
-    border: 1px solid #d0d0d0;
-    padding: 50px 0 20px 0;
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid #616161;
+    padding: 50px 44px 20px 44px;
     margin: 0 auto;
-    padding-bottom: 15px;
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    position: relative;
+    /* Shadow */
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
 }
 
 #login-form .input-field,
@@ -345,7 +380,8 @@ input[type="checkbox"]:checked + label:before {
     margin: 0 auto;
     text-align: center;
     position: relative;
-    left: 50%;
+    width: 100%;
+    left: 40%;
     top: 0%;
     transform: translate(-50%, 0%);
 }
@@ -365,20 +401,28 @@ input[type="checkbox"]:checked + label:before {
 
 #login-button, #forgot-button {
     position: relative;
-    right: 16%;
     margin-top: 10px;
-    width: 180px;
-    margin-bottom: 0px;
+    width: 70%;
+    margin-bottom: 6px;
+    left: 15%;
 }
 
 #login-button:hover, #forgot-button:hover {
     box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
 }
 
-#login-links, #forgot-links {
+#forgot-link {
     position: relative;
-    left: 66%;
+    left: 28%;
     bottom: 0%;
+    font-weight: bold;
+}
+
+#login-link {
+    position: relative;
+    left: 36%;
+    bottom: 0%;
+    font-weight: bold;
 }
 
 /*-----------------------------------------------------------------------------------
@@ -392,19 +436,21 @@ input[type="checkbox"]:checked + label:before {
     color: rgba(0, 0, 0, 0.5);
 }
 
+
 /*-----------------------------------------------------------------------------------
     Pages: Home
 -----------------------------------------------------------------------------------*/
 #home {
     padding: 40px 40px;
-    margin: 0 auto 40px auto;
+    margin: 0 auto;
     min-height: 250px;
     width: 100%;
-    background-color: #f1f1f1;
-    border: 1px solid #d0d0d0;
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid #616161;
+    /* Shadow */
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
 }
 
 /*----- Buttons --------------*/
@@ -429,14 +475,15 @@ input[type="checkbox"]:checked + label:before {
 -----------------------------------------------------------------------------------*/
 #contact {
     padding: 40px 40px;
-    margin: 0 auto 40px auto;
+    margin: 0 auto;
     min-height: 250px;
     width: 100%;
-    background-color: #f1f1f1;
-    border: 1px solid #d0d0d0;
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid #616161;
+    /* Shadow */
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
 }
 
 /*-----------------------------------------------------------------------------------

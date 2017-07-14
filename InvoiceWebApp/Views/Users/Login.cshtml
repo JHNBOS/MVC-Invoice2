@@ -19,8 +19,8 @@
 }
 
 <div>
-    <div class="section center-align" style="font-family:Roboto, sans-serif;">
-        <h4>Sign In</h4>
+    <div class="section center-align">
+        <h4 class="white-text">SIGN IN</h4>
     </div>
 
     <div class="row" id="login-row">
@@ -29,7 +29,8 @@
 
                 <!--Email-->
                 <div class="row">
-                    <div class="input-field col s12 col m12 col l8 offset-l2">
+                    <div class="input-field col s12 col m12 col l12">
+                        <i class="material-icons prefix">account_circle</i>
                         <input asp-for="Email" id="email" type="email" class="validate grey-text text-darken-3">
                         <label class="grey-text text-darken-3" for="email">Email</label>
                     </div>
@@ -38,6 +39,7 @@
                 <!--Password-->
                 <div class="row">
                     <div class="input-field col s12 col m12 col l8 offset-l2">
+                        <i class="material-icons prefix">lock</i>
                         <input asp-for="Password" id="password" type="password" class="validate grey-text text-darken-3">
                         <label class="grey-text text-darken-3" for="password">Password</label>
                     </div>
@@ -46,11 +48,15 @@
                 <!--Button-->
                 <div class="row">
                     <button id="login-button" type="submit"
-                        class="btn green darken-1 right white-text waves-effect waves-light">Sign In</button>
+                        class="btn indigo darken-1 white-text waves-effect waves-light">Sign In</button>
+
+                    <br />
+
+                    <a id="forgot-link" asp-action="ForgotPassword"
+                       class="indigo-text text-darken-1">Forgot your password?</a>
                 </div>
 
-                <a id="forgot-links" asp-action="ForgotPassword" style="font-weight: bold;" 
-                   class="green-text text-darken-1">Forgot Password?</a>
+                
             </form>
         </div>
     </div>
