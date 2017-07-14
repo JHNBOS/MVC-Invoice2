@@ -48,11 +48,11 @@
         <div class="row">
             <div class="col s12 col m12 center-align">
                 @if (user != null && admin == null) {
-                    <h4 style="margin-top: 40px;">Welcome, @user.Debtor.FirstName</h4>
+                    <h4 style="margin-top: 40px;text-transform:uppercase;">Welcome, @user.Debtor.FirstName</h4>
                 } else if (user == null && admin != null) {
-                    <h4 style="margin-top: 40px;">Welcome, @admin.FirstName</h4>
+                    <h4 style="margin-top: 40px;text-transform:uppercase;">Welcome, @admin.FirstName</h4>
                 } else {
-                    <h4 style="margin-top: 40px;">Welcome</h4>
+                    <h4 style="margin-top: 40px;text-transform:uppercase;">Welcome</h4>
                 }
             </div>
         </div>
@@ -69,7 +69,7 @@
             <div class="row">
                 <div class="col s3 col m3"></div>
                 <div class="col s12 col m12 center-align">
-                    <div id="chartdiv" style="width:100%;height:400px;background-color:#F1F1F1;display:none;"></div>
+                    <div id="chartdiv" style="width:100%;height:400px;background:rgba(255, 255, 255, 0);display:none;"></div>
                 </div>
                 <div class="col s3 col m3"></div>
             </div>
@@ -79,10 +79,10 @@
             <div class="row">
                 <div class="col s1 col m1"></div>
                 <div class="col s5 col m5 center-align">
-                    <div id="admin_chartdiv" style="width:100%;height:400px;background-color:#F1F1F1;display:none;"></div>
+                    <div id="admin_chartdiv" style="width:100%;height:400px;background:rgba(255, 255, 255, 0);display:none;"></div>
                 </div>
                 <div class="col s5 col m5 center-align">
-                    <div id="admin_chartdiv2" style="width:100%;height:400px;background-color:#F1F1F1;display:none;"></div>
+                    <div id="admin_chartdiv2" style="width:100%;height:400px;background:rgba(255, 255, 255, 0);display:none;"></div>
                 </div>
                 <div class="col s1 col m1"></div>
             </div>
@@ -98,6 +98,9 @@
         $(document).ready(function () {
             var user = null;
             var admin = null;
+            var divHeight = $("#home").height();
+
+            
 
             @if (user != null) {
                 <text>
@@ -117,10 +120,15 @@
                 setAdminHome();
             }
             if (user == null && admin == null) {
-                var noUserText = `With this application it is possible to view and pay your invoices
-                            <br /><br />
+                var noUserText = `
+                            With this application it is possible to view and pay your invoices
+
+                            <br />
+
                             To use this website, you must login using the credentials sent to you by @settings.CompanyName.
+
                             <br /><br /><br />
+
                             <a href="@Url.Action("Login", "Users")"
                                 id="home-button"
                                 class="btn-large indigo darken-1 waves-effect waves-light">
@@ -226,6 +234,8 @@
                             }
                         ]
                     });
+
+                $("#home").css("margin-bottom", "40px");
             }
         }
 
@@ -404,8 +414,9 @@
                                 "graph 1": totalPaid
                             }
                         ]
-                    }
-                );
+                    });
+
+                $("#home").css("margin-bottom", "40px");
             }
 
             //-----------------------------------------------------------------
@@ -452,6 +463,8 @@
                             }
                         ]
                     });
+
+                $("#home").css("margin-bottom", "40px");
             }
         }
     </script>

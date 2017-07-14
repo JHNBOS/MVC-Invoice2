@@ -393,6 +393,17 @@
                 mobileButton.attr("onclick", "location.href='@Url.Action("Login", "Users")'");
             }
 
+            //Change color of navbar links to black when scrolling
+            $(window).scroll(() => { 
+                if ($(window).scrollTop() >= 45) {
+                    //$("nav ul a").css("color", "#000");
+                    $("nav").css("background", "rgba(86, 91, 141, 0.6)")
+                } else if ($(window).scrollTop() < 45) {
+                    //$("nav ul a").css("color", "#FFF");
+                    $("nav").css("background", "rgba(255, 255, 255, 0.25)")
+                }
+            });
+
         });
     </script>
 </body>

@@ -33,12 +33,14 @@
     Body CSS
 -----------------------------------------------------------------------------------*/
 html, body {
+    position: relative;
     height: 100%;
 }
 
 body {
     font-family: 'Overpass', sans-serif;
     padding-bottom: 0px;
+    margin-bottom: 0px;
 
     /* Background */
     background: #5f2c82; /* fallback for old browsers */
@@ -53,7 +55,8 @@ body {
     padding-left: 75px;
     padding-right: 75px;
     width: 100%;
-    margin: 0 auto;
+    margin: 40px auto 0px auto;
+    min-height: calc(100% - 154px);
 }
 
 input,
@@ -99,15 +102,16 @@ nav {
     box-shadow: 0px 7px 18px -6px rgba(0,0,0,0.66);
     -webkit-box-shadow: 0px 7px 18px -6px rgba(0,0,0,0.66);
     -moz-box-shadow: 0px 7px 18px -6px rgba(0,0,0,0.66);
+
+    /* Background transition*/
+    -webkit-transition: background-color .7s;
+    -ms-transition: background-color .7s;
+    transition: background-color .7s;
 }
 
 nav .nav-wrapper {
     width: 94%;
     margin: auto;
-}
-
-.navbar-fixed {
-    margin-bottom: 50px;
 }
 
 nav .brand-logo {
@@ -125,6 +129,8 @@ nav .brand-logo img {
 }
 
 nav ul a {
+    -webkit-transition: background-color .3s;
+    -ms-transition: background-color .3s;
     transition: background-color .3s;
     font-size: 14px;
     color: #FFF;
@@ -217,15 +223,15 @@ nav ul a {
     Footer CSS
 -----------------------------------------------------------------------------------*/
 .page-footer {
-    min-height: initial;
     height: 50px !important;
     padding-top: 0px;
+    margin-top: 0px;
     background: rgba(255, 255, 255, 0);
-    position: absolute;
     width: 100%;
+    overflow: hidden;
+    position: static;
     bottom: 0;
     left: 0;
-    overflow: hidden;
 }
 
 .footer-copyright {
@@ -361,6 +367,7 @@ input[type="checkbox"]:checked + label:before {
 -----------------------------------------------------------------------------------*/
 #login-row, #forgot-row {
     width: 60%;
+    margin-bottom: 0px;
 }
 
 #login-form, #forgot-form {
@@ -413,16 +420,22 @@ input[type="checkbox"]:checked + label:before {
 
 #forgot-link {
     position: relative;
-    left: 28%;
+    left: 50%;
     bottom: 0%;
     font-weight: bold;
+    width: 45%;
+    display: block;
+    transform: translate(-50%, 0);
 }
 
 #login-link {
     position: relative;
-    left: 36%;
+    left: 50%;
     bottom: 0%;
     font-weight: bold;
+    width: 30%;
+    display: block;
+    transform: translate(-50%, 0);
 }
 
 /*-----------------------------------------------------------------------------------
@@ -505,11 +518,12 @@ input[type="checkbox"]:checked + label:before {
     margin: 0 auto 40px auto;
     min-height: 250px;
     width: 100%;
-    background-color: #f1f1f1;
-    border: 1px solid #d0d0d0;
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid #616161;
+    /* Shadow */
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
 }
 
 /*----- Buttons --------------*/
@@ -565,11 +579,12 @@ input[type="checkbox"]:checked + label:before {
     margin: 0 auto 40px auto;
     min-height: 250px;
     width: 100%;
-    background-color: #f1f1f1;
-    border: 1px solid #d0d0d0;
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid #616161;
+    /* Shadow */
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
 }
 
 /*----- Buttons --------------*/
@@ -637,11 +652,12 @@ input[type="checkbox"]:checked + label:before {
     margin: 0 auto 40px auto;
     min-height: 250px;
     width: 100%;
-    background-color: #f1f1f1;
-    border: 1px solid #d0d0d0;
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid #616161;
+    /* Shadow */
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
 }
 
 /*----- Buttons --------------*/
@@ -694,11 +710,12 @@ input[type="checkbox"]:checked + label:before {
     margin: 0 auto 40px auto;
     min-height: 250px;
     width: 100%;
-    background-color: #f1f1f1;
-    border: 1px solid #d0d0d0;
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid #616161;
+    /* Shadow */
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
 }
 
 /*----- Buttons --------------*/
@@ -765,11 +782,12 @@ input[type="checkbox"]:checked + label:before {
     margin: 0 auto 40px auto;
     min-height: 250px;
     width: 100%;
-    background-color: #f1f1f1;
-    border: 1px solid #d0d0d0;
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid #616161;
+    /* Shadow */
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
 }
 
 /*----- Buttons --------------*/
@@ -824,11 +842,12 @@ input[type="checkbox"]:checked + label:before {
     margin: 0 auto;
     min-height: 250px;
     width: 100%;
-    background-color: #f1f1f1;
-    border: 1px solid #d0d0d0;
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid #616161;
+    /* Shadow */
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
 }
 
 #create-invoice, #details-invoice,
@@ -907,11 +926,12 @@ input[type="checkbox"]:checked + label:before {
     margin: 0 auto;
     min-height: 250px;
     width: 100%;
-    background-color: #f1f1f1;
-    border: 1px solid #d0d0d0;
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+    background-color: rgba(255, 255, 255, 0.85);
+    border: 1px solid #616161;
+    /* Shadow */
+    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
 }
 
 #details-myinvoice {
