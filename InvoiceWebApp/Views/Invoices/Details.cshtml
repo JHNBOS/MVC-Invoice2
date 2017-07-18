@@ -20,54 +20,47 @@
             <form>
 
                 <div class="row">
-                    <div class="col s12 col m12 col l5">
+                    <div class="col s12 col m12 col l10 offset-l1">
                         <fieldset>
                             <legend>Invoice Information</legend>
 
                             <div class="row" id="debtor-row">
-                                <div class="input-field col s12 col m12 col l12">
+                                <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">perm_identity</i>
                                     @Html.DropDownListFor(m => m.DebtorID, (SelectList)ViewBag.DebtorID,
-                                                "Select Debtor", new { @id = "select_debtor", @disabled = "disabled" })
+                                                "Select a debtor", new { @id = "select_debtor", @disabled = "disabled" })
                                     <label for="select_debtor">Choose Debtor</label>
                                 </div>
-                            </div>
-
-                            <div class="row" id="company-row">
-                                <div class="input-field col s12 col m12 col l12">
+                                <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">business</i>
                                     @Html.DropDownListFor(m => m.CompanyID, (SelectList)ViewBag.CompanyID,
-                                                "Select Company", new { @id = "select_company", @disabled = "disabled" })
+                                                "Select a company", new { @id = "select_company", @disabled = "disabled" })
                                     <label for="select_company">Choose Company</label>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <label for="icon_created" style="padding-left: 57px;">Invoice Date</label>
-                                <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
-                                    <i class="material-icons prefix">today</i>
-                                    <input asp-for="CreatedOn" id="icon_created createdon" disabled />
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <label for="icon_expired" style="padding-left: 57px;">Expiration Date</label>
-                                <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
-                                    <i class="material-icons prefix">today</i>
-                                    <input asp-for="ExpirationDate" id="icon_expired expired" disabled />
-                                </div>
-                            </div>
+                            <div class="divider"></div>
+                            <br />
 
                             <div class="row">
                                 <div class="input-field col s12 col m12 col l6">
-                                    <i class="material-icons prefix">euro_symbol</i>
-                                    <input id="total" name="total" type="text" disabled />
-                                    <label for="total">Total</label>
+                                    <i class="material-icons prefix">today</i>
+                                    <input asp-for="CreatedOn" id="icon_created" disabled />
+                                    <label for="icon_created" style="font-size:.8rem;position:absolute;top:-16px;left:13px;">Invoice Date</label>
+                                </div>
+
+                                <div class="input-field col s12 col m12 col l6">
+                                    <i class="material-icons prefix">today</i>
+                                    <input asp-for="ExpirationDate" id="icon_expired" disabled />
+                                    <label for="icon_expired" style="font-size:.8rem;position:absolute;top:-16px;left:13px;">Invoice Expiration Date</label>
                                 </div>
                             </div>
 
+                            <div class="divider"></div>
+                            <br />
+
                             <div class="row" id="type-row">
-                                <div class="input-field col s12 col m12 col l12">
+                                <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">save</i>
                                     <select id="select_type" asp-for="Type" disabled>
                                         <option value="Concept">Concept</option>
@@ -75,14 +68,42 @@
                                     </select>
                                     <label for="select_type">Save As</label>
                                 </div>
+
+                                <div class="input-field col s12 col m12 col l6"></div>
                             </div>
+
+                            <div class="divider"></div>
+                            <br />
+
+                            <div class="row">
+                                <div class="input-field col s12 col m12 col l6">
+                                    <i class="material-icons prefix">exposure_neg_2</i>
+                                    <input id="icon_discount" type="number" value="0" asp-for="Discount" disabled />
+                                    <label for="icon_discount">Discount (%)</label>
+                                </div>
+
+                                <div class="input-field col s12 col m12 col l6">
+                                    <i class="material-icons prefix">euro_symbol</i>
+                                    <input id="total" name="total" type="text" readonly />
+                                    <label id="total-label" for="total" style="font-size:.8rem;position:absolute;top:13px;left:13px;">Total</label>
+                                </div>
+                            </div>
+
                         </fieldset>
                     </div>
-                    <div class="col s12 col m12 col l7">
+                </div>
+
+                <div class="row">
+                    <div class="col s12 col m12 col l10 offset-l1">
                         <fieldset>
                             <legend>Products</legend>
 
-                            <div id="products"></div>
+                            <div id="products" style="max-height: 300px;overflow-y:scroll;overflow-x:hidden;">
+                            </div>
+
+                            <br />
+                            <div class="divider"></div>
+
                         </fieldset>
                     </div>
                 </div>

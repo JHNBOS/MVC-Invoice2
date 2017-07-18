@@ -1,0 +1,201 @@
+<div class="navbar-fixed">
+
+        <!--Side Navbar-->
+        <ul id="slide-out" class="side-nav">
+            <li>
+                <div class="indigo darken-1">
+                    <a href="#" class="button-close white-text"><i class="material-icons">close</i></a>
+                </div>
+                <div class="user-view indigo darken-1">
+                    @if (user != null) {
+                        <a href="#!name"><span class="white-text name">@(user.Debtor.FullName)</span></a>
+                        <a href="#!email"><span class="white-text email">@(user.Email)</span></a>
+                    } else if (admin != null) {
+                        <a href="#!name"><span class="white-text name">@(admin.FullName)</span></a>
+                        <a href="#!email"><span class="white-text email">@(admin.Email)</span></a>
+                    } else {
+                        <a href="#"><span class="white-text">@(settings.CompanyName)</span></a>
+                    }
+                </div>
+            </li>
+            
+            <!--Check if user exist-->
+            @if (user != null) {
+                <li class="@(ViewBag.Current == "Home" ? "active" : "")">
+                    <a asp-area="" asp-controller="Home" asp-route-email="@(user.Email)"
+                       asp-action="Index">Home</a>
+                </li>
+            } else {
+                <li class="@(ViewBag.Current == "Home" ? "active" : "")">
+                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                </li>
+            }
+            <!--Check if admin exist-->
+            @if (admin != null) {
+                <!--Debtors-->
+                <li>
+                    <ul id="dropdown-debtor-slide" class="collapsible collapsible-accordion">
+                        <li>
+                            <a href="#" class="collapsible-header" style="padding-left: 31px;">
+                                Debtors
+                                <i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li class="@(ViewBag.Current == "Debtors" ? "active" : "")">
+                                        <a asp-area="" asp-controller="Debtors" asp-action="Index">Persons</a>
+                                    </li>
+                                    <li class="@(ViewBag.Current == "Companies" ? "active" : "")">
+                                        <a asp-area="" asp-controller="Companies" asp-action="Index">Companies</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <!--Products-->
+                <li class="@(ViewBag.Current == "Products" ? "active" : "")">
+                    <a asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                </li>
+                <!--Invoices-->
+                <li class="@(ViewBag.Current == "Invoices" ? "active" : "")">
+                    <a asp-area="" asp-controller="Invoices" asp-action="Index">Invoices</a>
+                </li>
+                <!--Accounts-->
+                <li>
+                    <ul id="dropdown-account-slide" class="collapsible collapsible-accordion">
+                        <li>
+                            <a href="#" class="collapsible-header" style="padding-left: 31px;">
+                                Accounts
+                                <i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li class="@(ViewBag.Current == "Users" ? "active" : "")">
+                                        >
+                                        <a asp-area="" asp-controller="Users" asp-action="Index">Users</a>
+                                    </li>
+                                    <li class="@(ViewBag.Current == "Admins" ? "active" : "")">
+                                        >
+                                        <a asp-area="" asp-controller="Admins" asp-action="Index">Admins</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+            }
+            <!--Check if user exist-->
+            @if (user != null) {
+                <!--My Invoices-->
+                <li class="@(ViewBag.Current == "MyInvoices" ? "active" : "")">
+                    <a asp-area="" asp-controller="MyInvoices" asp-action="Index">Invoices</a>
+                </li>
+            }
+            <!--Contact-->
+            <li class="@(ViewBag.Current == "Contact" ? "active" : "")">
+                <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+            </li>
+
+            @if (admin != null) {
+                 <!--Settings button mobile-->
+                <li>
+                    <a id="settings-btn" asp-controller="Admins" asp-action="Settings"
+                       class="btn-flat waves-effect waves-default tooltipped center-align"
+                       data-position="bottom" data-delay="50" data-tooltip="Settings">
+                        <i class="material-icons">settings</i>
+                    </a>
+                </li>
+            }
+
+            <!--Login/Logout button mobile-->
+            <li>
+                <button type="submit" id="account-btn" asp-controller="Users" asp-action="Login"
+                        class="btn white-text waves-effect waves-default"
+                        style="width:100%;"></button>
+            </li>
+        </ul>
+
+        <!--Horizontal Navbar-->
+        <nav>
+            <div class="nav-wrapper">
+                <a href="#" data-activates="slide-out" class="button"><i class="material-icons">menu</i></a>
+            </div>
+        </nav>
+
+    </div>
+
+
+
+
+    ---------------------------------------------------------------------------
+
+    <script>
+        $(document).ready(() => {
+            $(".button").sideNav({
+                menuWidth: 270, // Default is 300
+                edge: "left", // Choose the horizontal origin
+                closeOnClick: true, // Closes side-nav on <a> clicks, useful for Angular/Meteor
+            });
+            $(".button-close").sideNav("hide");
+            $(".collapsible").collapsible();
+            $('.tooltipped').tooltip({ delay: 50 });
+
+            var isLoggedIn = false;
+            var width = $(window).width();
+            var button = $(".navbar-fixed > .side-nav > li > #account-btn");
+            var mobileButton = $(".navbar-fixed .side-nav #account-btn-mobile");
+
+            @if (user != null || admin != null) {
+                <text>
+                    isLoggedIn = true;
+                </text>
+            }
+
+            //Account button non-mobile
+            if (isLoggedIn == true && width > 768) {
+                button.css("background", "#e53935", "important");
+                button.html(`<i class="fa fa-sign-out"></i>`);
+
+                button.attr("data-tooltip", "Sign out");
+                button.tooltip();
+
+                button.attr("onclick", "location.href='@Url.Action("Logout", "Users")'");
+            } else if (isLoggedIn == false && width > 768) {
+                button.css("background", "#64dd17", "important");
+                button.html(`<i class="fa fa-sign-in"></i>`);
+
+                button.attr("data-tooltip", "Sign in");
+                button.tooltip();
+
+                button.attr("onclick", "location.href='@Url.Action("Login", "Users")'");
+            }
+
+            //Account button mobile
+            if (isLoggedIn == true && width <= 768) {
+                mobileButton.css("background", "#e53935", "important");
+                mobileButton.css("color", "#fff", "important");
+
+                mobileButton.html(`<span>Log out</span>`);
+                mobileButton.attr("onclick", "location.href='@Url.Action("Logout", "Users")'");
+            } else if (isLoggedIn == false && width <= 768) {
+                mobileButton.css("background", "#64dd17", "important");
+                mobileButton.css("color", "#fff", "important");
+
+                mobileButton.html(`<span>Log in</span>`);
+                mobileButton.attr("onclick", "location.href='@Url.Action("Login", "Users")'");
+            }
+
+            //Change color of navbar links to black when scrolling
+            $(window).scroll(() => { 
+                if ($(window).scrollTop() >= 45) {
+                    //$("nav ul a").css("color", "#000");
+                    $("nav").css("background", "rgba(86, 91, 141, 0.6)")
+                } else if ($(window).scrollTop() < 45) {
+                    //$("nav ul a").css("color", "#FFF");
+                    $("nav").css("background", "rgba(255, 255, 255, 0.25)")
+                }
+            });
+
+        });
+    </script>

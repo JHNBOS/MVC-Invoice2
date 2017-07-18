@@ -264,6 +264,8 @@ namespace InvoiceWebApp.Data.Migrations
 
                     b.Property<int?>("DebtorID");
 
+                    b.Property<int>("Discount");
+
                     b.Property<DateTime>("ExpirationDate");
 
                     b.Property<bool>("Paid");

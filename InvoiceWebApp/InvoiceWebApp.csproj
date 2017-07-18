@@ -28,7 +28,11 @@
     <Content Include="wwwroot\images\banner2.svg" />
     <Content Include="wwwroot\images\banner3.svg" />
     <Content Include="wwwroot\images\banner4.svg" />
+    <Content Include="wwwroot\js\invoice\create-invoice.js" />
+    <Content Include="wwwroot\js\invoice\edit-invoice.js" />
     <Content Include="wwwroot\js\jquery-adaptive-background.js" />
+    <Content Include="wwwroot\js\product\create-product.js" />
+    <Content Include="wwwroot\js\product\edit-product.js" />
     <Content Include="wwwroot\js\quantize.js" />
     <Content Include="wwwroot\js\site.js" />
     <Content Include="wwwroot\js\site.min.js" />

@@ -27,6 +27,8 @@ namespace InvoiceWebApp.Models {
         [Display(Name = "Expiration Date")]
         public DateTime ExpirationDate { get; set; }
 
+        public int Discount { get; set; }
+
         [DataType(DataType.Currency)]
         public decimal Total { get; set; }
 

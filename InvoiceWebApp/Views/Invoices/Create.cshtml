@@ -21,54 +21,47 @@
             <form id="form" asp-controller="Invoices" asp-action="Create">
 
                 <div class="row">
-                    <div class="col s12 col m12 col l5">
+                    <div class="col s12 col m12 col l10 offset-l1">
                         <fieldset>
                             <legend>Invoice Information</legend>
 
                             <div class="row" id="debtor-row">
-                                <div class="input-field col s12 col m12 col l12">
+                                <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">perm_identity</i>
-                                    @Html.DropDownListFor(m => m.DebtorID, (SelectList)ViewBag.DebtorID, 
-                                                "Select Debtor", new { @id = "select_debtor" })
+                                    @Html.DropDownListFor(m => m.DebtorID, (SelectList)ViewBag.DebtorID,
+                                                "Select a debtor", new { @id = "select_debtor" })
                                     <label for="select_debtor">Choose Debtor</label>
                                 </div>
-                            </div>
-
-                            <div class="row" id="company-row">
-                                <div class="input-field col s12 col m12 col l12">
+                                <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">business</i>
-                                    @Html.DropDownListFor(m => m.CompanyID, (SelectList)ViewBag.CompanyID, 
-                                                "Select Company", new { @id = "select_company" })
+                                    @Html.DropDownListFor(m => m.CompanyID, (SelectList)ViewBag.CompanyID,
+                                                "Select a company", new { @id = "select_company" })
                                     <label for="select_company">Choose Company</label>
                                 </div>
                             </div>
 
+                            <div class="divider"></div>
+                            <br />
+
                             <div class="row">
-                                <label for="icon_created" style="padding-left: 57px;">Invoice Date</label>
-                                <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
+                                <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">today</i>
                                     <input asp-for="CreatedOn" id="icon_created" />
+                                    <label for="icon_created" style="font-size:.8rem;position:absolute;top:-16px;left:13px;">Invoice Date</label>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <label for="icon_expired" style="padding-left: 57px;">Invoice Expiration Date</label>
-                                <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
+                                <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">today</i>
                                     <input asp-for="ExpirationDate" id="icon_expired" />
+                                    <label for="icon_expired" style="font-size:.8rem;position:absolute;top:-16px;left:13px;">Invoice Expiration Date</label>
                                 </div>
                             </div>
 
-                            <div class="row">
-                                <label id="total-label" for="total">Total</label>
-                                <div class="input-field col s12 col m12 col l6">
-                                    <i class="material-icons prefix">euro_symbol</i>
-                                    <input id="total" name="total" type="text" readonly />
-                                </div>
-                            </div>
+                            <div class="divider"></div>
+                            <br />
 
                             <div class="row" id="type-row">
-                                <div class="input-field col s12 col m12 col l12">
+                                <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">save</i>
                                     <select id="select_type" asp-for="Type">
                                         <option value="Concept">Concept</option>
@@ -76,28 +69,51 @@
                                     </select>
                                     <label for="select_type">Save As</label>
                                 </div>
+
+                                <div class="input-field col s12 col m12 col l6"></div>
                             </div>
+
+                            <div class="divider"></div>
+                            <br />
+
+                            <div class="row">
+                                <div class="input-field col s12 col m12 col l6">
+                                    <i class="material-icons prefix">exposure_neg_2</i>
+                                    <input id="icon_discount" type="number" value="0" asp-for="Discount" />
+                                    <label for="icon_discount">Discount (%)</label>
+                                </div>
+
+                                <div class="input-field col s12 col m12 col l6">
+                                    <i class="material-icons prefix">euro_symbol</i>
+                                    <input id="total" name="total" type="text" readonly />
+                                    <label id="total-label" for="total" style="font-size:.8rem;position:absolute;top:-16px;left:13px;">Total</label>
+                                </div>
+                            </div>
+
                         </fieldset>
                     </div>
-                    <div class="col s12 col m12 col l7">
+                </div>
+
+                <div class="row">
+                    <div class="col s12 col m12 col l10 offset-l1">
                         <fieldset>
                             <legend>Products</legend>
 
-                            <div id="products">
+                            <div id="products" style="max-height: 300px;overflow-y:scroll;overflow-x:hidden;">
                                 <div id="product-control" class="row">
                                     <div class="input-field col s12 col m8 col l8">
                                         <select id="_product" asp-items="ViewBag.Products">
-                                            <option value="-1">--</option>
+                                            <option value="-1">Select a product</option>
                                         </select>
                                         <label>Product</label>
                                     </div>
 
-                                    <div class="input-field col s8 col m2 col l2">
+                                    <div class="input-field col s8 col m2 col l3">
                                         <input id="_amount" placeholder="Qnt." />
                                     </div>
 
-                                    <div class="input-field col s4 col m2 col l2">
-                                        <a href="#" id="delete-row-btn" 
+                                    <div class="input-field col s4 col m2 col l1">
+                                        <a href="#" id="delete-row-btn"
                                            class="btn red darken-1 waves-effect waves-light">
                                             <i class="material-icons">remove</i>
                                         </a>
@@ -105,6 +121,8 @@
                                 </div>
                             </div>
 
+                            <br />
+                            <div class="divider"></div>
                             <br />
 
                             <a href="#" id="add-row-btn" class="btn light-green waves-effect waves-light">
@@ -136,158 +154,5 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
-    <script>
-        //Variables
-        var total = "";
-        var count = 0;
-        var productArray = new Array();
-        var amountArray = new Array();
-
-        //Run when page has loaded
-        $(document).ready(function () {
-            $("#products select").material_select();
-            $("#debtor-row #select_debtor").material_select();
-            $("#company-row #select_company").material_select();
-            $("#type-row #select_type").material_select();
-        });
-
-        //-------------------------------------------------------------------------------------------
-        //Disable the other dropdownlist when on has an selected item
-        $("#debtor-row #select_debtor").change(function () {
-            var optionSelected = $(this).find("option:selected");
-            var valueSelected = optionSelected.val();
-            var textSelected = optionSelected.text();
-
-            if (textSelected != "--") {
-                $("#company-row > div > div > input").prop("disabled", true);
-            }
-            if (textSelected == "--") {
-                $("#company-row > div > div > input").prop("disabled", false);
-            }
-        });
-
-        $("#company-row #select_company").change(function () {
-            var optionSelected = $(this).find("option:selected");
-            var valueSelected = optionSelected.val();
-            var textSelected = optionSelected.text();
-
-            if (textSelected != "--") {
-                $("#debtor-row > div > div > input").prop("disabled", true);
-            }
-            if (textSelected == "--") {
-                $("#debtor-row > div > div > input").prop("disabled", false);
-            }
-        });
-
-        //-------------------------------------------------------------------------------------------
-        // Automatically set expiration date based on selected invoice date
-        $("#icon_created").on("change", () => {
-            var selectedDate = new Date($("#icon_created").val());
-
-            selectedDate.setDate(selectedDate.getDate() + 30);
-            selectedDate.setMonth(selectedDate.getMonth() + 1);
-
-            var day = selectedDate.getDate();
-            var month = selectedDate.getMonth();
-            var year = selectedDate.getFullYear();
-
-            if (month < 10) month = "0" + month;
-            if (day < 10) day = "0" + day;
-
-            var today = year + "-" + month + "-" + day;
-
-            $("#icon_expired").val(today);
-        });
-
-        //-------------------------------------------------------------------------------------------
-        //Calculate the total amount when adding a new product
-        $("#products option:selected").each(function () {
-            $("#product").on('change', function () {
-                calcTotal();
-            });
-        })
-
-        //-------------------------------------------------------------------------------------------
-        //Calculate the total amount when changing the amount of product(s)
-        $("#products #_amount").on('change', function () {
-            calcTotal();
-        });
-
-        //-------------------------------------------------------------------------------------------
-        //Add parameters to form and submit
-        $("#create-invoice-btn").on("click", function () {
-            $("#products option:selected").each(function () {
-                productArray.push($(this).val().split('_')[0]);
-            })
-
-            $("#products #_amount").each(function () {
-                amountArray.push($(this).val());
-            })
-
-            var totalPrice = $("#total").val();
-            var companyID = $().val();
-
-            $("#form").attr("action", "Create/?pids=" + productArray.toString() + "&amounts=" + amountArray.toString() + "&total=" + totalPrice.toString());
-            $("#form").submit();
-        });
-
-        //-------------------------------------------------------------------------------------------
-        //Add a new product row
-        $("#add-row-btn").on("click", function () {
-            @{cnt++;}
-
-            $("#product-control").show();
-            var copy = $("#product-control")
-                .clone(true)
-                .appendTo("#products")
-                .prop("id", "product-row")
-                .find("input").val("");
-
-            $("#product-control").hide();
-            $("#products select").material_select();
-        });
-
-        //-------------------------------------------------------------------------------------------
-        //Remove a product row
-        $("#delete-row-btn").on("click", function () {
-            @{cnt--;}
-            $(this).parent().parent().remove();
-
-            calcTotal();
-        });
-
-        //-------------------------------------------------------------------------------------------
-        //Calculate total amount based on selected products and their quantities
-        function calcTotal() {
-            var amounts = new Array();
-            var pids = new Array();
-            var totalPrice = Number.parseFloat("0");
-
-            $("#products option:selected").each(function () {
-                var id = $(this).val();
-                pids.push($(this).val());
-            })
-
-            $("#products #_amount").each(function () {
-                var amount = $(this).val();
-                amounts.push($(this).val());
-            })
-
-            for (var i = 0; i < pids.length; i++) {
-                var id = pids[i].split('_')[0];
-                var p = pids[i].split('_')[1];
-                var price = Number.parseFloat(p).toFixed(2);
-                var amount = Number.parseInt(amounts[i]);
-
-                totalPrice += (price * amount);
-            }
-
-            $("#total").prop("readonly", false);
-            $("#total").val(totalPrice.toLocaleString("nl-NL", { minimumFractionDigits: 2 }));
-
-            total = totalPrice.toLocaleString("nl-NL", { minimumFractionDigits: 2 });
-            $("#total").prop("readonly", true);
-        }
-    </script>
+    <script src="~/js/invoice/create-invoice.js" type="text/javascript"></script>
 }

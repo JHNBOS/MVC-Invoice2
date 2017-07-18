@@ -2,6 +2,7 @@
 using InvoiceWebApp.Models;
 using MailKit.Net.Smtp;
 using MimeKit;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace InvoiceWebApp.Services {
@@ -18,12 +19,17 @@ namespace InvoiceWebApp.Services {
         }
 
         public async Task SendLoginEmailAsync(string email, string pass) {
+            bool continueSending = false;
             string smtp = _settings.SMTP;
             int port = _settings.Port;
             string company = _settings.CompanyName;
             string company_email = _settings.Email;
             string password = _settings.Password;
             string website = _settings.Website;
+
+            if (smtp != "" || !string.IsNullOrEmpty(port.ToString()) || company_email != "" || password != "") {
+                continueSending = true;
+            }
 
             string subject = "Inloggevens " + company;
             string message = "Geachte heer, mevrouw,"
@@ -46,30 +52,40 @@ namespace InvoiceWebApp.Services {
             emailMessage.Subject = subject;
             emailMessage.Body = new TextPart("plain") { Text = message };
 
-            using (var client = new SmtpClient()) {
-                client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+            if (continueSending == true) {
+                using (var client = new SmtpClient()) {
+                    try {
+                        client.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
-                await client.ConnectAsync(smtp, port, false).ConfigureAwait(false);
+                        await client.ConnectAsync(smtp, port, false).ConfigureAwait(false);
 
-                client.AuthenticationMechanisms.Remove("XOAUTH2");
-                await client.AuthenticateAsync(company_email, password)
-                    .ConfigureAwait(false);
+                        client.AuthenticationMechanisms.Remove("XOAUTH2");
+                        await client.AuthenticateAsync(company_email, password)
+                            .ConfigureAwait(false);
 
-                await client.SendAsync(emailMessage).ConfigureAwait(false);
-                await client.DisconnectAsync(true).ConfigureAwait(false);
+                        await client.SendAsync(emailMessage).ConfigureAwait(false);
+                        await client.DisconnectAsync(true).ConfigureAwait(false);
+                    } catch (System.Exception ex) {
+                        Debug.WriteLine(ex);
+                    }
+                }
             }
 
-            // Plug in your email service here to send an email.
             //return Task.FromResult(0);
         }
 
         public async Task SendInvoiceEmailAsync(string email) {
+            bool continueSending = false;
             string smtp = _settings.SMTP;
             int port = _settings.Port;
             string company = _settings.CompanyName;
             string company_email = _settings.Email;
             string password = _settings.Password;
             string website = _settings.Website;
+
+            if (smtp != "" || !string.IsNullOrEmpty(port.ToString()) || company_email != "" || password != "") {
+                continueSending = true;
+            }
 
             string subject = "Factuur beschikbaar op " + company;
             string message = "Er staat een factuur voor u klaar op " + company + "."
@@ -86,17 +102,23 @@ namespace InvoiceWebApp.Services {
             emailMessage.Subject = subject;
             emailMessage.Body = new TextPart("plain") { Text = message };
 
-            using (var client = new SmtpClient()) {
-                client.ServerCertificateValidationCallback = (s, c, h, e) => true;
+            if (continueSending == true) {
+                using (var client = new SmtpClient()) {
+                    try {
+                        client.ServerCertificateValidationCallback = (s, c, h, e) => true;
 
-                await client.ConnectAsync(smtp, port, false).ConfigureAwait(false);
+                        await client.ConnectAsync(smtp, port, false).ConfigureAwait(false);
 
-                client.AuthenticationMechanisms.Remove("XOAUTH2");
-                await client.AuthenticateAsync(company_email, password)
-                    .ConfigureAwait(false);
+                        client.AuthenticationMechanisms.Remove("XOAUTH2");
+                        await client.AuthenticateAsync(company_email, password)
+                            .ConfigureAwait(false);
 
-                await client.SendAsync(emailMessage).ConfigureAwait(false);
-                await client.DisconnectAsync(true).ConfigureAwait(false);
+                        await client.SendAsync(emailMessage).ConfigureAwait(false);
+                        await client.DisconnectAsync(true).ConfigureAwait(false);
+                    } catch (System.Exception ex) {
+                        Debug.WriteLine(ex);
+                    }
+                }
             }
         }
 
