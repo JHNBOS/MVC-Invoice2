@@ -147,6 +147,18 @@ namespace InvoiceWebApp.Data.Migrations
                     b.ToTable("Settings");
                 });
 
+            modelBuilder.Entity("InvoiceWebApp.Models.Category", b =>
+                {
+                    b.Property<int>("CategoryID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("CategoryName");
+
+                    b.HasKey("CategoryID");
+
+                    b.ToTable("Categories");
+                });
+
             modelBuilder.Entity("InvoiceWebApp.Models.Company", b =>
                 {
                     b.Property<int>("CompanyID")
@@ -308,6 +320,10 @@ namespace InvoiceWebApp.Data.Migrations
                     b.Property<int>("ProductID")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<int?>("CategoryID");
+
+                    b.Property<int?>("CategoryID1");
+
                     b.Property<string>("Description");
 
                     b.Property<string>("Name")
@@ -321,6 +337,10 @@ namespace InvoiceWebApp.Data.Migrations
 
                     b.HasAlternateKey("Name")
                         .HasName("AlternateKey_Name");
+
+                    b.HasIndex("CategoryID");
+
+                    b.HasIndex("CategoryID1");
 
                     b.ToTable("Products");
                 });
@@ -483,6 +503,17 @@ namespace InvoiceWebApp.Data.Migrations
                         .WithMany("InvoiceItems")
                         .HasForeignKey("ProductID")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("InvoiceWebApp.Models.Product", b =>
+                {
+                    b.HasOne("InvoiceWebApp.Models.Category")
+                        .WithMany("ProductList")
+                        .HasForeignKey("CategoryID");
+
+                    b.HasOne("InvoiceWebApp.Models.Category")
+                        .WithMany("Products")
+                        .HasForeignKey("CategoryID1");
                 });
 
             modelBuilder.Entity("InvoiceWebApp.Models.User", b =>

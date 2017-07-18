@@ -7,7 +7,7 @@ var products = [];
 
 //Run when page has loaded
 $(document).ready(function () {
-    $("#products select").material_select();
+    $("#products #product-control #_product").material_select();
     $("#debtor-row #select_debtor").material_select();
     $("#debtor-row #select_company").material_select();
     $("#type-row #select_type").material_select();

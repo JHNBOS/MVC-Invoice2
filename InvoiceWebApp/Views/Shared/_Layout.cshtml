@@ -76,6 +76,16 @@
             </li>
         </ul>
 
+        <!--Product dropdown-->
+        <ul id="dropdown-product" class="dropdown-content collapsible collapsible-accordion">
+            <li class="@(ViewBag.Current == "Products" ? "active" : "")">
+                <a asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+            </li>
+            <li class="@(ViewBag.Current == "Categories" ? "active" : "")">
+                <a asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
+            </li>
+        </ul>
+
         <!--Accounts dropdown-->
         <ul id="dropdown-account" class="dropdown-content collapsible collapsible-accordion">
             <li class="@(ViewBag.Current == "Users" ? "active" : "")">
@@ -123,8 +133,25 @@
                     </ul>
                 </li>
                 <!--Products-->
-                <li class="@(ViewBag.Current == "Products" ? "active" : "")">
-                    <a asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                <li>
+                    <ul id="dropdown-prooduct-slide" class="collapsible collapsible-accordion">
+                        <li>
+                            <a href="#" class="collapsible-header" style="padding-left: 31px;">
+                                Products
+                                <i class="material-icons right">arrow_drop_down</i>
+                            </a>
+                            <div class="collapsible-body">
+                                <ul>
+                                    <li class="@(ViewBag.Current == "Products" ? "active" : "")">
+                                        <a asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                                    </li>
+                                    <li class="@(ViewBag.Current == "Categories" ? "active" : "")">
+                                        <a asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
                 </li>
                 <!--Invoices-->
                 <li class="@(ViewBag.Current == "Invoices" ? "active" : "")">
@@ -251,8 +278,11 @@
                             </a>
                         </li>
                         <!--Products-->
-                        <li class="@(ViewBag.Current == "Products" ? "active" : "")">
-                            <a asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+                        <li>
+                            <a class="dropdown-button" href="#!" data-activates="dropdown-product">
+                                Products
+                                <i class="material-icons right" style="margin-left:3px;">arrow_drop_down</i>
+                            </a>
                         </li>
                         <!--Invoices-->
                         <li class="@(ViewBag.Current == "Invoices" ? "active" : "")">

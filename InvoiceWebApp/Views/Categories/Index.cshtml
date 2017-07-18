@@ -1,0 +1,103 @@
+@model IEnumerable<InvoiceWebApp.Models.Category>
+
+@{
+    ViewData["Title"] = "Categories";
+}
+
+<div class="container" id="category-index">
+
+    <div class="row">
+        <div class="col s12 col m12 center-align">
+            <h4 style="margin-top: 40px;">Categories</h4>
+        </div>
+    </div>
+
+    <br />
+
+    <!--Top Form-->
+    <div class="row" style="margin-top: 5px;">
+        <div class="col s12 col m12">
+            @using (Html.BeginForm()) {
+                <!--Input-->
+                <div class="input-field offset-l2 col s12 col m12 col l4" id="search-form">
+                    <input id="searchQuery" type="text" placeholder="Search...">
+                </div>
+
+                <!--Buttons-->
+                <div class="input-field col s12 col m12 col l4 center-align" id="button-field">
+                    <button id="search-category-btn" type="submit" value="Search"
+                            class="btn-large indigo darken-1 tooltipped waves-effect waves-light"
+                            data-position="top" data-delay="50" data-tooltip="Search for Category">
+                        <i class="material-icons">search</i>
+                    </button>
+
+                    <a id="add-category-btn" asp-action="Create" value="Create Category"
+                       class="btn-large indigo darken-1 tooltipped waves-effect waves-light"
+                       data-position="top" data-delay="50" data-tooltip="Create Category">
+                        <i class="material-icons">add_box</i>
+                    </a>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="divider" style="background-color:#c2c2c2;margin-bottom:35px;"></div>
+
+    <div class="row">
+        <div class="col s12 col m12">
+            <table class="responsive-table bordered highlight">
+                <thead>
+                    <tr>
+                        <th>
+                            @Html.Raw("Category ID")
+                        </th>
+                        <th>
+                            @Html.ActionLink("Category", "Index", new { sortOrder = ViewBag.CategoryNameSortParm })
+                        </th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model) {
+                        <tr>
+                            <td>
+                                <a class="tooltipped" asp-action="Details" asp-route-id="@item.CategoryID"
+                                   data-position="top" data-delay="50" data-tooltip="View Details">
+                                    @Html.DisplayFor(modelItem => item.CategoryID)
+                                </a>
+                            </td>
+                            <td>
+                                <a class="tooltipped" asp-action="Details" asp-route-id="@item.CategoryID"
+                                   data-position="top" data-delay="50" data-tooltip="View Details">
+                                    @Html.DisplayFor(modelItem => item.CategoryName)
+                                </a>
+                            </td>
+                            <td>
+                                <a class="tooltipped" asp-action="Edit" asp-route-id="@item.CategoryID"
+                                   data-position="top" data-delay="50" data-tooltip="Edit Category"
+                                   style="padding-right: 2px;">
+                                    <i class="material-icons green-text">edit</i>
+                                </a>
+                                <a class="tooltipped" asp-action="Delete" asp-route-id="@item.CategoryID"
+                                   data-position="right" data-delay="50" data-tooltip="Remove Category"
+                                   style="padding-left: 2px;">
+                                    <i class="material-icons red-text">delete</i>
+                                </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+    <script>
+        $(document).ready(function () {
+            $('.tooltipped').tooltip({ delay: 50 });
+        });
+    </script>
+}
