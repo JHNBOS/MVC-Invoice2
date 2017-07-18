@@ -289,6 +289,8 @@ legend {
 #button-area a {
     font-size: 17px;
     padding-left: 0px;
+    position: relative;
+    left: -18px;
 }
 
 #button-field {
@@ -1299,4 +1301,47 @@ input[type="checkbox"]:checked + label:before {
         display: inline-block !important;
         padding-left: 10px;
     }
+}
+
+.chosen-container {
+    width: 100% !important;
+}
+
+.chosen-container-single .chosen-search input[type="text"] {
+    width: 94% !important;
+}
+
+.chosen-container-single .chosen-single {
+    background-color: transparent !important;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    border: none !important;
+    border-bottom: 1px solid #9e9e9e !important;
+    color: #000 !important;
+    display: block;
+    border-radius: 0px !important;
+    height: 46px !important;
+    overflow: hidden;
+    line-height: 46px !important;
+    padding: 0 0 0 8px;
+    position: relative;
+    text-decoration: none;
+    white-space: nowrap;
+    font-size: 1rem !important;
+    font-family: Overpass !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.chosen-container-single .chosen-search input[type="text"] {
+    background: url(chosen-sprite.png) no-repeat 100% -20px, #fff;
+    border: 1px solid #ccc;
+    border-radius: 0px !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    margin: 1px 0;
+    padding: 0px 18px 0px 4px;
+    width: 100%;
+    height: 30px;
 }

@@ -21,6 +21,7 @@
     <Content Include="Controllers\MyInvoicesController.cs" />
     <Content Include="Controllers\ProductsController.cs" />
     <Content Include="Controllers\UsersController.cs" />
+    <Content Include="wwwroot\css\bootstrap-chosen.css" />
     <Content Include="wwwroot\css\site.css" />
     <Content Include="wwwroot\css\site.min.css" />
     <Content Include="wwwroot\favicon.ico" />
