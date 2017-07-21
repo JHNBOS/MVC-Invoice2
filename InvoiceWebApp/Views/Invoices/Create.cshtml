@@ -26,16 +26,16 @@
 
                             <div class="row" id="debtor-row">
                                 <div class="input-field col s12 col m12 col l6">
-                                    <i class="material-icons prefix">perm_identity</i>
+                                    <label for="select_debtor" style="top:-15px;font-size:12px;left:60px;">Choose Debtor</label>
+                                    <i class="material-icons prefix">person</i>
                                     @Html.DropDownListFor(m => m.DebtorID, (SelectList)ViewBag.DebtorID,
-                                                "Select a debtor", new { @id = "select_debtor" })
-                                    <label for="select_debtor">Choose Debtor</label>
+                                                "Choose debtor", new { @id = "select_debtor", @class = "chosen-select" })
                                 </div>
                                 <div class="input-field col s12 col m12 col l6">
+                                    <label for="select_company" style="top:-15px;font-size:12px;left:60px;">Choose Company</label>
                                     <i class="material-icons prefix">business</i>
-                                    @Html.DropDownListFor(m => m.CompanyID, (SelectList)ViewBag.CompanyID,
-                                                "Select a company", new { @id = "select_company" })
-                                    <label for="select_company">Choose Company</label>
+                                    @Html.DropDownListFor(m => m.CompanyID, (SelectList) ViewBag.CompanyID,
+                                                "Choose company", new { @id = "select_company", @class = "chosen-select" })
                                 </div>
                             </div>
 
@@ -157,5 +157,7 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <link rel="stylesheet" href="~/css/chosen.css" />
+    <script src="~/js/chosen.jquery.js" type="text/javascript"></script>
     <script src="~/js/invoice/create-invoice.js" type="text/javascript"></script>
 }

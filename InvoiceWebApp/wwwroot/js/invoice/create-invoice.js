@@ -7,38 +7,48 @@ var products = [];
 
 //Run when page has loaded
 $(document).ready(function () {
+
+    $("#debtor-row #select_debtor").chosen({ width: "100%", search_contains: true });
+    $("#debtor-row #select_company").chosen({ width: "100%", search_contains: true });
+
     $("#products #product-control #_product").material_select();
-    $("#debtor-row #select_debtor").material_select();
-    $("#debtor-row #select_company").material_select();
+    //$("#debtor-row #select_debtor").material_select();
+    //$("#debtor-row #select_company").material_select();
     $("#type-row #select_type").material_select();
 });
 
 //-------------------------------------------------------------------------------------------
 //Disable the company dropdownlist when this dropdownlist has an option selected
-$("#debtor-row #select_debtor").change(function () {
-    var optionSelected = $(this).find("option:selected");
-    var valueSelected = optionSelected.val();
-    var textSelected = optionSelected.text();
+$("#debtor-row #select_debtor").change(function (e, params) {
+    var selectedOption = "";
 
-    if (textSelected != "Select Debtor") {
-        $("#debtor-row > div:nth-child(2) > div > input").prop("disabled", true);
+    if (e.target.value != "" || e.target.value != null) {
+        var selectedOption = $("#debtor-row #select_debtor").find("option[value='" + e.target.value + "']").text();
     }
-    if (textSelected == "Select Debtor") {
-        $("#debtor-row > div:nth-child(2) > div > input").prop("disabled", false);
+
+    if (selectedOption != "Choose debtor") {
+        $("#debtor-row #select_company").prop("disabled", true);
+        $("#debtor-row #select_company").trigger("chosen:updated");
+    } else {
+        $("#debtor-row #select_company").prop("disabled", false);
+        $("#debtor-row #select_company").trigger("chosen:updated");
     }
 });
 
 //Disable the debtor dropdownlist when this dropdownlist has an option selected
-$("#debtor-row #select_company").change(function () {
-    var optionSelected = $(this).find("option:selected");
-    var valueSelected = optionSelected.val();
-    var textSelected = optionSelected.text();
+$("#debtor-row #select_company").change(function (e, params) {
+    var selectedOption = "";
 
-    if (textSelected != "Select Company") {
-        $("#debtor-row > div:nth-child(1) > div > input").prop("disabled", true);
+    if (e.target.value != "" || e.target.value != null) {
+        var selectedOption = $("#debtor-row #select_company").find("option[value='" + e.target.value + "']").text();
     }
-    if (textSelected == "Select Company") {
-        $("#debtor-row > div:nth-child(1) > div > input").prop("disabled", false);
+
+    if (selectedOption != "Choose company") {
+        $("#debtor-row #select_debtor").prop("disabled", true);
+        $("#debtor-row #select_debtor").trigger("chosen:updated");
+    } else {
+        $("#debtor-row #select_debtor").prop("disabled", false);
+        $("#debtor-row #select_debtor").trigger("chosen:updated");
     }
 });
 
