@@ -17,7 +17,7 @@
     <!--Form-->
     <div class="row" style="margin-top: 5px;">
         <div class="col s12 col m12 col l10 offset-l1">
-            <form asp-controller="Products" asp-action="Create">
+            <form id="form" asp-controller="Products" asp-action="Create">
 
                 <fieldset>
                     <legend>Product Information</legend>
@@ -41,7 +41,7 @@
                     <div class="row">
                         <div class="input-field col s12 col m12 col l8 offset-l2">
                             <i class="material-icons prefix">euro_symbol</i>
-                            <input id="icon_price price" type="text" name="price" asp-for="Price" />
+                            <input id="icon_price" name="price" type="text" />
                             <label for="icon_price">Unit Price</label>
                         </div>
                     </div>
@@ -51,6 +51,14 @@
                             <i class="material-icons prefix">exposure_plus_2</i>
                             <input id="icon_vat" type="text" name="vat" asp-for="VAT" />
                             <label for="icon_vat">VAT Percentage</label>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="input-field col s12 col m12 col l8 offset-l2">
+                            <i class="material-icons prefix">label</i>
+                            @Html.DropDownList("CategoryName", ViewBag.Categories as SelectList, "Select a category", new { @id= "category_select", @name = "category"})
+                            <label for="category_select">Add to category</label>
                         </div>
                     </div>
                 </fieldset>

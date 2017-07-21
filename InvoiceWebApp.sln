@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.13
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InvoiceWebApp", "InvoiceWebApp\InvoiceWebApp.csproj", "{B6437921-5492-4EF7-9128-D52F4D64A477}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InvoiceWebApp", "InvoiceWebApp\InvoiceWebApp.csproj", "{B6437921-5492-4EF7-9128-D52F4D64A477}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Runtime.InteropServices;
 
 namespace InvoiceWebApp.Models {
 
@@ -13,11 +14,14 @@ namespace InvoiceWebApp.Models {
         public string Description { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = true)]
-        public decimal Price { get; set; }
+        public decimal? Price { get; set; }
 
         [Display(Name = "VAT")]
         public int VAT { get; set; }
 
+        public int? CategoryID { get; set; }
+
         public virtual List<InvoiceItem> InvoiceItems { get; set; }
+        public virtual Category Category { get; set; }
     }
 }

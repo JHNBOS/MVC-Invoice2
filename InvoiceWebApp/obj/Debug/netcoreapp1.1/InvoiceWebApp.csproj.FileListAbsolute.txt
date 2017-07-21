@@ -19,4 +19,3 @@ C:\GitHub\MVC-Invoice2\InvoiceWebApp\obj\Debug\netcoreapp1.1\UserSecretsAssembly
 C:\GitHub\MVC-Invoice2\InvoiceWebApp\obj\Debug\netcoreapp1.1\InvoiceWebApp.AssemblyInfo.cs
 C:\GitHub\MVC-Invoice2\InvoiceWebApp\obj\Debug\netcoreapp1.1\InvoiceWebApp.dll
 C:\GitHub\MVC-Invoice2\InvoiceWebApp\obj\Debug\netcoreapp1.1\InvoiceWebApp.pdb
-C:\GitHub\MVC-Invoice2\InvoiceWebApp\obj\Debug\netcoreapp1.1\InvoiceWebApp.csprojResolveAssemblyReference.cache

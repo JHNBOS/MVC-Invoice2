@@ -1,6 +1,7 @@
 using InvoiceWebApp.Data;
 using InvoiceWebApp.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -40,12 +41,58 @@ namespace InvoiceWebApp.Controllers {
             return product;
         }
 
-        //Add product to the database
-        private async Task CreateProduct(Product product, string price) {
-            //Parse price from string to decimal
-            product.Price = decimal.Parse(price);
+        //Get category based on productid
+        private async Task<Category> GetCategory(int? id) {
+            Category category = null;
 
             try {
+                category = await _context.Categories.SingleOrDefaultAsync(s => s.Products.Any(q => q.ProductID == id));
+            } catch (Exception ex) {
+                Debug.WriteLine(ex);
+            }
+
+            return category;
+        }
+
+        //Add product to category
+        private async Task AddToCategory(string categoryName, Product product) {
+            Category category = null;
+
+            try {
+                category = _context.Categories.SingleOrDefault(s => s.CategoryName == categoryName);
+                category.Products.Add(product);
+                await _context.SaveChangesAsync();
+            } catch (Exception ex) {
+                Debug.WriteLine(ex);
+            }
+        }
+
+        //Add product to the database
+        private async Task CreateProduct(Product product, string price, string category) {
+
+            Debug.WriteLine("Product Price: " + price);
+            Debug.WriteLine("Product Category: " + category);
+
+            //Parse price from string to decimal
+            product.Price = decimal.Parse(price);
+            Category cat = null;
+
+            if (category != "") {
+                try {
+                    cat = _context.Categories.SingleOrDefault(s => s.CategoryID == int.Parse(category));
+                } catch (Exception ex) {
+                    Debug.WriteLine(ex);
+                }
+            }
+
+            try {
+                if (cat != null) {
+                    product.CategoryID = int.Parse(category);
+                } else {
+                    product.Category = null;
+                    product.CategoryID = null;
+                }
+                
                 _context.Products.Add(product);
                 await _context.SaveChangesAsync();
             } catch (Exception ex) {
@@ -54,11 +101,35 @@ namespace InvoiceWebApp.Controllers {
         }
 
         //Update existing debtor
-        private async Task UpdateProduct(Product product, string price) {
+        private async Task UpdateProduct(Product product, string price, string category) {
+            Debug.WriteLine("Product Price: " + price);
+            Debug.WriteLine("Product Category: " + category);
+
             //Parse price from string to decimal
             product.Price = decimal.Parse(price);
+            Category cat = null;
+
+            if ( category != "" )
+            {
+                try
+                {
+                    cat = _context.Categories.SingleOrDefault(s => s.CategoryID == int.Parse(category));
+                } catch ( Exception ex )
+                {
+                    Debug.WriteLine(ex);
+                }
+            }
 
             try {
+                if ( cat != null )
+                {
+                    product.CategoryID = int.Parse(category);
+                } else
+                {
+                    product.Category = null;
+                    product.CategoryID = null;
+                }
+
                 _context.Update(product);
                 await _context.SaveChangesAsync();
             } catch (DbUpdateConcurrencyException ex) {
@@ -147,8 +218,25 @@ namespace InvoiceWebApp.Controllers {
                 return NotFound();
             }
 
-            //Get product
+            //Get product and category
             var product = await GetProduct(id);
+            var category = await GetCategory(id);
+
+            //Create selectlist with all categories
+            var categories = _context.Categories
+                .Select(s => new SelectListItem {
+                    Value = s.CategoryID.ToString(),
+                    Text = s.CategoryName
+                });
+
+            //Viewbag
+            if (category != null) {
+                ViewBag.Category = category.CategoryName;
+            } else {
+                ViewBag.Category = "";
+            }
+            ViewBag.Price = String.Format("{0:N2}", product.Price);
+            ViewBag.Categories = new SelectList(categories, "Value", "Text");
 
             if (product == null) {
                 return NotFound();
@@ -165,6 +253,16 @@ namespace InvoiceWebApp.Controllers {
             //Current page
             ViewBag.Current = "Products";
 
+            //Create selectlist with all categories
+            var categories = _context.Categories
+                .Select(s => new SelectListItem {
+                    Value = s.CategoryID.ToString(),
+                    Text = s.CategoryName
+            });
+
+            //Viewbag
+            ViewBag.Categories = new SelectList(categories, "Value", "Text");
+
             return View();
         }
 
@@ -173,11 +271,11 @@ namespace InvoiceWebApp.Controllers {
         //POST => Products/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ProductID,Description,Name,VAT")] Product product, string price) {
+        public async Task<IActionResult> Create([Bind("ProductID,Description,Name,VAT")] Product product, string price, string category) {
 
             if (ModelState.IsValid) {
                 //Add product to database
-                await CreateProduct(product, price);
+                await CreateProduct(product, price, category);
                 return RedirectToAction("Index", "Products", null);
             }
 
@@ -196,12 +294,25 @@ namespace InvoiceWebApp.Controllers {
                 return NotFound();
             }
 
-            //Get product
+            //Get product and category
             var product = await GetProduct(id);
+            var category = await GetCategory(id);
+
+            //Create selectlist with all categories
+            var categories = _context.Categories
+                .Select(s => new SelectListItem {
+                    Value = s.CategoryID.ToString(),
+                    Text = s.CategoryName
+                });
 
             //Set viewbag variables
+            if (category != null) {
+                ViewBag.Category = category.CategoryName;
+            } else {
+                ViewBag.Category = "";
+            }
             ViewBag.Price = String.Format("{0:N2}", product.Price);
-            ViewBag.VAT = product.VAT;
+            ViewBag.Categories = new SelectList(categories, "Value", "Text");
 
             if (product == null) {
                 return NotFound();
@@ -215,7 +326,7 @@ namespace InvoiceWebApp.Controllers {
         //POST => Products/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Description,Name,VAT")] Product product, string price) {
+        public async Task<IActionResult> Edit(int id, [Bind("ProductID,Description,Name,VAT")] Product product, string price, string category) {
 
             if (id != product.ProductID) {
                 return NotFound();
@@ -224,7 +335,7 @@ namespace InvoiceWebApp.Controllers {
             if (ModelState.IsValid) {
                 try {
                     //Update product
-                    await UpdateProduct(product, price);
+                    await UpdateProduct(product, price, category);
                 } catch (DbUpdateConcurrencyException) {
                     if (!ProductExists(product.ProductID)) {
                         return NotFound();
@@ -249,8 +360,25 @@ namespace InvoiceWebApp.Controllers {
                 return NotFound();
             }
 
-            //Get product
+            //Get product and category
             var product = await GetProduct(id);
+            var category = await GetCategory(id);
+
+            //Create selectlist with all categories
+            var categories = _context.Categories
+                .Select(s => new SelectListItem {
+                    Value = s.CategoryID.ToString(),
+                    Text = s.CategoryName
+                });
+
+            //Viewbag
+            if (category != null) {
+                ViewBag.Category = category.CategoryName;
+            } else {
+                ViewBag.Category = "";
+            }
+            ViewBag.Price = String.Format("{0:N2}", product.Price);
+            ViewBag.Categories = new SelectList(categories, "Value", "Text");
 
             if (product == null) {
                 return NotFound();

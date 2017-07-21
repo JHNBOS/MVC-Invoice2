@@ -322,14 +322,12 @@ namespace InvoiceWebApp.Data.Migrations
 
                     b.Property<int?>("CategoryID");
 
-                    b.Property<int?>("CategoryID1");
-
                     b.Property<string>("Description");
 
                     b.Property<string>("Name")
                         .IsRequired();
 
-                    b.Property<decimal>("Price");
+                    b.Property<decimal?>("Price");
 
                     b.Property<int>("VAT");
 
@@ -339,8 +337,6 @@ namespace InvoiceWebApp.Data.Migrations
                         .HasName("AlternateKey_Name");
 
                     b.HasIndex("CategoryID");
-
-                    b.HasIndex("CategoryID1");
 
                     b.ToTable("Products");
                 });
@@ -507,13 +503,9 @@ namespace InvoiceWebApp.Data.Migrations
 
             modelBuilder.Entity("InvoiceWebApp.Models.Product", b =>
                 {
-                    b.HasOne("InvoiceWebApp.Models.Category")
-                        .WithMany("ProductList")
-                        .HasForeignKey("CategoryID");
-
-                    b.HasOne("InvoiceWebApp.Models.Category")
+                    b.HasOne("InvoiceWebApp.Models.Category", "Category")
                         .WithMany("Products")
-                        .HasForeignKey("CategoryID1");
+                        .HasForeignKey("CategoryID");
                 });
 
             modelBuilder.Entity("InvoiceWebApp.Models.User", b =>

@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using InvoiceWebApp.Data;
 using InvoiceWebApp.Models;
+using System.Diagnostics;
 
 namespace InvoiceWebApp.Controllers {
 
@@ -17,6 +18,62 @@ namespace InvoiceWebApp.Controllers {
 
         public CategoriesController(ApplicationDbContext context){
             _context = context;    
+        }
+
+        //------------------------------------------------------------------------
+        //Database action methods
+
+        //Get a list of all categories
+        private async Task<List<Category>> GetCategories() {
+            return await _context.Categories.ToListAsync();
+        }
+
+        //Get category based on id
+        private async Task<Category> GetCategory(int? id) {
+            Category category = null;
+
+            try {
+                category = await _context.Categories
+                    .Include(s => s.Products)
+                    .SingleOrDefaultAsync(s => s.CategoryID == id);
+            } catch (Exception ex) {
+                Debug.WriteLine(ex);
+            }
+
+            return category;
+        }
+
+        //Add category to the database
+        private async Task CreateCategory(Category category) {
+
+            try {
+                _context.Categories.Add(category);
+                await _context.SaveChangesAsync();
+            } catch (Exception ex) {
+                Debug.WriteLine(ex);
+            }
+        }
+
+        //Update existing category
+        private async Task UpdateCategory(Category category) {
+            try {
+                _context.Update(category);
+                await _context.SaveChangesAsync();
+            } catch (DbUpdateConcurrencyException ex) {
+                Debug.WriteLine(ex);
+            }
+        }
+
+        //Remove existing category from the database
+        private async Task DeleteCategory(int id) {
+            Category category = await GetCategory(id);
+
+            try {
+                _context.Categories.Remove(category);
+                await _context.SaveChangesAsync();
+            } catch (Exception ex) {
+                Debug.WriteLine(ex);
+            }
         }
 
         //------------------------------------------------------------------------
@@ -33,7 +90,7 @@ namespace InvoiceWebApp.Controllers {
             ViewBag.CategoryNameSortParm = sortOrder == "CategoryName" ? "categoryname_desc" : "CategoryName";
 
             //Search function
-            var categories = await _context.Categories.ToListAsync();
+            var categories = await GetCategories();
             var query = from category in categories
                         select category;
 
@@ -67,14 +124,16 @@ namespace InvoiceWebApp.Controllers {
         // GET: Categories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
+            //Current page
+            ViewBag.Current = "Categories";
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .Include(s => s.Products)
-                .SingleOrDefaultAsync(m => m.CategoryID == id);
+            var category = await GetCategory(id);
+
             if (category == null)
             {
                 return NotFound();
@@ -86,6 +145,9 @@ namespace InvoiceWebApp.Controllers {
         // GET: Categories/Create
         public IActionResult Create()
         {
+            //Current page
+            ViewBag.Current = "Categories";
+
             return View();
         }
 
@@ -98,8 +160,7 @@ namespace InvoiceWebApp.Controllers {
         {
             if (ModelState.IsValid)
             {
-                _context.Add(category);
-                await _context.SaveChangesAsync();
+                await CreateCategory(category);
                 return RedirectToAction("Index");
             }
             return View(category);
@@ -108,14 +169,16 @@ namespace InvoiceWebApp.Controllers {
         // GET: Categories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+            //Current page
+            ViewBag.Current = "Categories";
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .Include(s => s.Products)
-                .SingleOrDefaultAsync(m => m.CategoryID == id);
+            var category = await GetCategory(id);
+
             if (category == null)
             {
                 return NotFound();
@@ -139,8 +202,7 @@ namespace InvoiceWebApp.Controllers {
             {
                 try
                 {
-                    _context.Update(category);
-                    await _context.SaveChangesAsync();
+                    await UpdateCategory(category);
                 }
                 catch (DbUpdateConcurrencyException)
                 {
@@ -161,14 +223,16 @@ namespace InvoiceWebApp.Controllers {
         // GET: Categories/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
+            //Current page
+            ViewBag.Current = "Categories";
+
             if (id == null)
             {
                 return NotFound();
             }
 
-            var category = await _context.Categories
-                .Include(s => s.Products)
-                .SingleOrDefaultAsync(m => m.CategoryID == id);
+            var category = await GetCategory(id);
+
             if (category == null)
             {
                 return NotFound();
@@ -182,11 +246,7 @@ namespace InvoiceWebApp.Controllers {
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var category = await _context.Categories
-                                .Include(s => s.Products)
-                                .SingleOrDefaultAsync(m => m.CategoryID == id);
-            _context.Categories.Remove(category);
-            await _context.SaveChangesAsync();
+            await DeleteCategory(id);
             return RedirectToAction("Index");
         }
 

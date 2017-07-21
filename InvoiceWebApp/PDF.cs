@@ -335,8 +335,8 @@ namespace InvoiceWebApp {
                 Product product = productList.Single(s => s.ProductID == item.ProductID);
 
                 int vatPercentage = product.VAT;
-                decimal subtotal = (product.Price * 100) / (100 + vatPercentage);
-                decimal total = product.Price * item.Amount;
+                decimal subtotal = (decimal)(product.Price * 100) / (100 + vatPercentage);
+                decimal total = (decimal)  product.Price * item.Amount;
 
                 subTotalAmount += subtotal;
                 totalAmount += total;

@@ -1,33 +1,55 @@
 @model InvoiceWebApp.Models.Category
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Edit Category";
 }
 
-<h2>Edit</h2>
+<div class="container" id="edit-category">
 
-<form asp-action="Edit">
-    <div class="form-horizontal">
-        <h4>Category</h4>
-        <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-    <input type="hidden" asp-for="CategoryID" />
-        <div class="form-group">
-            <label asp-for="CategoryName" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="CategoryName" class="form-control" />
-                <span asp-validation-for="CategoryName" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
-            </div>
+    <div class="row">
+        <div class="col s12 col m12 center-align">
+            <h4 style="margin-top: 40px;">Manage Category</h4>
         </div>
     </div>
-</form>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+    <br />
+
+    <!--Form-->
+    <div class="row" style="margin-top: 5px;">
+        <div class="col s12 col m12 col l10 offset-l1">
+            <form asp-controller="Categories" asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="CategoryID" />
+
+                <fieldset>
+                    <legend>Category</legend>
+
+                    <div class="row">
+                        <div class="input-field col s12 col m12 col l8 offset-l2">
+                            <i class="material-icons prefix">label</i>
+                            <input id="icon_name" type="text" asp-for="CategoryName" />
+                            <label for="icon_name">Category</label>
+                        </div>
+                    </div>
+
+                </fieldset>
+
+                <div class="row">
+                    <div id="button-area">
+                        <button id="edit-category-btn" type="submit" value="Save"
+                                class="btn-large indigo darken-1 waves-effect waves-light">
+                            <i class="material-icons left">save</i>
+                            <span>Save</span>
+                        </button>
+
+                        <br />
+
+                        <a asp-action="Index" class="indigo-text text-darken-1">Back to Overview</a>
+                    </div>
+                </div>
+
+            </form>
+        </div>
+    </div>
+
 </div>
-

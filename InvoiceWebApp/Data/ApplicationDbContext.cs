@@ -36,6 +36,10 @@ namespace InvoiceWebApp.Data {
             .HasAlternateKey(c => c.Name)
             .HasName("AlternateKey_Name");
 
+            builder.Entity<Product>()
+                .Property(c => c.Price)
+                    .IsRequired(false);
+
             //--------------------------------------
             //-------- Company ---------------------
             builder.Entity<Company>()
@@ -70,6 +74,8 @@ namespace InvoiceWebApp.Data {
                 .HasMany(c => c.Invoices)
                     .WithOne(c => c.Debtor)
                     .IsRequired(false);
+            //--------------------------------------
+
         }
 
         public DbSet<Debtor> Debtors { get; set; }

@@ -23,7 +23,7 @@
         <dependency id="Microsoft.Extensions.Configuration.UserSecrets" version="1.1.2" exclude="Build,Analyzers" />
         <dependency id="Microsoft.EntityFrameworkCore.SqlServer" version="1.1.2" exclude="Build,Analyzers" />
         <dependency id="Microsoft.AspNetCore.Mvc" version="1.1.3" exclude="Build,Analyzers" />
-        <dependency id="Microsoft.ApplicationInsights.AspNetCore" version="2.0.0" exclude="Build,Analyzers" />
+        <dependency id="Microsoft.ApplicationInsights.AspNetCore" version="2.0.1" exclude="Build,Analyzers" />
         <dependency id="Microsoft.AspNetCore.Session" version="1.1.2" exclude="Build,Analyzers" />
         <dependency id="Microsoft.AspNetCore.StaticFiles" version="1.1.2" exclude="Build,Analyzers" />
       </group>
@@ -36,10 +36,20 @@
       <files include="any/netcoreapp1.1/wwwroot/images/banner2.svg" buildAction="Content" />
       <files include="any/netcoreapp1.1/wwwroot/images/banner3.svg" buildAction="Content" />
       <files include="any/netcoreapp1.1/wwwroot/images/banner4.svg" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/images/mijnFactuur.png" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/js/chosen.jquery.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/js/invoice/create-invoice.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/js/invoice/edit-invoice.js" buildAction="Content" />
       <files include="any/netcoreapp1.1/wwwroot/js/jquery-adaptive-background.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/js/product/create-product.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/js/product/edit-product.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/js/product/view-product.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/js/quantize.js" buildAction="Content" />
       <files include="any/netcoreapp1.1/wwwroot/js/site.js" buildAction="Content" />
       <files include="any/netcoreapp1.1/wwwroot/js/site.min.js" buildAction="Content" />
       <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/.bower.json" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/bower.json" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/CHANGELOG.md" buildAction="Content" />
       <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css" buildAction="Content" />
       <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.css.map" buildAction="Content" />
       <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/dist/css/bootstrap-theme.min.css" buildAction="Content" />
@@ -56,7 +66,118 @@
       <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/dist/js/bootstrap.js" buildAction="Content" />
       <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/dist/js/bootstrap.min.js" buildAction="Content" />
       <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/dist/js/npm.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/fonts/glyphicons-halflings-regular.eot" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/fonts/glyphicons-halflings-regular.svg" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/fonts/glyphicons-halflings-regular.ttf" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/fonts/glyphicons-halflings-regular.woff" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/fonts/glyphicons-halflings-regular.woff2" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/Gemfile" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/Gemfile.lock" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/Gruntfile.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/grunt/.jshintrc" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/grunt/bs-commonjs-generator.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/grunt/bs-glyphicons-data-generator.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/grunt/bs-lessdoc-parser.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/grunt/bs-raw-files-generator.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/grunt/change-version.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/grunt/configBridge.json" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/grunt/npm-shrinkwrap.json" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/grunt/sauce_browsers.yml" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/ISSUE_TEMPLATE.md" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/js/.jscsrc" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/js/.jshintrc" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/js/affix.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/js/alert.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/js/button.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/js/carousel.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/js/collapse.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/js/dropdown.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/js/modal.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/js/popover.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/js/scrollspy.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/js/tab.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/js/tooltip.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/js/transition.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/.csscomb.json" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/.csslintrc" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/alerts.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/badges.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/bootstrap.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/breadcrumbs.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/button-groups.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/buttons.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/carousel.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/close.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/code.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/component-animations.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/dropdowns.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/forms.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/glyphicons.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/grid.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/input-groups.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/jumbotron.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/labels.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/list-group.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/media.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/alerts.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/background-variant.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/border-radius.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/buttons.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/center-block.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/clearfix.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/forms.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/gradients.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/grid-framework.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/grid.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/hide-text.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/image.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/labels.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/list-group.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/nav-divider.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/nav-vertical-align.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/opacity.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/pagination.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/panels.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/progress-bar.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/reset-filter.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/reset-text.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/resize.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/responsive-visibility.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/size.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/tab-focus.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/table-row.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/text-emphasis.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/text-overflow.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/mixins/vendor-prefixes.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/modals.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/navbar.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/navs.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/normalize.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/pager.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/pagination.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/panels.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/popovers.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/print.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/progress-bars.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/responsive-embed.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/responsive-utilities.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/scaffolding.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/tables.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/theme.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/thumbnails.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/tooltip.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/type.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/utilities.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/variables.less" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/less/wells.less" buildAction="Content" />
       <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/LICENSE" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/nuget/bootstrap.less.nuspec" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/nuget/bootstrap.nuspec" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/nuget/MyGet.ps1" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/package.js" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/package.json" buildAction="Content" />
+      <files include="any/netcoreapp1.1/wwwroot/lib/bootstrap/README.md" buildAction="Content" />
       <files include="any/netcoreapp1.1/wwwroot/lib/jquery-validation-unobtrusive/.bower.json" buildAction="Content" />
       <files include="any/netcoreapp1.1/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js" buildAction="Content" />
       <files include="any/netcoreapp1.1/wwwroot/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js" buildAction="Content" />
@@ -92,6 +213,11 @@
       <files include="any/netcoreapp1.1/Views/Admins/Index.cshtml" buildAction="Content" />
       <files include="any/netcoreapp1.1/Views/Admins/Login.cshtml" buildAction="Content" />
       <files include="any/netcoreapp1.1/Views/Admins/Settings.cshtml" buildAction="Content" />
+      <files include="any/netcoreapp1.1/Views/Categories/Create.cshtml" buildAction="Content" />
+      <files include="any/netcoreapp1.1/Views/Categories/Delete.cshtml" buildAction="Content" />
+      <files include="any/netcoreapp1.1/Views/Categories/Details.cshtml" buildAction="Content" />
+      <files include="any/netcoreapp1.1/Views/Categories/Edit.cshtml" buildAction="Content" />
+      <files include="any/netcoreapp1.1/Views/Categories/Index.cshtml" buildAction="Content" />
       <files include="any/netcoreapp1.1/Views/Companies/Create.cshtml" buildAction="Content" />
       <files include="any/netcoreapp1.1/Views/Companies/Delete.cshtml" buildAction="Content" />
       <files include="any/netcoreapp1.1/Views/Companies/Details.cshtml" buildAction="Content" />
@@ -116,10 +242,7 @@
       <files include="any/netcoreapp1.1/Views/Manage/ManageLogins.cshtml" buildAction="Content" />
       <files include="any/netcoreapp1.1/Views/Manage/SetPassword.cshtml" buildAction="Content" />
       <files include="any/netcoreapp1.1/Views/Manage/VerifyPhoneNumber.cshtml" buildAction="Content" />
-      <files include="any/netcoreapp1.1/Views/MyInvoices/Create.cshtml" buildAction="Content" />
-      <files include="any/netcoreapp1.1/Views/MyInvoices/Delete.cshtml" buildAction="Content" />
       <files include="any/netcoreapp1.1/Views/MyInvoices/Details.cshtml" buildAction="Content" />
-      <files include="any/netcoreapp1.1/Views/MyInvoices/Edit.cshtml" buildAction="Content" />
       <files include="any/netcoreapp1.1/Views/MyInvoices/Index.cshtml" buildAction="Content" />
       <files include="any/netcoreapp1.1/Views/Products/Create.cshtml" buildAction="Content" />
       <files include="any/netcoreapp1.1/Views/Products/Delete.cshtml" buildAction="Content" />
@@ -145,7 +268,14 @@
       <files include="any/netcoreapp1.1/bundleconfig.json" buildAction="Content" />
       <files include="any/netcoreapp1.1/package.json" buildAction="Content" />
       <files include="any/netcoreapp1.1/Properties/launchSettings.json" buildAction="Content" />
-      <files include="any/netcoreapp1.1/Controllers/DebtorsController.cs" buildAction="Content" />
+      <files include="any/netcoreapp1.1/Controllers/AdminsController.cs" buildAction="Content" />
+      <files include="any/netcoreapp1.1/Controllers/CompaniesController.cs" buildAction="Content" />
+      <files include="any/netcoreapp1.1/Controllers/HomeController.cs" buildAction="Content" />
+      <files include="any/netcoreapp1.1/Controllers/InvoiceItemsController.cs" buildAction="Content" />
+      <files include="any/netcoreapp1.1/Controllers/InvoicesController.cs" buildAction="Content" />
+      <files include="any/netcoreapp1.1/Controllers/MyInvoicesController.cs" buildAction="Content" />
+      <files include="any/netcoreapp1.1/Controllers/ProductsController.cs" buildAction="Content" />
+      <files include="any/netcoreapp1.1/Controllers/UsersController.cs" buildAction="Content" />
     </contentFiles>
   </metadata>
   <files>
@@ -165,14 +295,34 @@
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\images\banner3.svg" target="contentFiles\any\netcoreapp1.1\wwwroot\images\banner3.svg" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\images\banner4.svg" target="content\wwwroot\images\banner4.svg" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\images\banner4.svg" target="contentFiles\any\netcoreapp1.1\wwwroot\images\banner4.svg" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\images\mijnFactuur.png" target="content\wwwroot\images\mijnFactuur.png" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\images\mijnFactuur.png" target="contentFiles\any\netcoreapp1.1\wwwroot\images\mijnFactuur.png" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\chosen.jquery.js" target="content\wwwroot\js\chosen.jquery.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\chosen.jquery.js" target="contentFiles\any\netcoreapp1.1\wwwroot\js\chosen.jquery.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\invoice\create-invoice.js" target="content\wwwroot\js\invoice\create-invoice.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\invoice\create-invoice.js" target="contentFiles\any\netcoreapp1.1\wwwroot\js\invoice\create-invoice.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\invoice\edit-invoice.js" target="content\wwwroot\js\invoice\edit-invoice.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\invoice\edit-invoice.js" target="contentFiles\any\netcoreapp1.1\wwwroot\js\invoice\edit-invoice.js" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\jquery-adaptive-background.js" target="content\wwwroot\js\jquery-adaptive-background.js" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\jquery-adaptive-background.js" target="contentFiles\any\netcoreapp1.1\wwwroot\js\jquery-adaptive-background.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\product\create-product.js" target="content\wwwroot\js\product\create-product.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\product\create-product.js" target="contentFiles\any\netcoreapp1.1\wwwroot\js\product\create-product.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\product\edit-product.js" target="content\wwwroot\js\product\edit-product.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\product\edit-product.js" target="contentFiles\any\netcoreapp1.1\wwwroot\js\product\edit-product.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\product\view-product.js" target="content\wwwroot\js\product\view-product.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\product\view-product.js" target="contentFiles\any\netcoreapp1.1\wwwroot\js\product\view-product.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\quantize.js" target="content\wwwroot\js\quantize.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\quantize.js" target="contentFiles\any\netcoreapp1.1\wwwroot\js\quantize.js" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\site.js" target="content\wwwroot\js\site.js" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\site.js" target="contentFiles\any\netcoreapp1.1\wwwroot\js\site.js" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\site.min.js" target="content\wwwroot\js\site.min.js" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\js\site.min.js" target="contentFiles\any\netcoreapp1.1\wwwroot\js\site.min.js" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\.bower.json" target="content\wwwroot\lib\bootstrap\.bower.json" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\.bower.json" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\.bower.json" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\bower.json" target="content\wwwroot\lib\bootstrap\bower.json" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\bower.json" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\bower.json" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\CHANGELOG.md" target="content\wwwroot\lib\bootstrap\CHANGELOG.md" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\CHANGELOG.md" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\CHANGELOG.md" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css" target="content\wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css.map" target="content\wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css.map" />
@@ -205,8 +355,230 @@
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\dist\js\npm.js" target="content\wwwroot\lib\bootstrap\dist\js\npm.js" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\dist\js\npm.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\dist\js\npm.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.eot" target="content\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.eot" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.eot" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.svg" target="content\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.svg" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.ttf" target="content\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.ttf" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.ttf" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.woff" target="content\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.woff" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.woff" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.woff2" target="content\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.woff2" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\Gemfile" target="content\wwwroot\lib\bootstrap\Gemfile" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\Gemfile" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\Gemfile" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\Gemfile.lock" target="content\wwwroot\lib\bootstrap\Gemfile.lock" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\Gemfile.lock" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\Gemfile.lock" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\Gruntfile.js" target="content\wwwroot\lib\bootstrap\Gruntfile.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\Gruntfile.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\Gruntfile.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\grunt\.jshintrc" target="content\wwwroot\lib\bootstrap\grunt\.jshintrc" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\grunt\.jshintrc" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\grunt\.jshintrc" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\grunt\bs-commonjs-generator.js" target="content\wwwroot\lib\bootstrap\grunt\bs-commonjs-generator.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\grunt\bs-commonjs-generator.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\grunt\bs-commonjs-generator.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\grunt\bs-glyphicons-data-generator.js" target="content\wwwroot\lib\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\grunt\bs-glyphicons-data-generator.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\grunt\bs-lessdoc-parser.js" target="content\wwwroot\lib\bootstrap\grunt\bs-lessdoc-parser.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\grunt\bs-lessdoc-parser.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\grunt\bs-lessdoc-parser.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\grunt\bs-raw-files-generator.js" target="content\wwwroot\lib\bootstrap\grunt\bs-raw-files-generator.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\grunt\bs-raw-files-generator.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\grunt\bs-raw-files-generator.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\grunt\change-version.js" target="content\wwwroot\lib\bootstrap\grunt\change-version.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\grunt\change-version.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\grunt\change-version.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\grunt\configBridge.json" target="content\wwwroot\lib\bootstrap\grunt\configBridge.json" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\grunt\configBridge.json" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\grunt\configBridge.json" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\grunt\npm-shrinkwrap.json" target="content\wwwroot\lib\bootstrap\grunt\npm-shrinkwrap.json" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\grunt\npm-shrinkwrap.json" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\grunt\npm-shrinkwrap.json" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\grunt\sauce_browsers.yml" target="content\wwwroot\lib\bootstrap\grunt\sauce_browsers.yml" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\grunt\sauce_browsers.yml" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\grunt\sauce_browsers.yml" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\ISSUE_TEMPLATE.md" target="content\wwwroot\lib\bootstrap\ISSUE_TEMPLATE.md" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\ISSUE_TEMPLATE.md" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\ISSUE_TEMPLATE.md" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\.jscsrc" target="content\wwwroot\lib\bootstrap\js\.jscsrc" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\.jscsrc" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\js\.jscsrc" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\.jshintrc" target="content\wwwroot\lib\bootstrap\js\.jshintrc" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\.jshintrc" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\js\.jshintrc" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\affix.js" target="content\wwwroot\lib\bootstrap\js\affix.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\affix.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\js\affix.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\alert.js" target="content\wwwroot\lib\bootstrap\js\alert.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\alert.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\js\alert.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\button.js" target="content\wwwroot\lib\bootstrap\js\button.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\button.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\js\button.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\carousel.js" target="content\wwwroot\lib\bootstrap\js\carousel.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\carousel.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\js\carousel.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\collapse.js" target="content\wwwroot\lib\bootstrap\js\collapse.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\collapse.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\js\collapse.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\dropdown.js" target="content\wwwroot\lib\bootstrap\js\dropdown.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\dropdown.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\js\dropdown.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\modal.js" target="content\wwwroot\lib\bootstrap\js\modal.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\modal.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\js\modal.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\popover.js" target="content\wwwroot\lib\bootstrap\js\popover.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\popover.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\js\popover.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\scrollspy.js" target="content\wwwroot\lib\bootstrap\js\scrollspy.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\scrollspy.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\js\scrollspy.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\tab.js" target="content\wwwroot\lib\bootstrap\js\tab.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\tab.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\js\tab.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\tooltip.js" target="content\wwwroot\lib\bootstrap\js\tooltip.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\tooltip.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\js\tooltip.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\transition.js" target="content\wwwroot\lib\bootstrap\js\transition.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\js\transition.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\js\transition.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\.csscomb.json" target="content\wwwroot\lib\bootstrap\less\.csscomb.json" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\.csscomb.json" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\.csscomb.json" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\.csslintrc" target="content\wwwroot\lib\bootstrap\less\.csslintrc" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\.csslintrc" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\.csslintrc" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\alerts.less" target="content\wwwroot\lib\bootstrap\less\alerts.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\alerts.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\alerts.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\badges.less" target="content\wwwroot\lib\bootstrap\less\badges.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\badges.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\badges.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\bootstrap.less" target="content\wwwroot\lib\bootstrap\less\bootstrap.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\bootstrap.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\bootstrap.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\breadcrumbs.less" target="content\wwwroot\lib\bootstrap\less\breadcrumbs.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\breadcrumbs.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\breadcrumbs.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\button-groups.less" target="content\wwwroot\lib\bootstrap\less\button-groups.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\button-groups.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\button-groups.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\buttons.less" target="content\wwwroot\lib\bootstrap\less\buttons.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\buttons.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\buttons.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\carousel.less" target="content\wwwroot\lib\bootstrap\less\carousel.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\carousel.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\carousel.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\close.less" target="content\wwwroot\lib\bootstrap\less\close.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\close.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\close.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\code.less" target="content\wwwroot\lib\bootstrap\less\code.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\code.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\code.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\component-animations.less" target="content\wwwroot\lib\bootstrap\less\component-animations.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\component-animations.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\component-animations.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\dropdowns.less" target="content\wwwroot\lib\bootstrap\less\dropdowns.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\dropdowns.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\dropdowns.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\forms.less" target="content\wwwroot\lib\bootstrap\less\forms.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\forms.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\forms.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\glyphicons.less" target="content\wwwroot\lib\bootstrap\less\glyphicons.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\glyphicons.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\glyphicons.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\grid.less" target="content\wwwroot\lib\bootstrap\less\grid.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\grid.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\grid.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\input-groups.less" target="content\wwwroot\lib\bootstrap\less\input-groups.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\input-groups.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\input-groups.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\jumbotron.less" target="content\wwwroot\lib\bootstrap\less\jumbotron.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\jumbotron.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\jumbotron.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\labels.less" target="content\wwwroot\lib\bootstrap\less\labels.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\labels.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\labels.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\list-group.less" target="content\wwwroot\lib\bootstrap\less\list-group.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\list-group.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\list-group.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\media.less" target="content\wwwroot\lib\bootstrap\less\media.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\media.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\media.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins.less" target="content\wwwroot\lib\bootstrap\less\mixins.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\alerts.less" target="content\wwwroot\lib\bootstrap\less\mixins\alerts.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\alerts.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\alerts.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\background-variant.less" target="content\wwwroot\lib\bootstrap\less\mixins\background-variant.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\background-variant.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\background-variant.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\border-radius.less" target="content\wwwroot\lib\bootstrap\less\mixins\border-radius.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\border-radius.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\border-radius.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\buttons.less" target="content\wwwroot\lib\bootstrap\less\mixins\buttons.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\buttons.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\buttons.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\center-block.less" target="content\wwwroot\lib\bootstrap\less\mixins\center-block.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\center-block.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\center-block.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\clearfix.less" target="content\wwwroot\lib\bootstrap\less\mixins\clearfix.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\clearfix.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\clearfix.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\forms.less" target="content\wwwroot\lib\bootstrap\less\mixins\forms.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\forms.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\forms.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\gradients.less" target="content\wwwroot\lib\bootstrap\less\mixins\gradients.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\gradients.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\gradients.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\grid-framework.less" target="content\wwwroot\lib\bootstrap\less\mixins\grid-framework.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\grid-framework.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\grid-framework.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\grid.less" target="content\wwwroot\lib\bootstrap\less\mixins\grid.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\grid.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\grid.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\hide-text.less" target="content\wwwroot\lib\bootstrap\less\mixins\hide-text.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\hide-text.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\hide-text.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\image.less" target="content\wwwroot\lib\bootstrap\less\mixins\image.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\image.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\image.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\labels.less" target="content\wwwroot\lib\bootstrap\less\mixins\labels.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\labels.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\labels.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\list-group.less" target="content\wwwroot\lib\bootstrap\less\mixins\list-group.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\list-group.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\list-group.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\nav-divider.less" target="content\wwwroot\lib\bootstrap\less\mixins\nav-divider.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\nav-divider.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\nav-divider.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\nav-vertical-align.less" target="content\wwwroot\lib\bootstrap\less\mixins\nav-vertical-align.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\nav-vertical-align.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\nav-vertical-align.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\opacity.less" target="content\wwwroot\lib\bootstrap\less\mixins\opacity.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\opacity.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\opacity.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\pagination.less" target="content\wwwroot\lib\bootstrap\less\mixins\pagination.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\pagination.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\pagination.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\panels.less" target="content\wwwroot\lib\bootstrap\less\mixins\panels.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\panels.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\panels.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\progress-bar.less" target="content\wwwroot\lib\bootstrap\less\mixins\progress-bar.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\progress-bar.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\progress-bar.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\reset-filter.less" target="content\wwwroot\lib\bootstrap\less\mixins\reset-filter.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\reset-filter.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\reset-filter.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\reset-text.less" target="content\wwwroot\lib\bootstrap\less\mixins\reset-text.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\reset-text.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\reset-text.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\resize.less" target="content\wwwroot\lib\bootstrap\less\mixins\resize.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\resize.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\resize.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\responsive-visibility.less" target="content\wwwroot\lib\bootstrap\less\mixins\responsive-visibility.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\responsive-visibility.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\responsive-visibility.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\size.less" target="content\wwwroot\lib\bootstrap\less\mixins\size.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\size.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\size.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\tab-focus.less" target="content\wwwroot\lib\bootstrap\less\mixins\tab-focus.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\tab-focus.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\tab-focus.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\table-row.less" target="content\wwwroot\lib\bootstrap\less\mixins\table-row.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\table-row.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\table-row.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\text-emphasis.less" target="content\wwwroot\lib\bootstrap\less\mixins\text-emphasis.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\text-emphasis.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\text-emphasis.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\text-overflow.less" target="content\wwwroot\lib\bootstrap\less\mixins\text-overflow.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\text-overflow.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\text-overflow.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\vendor-prefixes.less" target="content\wwwroot\lib\bootstrap\less\mixins\vendor-prefixes.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\mixins\vendor-prefixes.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\mixins\vendor-prefixes.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\modals.less" target="content\wwwroot\lib\bootstrap\less\modals.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\modals.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\modals.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\navbar.less" target="content\wwwroot\lib\bootstrap\less\navbar.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\navbar.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\navbar.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\navs.less" target="content\wwwroot\lib\bootstrap\less\navs.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\navs.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\navs.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\normalize.less" target="content\wwwroot\lib\bootstrap\less\normalize.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\normalize.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\normalize.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\pager.less" target="content\wwwroot\lib\bootstrap\less\pager.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\pager.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\pager.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\pagination.less" target="content\wwwroot\lib\bootstrap\less\pagination.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\pagination.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\pagination.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\panels.less" target="content\wwwroot\lib\bootstrap\less\panels.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\panels.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\panels.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\popovers.less" target="content\wwwroot\lib\bootstrap\less\popovers.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\popovers.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\popovers.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\print.less" target="content\wwwroot\lib\bootstrap\less\print.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\print.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\print.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\progress-bars.less" target="content\wwwroot\lib\bootstrap\less\progress-bars.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\progress-bars.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\progress-bars.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\responsive-embed.less" target="content\wwwroot\lib\bootstrap\less\responsive-embed.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\responsive-embed.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\responsive-embed.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\responsive-utilities.less" target="content\wwwroot\lib\bootstrap\less\responsive-utilities.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\responsive-utilities.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\responsive-utilities.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\scaffolding.less" target="content\wwwroot\lib\bootstrap\less\scaffolding.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\scaffolding.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\scaffolding.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\tables.less" target="content\wwwroot\lib\bootstrap\less\tables.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\tables.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\tables.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\theme.less" target="content\wwwroot\lib\bootstrap\less\theme.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\theme.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\theme.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\thumbnails.less" target="content\wwwroot\lib\bootstrap\less\thumbnails.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\thumbnails.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\thumbnails.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\tooltip.less" target="content\wwwroot\lib\bootstrap\less\tooltip.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\tooltip.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\tooltip.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\type.less" target="content\wwwroot\lib\bootstrap\less\type.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\type.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\type.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\utilities.less" target="content\wwwroot\lib\bootstrap\less\utilities.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\utilities.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\utilities.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\variables.less" target="content\wwwroot\lib\bootstrap\less\variables.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\variables.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\variables.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\wells.less" target="content\wwwroot\lib\bootstrap\less\wells.less" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\less\wells.less" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\less\wells.less" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\LICENSE" target="content\wwwroot\lib\bootstrap\LICENSE" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\LICENSE" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\LICENSE" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\nuget\bootstrap.less.nuspec" target="content\wwwroot\lib\bootstrap\nuget\bootstrap.less.nuspec" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\nuget\bootstrap.less.nuspec" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\nuget\bootstrap.less.nuspec" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\nuget\bootstrap.nuspec" target="content\wwwroot\lib\bootstrap\nuget\bootstrap.nuspec" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\nuget\bootstrap.nuspec" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\nuget\bootstrap.nuspec" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\nuget\MyGet.ps1" target="content\wwwroot\lib\bootstrap\nuget\MyGet.ps1" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\nuget\MyGet.ps1" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\nuget\MyGet.ps1" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\package.js" target="content\wwwroot\lib\bootstrap\package.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\package.js" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\package.js" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\package.json" target="content\wwwroot\lib\bootstrap\package.json" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\package.json" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\package.json" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\README.md" target="content\wwwroot\lib\bootstrap\README.md" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\bootstrap\README.md" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\bootstrap\README.md" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\jquery-validation-unobtrusive\.bower.json" target="content\wwwroot\lib\jquery-validation-unobtrusive\.bower.json" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\jquery-validation-unobtrusive\.bower.json" target="contentFiles\any\netcoreapp1.1\wwwroot\lib\jquery-validation-unobtrusive\.bower.json" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" target="content\wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
@@ -277,6 +649,16 @@
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Admins\Login.cshtml" target="contentFiles\any\netcoreapp1.1\Views\Admins\Login.cshtml" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Admins\Settings.cshtml" target="content\Views\Admins\Settings.cshtml" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Admins\Settings.cshtml" target="contentFiles\any\netcoreapp1.1\Views\Admins\Settings.cshtml" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Categories\Create.cshtml" target="content\Views\Categories\Create.cshtml" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Categories\Create.cshtml" target="contentFiles\any\netcoreapp1.1\Views\Categories\Create.cshtml" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Categories\Delete.cshtml" target="content\Views\Categories\Delete.cshtml" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Categories\Delete.cshtml" target="contentFiles\any\netcoreapp1.1\Views\Categories\Delete.cshtml" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Categories\Details.cshtml" target="content\Views\Categories\Details.cshtml" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Categories\Details.cshtml" target="contentFiles\any\netcoreapp1.1\Views\Categories\Details.cshtml" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Categories\Edit.cshtml" target="content\Views\Categories\Edit.cshtml" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Categories\Edit.cshtml" target="contentFiles\any\netcoreapp1.1\Views\Categories\Edit.cshtml" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Categories\Index.cshtml" target="content\Views\Categories\Index.cshtml" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Categories\Index.cshtml" target="contentFiles\any\netcoreapp1.1\Views\Categories\Index.cshtml" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Companies\Create.cshtml" target="content\Views\Companies\Create.cshtml" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Companies\Create.cshtml" target="contentFiles\any\netcoreapp1.1\Views\Companies\Create.cshtml" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Companies\Delete.cshtml" target="content\Views\Companies\Delete.cshtml" />
@@ -325,14 +707,8 @@
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Manage\SetPassword.cshtml" target="contentFiles\any\netcoreapp1.1\Views\Manage\SetPassword.cshtml" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Manage\VerifyPhoneNumber.cshtml" target="content\Views\Manage\VerifyPhoneNumber.cshtml" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Manage\VerifyPhoneNumber.cshtml" target="contentFiles\any\netcoreapp1.1\Views\Manage\VerifyPhoneNumber.cshtml" />
-    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\MyInvoices\Create.cshtml" target="content\Views\MyInvoices\Create.cshtml" />
-    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\MyInvoices\Create.cshtml" target="contentFiles\any\netcoreapp1.1\Views\MyInvoices\Create.cshtml" />
-    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\MyInvoices\Delete.cshtml" target="content\Views\MyInvoices\Delete.cshtml" />
-    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\MyInvoices\Delete.cshtml" target="contentFiles\any\netcoreapp1.1\Views\MyInvoices\Delete.cshtml" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\MyInvoices\Details.cshtml" target="content\Views\MyInvoices\Details.cshtml" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\MyInvoices\Details.cshtml" target="contentFiles\any\netcoreapp1.1\Views\MyInvoices\Details.cshtml" />
-    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\MyInvoices\Edit.cshtml" target="content\Views\MyInvoices\Edit.cshtml" />
-    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\MyInvoices\Edit.cshtml" target="contentFiles\any\netcoreapp1.1\Views\MyInvoices\Edit.cshtml" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\MyInvoices\Index.cshtml" target="content\Views\MyInvoices\Index.cshtml" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\MyInvoices\Index.cshtml" target="contentFiles\any\netcoreapp1.1\Views\MyInvoices\Index.cshtml" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Views\Products\Create.cshtml" target="content\Views\Products\Create.cshtml" />
@@ -383,7 +759,21 @@
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\package.json" target="contentFiles\any\netcoreapp1.1\package.json" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Properties\launchSettings.json" target="content\Properties\launchSettings.json" />
     <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Properties\launchSettings.json" target="contentFiles\any\netcoreapp1.1\Properties\launchSettings.json" />
-    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Controllers\DebtorsController.cs" target="content\Controllers\DebtorsController.cs" />
-    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Controllers\DebtorsController.cs" target="contentFiles\any\netcoreapp1.1\Controllers\DebtorsController.cs" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Controllers\AdminsController.cs" target="content\Controllers\AdminsController.cs" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Controllers\AdminsController.cs" target="contentFiles\any\netcoreapp1.1\Controllers\AdminsController.cs" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Controllers\CompaniesController.cs" target="content\Controllers\CompaniesController.cs" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Controllers\CompaniesController.cs" target="contentFiles\any\netcoreapp1.1\Controllers\CompaniesController.cs" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Controllers\HomeController.cs" target="content\Controllers\HomeController.cs" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Controllers\HomeController.cs" target="contentFiles\any\netcoreapp1.1\Controllers\HomeController.cs" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Controllers\InvoiceItemsController.cs" target="content\Controllers\InvoiceItemsController.cs" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Controllers\InvoiceItemsController.cs" target="contentFiles\any\netcoreapp1.1\Controllers\InvoiceItemsController.cs" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Controllers\InvoicesController.cs" target="content\Controllers\InvoicesController.cs" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Controllers\InvoicesController.cs" target="contentFiles\any\netcoreapp1.1\Controllers\InvoicesController.cs" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Controllers\MyInvoicesController.cs" target="content\Controllers\MyInvoicesController.cs" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Controllers\MyInvoicesController.cs" target="contentFiles\any\netcoreapp1.1\Controllers\MyInvoicesController.cs" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Controllers\ProductsController.cs" target="content\Controllers\ProductsController.cs" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Controllers\ProductsController.cs" target="contentFiles\any\netcoreapp1.1\Controllers\ProductsController.cs" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Controllers\UsersController.cs" target="content\Controllers\UsersController.cs" />
+    <file src="C:\GitHub\MVC-Invoice2\InvoiceWebApp\Controllers\UsersController.cs" target="contentFiles\any\netcoreapp1.1\Controllers\UsersController.cs" />
   </files>
 </package>
