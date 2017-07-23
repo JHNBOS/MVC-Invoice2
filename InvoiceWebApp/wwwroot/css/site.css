@@ -425,22 +425,20 @@ input[type="checkbox"]:checked + label:before {
 
 #forgot-link {
     position: relative;
-    left: 50%;
+    left: 29%;
     bottom: 0%;
     font-weight: bold;
     width: 45%;
     display: block;
-    transform: translate(-50%, 0);
 }
 
 #login-link {
     position: relative;
-    left: 50%;
+    left: 44%;
     bottom: 0%;
     font-weight: bold;
     width: 30%;
     display: block;
-    transform: translate(-50%, 0);
 }
 
 /*-----------------------------------------------------------------------------------

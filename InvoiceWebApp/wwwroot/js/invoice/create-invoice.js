@@ -1,20 +1,35 @@
 ﻿//Variables
 var total = "";
-var count = 0;
+var count = 1;
 var productArray = new Array();
 var amountArray = new Array();
 var products = [];
 
 //Run when page has loaded
 $(document).ready(function () {
+    //Initialize Chosen JS dropdowns
+    $("#debtor-row #select_debtor").chosen({
+        width: "100%",
+        search_contains: true,
+        allow_single_deselect: true,
+        no_results_text: "No debtor matches: "
+    });
+    $("#debtor-row #select_company").chosen({
+        width: "100%",
+        search_contains: true,
+        allow_single_deselect: true,
+        no_results_text: "No company matches: "
+    });
 
-    $("#debtor-row #select_debtor").chosen({ width: "100%", search_contains: true });
-    $("#debtor-row #select_company").chosen({ width: "100%", search_contains: true });
-
-    $("#products #product-control #_product").material_select();
-    //$("#debtor-row #select_debtor").material_select();
-    //$("#debtor-row #select_company").material_select();
+    //Initialize Materialize CSS dropdowns
+    $("#products #product-control select").material_select();
     $("#type-row #select_type").material_select();
+
+    //Hide delete button product-control
+    $("#products #product-control #delete-row-btn").hide();
+
+    //Set value of total input
+    $("#total").val("0,00");
 });
 
 //-------------------------------------------------------------------------------------------
@@ -25,7 +40,6 @@ $("#debtor-row #select_debtor").change(function (e, params) {
     if (e.target.value != "" || e.target.value != null) {
         var selectedOption = $("#debtor-row #select_debtor").find("option[value='" + e.target.value + "']").text();
     }
-
     if (selectedOption != "Choose debtor") {
         $("#debtor-row #select_company").prop("disabled", true);
         $("#debtor-row #select_company").trigger("chosen:updated");
@@ -42,7 +56,6 @@ $("#debtor-row #select_company").change(function (e, params) {
     if (e.target.value != "" || e.target.value != null) {
         var selectedOption = $("#debtor-row #select_company").find("option[value='" + e.target.value + "']").text();
     }
-
     if (selectedOption != "Choose company") {
         $("#debtor-row #select_debtor").prop("disabled", true);
         $("#debtor-row #select_debtor").trigger("chosen:updated");
@@ -74,27 +87,33 @@ $("#icon_created").on("change", () => {
 
 //-------------------------------------------------------------------------------------------
 //Calculate the total amount when adding a new product
-$("#products option:selected").each(function () {
-    $("#_product").on('change', function () {
-        console.log("Product: " + $(this).val());
+$("#products div div:nth-child(2) #_product").on("change", function () {
+    $("#products div div:nth-child(2) #_product option:selected").each(function () {
         calcTotal();
-    });
-})
+    })
+});
 
 //Calculate the total amount when changing the amount of product(s)
-$("#products #_amount").on('change', function () {
+$("#products #_amount").on("change", function () {
+    calcTotal();
+});
+$("#products #_amount").on("keyup", function () {
+    calcTotal();
+});
+$("#products #_amount").mouseup(function () {
+    calcTotal();
+});
+$("#products #_amount").mousedown(function () {
     calcTotal();
 });
 
 //Calculate the total amount when changing the amount of discount
-$("#icon_discount").on('change', function () {
+$("#icon_discount").on("change", function () {
     calcTotal();
 });
-
 $("#icon_discount").mouseup(function () {
     calcTotal();
 });
-
 $("#icon_discount").mousedown(function () {
     calcTotal();
 });
@@ -102,7 +121,7 @@ $("#icon_discount").mousedown(function () {
 //-------------------------------------------------------------------------------------------
 //Add parameters to form and submit
 $("#create-invoice-btn").on("click", function () {
-    $("#products option:selected").each(function () {
+    $("#products div div:nth-child(2) #_product option:selected").each(function () {
         productArray.push($(this).val().split('_')[0]);
     })
 
@@ -120,15 +139,26 @@ $("#create-invoice-btn").on("click", function () {
 //-------------------------------------------------------------------------------------------
 //Add a new product row
 $("#add-row-btn").on("click", function () {
-    $("#product-control").show();
+    count++;
+
     var copy = $("#product-control")
         .clone(true)
         .appendTo("#products")
-        .prop("id", "product-row")
-        .find("input").val("");
+        .prop("id", "product-row");
 
-    $("#product-control").hide();
-    $("#products #product-row select").material_select();
+    //Empty inputs
+    $("#products #product-row:nth-child(" + count + ") #_product").empty();
+    $("#products #product-row:nth-child(" + count + ") #_amount").prop("value", "");
+
+    //Append option
+    $("#products #product-row:nth-child(" + count + ") #_product").append("<option value=''>Select a product</option>");
+
+    //Show delete button
+    $("#products #product-row:nth-child(" + count + ") #delete-row-btn").show();
+
+    //Initialize Materialize CSS dropdowns
+    $("#products #product-row:nth-child(" + count + ") select").material_select();
+    $("#products #product-control select").material_select();
 
     return false;
 });
@@ -136,7 +166,9 @@ $("#add-row-btn").on("click", function () {
 //-------------------------------------------------------------------------------------------
 //Remove a product row
 $("#delete-row-btn").on("click", function () {
-    $(this).parent().parent().remove();
+    $(this).closest(".row").remove();
+
+    count--;
     calcTotal();
 
     return false;
@@ -151,8 +183,8 @@ function calcTotal() {
     var totalPrice = Number.parseFloat("0");
     var continueCalc = false;
 
-    $("#products option:selected").each(function () {
-        if ($(this).val() != "-1") {
+    $("#products div div:nth-child(2) #_product option:selected").each(function () {
+        if ($(this).val() != "") {
             pids.push($(this).val());
             continueCalc = true;
         }
@@ -178,10 +210,9 @@ function calcTotal() {
 
     if (amounts.length != pids.length) {
         $("#total").prop("readonly", false);
-        $("#total").val("");
+        $("#total").val("0,00");
         $("#total").prop("readonly", true);
     }
-
     if (continueCalc == true) {
         for (var i = 0; i < pids.length; i++) {
             var id = pids[i].split('_')[0];
@@ -202,4 +233,11 @@ function calcTotal() {
         total = totalPrice.toLocaleString("nl-NL", { minimumFractionDigits: 2 });
         $("#total").prop("readonly", true);
     }
+    if (continueCalc == false && pids.length == 0 && ($("#total").val() != 0 || $("#total").val() != "0")) {
+        $("#total").prop("readonly", false);
+        $("#total").val("0,00");
+        $("#total").prop("readonly", true);
+    }
 }
+
+//-------------------------------------------------------------------------------------------

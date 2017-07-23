@@ -46,7 +46,6 @@ $("#debtor-row #select_debtor").change(function (e, params) {
     if (e.target.value != "" || e.target.value != null) {
         var selectedOption = $("#debtor-row #select_debtor").find("option[value='" + e.target.value + "']").text();
     }
-
     if (selectedOption != "Choose debtor") {
         $("#debtor-row #select_company").prop("disabled", true);
         $("#debtor-row #select_company").trigger("chosen:updated");
@@ -63,7 +62,6 @@ $("#debtor-row #select_company").change(function (e, params) {
     if (e.target.value != "" || e.target.value != null) {
         var selectedOption = $("#debtor-row #select_company").find("option[value='" + e.target.value + "']").text();
     }
-
     if (selectedOption != "Choose company") {
         $("#debtor-row #select_debtor").prop("disabled", true);
         $("#debtor-row #select_debtor").trigger("chosen:updated");

@@ -28,23 +28,6 @@
                         <fieldset>
                             <legend>Invoice Information</legend>
 
-                            <!--
-                            <div class="row" id="debtor-row">
-                                <div class="input-field col s12 col m12 col l6">
-                                    <i class="material-icons prefix">perm_identity</i>
-                                    @Html.DropDownListFor(m => m.DebtorID, (SelectList)ViewBag.DebtorID,
-                                                "Select a debtor", new { @id = "select_debtor" })
-                                    <label for="select_debtor">Choose Debtor</label>
-                                </div>
-                                <div class="input-field col s12 col m12 col l6">
-                                    <i class="material-icons prefix">business</i>
-                                    @Html.DropDownListFor(m => m.CompanyID, (SelectList)ViewBag.CompanyID,
-                                                "Select a company", new { @id = "select_company" })
-                                    <label for="select_company">Choose Company</label>
-                                </div>
-                            </div>
-                            -->
-
                             <div class="row" id="debtor-row">
                                 <div class="input-field col s12 col m12 col l6">
                                     <label for="select_debtor" style="top:-15px;font-size:12px;left:60px;">Choose Debtor</label>
@@ -119,25 +102,32 @@
                         <fieldset>
                             <legend>Products</legend>
 
-                            <div id="products" style="max-height: 300px;overflow-y:scroll;overflow-x:hidden;">
+                            <div id="products" style="height: auto;max-height: 300px;overflow-y:scroll;overflow-x:hidden;">
+                                <!--Begin of product-control-->
                                 <div id="product-control" class="row">
-                                    <div class="input-field col s12 col m8 col l8">
-                                        <select id="_product" asp-items="ViewBag.Products">
-                                            <option value="-1">Choose product</option>
+                                    <div class="input-field col s12 col m5 col l5">
+                                        @Html.DropDownList("CategoryName", (SelectList) ViewBag.Categories, "Select a category...", new { @id = "_category" })
+                                    </div>
+
+                                    <div class="input-field col s12 col m5 col l5">
+                                        <select id="_product">
+                                            <option value="">Select a product</option>
                                         </select>
                                     </div>
 
-                                    <div class="input-field col s8 col m2 col l3">
-                                        <input id="_amount" placeholder="Qnt." />
+                                    <div class="input-field col s8 col m1 col l1">
+                                        <input id="_amount" type="number" placeholder="Qnt." min="0" />
                                     </div>
 
-                                    <div class="input-field col s4 col m2 col l1">
+                                    <div class="input-field col s4 col m1 col l1">
                                         <a href="#" id="delete-row-btn"
                                            class="btn red darken-1 waves-effect waves-light">
                                             <i class="material-icons">remove</i>
                                         </a>
                                     </div>
+
                                 </div>
+                                <!--End of product-control-->
                             </div>
 
                             <br />

@@ -78,14 +78,14 @@
                             <div class="row">
                                 <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">exposure_neg_2</i>
-                                    <input id="icon_discount" type="number" value="0" asp-for="Discount" />
+                                    <input id="icon_discount" type="number" value="0" min="0" asp-for="Discount" />
                                     <label for="icon_discount">Discount (%)</label>
                                 </div>
 
                                 <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">euro_symbol</i>
-                                    <input id="total" name="total" type="text" readonly />
-                                    <label id="total-label" for="total" style="font-size:.8rem;position:absolute;top:-16px;left:13px;">Total</label>
+                                    <input id="total" name="total" type="text" vreadonly />
+                                    <label id="total-label" for="total" style="font-size:.8rem;position:absolute;top:-7px;left:13px;">Total</label>
                                 </div>
                             </div>
 
@@ -98,30 +98,32 @@
                         <fieldset>
                             <legend>Products</legend>
 
-                            <div id="products" style="height:200px;max-height:300px;overflow-y:scroll;overflow-x:hidden;">
+                            <div id="products" style="height:auto;max-height:300px;overflow-y:scroll;overflow-x:hidden;">
+                                <!--Begin of product-control-->
                                 <div id="product-control" class="row">
-                                    <div class="input-field col s12 col m7 col l7">
-                                        <!--
-                                            <select id="_product" asp-items="ViewBag.Products">
-                                                <option value="-1">Select a product</option>
-                                            </select>
-                                            <label>Product</label>
-                                        -->
-                                        <label>Product</label>
-                                        @Html.DropDownList("Name", ViewBag.Products as SelectList, "Select a product...", new { @id = "_product" })
+                                    <div class="input-field col s12 col m5 col l5">
+                                        @Html.DropDownList("CategoryName", (SelectList) ViewBag.Categories, "Select a category...", new { @id = "_category" })
                                     </div>
 
-                                    <div class="input-field col s8 col m3 col l3">
-                                        <input id="_amount" placeholder="Qnt." />
+                                    <div class="input-field col s12 col m5 col l5">
+                                        <select id="_product">
+                                            <option value="">Select a product</option>
+                                        </select>
                                     </div>
 
-                                    <div class="input-field col s4 col m2 col l1">
+                                    <div class="input-field col s8 col m1 col l1">
+                                        <input id="_amount" type="number" placeholder="Qnt." min="0" />
+                                    </div>
+
+                                    <div class="input-field col s4 col m1 col l1">
                                         <a href="#" id="delete-row-btn"
                                            class="btn red darken-1 waves-effect waves-light">
                                             <i class="material-icons">remove</i>
                                         </a>
                                     </div>
+
                                 </div>
+                                <!--End of product-control-->
                             </div>
 
                             <br />
@@ -160,4 +162,33 @@
     <link rel="stylesheet" href="~/css/chosen.css" />
     <script src="~/js/chosen.jquery.js" type="text/javascript"></script>
     <script src="~/js/invoice/create-invoice.js" type="text/javascript"></script>
+    <script>
+        //Call for cascading dropdown
+        $("#_category").change(function () {
+            //Empty product select
+            var productSelect = $(this).closest(".row").find("#_product");
+
+            productSelect.empty();
+
+            $.ajax({
+                type: "POST",
+                url: '@Url.Action("GetProducts")',
+                dataType: "json",
+                data: { id: $(this).val() },
+                success: function (items) {
+                    $.each(items, function (i, item) {
+                        $(productSelect)
+                            .append('<option value="' + item.value + '">' + item.text + '</option>');
+                    });
+                    $(productSelect).material_select();
+                },
+                error: function (ex) {
+                    alert('Failed to retrieve products.' + ex);
+                }
+            });
+
+            return false;
+
+        });
+    </script>
 }

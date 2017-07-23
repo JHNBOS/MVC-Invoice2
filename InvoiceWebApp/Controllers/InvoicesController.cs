@@ -223,6 +223,19 @@ namespace InvoiceWebApp.Controllers {
             }
         }
 
+        public JsonResult GetProducts(int id)
+        {
+            // Create selectlist with all products
+            var products = _context.Products
+                .Where(s => s.CategoryID == id)
+                .Select(s => new SelectListItem {
+                    Value = s.ProductID.ToString() + "_" + s.Price.ToString(),
+                    Text = s.Name
+                });
+
+            return Json(new SelectList(products, "Value", "Text"));
+        }
+
         //------------------------------------------------------------------------
         //Controller actions
 
@@ -346,24 +359,31 @@ namespace InvoiceWebApp.Controllers {
             //Current page
             ViewBag.Current = "Invoices";
 
-            //Create selectlist with all products
-            var products = _context.Products
+            //Create selectlist with all categories
+            var categories = _context.Categories
                 .Select(s => new SelectListItem {
-                    Value = s.ProductID.ToString() + "_" + s.Price.ToString(),
-                    Text = s.Name
-                });
+                    Value = s.CategoryID.ToString(),
+                    Text = s.CategoryName
+            });
 
             //Create selectlist with all companies
             var companies = _context.Company
                 .Select(s => new SelectListItem {
                     Value = s.CompanyID.ToString(),
                     Text = s.CompanyName.ToString() + " in " + s.City.ToString()
-                });
+            });
+
+            //Create selectlist with all debtor
+            var debtors = _context.Debtors
+                .Select(s => new SelectListItem {
+                    Value = s.DebtorID.ToString(),
+                    Text = s.FullName.ToString() + " in " + s.City.ToString()
+            });
 
             //Viewbags and viewdata
-            ViewBag.Products = new SelectList(products, "Value", "Text");
+            ViewBag.Categories = new SelectList(categories, "Value", "Text");
             ViewData["CompanyID"] = new SelectList(companies, "Value", "Text");
-            ViewData["DebtorID"] = new SelectList(_context.Debtors, "DebtorID", "FullName");
+            ViewData["DebtorID"] = new SelectList(debtors, "Value", "Text");
 
             return View();
         }
@@ -404,24 +424,31 @@ namespace InvoiceWebApp.Controllers {
                 return RedirectToAction("Index");
             }
 
-            //Create selectlist with all products
-            var products = _context.Products
+            //Create selectlist with all categories
+            var categories = _context.Categories
                 .Select(s => new SelectListItem {
-                    Value = s.ProductID.ToString() + "_" + s.Price.ToString(),
-                    Text = s.Name
-                });
+                    Value = s.CategoryID.ToString(),
+                    Text = s.CategoryName
+            });
 
             //Create selectlist with all companies
             var companies = _context.Company
                 .Select(s => new SelectListItem {
                     Value = s.CompanyID.ToString(),
                     Text = s.CompanyName.ToString() + " in " + s.City.ToString()
-                });
+            });
+
+            //Create selectlist with all debtor
+            var debtors = _context.Debtors
+                .Select(s => new SelectListItem {
+                    Value = s.DebtorID.ToString(),
+                    Text = s.FullName.ToString() + " in " + s.City.ToString()
+            });
 
             //Viewbags and viewdata
-            ViewBag.Products = new SelectList(products, "Value", "Text", pids);
+            ViewBag.Categories = new SelectList(categories, "Value", "Text");
             ViewData["CompanyID"] = new SelectList(companies, "Value", "Text", invoice.CompanyID);
-            ViewData["DebtorID"] = new SelectList(_context.Debtors, "DebtorID", "FullName", invoice.DebtorID);
+            ViewData["DebtorID"] = new SelectList(debtors, "Value", "Text", invoice.DebtorID);
 
             return View(invoice);
         }
