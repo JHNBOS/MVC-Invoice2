@@ -1,16 +1,114 @@
 ﻿//Variables
 var firstRun = true;
-var count = 0;
 var productArray = new Array();
 var amountArray = new Array();
 
-//-------------------------------------------------------------------------------------------
-//Hide product-control row
-$("#product-control").hide();
+//--------------------------------- DOCUMENT READY
+$(document).ready(function () {
+    init();
+});
 
-//-------------------------------------------------------------------------------------------
-//Run when page has loaded
-$(document).ready(() => {
+//--------------------------------- DEBTOR EVENT HANDLER
+$("#debtor-row #select_debtor").change(function (e, params) {
+    changeDebtor(e, params);
+});
+
+//--------------------------------- COMPANY EVENT HANDLER
+$("#debtor-row #select_company").change(function(e, params) {
+    changeCompany(e, params);
+});
+
+//--------------------------------- DATE EVENT HANDLER
+$("#icon_created").on("change", function () {
+    changeDate();
+});
+
+//--------------------------------- PRODUCT EVENT HANDLER
+$("#products div div:nth-child(2) #_product").on("change", function () {
+    $("#products div div:nth-child(2) #_product option:selected").each(function () {
+        calcTotal();
+    })
+});
+
+//--------------------------------- AMOUNT EVENT HANDLER
+$("#products #_amount").on("change", function () {
+    calcTotal();
+});
+$("#products #_amount").on("keyup", function () {
+    calcTotal();
+});
+$("#products #_amount").mouseup(function () {
+    calcTotal();
+});
+$("#products #_amount").mousedown(function () {
+    calcTotal();
+});
+
+//--------------------------------- DISCOUNT EVENT HANDLER
+$("#icon_discount").on('change', function () {
+    calcTotal();
+});
+
+$("#icon_discount").mouseup(function () {
+    calcTotal();
+});
+
+$("#icon_discount").mousedown(function () {
+    calcTotal();
+});
+
+$(document).on("change", "#icon_discount", function () {
+    calcTotal();
+});
+
+//--------------------------------- SUBMIT BUTTON EVENT HANDLER
+$("#edit-invoice-btn").on("click", function () {
+    submitForm();
+});
+
+//--------------------------------- ADD ROW EVENT HANDLER
+$("#add-row-btn").on("click", function () {
+    addRow();
+});
+
+//--------------------------------- REMOVE ROW EVENT HANDLER
+$(document).on("click", "#delete-row-btn", function () {
+    deleteRow();
+})
+
+//--------------------------------- CATEGORY  EVENT HANDLER
+$("#_category").change(function() {
+    //Empty product select
+    var productSelect = $(this).closest(".row").find("#_product");
+
+    productSelect.empty();
+
+    //Make ajax call
+    $.ajax({
+        type: "POST",
+        url: ajaxURL2,
+        dataType: "json",
+        data: { id: $(this).val() },
+        success: function (items) {
+            $.each(items, function (i, item) {
+                $(productSelect)
+                    .append('<option value="' + item.value + '">' + item.text + '</option>');
+            });
+            $(productSelect).material_select();
+        },
+        error: function (ex) {
+            alert('Failed to retrieve products.' + ex);
+        }
+    });
+
+    return false;
+});
+
+//---------------
+//--------------------------------- FUNCTIONS ---------------------------------//
+
+//Startup function
+function init() {
     //Initialize Chosen JS dropdowns
     $("#debtor-row #select_debtor").chosen({
         width: "100%",
@@ -31,160 +129,54 @@ $(document).ready(() => {
 
     //Set value of the total amount in the input box
     $("#total").val(totalAmount);
+    total = totalAmount;
+
+    //Hide delete button product-control
+    $("#products #product-control #delete-row-btn").hide();
 
     //Set product rows is this is the first run
     if (firstRun == true) {
         setRows();
     }
-});
+}
 
-//-------------------------------------------------------------------------------------------
-//Disable the company dropdownlist when this dropdownlist has an option selected
-$("#debtor-row #select_debtor").change(function (e, params) {
-    var selectedOption = "";
+//Add new row for product
+function addRow() {
+    count++;
 
-    if (e.target.value != "" || e.target.value != null) {
-        var selectedOption = $("#debtor-row #select_debtor").find("option[value='" + e.target.value + "']").text();
-    }
-    if (selectedOption != "Choose debtor") {
-        $("#debtor-row #select_company").prop("disabled", true);
-        $("#debtor-row #select_company").trigger("chosen:updated");
-    } else {
-        $("#debtor-row #select_company").prop("disabled", false);
-        $("#debtor-row #select_company").trigger("chosen:updated");
-    }
-});
-
-//Disable the debtor dropdownlist when this dropdownlist has an option selected
-$("#debtor-row #select_company").change(function (e, params) {
-    var selectedOption = "";
-
-    if (e.target.value != "" || e.target.value != null) {
-        var selectedOption = $("#debtor-row #select_company").find("option[value='" + e.target.value + "']").text();
-    }
-    if (selectedOption != "Choose company") {
-        $("#debtor-row #select_debtor").prop("disabled", true);
-        $("#debtor-row #select_debtor").trigger("chosen:updated");
-    } else {
-        $("#debtor-row #select_debtor").prop("disabled", false);
-        $("#debtor-row #select_debtor").trigger("chosen:updated");
-    }
-});
-
-//-------------------------------------------------------------------------------------------
-// Automatically set expiration date based on selected invoice date
-$("#icon_created").on("change", () => {
-    var selectedDate = new Date($("#icon_created").val());
-
-    var day = selectedDate.getDate() + 30;
-    var month = selectedDate.getMonth() + 1;
-    var year = selectedDate.getFullYear();
-
-    if (month < 10) month = "0" + month;
-    if (day < 10) day = "0" + day;
-
-    var today = year + "-" + month + "-" + day;
-    $("#icon_expired").val(today);
-});
-
-//-------------------------------------------------------------------------------------------
-//Calculate the total amount when adding a new product
-$("#products option:selected").each(() => {
-    $("#product").on('change', () => {
-        calcTotal();
-    });
-})
-
-$(document).on("change", "#products option:selected", () => {
-    calcTotal();
-});
-
-//----------------------------------------------------------------
-//Calculate the total amount when changing the amount of product(s)
-$("#products #_amount").on('change', () => {
-    calcTotal();
-});
-
-$(document).on("change", "#products #_amount", () => {
-    calcTotal();
-});
-
-//---------------------------------------------------------------
-//Calculate the total amount when changing the amount of discount
-$("#icon_discount").on('change', function () {
-    calcTotal();
-});
-
-$("#icon_discount").mouseup(function () {
-    calcTotal();
-});
-
-$("#icon_discount").mousedown(function () {
-    calcTotal();
-});
-
-$(document).on("change", "#icon_discount", () => {
-    calcTotal();
-});
-
-//-------------------------------------------------------------------------------------------
-//Add parameters to form and submit
-$("#edit-invoice-btn").on("click", () => {
-    $("#products option:selected").each(function () {
-        productArray.push($(this).val().split('_')[0]);
-    });
-
-    $("#products [id^=_product-]").each(function () {
-        var text = $(this).val();
-        var id = $(this).attr("id");
-        var pid = id.split("x")[1];
-
-        productArray.push(pid);
-    });
-
-    $("#products #_amount").each(function () {
-        amountArray.push($(this).val());
-    });
-
-    productArray.splice(0, 1);
-    amountArray.splice(0, 1);
-
-    var totalPrice = $("#total").val();
-
-    $("#form").append('<input type="hidden" name="total" value="' + totalPrice + '" /> ');
-    $("#form").append('<input type="hidden" name="pids" value="' + productArray.toString() + '" /> ');
-    $("#form").append('<input type="hidden" name="amounts" value="' + amountArray.toString() + '" /> ');
-
-    $("#form").submit();
-});
-
-//-------------------------------------------------------------------------------------------
-//Add a new product row
-$("#add-row-btn").on("click", function () {
-    $("#product-control").show();
     var copy = $("#product-control")
         .clone(true)
         .appendTo("#products")
-        .prop("id", "product-row")
-        .find("input").val("");
+        .prop("id", "product-row");
 
-    $("#product-control").hide();
-    $("#products #product-row select").material_select();
+    //Empty inputs
+    $("#products #product-row:nth-child(" + count + ") #_product").empty();
+    $("#products #product-row:nth-child(" + count + ") #_amount").prop("value", "");
+
+    //Append option
+    $("#products #product-row:nth-child(" + count + ") #_product").append("<option value=''>Select a product</option>");
+
+    //Show delete button
+    $("#products #product-row:nth-child(" + count + ") #delete-row-btn").show();
+
+    //Initialize Materialize CSS dropdowns
+    $("#products #product-row:nth-child(" + count + ") select").material_select();
+    $("#products #product-control select").material_select();
 
     return false;
-});
+}
 
-//-------------------------------------------------------------------------------------------
-//Remove a product row
-$(document).on("click", "#delete-row-btn", function () {
-    $(this).parent().parent().remove();
+//Remove product row
+function deleteRow() {
+    $(this).closest(".row").remove();
+
+    count--;
     calcTotal();
 
     return false;
-})
+}
 
-//-------------------------------------------------------------------------------------------
-//Calculate total amount based on selected products and their quantities
+//Calculate total price of all products
 function calcTotal() {
     var amounts = new Array();
     var pids = new Array();
@@ -192,25 +184,14 @@ function calcTotal() {
     var totalPrice = Number.parseFloat("0");
     var continueCalc = false;
 
-    $("#products option:selected").each(function () {
-        var id = $(this).val();
-        pids.push($(this).val());
-    });
-
-    $("#products [id^=_product-]").each(function () {
-        var text = $(this).val();
-        var id = $(this).attr("id");
-        var pid = id.split("x")[1];
-
-        //pids.push(pid);
-
-        if (pid != "-1") {
-            pids.push(pid);
+    $("#products div div:nth-child(2) #_product option:selected").each(function () {
+        if ($(this).val() != "") {
+            pids.push($(this).val());
             continueCalc = true;
         }
     });
 
-    $("#products #_amount").each(function () {
+    $("#products #_amount:not(:empty)").each(function () {
         var amount = 0;
 
         if ($(this).val() != "") {
@@ -228,8 +209,15 @@ function calcTotal() {
         }
     });
 
-    pids.splice(0, 1);
-    amounts.splice(0, 1);
+    if (amounts.length != pids.length) {
+        $("#total").prop("readonly", false);
+        $("#total").val("0,00");
+        $("#total").prop("readonly", true);
+    }
+
+    console.log("pids length: " + pids.length);
+    console.log("amounts length: " + amounts.length);
+    console.log("continueCalc: " + continueCalc);
 
     if (continueCalc == true) {
         for (var i = 0; i < pids.length; i++) {
@@ -251,4 +239,75 @@ function calcTotal() {
         total = totalPrice.toLocaleString("nl-NL", { minimumFractionDigits: 2 });
         $("#total").prop("readonly", true);
     }
+    if (continueCalc == false && pids.length == 0 && ($("#total").val() != 0 || $("#total").val() != "0")) {
+        $("#total").prop("readonly", false);
+        $("#total").val("0,00");
+        $("#total").prop("readonly", true);
+    }
+}
+
+//When invoice date has been selected, add 30 days to the expiration date
+function changeDate() {
+    var selectedDate = new Date($("#icon_created").val());
+
+    var day = selectedDate.getDate() + 30;
+    var month = selectedDate.getMonth() + 1;
+    var year = selectedDate.getFullYear();
+
+    if (month < 10) month = "0" + month;
+    if (day < 10) day = "0" + day;
+
+    var today = year + "-" + month + "-" + day;
+    $("#icon_expired").val(today);
+}
+
+//Disable the company dropdown when a debtor is selected
+function changeDebtor(e, params) {
+    var selectedOption = "";
+
+    if (e.target.value != "" || e.target.value != null) {
+        var selectedOption = $("#debtor-row #select_debtor").find("option[value='" + e.target.value + "']").text();
+    }
+    if (selectedOption != "Choose debtor") {
+        $("#debtor-row #select_company").prop("disabled", true);
+        $("#debtor-row #select_company").trigger("chosen:updated");
+    } else {
+        $("#debtor-row #select_company").prop("disabled", false);
+        $("#debtor-row #select_company").trigger("chosen:updated");
+    }
+}
+
+//Disable the debtor dropdown when a company is selected
+function changeCompany(e, params) {
+    var selectedOption = "";
+
+    if (e.target.value != "" || e.target.value != null) {
+        var selectedOption = $("#debtor-row #select_company").find("option[value='" + e.target.value + "']").text();
+    }
+    if (selectedOption != "Choose company") {
+        $("#debtor-row #select_debtor").prop("disabled", true);
+        $("#debtor-row #select_debtor").trigger("chosen:updated");
+    } else {
+        $("#debtor-row #select_debtor").prop("disabled", false);
+        $("#debtor-row #select_debtor").trigger("chosen:updated");
+    }
+}
+
+//Execute when save button is clicked
+function submitForm() {
+    $("#products div div:nth-child(2) #_product option:selected").each(function () {
+        productArray.push($(this).val().split('_')[0]);
+    });
+
+    $("#products #_amount").each(function () {
+        amountArray.push($(this).val());
+    });
+
+    var totalPrice = $("#total").val();
+
+    $("#form").append('<input type="hidden" name="total" value="' + totalPrice + '" /> ');
+    $("#form").append('<input type="hidden" name="pids" value="' + productArray.toString() + '" /> ');
+    $("#form").append('<input type="hidden" name="amounts" value="' + amountArray.toString() + '" /> ');
+
+    $("#form").submit();
 }

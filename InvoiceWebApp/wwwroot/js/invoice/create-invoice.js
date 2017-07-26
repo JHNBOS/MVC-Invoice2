@@ -7,6 +7,7 @@ var products = [];
 
 //Run when page has loaded
 $(document).ready(function () {
+
     //Initialize Chosen JS dropdowns
     $("#debtor-row #select_debtor").chosen({
         width: "100%",
@@ -93,6 +94,7 @@ $("#products div div:nth-child(2) #_product").on("change", function () {
     })
 });
 
+//-------------------------------------------------------------------------------------------
 //Calculate the total amount when changing the amount of product(s)
 $("#products #_amount").on("change", function () {
     calcTotal();
@@ -107,6 +109,7 @@ $("#products #_amount").mousedown(function () {
     calcTotal();
 });
 
+//-------------------------------------------------------------------------------------------
 //Calculate the total amount when changing the amount of discount
 $("#icon_discount").on("change", function () {
     calcTotal();
@@ -130,7 +133,6 @@ $("#create-invoice-btn").on("click", function () {
     })
 
     var totalPrice = $("#total").val();
-    var companyID = $().val();
 
     $("#form").attr("action", "Create/?pids=" + productArray.toString() + "&amounts=" + amountArray.toString() + "&total=" + totalPrice.toString());
     $("#form").submit();
@@ -213,6 +215,7 @@ function calcTotal() {
         $("#total").val("0,00");
         $("#total").prop("readonly", true);
     }
+
     if (continueCalc == true) {
         for (var i = 0; i < pids.length; i++) {
             var id = pids[i].split('_')[0];
@@ -241,3 +244,30 @@ function calcTotal() {
 }
 
 //-------------------------------------------------------------------------------------------
+//Call for cascading dropdown
+$("#_category").change(function () {
+    //Empty product select
+    var productSelect = $(this).closest(".row").find("#_product");
+
+    productSelect.empty();
+
+    //Make ajax call
+    $.ajax({
+        type: "POST",
+        url: ajaxURL,
+        dataType: "json",
+        data: { id: $(this).val() },
+        success: function (items) {
+            $.each(items, function (i, item) {
+                $(productSelect)
+                    .append('<option value="' + item.value + '">' + item.text + '</option>');
+            });
+            $(productSelect).material_select();
+        },
+        error: function (ex) {
+            alert('Failed to retrieve products.' + ex);
+        }
+    });
+
+    return false;
+});

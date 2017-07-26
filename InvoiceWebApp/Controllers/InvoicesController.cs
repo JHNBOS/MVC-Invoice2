@@ -236,6 +236,18 @@ namespace InvoiceWebApp.Controllers {
             return Json(new SelectList(products, "Value", "Text"));
         }
 
+        public JsonResult GetCategories()
+        {
+            // Create selectlist with all products
+            var categories = _context.Categories
+                .Select(s => new SelectListItem {
+                    Value = s.CategoryID.ToString(),
+                    Text = s.CategoryName
+                });
+
+            return Json(new SelectList(categories, "Value", "Text"));
+        }
+
         //------------------------------------------------------------------------
         //Controller actions
 
@@ -476,11 +488,13 @@ namespace InvoiceWebApp.Controllers {
             //Get product id's and create unique id
             var p = _context.Products;
             string[] pids = new string[p.Count()];
+            int[] cats = new int[p.Count()];
 
             int cnt = 0;
             foreach (var pid in p) {
                 string _id = pid.ProductID + "_" + pid.Price;
                 pids[cnt] = _id;
+                cats[cnt] = (int)pid.CategoryID;
                 cnt++;
             }
 
@@ -491,6 +505,13 @@ namespace InvoiceWebApp.Controllers {
                      Text = s.Name
                  });
 
+            //Create selectlist with all categories
+            var categories = _context.Categories
+                .Select(s => new SelectListItem {
+                    Value = s.CategoryID.ToString(),
+                    Text = s.CategoryName
+                });
+
             //Create selectlist with all companies
             var companies = _context.Company
                 .Select(s => new SelectListItem {
@@ -498,15 +519,24 @@ namespace InvoiceWebApp.Controllers {
                     Text = s.CompanyName.ToString() + " in " + s.City.ToString()
                 });
 
+            //Create selectlist with all debtor
+            var debtors = _context.Debtors
+                .Select(s => new SelectListItem {
+                    Value = s.DebtorID.ToString(),
+                    Text = s.FullName.ToString() + " in " + s.City.ToString()
+                });
+
             //Viewbags and viewdata
             ViewBag.PIDs = pids;
+            ViewBag.Cats = cats;
             ViewBag.Amounts = items.Select(s => s.Amount).ToArray();
             ViewBag.Names = items.Select(s => s.Product.Name).ToArray();
             ViewBag.Total = String.Format("{0:N2}", invoice.Total);
 
             ViewBag.Products = new SelectList(products, "Value", "Text");
-            ViewData["CompanyID"] = new SelectList(companies, "Value", "Text");
-            ViewData["DebtorID"] = new SelectList(_context.Debtors, "DebtorID", "FullName", invoice.DebtorID);
+            ViewBag.Categories = new SelectList(categories, "Value", "Text");
+            ViewData["CompanyID"] = new SelectList(companies, "Value", "Text", invoice.CompanyID);
+            ViewData["DebtorID"] = new SelectList(debtors, "Value", "Text", invoice.DebtorID);
 
             return View(invoice);
         }

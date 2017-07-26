@@ -98,7 +98,7 @@
                         <fieldset>
                             <legend>Products</legend>
 
-                            <div id="products" style="height:auto;max-height:300px;overflow-y:scroll;overflow-x:hidden;">
+                            <div id="products">
                                 <!--Begin of product-control-->
                                 <div id="product-control" class="row">
                                     <div class="input-field col s12 col m5 col l5">
@@ -121,7 +121,6 @@
                                             <i class="material-icons">remove</i>
                                         </a>
                                     </div>
-
                                 </div>
                                 <!--End of product-control-->
                             </div>
@@ -161,34 +160,9 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <link rel="stylesheet" href="~/css/chosen.css" />
     <script src="~/js/chosen.jquery.js" type="text/javascript"></script>
-    <script src="~/js/invoice/create-invoice.js" type="text/javascript"></script>
     <script>
-        //Call for cascading dropdown
-        $("#_category").change(function () {
-            //Empty product select
-            var productSelect = $(this).closest(".row").find("#_product");
-
-            productSelect.empty();
-
-            $.ajax({
-                type: "POST",
-                url: '@Url.Action("GetProducts")',
-                dataType: "json",
-                data: { id: $(this).val() },
-                success: function (items) {
-                    $.each(items, function (i, item) {
-                        $(productSelect)
-                            .append('<option value="' + item.value + '">' + item.text + '</option>');
-                    });
-                    $(productSelect).material_select();
-                },
-                error: function (ex) {
-                    alert('Failed to retrieve products.' + ex);
-                }
-            });
-
-            return false;
-
-        });
+        //Variables
+        var ajaxURL = '@Url.Action("GetProducts")';
     </script>
+    <script src="~/js/invoice/create-invoice.js" type="text/javascript"></script>
 }

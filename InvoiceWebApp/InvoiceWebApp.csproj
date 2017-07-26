@@ -30,6 +30,7 @@
     <Content Include="wwwroot\images\banner4.svg" />
     <Content Include="wwwroot\js\invoice\create-invoice.js" />
     <Content Include="wwwroot\js\invoice\edit-invoice.js" />
+    <Content Include="wwwroot\js\invoice\view-invoice.js" />
     <Content Include="wwwroot\js\jquery-adaptive-background.js" />
     <Content Include="wwwroot\js\product\create-product.js" />
     <Content Include="wwwroot\js\product\edit-product.js" />
