@@ -103,9 +103,6 @@
     <None Include="wwwroot\lib\jquery\LICENSE.txt" />
   </ItemGroup>
   <ItemGroup>
-    <None Update="invoices_database.mdf">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Update="invoice_db.mdf">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

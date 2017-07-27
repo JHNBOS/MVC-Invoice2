@@ -31,7 +31,13 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - @settings.CompanyName</title>
+    @if ( settings != null )
+    {
+        <title>@ViewData["Title"] - @settings.CompanyName</title>
+    } else
+    {
+        <title>@ViewData["Title"]</title>
+    }
 
     <environment names="Development">
         <!-- Compiled and minified Materialze CSS -->
@@ -366,7 +372,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
         <!-- Compiled and minified JavaScript Materialize CSS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.js"></script>
 
         <!--jQuery Adaptive Background Script-->
         <script src="~/js/jquery-adaptive-background.js"></script>

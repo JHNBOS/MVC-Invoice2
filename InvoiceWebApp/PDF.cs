@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
@@ -31,10 +32,27 @@ namespace InvoiceWebApp {
             string logo = Path.Combine(_env.WebRootPath, "images/" + _settings.Logo);
             
             //Instances
-            Invoice invoice = _context.Invoices.Single(s => s.InvoiceNumber == id);
-            Debtor debtor = _context.Debtors.Single(s => s.DebtorID == invoice.DebtorID);
-            List<InvoiceItem> invoiceItems = _context.InvoiceItems.Where(s => s.InvoiceNumber == invoice.InvoiceNumber).ToList();
+            Invoice invoice = null;
+            Debtor debtor = null;
+            Company company = null;
+            List<InvoiceItem> invoiceItems = null;
             List<Product> productList = new List<Product>();
+
+            try
+            {
+                invoice = _context.Invoices.SingleOrDefault(s => s.InvoiceNumber == id);
+                debtor = _context.Debtors.SingleOrDefault(s => s.DebtorID == invoice.DebtorID);
+                invoiceItems = _context.InvoiceItems.Where(s => s.InvoiceNumber == invoice.InvoiceNumber).ToList();
+
+                if (debtor == null)
+                {
+                    int cid = (int)invoice.CompanyID;
+                    company = _context.Companies.SingleOrDefault(s => s.CompanyID == cid);
+                }
+            } catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
 
             foreach (var item in invoiceItems) {
                 Product product = _context.Products.Single(s => s.ProductID == item.ProductID);
@@ -180,40 +198,49 @@ namespace InvoiceWebApp {
                     padding-left: 4px;
                 }
                 .invoice-box .item-table tr td:nth-child(2){
-                    width: 37%;
+                    width: 34%;
                 }
                 .invoice-box .item-table tr td:nth-child(4),
                 .invoice-box .item-table tr td:nth-child(5),
                 .invoice-box .item-table tr td:nth-child(6){
                     text-align: center;
                 }
-                .invoice-box .item-table tr td:nth-child(3),
+                .invoice-box .item-table tr td:nth-child(3){
+                    width: 12%;
+                    text-align: center;
+                }
                 .invoice-box .item-table tr td:nth-child(4),
                 .invoice-box .item-table tr td:nth-child(5){
                     width: 8%;
                 }
                 .invoice-box .item-table tr td:nth-child(6){
-                    width: 13%
+                    width: 12%
                 }
                 .invoice-box .total-table{
                     border-collapse: collapse;
                     border-spacing; 0;
                     width: 18%;
                     float: right;
-                    margin: 0 35px 0 0 !important;
+                    margin: 5px 35px 0 0 !important;
                     padding: 0 0 0 0 !important;
                 }
                 .invoice-box .total-table .total{
                     border-top: 1px solid #888;
                 }
-                .invoice-box .total-table tr td:nth-child(1),
-                .invoice-box .total-table tr td:nth-child(2),
-                .invoice-box .total-table tr td:nth-child(3){
-                    align: right !important;
-                    font-weight: bold;
+                .invoice-box .total-table tr td:nth-child(1){
+                    font-weight: 600;
                     text-align: right;
                     font-size: 15px;
                     padding-bottom: 1px;
+                    width: 40%;
+                }
+                .invoice-box .total-table tr td:nth-child(2){
+                    font-weight: 800;
+                    text-align: left;
+                    font-size: 15px;
+                    padding-bottom: 1px;
+                    padding-left: 6px;
+                    width: 60%;
                 }
                 .invoice-box .disclaimer-table{
                     width: 100%;
@@ -261,17 +288,19 @@ namespace InvoiceWebApp {
             companyString += 
                 "</td>"
                 + "<td class=company>"
-                + _settings.CompanyName
+                + "<b>" + _settings.CompanyName + "</b>"
                 + "<hr />"
                 + _settings.Address
                 + "<br />" + _settings.PostalCode + " " + _settings.City
                 + "<br />" + _settings.Country
                 + "<hr />"
-                + _settings.Website
-                + "<br />" + _settings.Phone
+                + "<b>Tel: </b>" + _settings.Phone
+                + "<br />"
+                + "<b>Web: </b>" + _settings.Website
                 + "<hr />"
-                + "Company ID: " + _settings.RegNumber
-                + "<br /> VAT No:  " + _settings.FinancialNumber
+                + "<b>Reg No: </b>" + _settings.RegNumber
+                + "<br />"
+                + "<b>VAT: </b>" + _settings.FinancialNumber
                 + "</td>"
                 + "</tr> "
                 + "</table> "
@@ -279,24 +308,48 @@ namespace InvoiceWebApp {
                 + "</tr>"
                 + "</table>";
 
+            string debtorString = "";
+
             //Debtor string
-            string debtorString = @"<table class=debtor-table cellpadding=0 cellspacing=0>"
-                + "<tr>"
-                    + "<td class=debtor-name>"
-                        + debtor.FirstName + " " + debtor.LastName
-                    + "</td>"
-                + "</tr>"
-                + "<tr>"
-                    + "<td class=debtor-address>"
-                        + debtor.Address
-                    + "</td>"
-                + "</tr>"
-                + "<tr>"
-                    + "<td class=debtor-city>"
-                        + debtor.PostalCode + " " + debtor.City
-                    + "</td>"
-                + "</tr>"
-            + "</table>";
+            if (debtor != null)
+            {
+                debtorString = @"<table class=debtor-table cellpadding=0 cellspacing=0>"
+                    + "<tr>"
+                        + "<td class=debtor-name>"
+                            + debtor.FirstName + " " + debtor.LastName
+                        + "</td>"
+                    + "</tr>"
+                    + "<tr>"
+                        + "<td class=debtor-address>"
+                            + debtor.Address
+                        + "</td>"
+                    + "</tr>"
+                    + "<tr>"
+                        + "<td class=debtor-city>"
+                            + debtor.PostalCode + " " + debtor.City
+                        + "</td>"
+                    + "</tr>"
+                + "</table>";
+            } else if (company != null)
+            {
+                debtorString = @"<table class=debtor-table cellpadding=0 cellspacing=0>"
+                    + "<tr>"
+                        + "<td class=debtor-name>"
+                            + company.CompanyName
+                        + "</td>"
+                    + "</tr>"
+                    + "<tr>"
+                        + "<td class=debtor-address>"
+                            + company.Address
+                        + "</td>"
+                    + "</tr>"
+                    + "<tr>"
+                        + "<td class=debtor-city>"
+                            + company.PostalCode + " " + company.City
+                        + "</td>"
+                    + "</tr>"
+                + "</table>";
+            }
 
             //Spacer string
             string spacerString = @"<br />";
@@ -304,11 +357,11 @@ namespace InvoiceWebApp {
             //Invoice info
             string invoiceString = @"<table class=invoice-info cellpadding=0 cellspacing=0>"
                 + "<tr>"
-                + "<td>Date: </td>"
+                + "<td><b>Date: </b></td>"
                 + "<td>" + invoice.CreatedOn.ToString("dd-MM-yyyy") + "</td>"
                 + "</tr>"
                 + "<tr>"
-                + "<td>Invoice No: </td>"
+                + "<td><b>Invoice No: </b></td>"
                 + "<td>" + invoiceNumber + "</td>"
                 + "</tr>"
                 + "</table>";
@@ -326,20 +379,23 @@ namespace InvoiceWebApp {
 
             //Table string
             string tableString = "";
-            decimal totalAmount = 0;
+            decimal totalBeforeDiscount = 0;
+            decimal totalAmount = invoice.Total;
             decimal subTotalAmount = 0;
             decimal vatTotalAmount = 0;
+            decimal discount = 0;
+            int discountPercentage = invoice.Discount;
 
             for (int i = 0; i < invoiceItems.Count; i++) {
                 InvoiceItem item = invoiceItems[i];
                 Product product = productList.Single(s => s.ProductID == item.ProductID);
+                int vatPercentage = 100 + product.VAT;
 
-                int vatPercentage = product.VAT;
-                decimal subtotal = (decimal)(product.Price * 100) / (100 + vatPercentage);
-                decimal total = (decimal)  product.Price * item.Amount;
+                decimal total = (decimal) (product.Price * item.Amount);
+                decimal subTotal = (decimal)(product.Price * 100) / vatPercentage;
 
-                subTotalAmount += subtotal;
-                totalAmount += total;
+                totalBeforeDiscount += total;
+                subTotalAmount += subTotal;
 
                 tableString += @"<tr class=item>"
                         + "<td>" + product.Name + "</td>"
@@ -347,23 +403,35 @@ namespace InvoiceWebApp {
                         + "<td>&euro; " + String.Format("{0:N2}", product.Price) + "</td>"
                         + "<td>" + item.Amount + "</td>"
                         + "<td>" + String.Format("{0}%", product.VAT) + "</td>"
-                        + "<td>&euro; " + total + "</td>"
+                        + "<td>&euro; " + String.Format("{0:N2}", total) + "</td>"
                         + "</tr>";
             }
 
-            vatTotalAmount = (totalAmount - subTotalAmount);
+            vatTotalAmount = totalAmount - subTotalAmount;
+            discount = (totalBeforeDiscount * discountPercentage) / 100;
+
+            Debug.WriteLine("Discount Percentage: " + discountPercentage + "%");
+            Debug.WriteLine("Discount: " + discount);
+
             tableString += "</table>";
 
             //Total string
             string totalString = @"<table class=total-table cellspacing=0 cellpadding=0>"
                 + "<tr class=vat>"
-                + "<td>VAT:  &euro; " + String.Format("{0:N2}", vatTotalAmount) + "</td>"
+                    + "<td>VAT:</td>"
+                    + "<td>&euro; " + String.Format("{0:N2}", vatTotalAmount) + "</td>"
                 + "</tr>"
                 + "<tr class=subtotal>"
-                + "<td>Subtotal:  &euro; " + String.Format("{0:N2}", subTotalAmount) + "</td>"
+                    + "<td>Subtotal:</td>"
+                    + "<td>&euro; " + String.Format("{0:N2}", subTotalAmount) + "</td>"
+                + "</tr>"
+                + "<tr class=discount>"
+                    + "<td>Discount:</td>"
+                    + "<td>&euro; " + String.Format("{0:N2}", discount) + "</td>"
                 + "</tr>"
                 + "<tr class=total>"
-                + "<td>Total:  &euro; " + String.Format("{0:N2}", totalAmount) + "</td>"
+                    + "<td>Total:</td>"
+                    + "<td>&euro; " + String.Format("{0:N2}", totalAmount) + "</td>"
                 + "</tr>"
                 + "</table>";
 

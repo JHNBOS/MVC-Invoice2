@@ -12,12 +12,12 @@ namespace InvoiceWebApp.Models {
         public int DebtorID { get; set; }
 
         [DataType(DataType.EmailAddress)]
+        [Required]
         public string Email { get; set; }
 
         [DataType(DataType.Password)]
+        [Required]
         public string Password { get; set; }
-
-        public string AccountType { get; set; }
 
         public virtual Debtor Debtor { get; set; }
     }

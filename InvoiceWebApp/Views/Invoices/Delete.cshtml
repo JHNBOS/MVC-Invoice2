@@ -79,7 +79,7 @@
                             <div class="row">
                                 <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">exposure_neg_2</i>
-                                    <input id="icon_discount" type="number" value="0" asp-for="Discount" disabled />
+                                    <input id="icon_discount" asp-for="Discount" disabled />
                                     <label for="icon_discount">Discount (%)</label>
                                 </div>
 
@@ -131,79 +131,24 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-
     <script>
-        //Variables
-        var firstRun = true;
+        var totalAmount = "@(ViewBag.Total)";
+        var pids = new Array();
+        var amounts = new Array();
+        var pnames = new Array();
 
-        //Run when page has loaded
-        $(document).ready(function () {
-            $("#products select").material_select();
-            $("#debtor-row #select_debtor").material_select();
-            $("#company-row #select_company").material_select();
-            $("#type-row #select_type").material_select();
-
-            //Set value of the total amount in the input box
-            var totalAmount = "@(ViewBag.Total)";
-            $("#total").val(totalAmount);
-
-            //Set product rows is this is the first run
-            if (firstRun == true) {
-                setRows();
-            }
-        });
-
-        //-------------------------------------------------------------------------------------------
-        //Create new product rows based on the products selected when creating this invoice
-        function setRows() {
-            var pids = new Array();
-            var amounts = new Array();
-            var pnames = new Array();
-
-            @foreach (var pid in ViewBag.PIDs)
-            {
-                @:pids.push('@(pid)');
-            }
-            @foreach (var amount in ViewBag.Amounts)
-            {
-                @:amounts.push('@(amount)');
-            }
-            @foreach (var name in ViewBag.Names)
-            {
-                @:pnames.push('@(name)');
-            }
-
-            for (var i = 0; i < amounts.length; i++) {
-                var amount = amounts[i];
-
-                var html = `
-                    <div id="product-row-` + i + `" class="row">
-                        <div class="input-field col s12 col m8 col l8">
-                            <input id="_product-` + i + `" disabled/>
-                        </div>
-
-                        <div class="input-field col s8 col m2 col l2">
-                            <input id="_amount" placeholder="Qnt." value="` + amount + `" disabled />
-                        </div>
-                    </div>
-                `;
-
-                $("#products").append(html);
-            }
-
-            for (var i = 0; i < amounts.length; i++) {
-                var pid = pids[i];
-                var pname = pnames[i];
-
-                var element = "#products #product-row-" + i.toString() + " #_product-" + i.toString();
-
-                $(element).prop("value", pname);
-                $(element).prop("disabled", true);
-
-                //Reset variables
-                pid = "";
-                pname = "";
-            }
+        @foreach(var pid in ViewBag.PIDs)
+        {
+           @:pids.push('@(pid)');
         }
-    </script>
+        @foreach(var amount in ViewBag.Amounts)
+        {
+            @:amounts.push('@(amount)');
+        }
+        @foreach(var name in ViewBag.Names)
+        {
+            @:pnames.push('@(name)');
+        }
+</script>
+<script src="~/js/invoice/view-invoice.js"></script>
 }

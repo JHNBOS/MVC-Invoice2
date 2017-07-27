@@ -23,7 +23,7 @@ namespace InvoiceWebApp.Data {
 
             builder.Entity<Debtor>()
             .HasAlternateKey(c => c.BankAccount)
-            .HasName("AlternateKey_BankAccount");
+            .HasName("AlternateKey_BankAccount_Debtor");
 
             builder.Entity<Debtor>()
                 .HasOne(c => c.User)
@@ -56,13 +56,14 @@ namespace InvoiceWebApp.Data {
 
             builder.Entity<Company>()
             .HasAlternateKey(c => c.BankAccount)
-            .HasName("AlternateKey_BankAccount");
+            .HasName("AlternateKey_BankAccount_Company");
 
             //--------------------------------------
             //-------- Admin -----------------------
             builder.Entity<Admin>()
             .HasAlternateKey(c => c.Email)
             .HasName("AlternateKey_AdminEmail");
+
             //--------------------------------------
             //-------- Invoice ---------------------
             builder.Entity<Company>()
@@ -74,6 +75,10 @@ namespace InvoiceWebApp.Data {
                 .HasMany(c => c.Invoices)
                     .WithOne(c => c.Debtor)
                     .IsRequired(false);
+
+            builder.Entity<Invoice>()
+                .Property(c => c.Discount)
+                    .HasDefaultValue(0);
             //--------------------------------------
 
         }
@@ -85,7 +90,7 @@ namespace InvoiceWebApp.Data {
         public DbSet<Category> Categories { get; set; }
         public DbSet<Invoice> Invoices { get; set; }
         public DbSet<InvoiceItem> InvoiceItems { get; set; }
-        public DbSet<Company> Company { get; set; }
+        public DbSet<Company> Companies { get; set; }
         public DbSet<AppSettings> Settings { get; set; }
     }
 }

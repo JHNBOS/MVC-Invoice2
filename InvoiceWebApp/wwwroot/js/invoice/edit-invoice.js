@@ -25,27 +25,29 @@ $("#icon_created").on("change", function () {
 
 //--------------------------------- PRODUCT EVENT HANDLER
 $("#products div div:nth-child(2) #_product").on("change", function () {
-    $("#products div div:nth-child(2) #_product option:selected").each(function () {
-        calcTotal();
-    })
+    console.log("Value: " + $(this).val());
+    calcTotal();
 });
 
 //--------------------------------- AMOUNT EVENT HANDLER
-$("#products #_amount").on("change", function () {
+$("#products div div:nth-child(3) #_amount").on("change", function () {
     calcTotal();
 });
-$("#products #_amount").on("keyup", function () {
+
+$("#products div div:nth-child(3) #_amount").on("keyup", function () {
     calcTotal();
 });
-$("#products #_amount").mouseup(function () {
+
+$("#products div div:nth-child(3) #_amount").mouseup(function () {
     calcTotal();
 });
-$("#products #_amount").mousedown(function () {
+
+$("#products div div:nth-child(3) #_amount").mousedown(function () {
     calcTotal();
 });
 
 //--------------------------------- DISCOUNT EVENT HANDLER
-$("#icon_discount").on('change', function () {
+$("#icon_discount").on("change", function () {
     calcTotal();
 });
 
@@ -54,10 +56,6 @@ $("#icon_discount").mouseup(function () {
 });
 
 $("#icon_discount").mousedown(function () {
-    calcTotal();
-});
-
-$(document).on("change", "#icon_discount", function () {
     calcTotal();
 });
 
@@ -72,8 +70,8 @@ $("#add-row-btn").on("click", function () {
 });
 
 //--------------------------------- REMOVE ROW EVENT HANDLER
-$(document).on("click", "#delete-row-btn", function () {
-    deleteRow();
+$("#delete-row-btn").on("click", function () {
+    deleteRow(this);
 })
 
 //--------------------------------- CATEGORY  EVENT HANDLER
@@ -154,7 +152,7 @@ function addRow() {
     $("#products #product-row:nth-child(" + count + ") #_amount").prop("value", "");
 
     //Append option
-    $("#products #product-row:nth-child(" + count + ") #_product").append("<option value=''>Select a product</option>");
+    $("#products #product-row:nth-child(" + count + ") #_product").append("<option value=''>Select a product...</option>");
 
     //Show delete button
     $("#products #product-row:nth-child(" + count + ") #delete-row-btn").show();
@@ -162,18 +160,14 @@ function addRow() {
     //Initialize Materialize CSS dropdowns
     $("#products #product-row:nth-child(" + count + ") select").material_select();
     $("#products #product-control select").material_select();
-
-    return false;
 }
 
 //Remove product row
-function deleteRow() {
-    $(this).closest(".row").remove();
+function deleteRow(obj) {
+    $(obj).closest(".row").remove();
 
     count--;
     calcTotal();
-
-    return false;
 }
 
 //Calculate total price of all products
@@ -191,7 +185,7 @@ function calcTotal() {
         }
     });
 
-    $("#products #_amount:not(:empty)").each(function () {
+    $("#products div div:nth-child(3) #_amount").each(function () {
         var amount = 0;
 
         if ($(this).val() != "") {
@@ -215,15 +209,11 @@ function calcTotal() {
         $("#total").prop("readonly", true);
     }
 
-    console.log("pids length: " + pids.length);
-    console.log("amounts length: " + amounts.length);
-    console.log("continueCalc: " + continueCalc);
-
     if (continueCalc == true) {
         for (var i = 0; i < pids.length; i++) {
             var id = pids[i].split('_')[0];
             var p = pids[i].split('_')[1];
-            var price = Number.parseFloat(p).toFixed(2);
+            var price = Number(p.replace(/,/, '.'));
             var amount = Number.parseInt(amounts[i]);
 
             var discountPercentage = 100 - discount;
@@ -250,8 +240,11 @@ function calcTotal() {
 function changeDate() {
     var selectedDate = new Date($("#icon_created").val());
 
-    var day = selectedDate.getDate() + 30;
-    var month = selectedDate.getMonth() + 1;
+    selectedDate.setDate(selectedDate.getDate() + 30);
+    selectedDate.setMonth(selectedDate.getMonth() + 1);
+
+    var day = selectedDate.getDate();
+    var month = selectedDate.getMonth();
     var year = selectedDate.getFullYear();
 
     if (month < 10) month = "0" + month;

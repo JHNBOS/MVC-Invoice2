@@ -31,10 +31,8 @@
     <!--Form-->
     <div class="row" style="margin-top: 5px;">
         <div class="col s12 col col m10 offset-m1">
-            <form asp-controller="Users" asp-action="Edit">
-                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <form id="form" asp-controller="Users" asp-action="Edit">
                 <input type="hidden" asp-for="ID" />
-                <input type="hidden" asp-for="AccountType" />
                 <input type="hidden" asp-for="DebtorID" />
 
                 <fieldset>
@@ -56,12 +54,12 @@
                     <div class="row">
                         <div class="input-field col s12 col m4 offset-m2">
                             <i class="material-icons prefix">email</i>
-                            @Html.TextBoxFor(m => m.Email, new { @id = "icon_email", @disabled = "disabled", @class = "no-submit" })
+                            @Html.TextBoxFor(m => m.Email, new { @id = "icon_email"})
                             <label for="icon_email">Email</label>
                         </div>
                         <div class="input-field col s12 col m4">
                             <i class="material-icons prefix">lock</i>
-                            <input id="icon_password" type="text" asp-for="Password" class="validate">
+                            @Html.TextBoxFor(m => m.Password, new { @id = "icon_password" })
                             <label for="icon_password">Password</label>
                         </div>
                     </div>
@@ -118,7 +116,7 @@
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     
     <script>
-        $("form").submit(() => {
+        $("#form").submit(function() {
             $(".no-submit").remove();
         });
     </script>

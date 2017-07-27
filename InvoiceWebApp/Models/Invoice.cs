@@ -21,18 +21,22 @@ namespace InvoiceWebApp.Models {
 
         [DataType(DataType.Date)]
         [Display(Name = "Invoice Date")]
+        [Required]
         public DateTime CreatedOn { get; set; }
 
         [DataType(DataType.Date)]
         [Display(Name = "Expiration Date")]
+        [Required]
         public DateTime ExpirationDate { get; set; }
 
+        [Required]
         public int Discount { get; set; }
 
         [DataType(DataType.Currency)]
         public decimal Total { get; set; }
 
         [Display(Name = "Save As")]
+        [Required]
         public string Type { get; set; }
 
         public bool Paid { get; set; }

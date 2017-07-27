@@ -24,7 +24,7 @@ namespace InvoiceWebApp.Controllers {
 
         //Get a list of all companies
         private async Task<List<Company>> GetCompanies() {
-            return await _context.Company.ToListAsync();
+            return await _context.Companies.ToListAsync();
         }
 
         //Get company based on id
@@ -32,7 +32,7 @@ namespace InvoiceWebApp.Controllers {
             Company company = null;
 
             try {
-                company = await _context.Company.SingleOrDefaultAsync(s => s.CompanyID == id);
+                company = await _context.Companies.SingleOrDefaultAsync(s => s.CompanyID == id);
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
@@ -43,7 +43,7 @@ namespace InvoiceWebApp.Controllers {
         //Add company to the database
         private async Task CreateCompany(Company company) {
             try {
-                _context.Company.Add(company);
+                _context.Companies.Add(company);
                 await _context.SaveChangesAsync();
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
@@ -65,7 +65,7 @@ namespace InvoiceWebApp.Controllers {
             Company company = await GetCompany(id);
 
             try {
-                _context.Company.Remove(company);
+                _context.Companies.Remove(company);
                 await _context.SaveChangesAsync();
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
@@ -274,7 +274,7 @@ namespace InvoiceWebApp.Controllers {
         //---------------------------------
 
         private bool CompanyExists(int id) {
-            return _context.Company.Any(e => e.CompanyID == id);
+            return _context.Companies.Any(e => e.CompanyID == id);
         }
 
     }

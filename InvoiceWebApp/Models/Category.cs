@@ -11,6 +11,7 @@ namespace InvoiceWebApp.Models
         [Key]
         public int CategoryID { get; set; }
 
+        [Required]
         public string CategoryName { get; set; }
 
         public virtual List<Product> Products { get; set; }

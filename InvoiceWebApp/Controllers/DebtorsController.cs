@@ -60,7 +60,6 @@ namespace InvoiceWebApp.Controllers {
         private async Task CreateLogin(Debtor debtor) {
             try {
                 User user = new User();
-                user.AccountType = "Client";
                 user.Debtor = debtor;
                 user.Email = debtor.Email;
                 user.Password = debtor.FirstName + "_" + DateTime.Now.ToString("ddMMHH");

@@ -50,9 +50,6 @@ namespace InvoiceWebApp.Controllers {
 
         //Add user to the database
         private async Task CreateUser(User user) {
-            //Set account type
-            user.AccountType = "Client";
-
             try {
                 _context.Users.Add(user);
                 await _context.SaveChangesAsync();
@@ -227,18 +224,17 @@ namespace InvoiceWebApp.Controllers {
         //POST => Users/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,DebtorID,Email,Password,AccountType")] User user) {
+        public async Task<IActionResult> Edit(int id, [Bind("ID,DebtorID,Email,Password")] User user) {
 
             if (id != user.ID) {
                 return NotFound();
             }
 
             if (ModelState.IsValid) {
-                await UpdateUser(user);
-
                 try {
                     //Update user
-                    await UpdateUser(user);
+                    _context.Update(user);
+                    await _context.SaveChangesAsync();
                 } catch (DbUpdateConcurrencyException) {
                     if (!UserExists(user.ID)) {
                         return NotFound();

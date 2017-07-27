@@ -9,6 +9,7 @@ namespace InvoiceWebApp.Models {
         [Key]
         public int ProductID { get; set; }
 
+        [Required]
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -17,11 +18,12 @@ namespace InvoiceWebApp.Models {
         public decimal? Price { get; set; }
 
         [Display(Name = "VAT")]
+        [Required]
         public int VAT { get; set; }
 
         public int? CategoryID { get; set; }
 
-        public virtual List<InvoiceItem> InvoiceItems { get; set; }
         public virtual Category Category { get; set; }
+        public virtual List<InvoiceItem> InvoiceItems { get; set; }
     }
 }

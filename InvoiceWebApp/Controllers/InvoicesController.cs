@@ -353,7 +353,7 @@ namespace InvoiceWebApp.Controllers {
             ViewBag.Amounts = invoiceItems.Select(s => s.Amount).ToArray();
             ViewBag.Names = invoiceItems.Select(s => s.Product.Name).ToArray();
             ViewBag.Total = String.Format("{0:N2}", invoice.Total);
-            ViewData["CompanyID"] = new SelectList(_context.Company, "CompanyID", "CompanyName", invoice.CompanyID);
+            ViewData["CompanyID"] = new SelectList(_context.Companies, "CompanyID", "CompanyName", invoice.CompanyID);
             ViewData["DebtorID"] = new SelectList(_context.Debtors, "DebtorID", "FullName", invoice.DebtorID);
 
             if (invoice == null) {
@@ -379,7 +379,7 @@ namespace InvoiceWebApp.Controllers {
             });
 
             //Create selectlist with all companies
-            var companies = _context.Company
+            var companies = _context.Companies
                 .Select(s => new SelectListItem {
                     Value = s.CompanyID.ToString(),
                     Text = s.CompanyName.ToString() + " in " + s.City.ToString()
@@ -406,7 +406,7 @@ namespace InvoiceWebApp.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("InvoiceNumber,CreatedOn,DebtorID,CompanyID,Paid,ExpirationDate,Type")] Invoice invoice,
+            [Bind("InvoiceNumber,CreatedOn,DebtorID,CompanyID,Paid,ExpirationDate,Type,Discount")] Invoice invoice,
             string total, string pids, string amounts) {
 
             if (ModelState.IsValid) {
@@ -427,7 +427,7 @@ namespace InvoiceWebApp.Controllers {
                         AuthMessageSender email = new AuthMessageSender(_settings);
                         await email.SendInvoiceEmailAsync(debtor.Email);
                     } else if (invoice.CompanyID is int) {
-                        Company company = _context.Company.Single(s => s.CompanyID == invoice.CompanyID);
+                        Company company = _context.Companies.Single(s => s.CompanyID == invoice.CompanyID);
                         AuthMessageSender email = new AuthMessageSender(_settings);
                         await email.SendInvoiceEmailAsync(company.Email);
                     }
@@ -444,7 +444,7 @@ namespace InvoiceWebApp.Controllers {
             });
 
             //Create selectlist with all companies
-            var companies = _context.Company
+            var companies = _context.Companies
                 .Select(s => new SelectListItem {
                     Value = s.CompanyID.ToString(),
                     Text = s.CompanyName.ToString() + " in " + s.City.ToString()
@@ -513,7 +513,7 @@ namespace InvoiceWebApp.Controllers {
                 });
 
             //Create selectlist with all companies
-            var companies = _context.Company
+            var companies = _context.Companies
                 .Select(s => new SelectListItem {
                     Value = s.CompanyID.ToString(),
                     Text = s.CompanyName.ToString() + " in " + s.City.ToString()
@@ -547,7 +547,7 @@ namespace InvoiceWebApp.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id,
-            [Bind("InvoiceNumber,CreatedOn,DebtorID,CompanyID,Paid,ExpirationDate,Type")] Invoice invoice,
+            [Bind("InvoiceNumber,CreatedOn,DebtorID,CompanyID,Paid,ExpirationDate,Type,Discount")] Invoice invoice,
             string pids, string amounts, string total) {
 
             if (id != invoice.InvoiceNumber) {
@@ -566,7 +566,7 @@ namespace InvoiceWebApp.Controllers {
                     await email.SendInvoiceEmailAsync(debtor.Email);
 
                 } else if (invoice.Type == "Final" && invoiceBeforeUpdate.Type != "Final" && String.IsNullOrEmpty(invoice.CompanyID.ToString())) {
-                    Company company = _context.Company.Single(s => s.CompanyID == invoice.CompanyID);
+                    Company company = _context.Companies.Single(s => s.CompanyID == invoice.CompanyID);
                     AuthMessageSender email = new AuthMessageSender(_settings);
                     await email.SendInvoiceEmailAsync(company.Email);
                 }
@@ -575,7 +575,7 @@ namespace InvoiceWebApp.Controllers {
             }
 
             //Create selectlist with all companies
-            var companies = _context.Company
+            var companies = _context.Companies
                 .Select(s => new SelectListItem {
                     Value = s.CompanyID.ToString(),
                     Text = s.CompanyName.ToString() + " in " + s.City.ToString()
@@ -630,7 +630,7 @@ namespace InvoiceWebApp.Controllers {
             ViewBag.Amounts = invoiceItems.Select(s => s.Amount).ToArray();
             ViewBag.Names = invoiceItems.Select(s => s.Product.Name).ToArray();
             ViewBag.Total = String.Format("{0:N2}", invoice.Total);
-            ViewData["CompanyID"] = new SelectList(_context.Company, "CompanyID", "CompanyName", invoice.CompanyID);
+            ViewData["CompanyID"] = new SelectList(_context.Companies, "CompanyID", "CompanyName", invoice.CompanyID);
             ViewData["DebtorID"] = new SelectList(_context.Debtors, "DebtorID", "FullName", invoice.DebtorID);
 
             if (invoice == null) {

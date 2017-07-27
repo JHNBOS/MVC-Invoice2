@@ -5,9 +5,111 @@ var productArray = new Array();
 var amountArray = new Array();
 var products = [];
 
-//Run when page has loaded
+//--------------------------------- DOCUMENT READY
 $(document).ready(function () {
+    init();
+});
 
+//--------------------------------- DEBTOR EVENT HANDLER
+$("#debtor-row #select_debtor").change(function (e, params) {
+    changeDebtor(e, params);
+});
+
+//--------------------------------- COMPANY EVENT HANDLER
+$("#debtor-row #select_company").change(function (e, params) {
+    changeCompany(e, params);
+});
+
+//--------------------------------- DATE EVENT HANDLER
+$("#icon_created").on("change", function() {
+    changeDate();
+});
+
+//--------------------------------- PRODUCT EVENT HANDLER
+$("#products div div:nth-child(2) #_product").on("change", function () {
+    $("#products div div:nth-child(2) #_product option:selected").each(function () {
+        calcTotal();
+    });
+});
+
+//--------------------------------- AMOUNT EVENT HANDLER
+$("#products div div:nth-child(3) #_amount").on("change", function () {
+    calcTotal();
+});
+
+$("#products div div:nth-child(3) #_amount").on("keyup", function () {
+    calcTotal();
+});
+
+$("#products div div:nth-child(3) #_amount").mouseup(function () {
+    calcTotal();
+});
+
+$("#products div div:nth-child(3) #_amount").mousedown(function () {
+    calcTotal();
+});
+
+//--------------------------------- DISCOUNT EVENT HANDLER
+$("#icon_discount").on("change", function () {
+    calcTotal();
+});
+
+$("#icon_discount").mouseup(function () {
+    calcTotal();
+});
+
+$("#icon_discount").mousedown(function () {
+    calcTotal();
+});
+
+//--------------------------------- SUBMIT BUTTON EVENT HANDLER
+$("#create-invoice-btn").on("click", function () {
+    submitForm();
+});
+
+//--------------------------------- ADD ROW EVENT HANDLER
+$("#add-row-btn").on("click", function () {
+    addRow();
+});
+
+//--------------------------------- REMOVE ROW EVENT HANDLER
+$("#delete-row-btn").on("click", function () {
+    deleteRow(this);
+})
+
+//--------------------------------- CATEGORY  EVENT HANDLER
+$("#_category").change(function () {
+    //Empty product select
+    var productSelect = $(this).closest(".row").find("#_product");
+
+    productSelect.empty();
+
+    //Make ajax call
+    $.ajax({
+        type: "POST",
+        url: ajaxURL,
+        dataType: "json",
+        data: { id: $(this).val() },
+        success: function (items) {
+            $.each(items, function (i, item) {
+                $(productSelect)
+                    .append('<option value="' + item.value + '">' + item.text + '</option>');
+            });
+            $(productSelect).material_select();
+        },
+        error: function (ex) {
+            alert('Failed to retrieve products.' + ex);
+        }
+    });
+
+    return false;
+});
+
+//---------------
+//--------------------------------- FUNCTIONS ---------------------------------//
+
+//Startup function
+function init() {
     //Initialize Chosen JS dropdowns
     $("#debtor-row #select_debtor").chosen({
         width: "100%",
@@ -31,11 +133,10 @@ $(document).ready(function () {
 
     //Set value of total input
     $("#total").val("0,00");
-});
+}
 
-//-------------------------------------------------------------------------------------------
-//Disable the company dropdownlist when this dropdownlist has an option selected
-$("#debtor-row #select_debtor").change(function (e, params) {
+//Disable the company dropdown when a debtor is selected
+function changeDebtor(e, params) {
     var selectedOption = "";
 
     if (e.target.value != "" || e.target.value != null) {
@@ -48,10 +149,10 @@ $("#debtor-row #select_debtor").change(function (e, params) {
         $("#debtor-row #select_company").prop("disabled", false);
         $("#debtor-row #select_company").trigger("chosen:updated");
     }
-});
+}
 
-//Disable the debtor dropdownlist when this dropdownlist has an option selected
-$("#debtor-row #select_company").change(function (e, params) {
+//Disable the debtor dropdown when a company is selected
+function changeCompany(e, params) {
     var selectedOption = "";
 
     if (e.target.value != "" || e.target.value != null) {
@@ -64,11 +165,10 @@ $("#debtor-row #select_company").change(function (e, params) {
         $("#debtor-row #select_debtor").prop("disabled", false);
         $("#debtor-row #select_debtor").trigger("chosen:updated");
     }
-});
+}
 
-//-------------------------------------------------------------------------------------------
-// Automatically set expiration date based on selected invoice date
-$("#icon_created").on("change", () => {
+//When invoice date has been selected, add 30 days to the expiration date
+function changeDate() {
     var selectedDate = new Date($("#icon_created").val());
 
     selectedDate.setDate(selectedDate.getDate() + 30);
@@ -82,65 +182,11 @@ $("#icon_created").on("change", () => {
     if (day < 10) day = "0" + day;
 
     var today = year + "-" + month + "-" + day;
-
     $("#icon_expired").val(today);
-});
+}
 
-//-------------------------------------------------------------------------------------------
-//Calculate the total amount when adding a new product
-$("#products div div:nth-child(2) #_product").on("change", function () {
-    $("#products div div:nth-child(2) #_product option:selected").each(function () {
-        calcTotal();
-    })
-});
-
-//-------------------------------------------------------------------------------------------
-//Calculate the total amount when changing the amount of product(s)
-$("#products #_amount").on("change", function () {
-    calcTotal();
-});
-$("#products #_amount").on("keyup", function () {
-    calcTotal();
-});
-$("#products #_amount").mouseup(function () {
-    calcTotal();
-});
-$("#products #_amount").mousedown(function () {
-    calcTotal();
-});
-
-//-------------------------------------------------------------------------------------------
-//Calculate the total amount when changing the amount of discount
-$("#icon_discount").on("change", function () {
-    calcTotal();
-});
-$("#icon_discount").mouseup(function () {
-    calcTotal();
-});
-$("#icon_discount").mousedown(function () {
-    calcTotal();
-});
-
-//-------------------------------------------------------------------------------------------
-//Add parameters to form and submit
-$("#create-invoice-btn").on("click", function () {
-    $("#products div div:nth-child(2) #_product option:selected").each(function () {
-        productArray.push($(this).val().split('_')[0]);
-    })
-
-    $("#products #_amount").each(function () {
-        amountArray.push($(this).val());
-    })
-
-    var totalPrice = $("#total").val();
-
-    $("#form").attr("action", "Create/?pids=" + productArray.toString() + "&amounts=" + amountArray.toString() + "&total=" + totalPrice.toString());
-    $("#form").submit();
-});
-
-//-------------------------------------------------------------------------------------------
-//Add a new product row
-$("#add-row-btn").on("click", function () {
+//Add new row for product
+function addRow() {
     count++;
 
     var copy = $("#product-control")
@@ -153,7 +199,7 @@ $("#add-row-btn").on("click", function () {
     $("#products #product-row:nth-child(" + count + ") #_amount").prop("value", "");
 
     //Append option
-    $("#products #product-row:nth-child(" + count + ") #_product").append("<option value=''>Select a product</option>");
+    $("#products #product-row:nth-child(" + count + ") #_product").append("<option value=''>Select a product...</option>");
 
     //Show delete button
     $("#products #product-row:nth-child(" + count + ") #delete-row-btn").show();
@@ -163,21 +209,17 @@ $("#add-row-btn").on("click", function () {
     $("#products #product-control select").material_select();
 
     return false;
-});
+}
 
-//-------------------------------------------------------------------------------------------
-//Remove a product row
-$("#delete-row-btn").on("click", function () {
-    $(this).closest(".row").remove();
+//Remove product row
+function deleteRow(obj) {
+    $(obj).closest(".row").remove();
 
     count--;
     calcTotal();
+}
 
-    return false;
-});
-
-//-------------------------------------------------------------------------------------------
-//Calculate total amount based on selected products and their quantities
+//Calculate total price of all products
 function calcTotal() {
     var amounts = new Array();
     var pids = new Array();
@@ -192,7 +234,7 @@ function calcTotal() {
         }
     });
 
-    $("#products #_amount").each(function () {
+    $("#products div div:nth-child(3) #_amount").each(function () {
         var amount = 0;
 
         if ($(this).val() != "") {
@@ -220,7 +262,7 @@ function calcTotal() {
         for (var i = 0; i < pids.length; i++) {
             var id = pids[i].split('_')[0];
             var p = pids[i].split('_')[1];
-            var price = Number.parseFloat(p).toFixed(2);
+            var price = Number(p.replace(/,/, '.'));
             var amount = Number.parseInt(amounts[i]);
 
             var discountPercentage = 100 - discount;
@@ -243,31 +285,18 @@ function calcTotal() {
     }
 }
 
-//-------------------------------------------------------------------------------------------
-//Call for cascading dropdown
-$("#_category").change(function () {
-    //Empty product select
-    var productSelect = $(this).closest(".row").find("#_product");
+//Execute when save button is clicked
+function submitForm() {
+    $("#products div div:nth-child(2) #_product option:selected").each(function () {
+        productArray.push($(this).val().split('_')[0]);
+    })
 
-    productSelect.empty();
+    $("#products div div:nth-child(3) #_amount").each(function () {
+        amountArray.push($(this).val());
+    })
 
-    //Make ajax call
-    $.ajax({
-        type: "POST",
-        url: ajaxURL,
-        dataType: "json",
-        data: { id: $(this).val() },
-        success: function (items) {
-            $.each(items, function (i, item) {
-                $(productSelect)
-                    .append('<option value="' + item.value + '">' + item.text + '</option>');
-            });
-            $(productSelect).material_select();
-        },
-        error: function (ex) {
-            alert('Failed to retrieve products.' + ex);
-        }
-    });
+    var totalPrice = $("#total").val();
 
-    return false;
-});
+    $("#form").attr("action", "Create/?pids=" + productArray.toString() + "&amounts=" + amountArray.toString() + "&total=" + totalPrice.toString());
+    $("#form").submit();
+}

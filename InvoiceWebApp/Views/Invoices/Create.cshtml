@@ -78,13 +78,13 @@
                             <div class="row">
                                 <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">exposure_neg_2</i>
-                                    <input id="icon_discount" type="number" value="0" min="0" asp-for="Discount" />
+                                    <input id="icon_discount" min="0" value="0" asp-for="Discount" />
                                     <label for="icon_discount">Discount (%)</label>
                                 </div>
 
                                 <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">euro_symbol</i>
-                                    <input id="total" name="total" type="text" vreadonly />
+                                    <input id="total" name="total" type="text" readonly />
                                     <label id="total-label" for="total" style="font-size:.8rem;position:absolute;top:-7px;left:13px;">Total</label>
                                 </div>
                             </div>
@@ -107,7 +107,7 @@
 
                                     <div class="input-field col s12 col m5 col l5">
                                         <select id="_product">
-                                            <option value="">Select a product</option>
+                                            <option value="">Select a product...</option>
                                         </select>
                                     </div>
 
@@ -116,7 +116,7 @@
                                     </div>
 
                                     <div class="input-field col s4 col m1 col l1">
-                                        <a href="#" id="delete-row-btn"
+                                        <a href="#!" id="delete-row-btn"
                                            class="btn red darken-1 waves-effect waves-light">
                                             <i class="material-icons">remove</i>
                                         </a>
@@ -129,7 +129,7 @@
                             <div class="divider"></div>
                             <br />
 
-                            <a href="#" id="add-row-btn" class="btn light-green waves-effect waves-light">
+                            <a href="#!" id="add-row-btn" class="btn light-green waves-effect waves-light">
                                 <i class="material-icons">add</i>
                             </a>
                         </fieldset>

@@ -2,8 +2,6 @@
 
 @{
     ViewData["Title"] = "Manage Invoice";
-
-    var count = 0;
 }
 
 <div class="container" id="edit-invoice">
@@ -82,7 +80,13 @@
                             <div class="row">
                                 <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">exposure_neg_2</i>
-                                    <input id="icon_discount" type="number" value="0" asp-for="Discount" />
+                                    @if (Model.Discount >= 0)
+                                    {
+                                        <input id="icon_discount" min="0" asp-for="Discount" />
+                                    } else
+                                    {
+                                        <input id="icon_discount" value="0" min="0" asp-for="Discount" />
+                                    }
                                     <label for="icon_discount">Discount (%)</label>
                                 </div>
 
@@ -111,7 +115,7 @@
 
                                     <div class="input-field col s12 col m5 col l5">
                                         <select id="_product">
-                                            <option value="">Select a product</option>
+                                            <option value="">Select a product...</option>
                                         </select>
                                     </div>
 
@@ -120,7 +124,7 @@
                                     </div>
 
                                     <div class="input-field col s4 col m1 col l1">
-                                        <a href="#" id="delete-row-btn"
+                                        <a href="#!" id="delete-row-btn"
                                            class="btn red darken-1 waves-effect waves-light">
                                             <i class="material-icons">remove</i>
                                         </a>
@@ -133,7 +137,7 @@
                             <div class="divider"></div>
                             <br />
 
-                            <a href="#" id="add-row-btn" class="btn light-green waves-effect waves-light">
+                            <a href="#!" id="add-row-btn" class="btn light-green waves-effect waves-light">
                                 <i class="material-icons">add</i>
                             </a>
                         </fieldset>
@@ -209,6 +213,7 @@
             var pids = new Array();
             var amounts = new Array();
             var pnames = new Array();
+            var start = true;
 
             @foreach(var category in ViewBag.Cats)
             {
@@ -233,28 +238,39 @@
                 var pname = pnames[i];
                 var cat = categories[i];
 
-                console.log("pname: " + pname);
+                if (start == true) {
+                    //Set category
+                    $("#products #product-control #_category").val(cat);
+                    $("#products #product-control #_category").material_select();
+                    $("#products #product-control #_category").change();
 
-                addRow();              
+                    //Set product
+                    $("#products #product-control #_product").val(pid);
+                    $("#products #product-control #_product").material_select();
+                    $("#products #product-control #_product").change();
 
-                //Initialize Materialize CSS dropdowns
-                $("#products #product-row:nth-child(" + count + ") #_category").material_select();
-                $("#products #product-row:nth-child(" + count + ") #_product").material_select();
+                    //Set amount
+                    $("#products #product-control #_amount").val(amount);
 
-                //Set amount
-                $("#products #product-row:nth-child(" + count + ") #_category").val(cat);
+                    start = false
+                } else {
+                    addRow();
 
-                //Set category
-                $("#products #product-row:nth-child(" + count + ") #_amount").val(amount);
-                $("#products #product-row:nth-child(" + count + ") #_category").material_select();
-                $("#products #product-row:nth-child(" + count + ") #_category").change();
+                    //Set category
+                    $("#products #product-row:nth-child(" + count + ") #_category").val(cat);
+                    $("#products #product-row:nth-child(" + count + ") #_category").material_select();
+                    $("#products #product-row:nth-child(" + count + ") #_category").change();
 
-                //Set product
-                $("#products #product-row:nth-child(" + count + ") #_product").val(`"` + pid + `"`);
-                $("#products #product-row:nth-child(" + count + ") #_product").find("option[text='(" + pname + ")']").addClass("active");
+                    //Set amount
+                    $("#products #product-row:nth-child(" + count + ") #_amount").val(amount);
 
-                $("#products #product-row:nth-child(" + count + ") #_product").material_select();
-                $("#products #product-row:nth-child(" + count + ") #_product").change();
+                    //Set product
+                    setTimeout(function () {
+                        $("#products #product-row:nth-child(" + count + ") #_product").val(pid);
+                        $("#products #product-row:nth-child(" + count + ") #_product").material_select();
+                        $("#products #product-row:nth-child(" + count + ") #_product").change();
+                    }, 1000);
+                }
             }
         }
     </script>
