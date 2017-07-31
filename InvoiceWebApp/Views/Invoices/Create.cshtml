@@ -1,7 +1,13 @@
+@using static InvoiceWebApp.Models.AppSettings
 @model InvoiceWebApp.Models.Invoice
 
 @{
-    ViewData["Title"] = "Create Invoice";
+	ViewData["Title"] = "Create Invoice";
+
+	AppSettings settings = null;
+	if (SessionHelper.IsExists(Context.Session, "Settings")) {
+		settings = SessionHelper.Get<AppSettings>(Context.Session, "Settings");
+	}
 }
 
 <div class="container" id="create-invoice">
@@ -162,7 +168,8 @@
     <script src="~/js/chosen.jquery.js" type="text/javascript"></script>
     <script>
         //Variables
-        var ajaxURL = '@Url.Action("GetProducts")';
+		var ajaxURL = '@Url.Action("GetProducts")';
+		var invoiceCycle = '@settings.InvoiceCycle';
     </script>
     <script src="~/js/invoice/create-invoice.js" type="text/javascript"></script>
 }

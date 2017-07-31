@@ -240,7 +240,7 @@ function calcTotal() {
 function changeDate() {
     var selectedDate = new Date($("#icon_created").val());
 
-    selectedDate.setDate(selectedDate.getDate() + 30);
+	selectedDate.setDate(selectedDate.getDate() + Number.parseInt(invoiceCycle));
     selectedDate.setMonth(selectedDate.getMonth() + 1);
 
     var day = selectedDate.getDate();

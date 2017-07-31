@@ -120,6 +120,8 @@ namespace InvoiceWebApp.Migrations
 
                     b.Property<string>("FinancialNumber");
 
+                    b.Property<int>("InvoiceCycle");
+
                     b.Property<string>("Logo");
 
                     b.Property<string>("Password");

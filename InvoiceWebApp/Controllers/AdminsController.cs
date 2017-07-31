@@ -431,6 +431,8 @@ namespace InvoiceWebApp.Controllers {
                 _settings.SMTP = AppSettings.SMTP;
                 _settings.Port = AppSettings.Port;
 
+				_settings.InvoiceCycle = AppSettings.InvoiceCycle;
+
                 //Update Settings
                 _context.Update(_settings);
                 _context.SaveChanges();

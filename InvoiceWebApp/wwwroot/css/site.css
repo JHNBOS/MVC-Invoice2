@@ -261,11 +261,11 @@ h4 {
     Fieldset CSS
 -----------------------------------------------------------------------------------*/
 fieldset {
-    border: 2px solid rgba(21, 101, 192, 0.2);
-    margin: 0 2px;
-    padding: 20px 24px;
-    width: 100%;
-    margin: 0 auto;
+	border: 2px solid #d0d0d0;
+	margin: 0 2px;
+	padding: 20px 24px;
+	width: 100%;
+	margin: 0 auto;
 }
 
 legend {
@@ -511,6 +511,73 @@ input[type="checkbox"]:checked + label:before {
     max-width: 60%;
 }
 
+#settings-admin fieldset {
+	margin: 10px auto;
+}
+
+#settings-admin .tabs {
+	height: 310px;
+	white-space: normal;
+	margin: 15px 0;
+	background-color: transparent;
+}
+
+#settings-admin .tab {
+	display: block;
+	width: 100%;
+	border-bottom: 1px solid #D0D0D0;
+}
+
+#settings-admin .tabs .tab {
+	height: 50px;
+	line-height: 50px;
+}
+
+#settings-admin .tabs .tab a {
+	color: #3949ab;
+	display: block;
+	width: 100%;
+	height: 100%;
+	padding: 0 24px;
+	font-size: 13px;
+	font-family: 'Lato', sans-serif;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	transition: color .28s ease;
+}
+
+#settings-admin .tabs .tab a.active {
+	background-color: transparent;
+	color: #2b3984;
+	font-weight: bold;
+}
+
+#settings-admin .tab-content {
+	height: 310px;
+	width: 100%;
+	background-color: transparent;
+	border: 0px solid #FFF;
+}
+
+#settings-admin .indicator {
+	display: none;
+}
+
+/*----- Buttons --------------*/
+#save-settings-btn {
+	margin-top: 15px;
+	margin-bottom: 25px;
+	width: 170px;
+}
+
+#save-settings-btn:hover {
+	box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
+}
+
+#save-settings-btn > span {
+	height: 36px;
+	line-height: 40px;
+}
 /*-----------------------------------------------------------------------------------
     Pages: Debtor
 -----------------------------------------------------------------------------------*/
@@ -856,22 +923,19 @@ input[type="checkbox"]:checked + label:before {
 
 /*----- Buttons --------------*/
 #create-admin-btn, #edit-admin-btn,
-#change-admin-btn, #remove-admin-btn,
-#save-settings-btn {
+#change-admin-btn, #remove-admin-btn {
     margin-top: 15px;
     margin-bottom: 25px;
     width: 170px;
 }
 
 #create-admin-btn:hover, #edit-admin-btn:hover,
-#change-admin-btn:hover, #remove-admin-btn:hover,
-#save-settings-btn:hover {
+#change-admin-btn:hover, #remove-admin-btn:hover {
     box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
 }
 
 #create-admin-btn > span, #edit-admin-btn > span,
-#change-admin-btn > span, #remove-admin-btn > span,
-#save-settings-btn > span {
+#change-admin-btn > span, #remove-admin-btn > span {
     height: 36px;
     line-height: 40px;
 }

@@ -40,5 +40,8 @@
 
         //Invoice Prefix
         public string Prefix { get; set; }
-    }
+
+		//Invoice Cycle
+		public int InvoiceCycle { get; set; }
+	}
 }
