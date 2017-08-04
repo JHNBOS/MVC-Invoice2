@@ -129,6 +129,17 @@ nav .brand-logo img {
     padding-bottom: 10px;
 }
 
+/*Active menu item*/
+.side-nav li.active {
+	background-color: rgba(0,0,0,0.05);
+}
+
+.side-nav li.active > a {
+	color: #6e1abb;
+	font-weight: bold;
+}
+
+/*Menu item*/
 nav ul a {
     -webkit-transition: background-color .3s;
     -ms-transition: background-color .3s;
@@ -141,64 +152,57 @@ nav ul a {
 }
 
 #settings-btn {
-    display: block;
-    height: 64px;
-    line-height: 68.5px;
-    text-align: center;
-    color: #fff;
-    transition: background-color .3s;
-    font-size: 1rem;
-    display: block;
-    padding: 0 15px;
-    cursor: pointer;
-}
-
-#settings-btn i {
-    text-shadow: 0px 0px 3px #000;
-}
-
-#settings-btn:hover i {
-    text-shadow: 0px 3px 20px #000;
-}
-
-#settings-btn-mobile {
-    display: none;
-    text-align: center;
-    color: #fff;
-    background: #7cb342;
-    transition: background-color .3s;
-    font-size: 1rem;
-    display: block;
-    padding: 0 15px;
-    cursor: pointer;
-    width: 100%;
+	display: block;
+	height: 64px;
+	line-height: 68.5px;
+	text-align: center;
+	background: #1f638c;
+	transition: background-color .3s;
+	font-size: 1rem;
+	display: block;
+	cursor: pointer;
+	position: absolute;
+	bottom: 114px;
+	left: 0;
+	width: 100%;
+	padding-left: 0px;
+	margin-left: 0px;
+	color: white;
 }
 
 #account-btn {
-    display: block;
-    height: 64px;
-    line-height: 68.5px;
-    text-align: center;
-    transition: background-color .3s;
-    font-size: 1rem;
-    display: block;
-    padding: 0 15px;
-    cursor: pointer;
+	display: block;
+	height: 64px;
+	line-height: 68.5px;
+	text-align: center;
+	transition: background-color .3s;
+	font-size: 1rem;
+	display: block;
+	cursor: pointer;
+	position: absolute;
+	bottom: 50px;
+	left: 0;
+	width: 100%;
+	padding-left: 0px;
+	margin-left: 0px;
+	color: white;
 }
 
-#account-btn:hover i {
-    font-size: 1.5rem;
+.side-nav .collapsible-header, .side-nav.fixed .collapsible-header {
+	background-color: transparent;
+	border: none;
+	line-height: inherit;
+	height: inherit;
+	padding: 0 32px;
 }
 
-#account-btn-mobile {
-    display: none;
-    text-align: center;
-    transition: background-color .3s;
-    font-size: 1rem;
-    display: block;
-    padding: 0 15px;
-    cursor: pointer;
-    width: 100%;
+.side-nav li > a > i, .side-nav li > a > [class^="mdi-"], .side-nav li > a li > a > [class*="mdi-"], .side-nav li > a > i.material-icons {
+	float: left;
+	height: 48px;
+	line-height: 48px;
+	margin: 0 -10px 0 0;
+	width: 24px;
+	color: rgba(0,0,0,0.54);
 }
 
 #sidenav-overlay {
@@ -206,9 +210,9 @@ nav ul a {
 }
 
 .side-nav .collapsible-body li a, .side-nav.fixed .collapsible-body li a {
-    padding: 0 23.5px 0 31px;
-    text-align: center;
-    background-color: #e2ffd5;
+	padding: 0 23.5px 0 31px;
+	text-align: center;
+	background-color: #efefef;
 }
 
 .side-nav .collapsible-body > ul:not(.collapsible) > li.active a, 

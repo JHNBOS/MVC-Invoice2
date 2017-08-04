@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>chart created with amCharts | amCharts</title>
+		<meta name="description" content="chart created using amCharts live editor" />
+		
+		<!-- amCharts javascript sources -->
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+		
+
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+			AmCharts.makeChart("chartdiv",
+				{
+					"type": "serial",
+					"categoryField": "category",
+					"columnSpacing": 33,
+					"columnWidth": 0.6,
+					"rotate": true,
+					"colors": [
+						"#67b7dc",
+						"#fdd400",
+						"#84b761",
+						"#cc4748",
+						"#cd82ad",
+						"#2f4074",
+						"#448e4d",
+						"#b7b83f",
+						"#b9783f",
+						"#b93e3d",
+						"#913167"
+					],
+					"startDuration": 3,
+					"autoDisplay": true,
+					"fontFamily": "Arial",
+					"fontSize": 12,
+					"theme": "light",
+					"categoryAxis": {
+						"autoWrap": true,
+						"gridPosition": "start",
+						"gridAlpha": 0,
+						"titleFontSize": 0
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"balloonText": "Invoices saved as concept: [[value]]",
+							"bulletAlpha": 0,
+							"color": "#CC0000",
+							"columnWidth": 1,
+							"cornerRadiusTop": 3,
+							"fillAlphas": 1,
+							"fontSize": 0,
+							"gapPeriod": 1,
+							"id": "AmGraph-1",
+							"labelPosition": "bottom",
+							"labelText": "",
+							"lineAlpha": 0,
+							"negativeFillAlphas": 0,
+							"title": "graph 1",
+							"type": "column",
+							"valueField": "graph 1"
+						}
+					],
+					"guides": [
+						{
+							"above": true,
+							"angle": 0,
+							"balloonText": "Total invoices",
+							"boldLabel": true,
+							"dashLength": 0,
+							"expand": true,
+							"fillColor": "#FFFF00",
+							"id": "Guide-1",
+							"inside": true,
+							"label": "Total invoices",
+							"labelRotation": 90,
+							"lineAlpha": 1,
+							"lineColor": "#FFC800",
+							"lineThickness": 2,
+							"position": "bottom",
+							"tickLength": 3,
+							"toAngle": 0,
+							"value": 344,
+							"valueAxis": "ValueAxis-1"
+						}
+					],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"includeAllValues": true,
+							"includeGuidesInMinMax": true,
+							"zeroGridAlpha": 0,
+							"axisAlpha": 0,
+							"gridAlpha": 0,
+							"labelsEnabled": false,
+							"minorGridAlpha": 0,
+							"offset": 2,
+							"title": "",
+							"titleFontSize": 11
+						}
+					],
+					"allLabels": [],
+					"balloon": {
+						"maxWidth": 201,
+						"offsetX": -3
+					},
+					"titles": [
+						{
+							"id": "Title-1",
+							"size": 15,
+							"text": "Invoices saved as concept"
+						}
+					],
+					"dataProvider": [
+						{
+							"category": "",
+							"graph 1": "156"
+						}
+					]
+				}
+			);
+		</script>
+	</head>
+	<body>
+		<div id="chartdiv" style="width: 100%; height: 400px; background-color: #FFFFFF;" ></div>
+	</body>
+</html>

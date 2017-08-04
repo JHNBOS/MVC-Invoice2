@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>chart created with amCharts | amCharts</title>
+		<meta name="description" content="chart created using amCharts live editor" />
+		
+		<!-- amCharts javascript sources -->
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/pie.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+		
+
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+			AmCharts.makeChart("chartdiv",
+				{
+					"type": "pie",
+					"angle": 15.3,
+					"balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+					"depth3D": 10,
+					"innerRadius": 0,
+					"labelRadius": 31,
+					"minRadius": 40,
+					"radius": "40%",
+					"startAngle": 0,
+					"baseColor": "",
+					"maxLabelWidth": 110,
+					"outlineAlpha": 0,
+					"pullOutDuration": 2,
+					"pullOutOnlyOne": true,
+					"startDuration": 2,
+					"startEffect": "easeOutSine",
+					"tabIndex": 0,
+					"titleField": "category",
+					"valueField": "column-1",
+					"autoDisplay": true,
+					"decimalSeparator": ",",
+					"percentPrecision": 1,
+					"precision": 3,
+					"theme": "light",
+					"thousandsSeparator": ".",
+					"allLabels": [],
+					"balloon": {},
+					"titles": [
+						{
+							"id": "Title-1",
+							"size": 9,
+							"text": "Amount Collected"
+						}
+					],
+					"dataProvider": [
+						{
+							"category": "Already collected",
+							"column-1": "849.500"
+						},
+						{
+							"category": "To be collected",
+							"column-1": "350.500"
+						}
+					]
+				}
+			);
+		</script>
+	</head>
+	<body>
+		<div id="chartdiv" style="width: 100%; height: 400px; background-color: #FFFFFF;" ></div>
+	</body>
+</html>

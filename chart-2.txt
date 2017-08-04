@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>chart created with amCharts | amCharts</title>
+		<meta name="description" content="chart created using amCharts live editor" />
+		
+		<!-- amCharts javascript sources -->
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/amcharts.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/serial.js"></script>
+		<script type="text/javascript" src="https://www.amcharts.com/lib/3/themes/light.js"></script>
+		
+
+		<!-- amCharts javascript code -->
+		<script type="text/javascript">
+			AmCharts.makeChart("chartdiv",
+				{
+					"type": "serial",
+					"categoryField": "category",
+					"columnSpacing": 15,
+					"columnWidth": 0.5,
+					"depth3D": 3,
+					"startDuration": 2,
+					"startEffect": "bounce",
+					"autoDisplay": true,
+					"theme": "light",
+					"categoryAxis": {
+						"gridPosition": "start",
+						"title": "",
+						"titleFontSize": 11
+					},
+					"trendLines": [],
+					"graphs": [
+						{
+							"balloonText": "Invoices collected[[category]]: [[value]]",
+							"fillAlphas": 1,
+							"id": "AmGraph-1",
+							"title": "Collected",
+							"type": "column",
+							"valueField": "Collected"
+						},
+						{
+							"balloonText": "Invoices due[[category]]: [[value]]",
+							"fillAlphas": 1,
+							"id": "AmGraph-2",
+							"title": "Due",
+							"type": "column",
+							"valueField": "Due"
+						}
+					],
+					"guides": [],
+					"valueAxes": [
+						{
+							"id": "ValueAxis-1",
+							"title": "Amount of invoices"
+						}
+					],
+					"allLabels": [],
+					"balloon": {
+						"borderThickness": 0
+					},
+					"legend": {
+						"enabled": true,
+						"align": "center",
+						"maxColumns": 2,
+						"useGraphSettings": true,
+						"valueWidth": 40
+					},
+					"titles": [
+						{
+							"id": "Title-1",
+							"size": 15,
+							"text": "Invoices collected"
+						}
+					],
+					"dataProvider": [
+						{
+							"category": "",
+							"Due": "304",
+							"Collected": "188"
+						}
+					]
+				}
+			);
+		</script>
+	</head>
+	<body>
+		<div id="chartdiv" style="width: 100%; height: 400px; background-color: #FFFFFF;" ></div>
+	</body>
+</html>

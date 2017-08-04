@@ -3,27 +3,27 @@
 @inject ApplicationDbContext _context
 
 @{
-    User user = null;
-    Admin admin = null;
-    AppSettings settings = null;
+	User user = null;
+	Admin admin = null;
+	AppSettings settings = null;
 
-    //Check for user
-    if (SessionHelper.IsExists(Context.Session, "User")) {
-        user = (User)Context.Session.Get<User>("User");
-    }
+	//Check for user
+	if (SessionHelper.IsExists(Context.Session, "User")) {
+		user = (User) Context.Session.Get<User>("User");
+	}
 
-    //Check for admin
-    if (SessionHelper.IsExists(Context.Session, "Admin")) {
-        admin = (Admin)Context.Session.Get<Admin>("Admin");
-    }
+	//Check for admin
+	if (SessionHelper.IsExists(Context.Session, "Admin")) {
+		admin = (Admin) Context.Session.Get<Admin>("Admin");
+	}
 
-    //Check for settings
-    if (SessionHelper.IsExists(Context.Session, "Settings")) {
-        settings = SessionHelper.Get<AppSettings>(Context.Session, "Settings");
-    } else {
-        settings = _context.Settings.FirstOrDefault();
-        SessionHelper.Set(Context.Session, "Settings", settings);
-    }
+	//Check for settings
+	if (SessionHelper.IsExists(Context.Session, "Settings")) {
+		settings = SessionHelper.Get<AppSettings>(Context.Session, "Settings");
+	} else {
+		settings = _context.Settings.FirstOrDefault();
+		SessionHelper.Set(Context.Session, "Settings", settings);
+	}
 }
 
 <!DOCTYPE html>
@@ -31,17 +31,18 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    @if ( settings != null )
-    {
+    @if (settings != null)
+	{
         <title>@ViewData["Title"] - @settings.CompanyName</title>
-    } else
-    {
+	} else
+	{
         <title>@ViewData["Title"]</title>
-    }
+	}
 
     <environment names="Development">
         <!-- Compiled and minified Materialze CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+		<link rel="stylesheet" 
+			  href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css" />
         <link rel="stylesheet" href="~/css/site.css" />
 
         <!--Google Icon Font-->
@@ -56,7 +57,8 @@
     </environment>
     <environment names="Staging,Production">
         <!-- Compiled and minified Materialze CSS -->
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/css/materialize.min.css">
+		<link rel="stylesheet"
+			  href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/css/materialize.min.css" />
         <link rel="stylesheet" href="~/css/site.css" />
 
         <!--Awesome Font-->
@@ -70,272 +72,171 @@
     @Html.Raw(JavaScriptSnippet.FullScript)
 </head>
 <body>
-    <div class="navbar-fixed">
+	<nav>
+		<ul id="slide-out" class="side-nav">
 
-        <!--Debtor dropdown-->
-        <ul id="dropdown-debtor" class="dropdown-content collapsible collapsible-accordion">
-            <li class="@(ViewBag.Current == "Debtors" ? "active" : "")">
-                <a asp-area="" asp-controller="Debtors" asp-action="Index">Persons</a>
-            </li>
-            <li class="@(ViewBag.Current == "Companies" ? "active" : "")">
-                <a asp-area="" asp-controller="Companies" asp-action="Index">Companies</a>
-            </li>
-        </ul>
+			<!--Check if user exist-->
+			@if (user != null) {
+				<li class="@(ViewBag.Current == "Home" ? "active" : "")">
+					<a asp-area="" asp-controller="Home" asp-route-email="@(user.Email)"
+					   asp-action="Index">Home</a>
+				</li>
+			} else if (admin != null) {
+				<li class="@(ViewBag.Current == "Home" ? "active" : "")">
+					<a asp-area="" asp-controller="Home" asp-route-email="@(admin.Email)"
+					   asp-action="Index">Home</a>
+				</li>
+			} else {
+				<li class="@(ViewBag.Current == "Home" ? "active" : "")">
+					<a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+				</li>
+			}
+			
 
-        <!--Product dropdown-->
-        <ul id="dropdown-product" class="dropdown-content collapsible collapsible-accordion">
-            <li class="@(ViewBag.Current == "Products" ? "active" : "")">
-                <a asp-area="" asp-controller="Products" asp-action="Index">Products</a>
-            </li>
-            <li class="@(ViewBag.Current == "Categories" ? "active" : "")">
-                <a asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
-            </li>
-        </ul>
-
-        <!--Accounts dropdown-->
-        <ul id="dropdown-account" class="dropdown-content collapsible collapsible-accordion">
-            <li class="@(ViewBag.Current == "Users" ? "active" : "")">
-                <a asp-area="" asp-controller="Users" asp-action="Index">Users</a>
-            </li>
-            <li class="@(ViewBag.Current == "Admins" ? "active" : "")">
-                <a asp-area="" asp-controller="Admins" asp-action="Index">Admins</a>
-            </li>
-        </ul>
-
-        <!--Mobile Nav-->
-        <ul id="mobile-nav" class="side-nav">
-            <!--Check if user exist-->
-            @if (user != null) {
-                <li class="@(ViewBag.Current == "Home" ? "active" : "")">
-                    <a asp-area="" asp-controller="Home" asp-route-email="@(user.Email)"
-                       asp-action="Index">Home</a>
-                </li>
-            } else {
-                <li class="@(ViewBag.Current == "Home" ? "active" : "")">
-                    <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                </li>
-            }
-            <!--Check if admin exist-->
-            @if (admin != null) {
+			<!--Check if admin exist-->
+			@if (admin != null) {
                 <!--Debtors-->
-                <li>
-                    <ul id="dropdown-debtor-slide" class="collapsible collapsible-accordion">
-                        <li>
-                            <a href="#" class="collapsible-header" style="padding-left: 31px;">
-                                Debtors
-                                <i class="material-icons right">arrow_drop_down</i>
-                            </a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li class="@(ViewBag.Current == "Debtors" ? "active" : "")">
-                                        <a asp-area="" asp-controller="Debtors" asp-action="Index">Persons</a>
-                                    </li>
-                                    <li class="@(ViewBag.Current == "Companies" ? "active" : "")">
-                                        <a asp-area="" asp-controller="Companies" asp-action="Index">Companies</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
+				<li class="">
+					<ul class="collapsible collapsible-accordion">
+						<li>
+							<a class="collapsible-header">Debtors<i class="material-icons" style="float:right;">arrow_drop_down</i></a>
+							<div class="collapsible-body">
+								<ul>
+									<li class="@(ViewBag.Current == "Debtors" ? "active" : "")">
+										<a asp-area="" asp-controller="Debtors" asp-action="Index">Persons</a>
+									</li>
+									<li class="@(ViewBag.Current == "Companies" ? "active" : "")">
+										<a asp-area="" asp-controller="Companies" asp-action="Index">Companies</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</li>
+
                 <!--Products-->
-                <li>
-                    <ul id="dropdown-prooduct-slide" class="collapsible collapsible-accordion">
-                        <li>
-                            <a href="#" class="collapsible-header" style="padding-left: 31px;">
-                                Products
-                                <i class="material-icons right">arrow_drop_down</i>
-                            </a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li class="@(ViewBag.Current == "Products" ? "active" : "")">
-                                        <a asp-area="" asp-controller="Products" asp-action="Index">Products</a>
-                                    </li>
-                                    <li class="@(ViewBag.Current == "Categories" ? "active" : "")">
-                                        <a asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
+				<li class="">
+					<ul class="collapsible collapsible-accordion">
+						<li>
+							<a class="collapsible-header">Products<i class="material-icons" style="float:right;">arrow_drop_down</i></a>
+							<div class="collapsible-body">
+								<ul>
+									<li class="@(ViewBag.Current == "Products" ? "active" : "")">
+										<a asp-area="" asp-controller="Products" asp-action="Index">Products</a>
+									</li>
+									<li class="@(ViewBag.Current == "Categories" ? "active" : "")">
+										<a asp-area="" asp-controller="Categories" asp-action="Index">Categories</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</li>
+
                 <!--Invoices-->
-                <li class="@(ViewBag.Current == "Invoices" ? "active" : "")">
-                    <a asp-area="" asp-controller="Invoices" asp-action="Index">Invoices</a>
-                </li>
+				<li class="@(ViewBag.Current == "Invoices" ? "active" : "")">
+					<a asp-area="" asp-controller="Invoices" asp-action="Index">Invoices</a>
+				</li>
+
                 <!--Accounts-->
-                <li>
-                    <ul id="dropdown-account-slide" class="collapsible collapsible-accordion">
-                        <li>
-                            <a href="#" class="collapsible-header" style="padding-left: 31px;">
-                                Accounts
-                                <i class="material-icons right">arrow_drop_down</i>
-                            </a>
-                            <div class="collapsible-body">
-                                <ul>
-                                    <li class="@(ViewBag.Current == "Users" ? "active" : "")">>
-                                        <a asp-area="" asp-controller="Users" asp-action="Index">Users</a>
-                                    </li>
-                                    <li class="@(ViewBag.Current == "Admins" ? "active" : "")">>
-                                        <a asp-area="" asp-controller="Admins" asp-action="Index">Admins</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                    </ul>
-                </li>
-            }
-            <!--Check if user exist-->
-            @if (user != null) {
+				<li class="">
+					<ul class="collapsible collapsible-accordion">
+						<li>
+							<a class="collapsible-header">Accounts<i class="material-icons" style="float:right;">arrow_drop_down</i></a>
+							<div class="collapsible-body">
+								<ul>
+									<li class="@(ViewBag.Current == "Users" ? "active" : "")">
+										<a asp-area="" asp-controller="Users" asp-action="Index">Users</a>
+									</li>
+									<li class="@(ViewBag.Current == "Admins" ? "active" : "")">
+										<a asp-area="" asp-controller="Admins" asp-action="Index">Admins</a>
+									</li>
+								</ul>
+							</div>
+						</li>
+					</ul>
+				</li>
+			}
+
+
+			<!--Check if user exist-->
+			@if (user != null) {
                 <!--My Invoices-->
-                <li class="@(ViewBag.Current == "MyInvoices" ? "active" : "")">
-                    <a asp-area="" asp-controller="MyInvoices" asp-action="Index">Invoices</a>
-                </li>
-            }
-            <!--Contact-->
-            <li class="@(ViewBag.Current == "Contact" ? "active" : "")">
-                <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
-            </li>
+				<li class="@(ViewBag.Current == "MyInvoices" ? "active" : "")">
+					<a asp-area="" asp-controller="MyInvoices" asp-action="Index">Invoices</a>
+				</li>
+			}
 
-            @if (admin != null) {
-                 <!--Settings button mobile-->
-                <li>
-                    <a id="settings-btn-mobile" asp-controller="Admins" asp-action="Settings"
-                       class="btn-flat waves-effect waves-default">
-                        Settings
-                    </a>
-                </li>
-            }
+			<!--Contact-->
+			<li class="@(ViewBag.Current == "Contact" ? "active" : "")">
+				<a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
+			</li>
 
-            <!--Login/Logout button mobile-->
-            <li>
-                <button type="submit" id="account-btn-mobile" asp-controller="Users" asp-action="Login"
-                        class="btn-flat waves-effect waves-default"></button>
-            </li>
-        </ul>
+			<!--Settings button-->
+			@if (admin != null) {
+				<li class="@(ViewBag.Current == "Settings" ? "active" : "")">
+					<a id="settings-btn" asp-controller="Admins" asp-action="Settings"
+					   class="btn-flat waves-effect waves-default tooltipped"
+					   data-position="right" data-delay="50" data-tooltip="Settings">
+						Settings
+					</a>
+				</li>
+			}
 
-        <!--Navbar-->
-        <nav>
-            <div class="nav-wrapper">
-                @if (user != null) {
-                    <a class="brand-logo" asp-controller="Home" asp-action="Index" 
-                       asp-route-email="@(user.Email)">
-                        <!--BEGIN OF LOGO-->
-                        @if (settings.Logo != "" && settings.UseLogo == true) {
-                            <img src="~/images/@(settings.Logo)" class="responsive-img" />
-                        }
-                        @if (settings.UseLogo == false || settings.Logo == "") {
-                            @settings.CompanyName
-                        }
-                        <!--END OF LOGO-->
-                    </a>
-                }
-                @if (admin != null) {
-                    <a class="brand-logo" asp-controller="Home" asp-action="Index"
-                       asp-route-email="@(admin.Email)">
-                        <!--BEGIN OF LOGO-->
-                        @if (settings.Logo != "" && settings.UseLogo == true) {
-                            <img src="~/images/@(settings.Logo)" class="responsive-img" />
-                        }
-                        @if (settings.UseLogo == false || settings.Logo == "") {
-                            @settings.CompanyName
-                        }
-                        <!--END OF LOGO-->
-                    </a>
-                } else {
-                    <a class="brand-logo" asp-controller="Home" asp-action="Index"
-                       asp-route-email="">
-                        <!--BEGIN OF LOGO-->
-                        @if (settings.Logo != "" && settings.UseLogo == true) {
-                            <img src="~/images/@(settings.Logo)" class="responsive-img" />
-                        }
-                        @if (settings.UseLogo == false || settings.Logo == "") {
-                            @settings.CompanyName
-                        }
-                        <!--END OF LOGO-->
-                    </a>
-                }
+			<!--Login/Logout button-->
+			<li>
+				<a id="account-btn" asp-controller="Users" asp-action="Login"
+				   class="btn-flat waves-effect waves-default tooltipped"
+				   data-position="right" data-delay="50" data-tooltip="Sign in">
+				</a>
+			</li>
+		</ul>
 
-                <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
-                <ul id="nav-mobile" class="right hide-on-med-and-down">
-                    <!--Check if user exist-->
-                    @if (user != null) {
-                        <li class="@(ViewBag.Current == "Home" ? "active" : "")">
-                            <a asp-area="" asp-controller="Home" asp-route-email="@(user.Email)"
-                               asp-action="Index">Home</a>
-                        </li>
-                    } else if (admin != null) {
-                        <li class="@(ViewBag.Current == "Home" ? "active" : "")">
-                            <a asp-area="" asp-controller="Home" asp-route-email="@(admin.Email)"
-                               asp-action="Index">Home</a>
-                        </li>
-                    } else {
-                        <li class="@(ViewBag.Current == "Home" ? "active" : "")">
-                            <a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                    }
-                    <!--Check if admin exist-->
-                    @if (admin != null) {
-                        <!--Debtors-->
-                        <li>
-                            <a class="dropdown-button" href="#!" data-activates="dropdown-debtor">
-                                Debtors
-                                <i class="material-icons right" style="margin-left:3px;">arrow_drop_down</i>
-                            </a>
-                        </li>
-                        <!--Products-->
-                        <li>
-                            <a class="dropdown-button" href="#!" data-activates="dropdown-product">
-                                Products
-                                <i class="material-icons right" style="margin-left:3px;">arrow_drop_down</i>
-                            </a>
-                        </li>
-                        <!--Invoices-->
-                        <li class="@(ViewBag.Current == "Invoices" ? "active" : "")">
-                            <a asp-area="" asp-controller="Invoices" asp-action="Index">Invoices</a>
-                        </li>
-                        <!--Accounts-->
-                        <li>
-                            <a class="dropdown-button" href="#!" data-activates="dropdown-account">
-                                Accounts
-                                <i class="material-icons right" style="margin-left:3px;">arrow_drop_down</i>
-                            </a>
-                        </li>
-                    }
-                    <!--Check if user exist-->
-                    @if (user != null) {
-                        <!--My Invoices-->
-                        <li class="@(ViewBag.Current == "MyInvoices" ? "active" : "")">
-                            <a asp-area="" asp-controller="MyInvoices" asp-action="Index">Invoices</a>
-                        </li>
-                    }
+		<!--Toggle button-->
+		<a href="#" data-activates="slide-out" class="button-collapse show-on-large">
+			<i class="material-icons">menu</i>
+		</a>
 
-                    <!--Contact-->
-                    <li class="@(ViewBag.Current == "Contact" ? "active" : "")">
-                        <a asp-area="" asp-controller="Home" asp-action="Contact">Contact</a>
-                    </li>
-
-                    <!--Settings button-->
-                    @if (admin != null) {
-                        <li class="@(ViewBag.Current == "Settings" ? "active" : "")">
-                            <a id="settings-btn" asp-controller="Admins" asp-action="Settings"
-                               class="btn-flat waves-effect waves-default tooltipped"
-                               data-position="bottom" data-delay="50" data-tooltip="Settings">
-                                <i class="material-icons">settings</i>
-                            </a>
-                        </li>
-                    }
-
-                    <!--Login/Logout button-->
-                    <li>
-                        <button type="submit" id="account-btn" asp-controller="Users" asp-action="Login"
-                                class="btn-flat waves-effect waves-default tooltipped"
-                                data-position="bottom" data-delay="50" data-tooltip="Sign in"></button>
-                    </li>
-                </ul>
-            </div>
-        </nav>
-    </div>
+		<!--Navbar brand-->
+		@if (user != null) {
+			<a class="brand-logo right" asp-controller="Home" asp-action="Index"
+			   asp-route-email="@(user.Email)">
+				<!--BEGIN OF LOGO-->
+				@if (settings.Logo != "" && settings.UseLogo == true) {
+					<img src="~/images/@(settings.Logo)" class="responsive-img" />
+				}
+				@if (settings.UseLogo == false || settings.Logo == "") {
+					@settings.CompanyName
+				}
+				<!--END OF LOGO-->
+			</a>
+		}
+		@if (admin != null) {
+			<a class="brand-logo right" asp-controller="Home" asp-action="Index"
+			   asp-route-email="@(admin.Email)">
+				<!--BEGIN OF LOGO-->
+				@if (settings.Logo != "" && settings.UseLogo == true) {
+					<img src="~/images/@(settings.Logo)" class="responsive-img" />
+				}
+				@if (settings.UseLogo == false || settings.Logo == "") {
+					@settings.CompanyName
+				}
+				<!--END OF LOGO-->
+			</a>
+		} else {
+			<a class="brand-logo right" asp-controller="Home" asp-action="Index"
+			   asp-route-email="">
+				<!--BEGIN OF LOGO-->
+				@if (settings.Logo != "" && settings.UseLogo == true) {
+					<img src="~/images/@(settings.Logo)" class="responsive-img" />
+				}
+				@if (settings.UseLogo == false || settings.Logo == "") {
+					@settings.CompanyName
+				}
+				<!--END OF LOGO-->
+			</a>
+		}
+	</nav>
 
     <div class="body-content">
         @RenderBody()
@@ -354,7 +255,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
         <!-- Compiled and minified JavaScript Materialize CSS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
 
         <!--jQuery Adaptive Background Script-->
         <script src="~/js/jquery-adaptive-background.js"></script>
@@ -372,7 +273,7 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
         <!-- Compiled and minified JavaScript Materialize CSS -->
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.100.1/js/materialize.min.js"></script>
 
         <!--jQuery Adaptive Background Script-->
         <script src="~/js/jquery-adaptive-background.js"></script>
@@ -390,14 +291,18 @@
 
     <script>
         $(document).ready(() => {
-            $(".button-collapse").sideNav();
+			$(".button-collapse").sideNav({
+				menuWidth: 250, 
+				edge: "left", 
+				closeOnClick: true
+			});
             $(".collapsible").collapsible();
             $('.tooltipped').tooltip({ delay: 50 });
 
             var isLoggedIn = false;
             var width = $(window).width();
-            var button = $(".navbar-fixed #account-btn");
-            var mobileButton = $(".navbar-fixed #account-btn-mobile");
+            var button = $("#account-btn");
+            var mobileButton = $("#account-btn-mobile");
 
             @if (user != null || admin != null) {
                 <text>
@@ -407,20 +312,32 @@
 
             //Account button non-mobile
             if (isLoggedIn == true && width > 768) {
-                button.css("color", "#e53935", "important");
-                button.html(`<i class="fa fa-sign-out"></i>`);
+				//Set background color
+				button.css("background", "#e53935", "important");
 
+				//Set text
+				button.text("");
+				button.text("Sign out");
+
+				//Set tooltip
                 button.attr("data-tooltip", "Sign out");
                 button.tooltip();
 
+				//Set location attribute
                 button.attr("onclick", "location.href='@Url.Action("Logout", "Users")'");
             } else if (isLoggedIn == false && width > 768) {
-                button.css("color", "#64dd17", "important");
-                button.html(`<i class="fa fa-sign-in"></i>`);
+				//Set background color
+				button.css("background", "#64dd17", "important");
 
-                button.attr("data-tooltip", "Sign in");
-                button.tooltip();
+				//Set text
+				button.text("");
+				button.text("Sign In");
 
+				//Set tooltip
+				button.attr("data-tooltip", "Sign in");
+				button.tooltip();
+
+				//Set location attribute
                 button.attr("onclick", "location.href='@Url.Action("Login", "Users")'");
             }
 
@@ -440,6 +357,7 @@
             }
 
             //Change color of navbar links to black when scrolling
+			/*
             $(window).scroll(() => { 
                 if ($(window).scrollTop() >= 45) {
                     //$("nav ul a").css("color", "#000");
@@ -449,6 +367,7 @@
                     $("nav").css("background", "rgba(255, 255, 255, 0.25)")
                 }
             });
+			*/
 
         });
     </script>
