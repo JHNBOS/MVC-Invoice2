@@ -347,7 +347,7 @@ namespace InvoiceWebApp.Controllers {
             }
             */
 
-            return View(userLogin);
+            return View(user);
         }
 
         //---------------------------------

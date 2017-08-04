@@ -47,9 +47,9 @@
     <div class="container" id="home">
         <div class="row">
             <div class="col s12 col m12 center-align">
-                @if (user != null && admin == null) {
+                @if (user != null) {
                     <h4 style="margin-top: 40px;text-transform:uppercase;">Welcome, @user.Debtor.FirstName</h4>
-                } else if (user == null && admin != null) {
+                } else if (admin != null) {
                     <h4 style="margin-top: 40px;text-transform:uppercase;">Welcome, @admin.FirstName</h4>
                 } else {
                     <h4 style="margin-top: 40px;text-transform:uppercase;">Welcome</h4>
@@ -65,7 +65,7 @@
 
         <div class="divider"></div>
 
-        @if (user != null) {
+        @if (user != null && admin == null) {
             <div class="row">
                 <div class="col s3 col m3"></div>
                 <div class="col s12 col m12 center-align">
@@ -77,14 +77,12 @@
 
         @if (admin != null) {
             <div class="row">
-                <div class="col s1 col m1"></div>
-                <div class="col s5 col m5 center-align">
-                    <div id="admin_chartdiv" style="width:100%;height:400px;background:rgba(255, 255, 255, 0);display:none;"></div>
+                <div class="col s6 col m6 center-align">
+                    <div id="admin_chartdiv" style="width:100%;height:200px;background:rgba(255, 255, 255, 0);"></div>
                 </div>
-                <div class="col s5 col m5 center-align">
-                    <div id="admin_chartdiv2" style="width:100%;height:400px;background:rgba(255, 255, 255, 0);display:none;"></div>
+                <div class="col s6 col m6 center-align">
+                    <div id="admin_chartdiv2" style="width:100%;height:200px;background:rgba(255, 255, 255, 0);"></div>
                 </div>
-                <div class="col s1 col m1"></div>
             </div>
         }
     </div>
@@ -99,8 +97,6 @@
             var user = null;
             var admin = null;
             var divHeight = $("#home").height();
-
-            
 
             @if (user != null) {
                 <text>
@@ -156,8 +152,8 @@
                 <text>
                     $("#invoiceText").html("You have 1 unpaid invoice."
                         + "<br />"
-                        + "Total paid: &euro; @(ViewBag.clientPaid)");
-                         "<br />"
+						+ "Total paid: &euro; @(ViewBag.clientPaid)"
+                        + "<br />"
                         + "To be paid: &euro;  @(ViewBag.clientNotPaid)");
                 </text>
             }
@@ -165,7 +161,7 @@
                 <text>
                     $("#invoiceText").html("You have @(ViewBag.clientNotPaidCount) unpaid invoices."
                         + "<br />"
-                        + "Total paid: &euro; @(ViewBag.clientPaid)");
+                        + "Total paid: &euro; @(ViewBag.clientPaid)"
                         + "<br />"
                         + "To be paid: &euro;  @(ViewBag.clientNotPaid)");
                 </text>
@@ -246,17 +242,24 @@
             var unpaidCount = "";
             var total = "";
             var totalPaid = "";
-            var totalAmountFormatted = "";
+			var totalAmountFormatted = "";
+			var showCharts = false;
 
             //-----------------------------------------------------------------
             //Set text according to paid and unpaid invoices
             @if (ViewBag.finalCount == 0) {
                 <text>
                     $("#admin_chartdiv").hide();
-                    $("#admin_chartdiv2").hide();
-                    noInvoicesText += "There are currently no invoices.";
+					$("#admin_chartdiv2").hide();
+					noInvoicesText += "There are currently no invoices.";
+					showCharts = false;
                 </text>
-            }
+			} else
+			{
+				<text>
+					showCharts = true;
+                </text>
+			}
             @if (ViewBag.conceptCount == 0){
                 <text>
                     noInvoicesText += "";
@@ -278,193 +281,195 @@
             //-----------------------------------------------------------------
             //Show chart based on invoices
 
-            $("#admin_chartdiv").show();
-            $("#admin_chartdiv2").show();
+			if (showCharts == true) {
+				$("#admin_chartdiv").show();
+				$("#admin_chartdiv2").show();
 
-            @{
-                int? paidInvoiceCount = ViewBag.adminPaidCount;
-                int? unpaidInvoiceCount = ViewBag.adminNotPaidCount;
+				@{
+					int? paidInvoiceCount = ViewBag.adminPaidCount;
+					int? unpaidInvoiceCount = ViewBag.adminNotPaidCount;
 
-                decimal? totalPaid = ViewBag.totalPaid;
-                decimal? totalAmount = ViewBag.total;
+					decimal? totalPaid = ViewBag.totalPaid;
+					decimal? totalAmount = ViewBag.total;
 
-                if (paidInvoiceCount != null){
-                    <text>
-                        paidCount = @paidInvoiceCount;
-                    </text>
-                }
-                if (unpaidInvoiceCount != null){
-                    <text>
-                        unpaidCount = @unpaidInvoiceCount;
-                    </text>
-                }
-                if (totalPaid != null){
-                    <text>
-                        totalPaid = @totalPaid;
-                    </text>
-                }
-                if (totalAmount != null){
-                    <text>
-                        total = @totalAmount;
-                    </text>
-                }
-            }
+					if (paidInvoiceCount != null){
+						<text>
+							paidCount = @paidInvoiceCount;
+						</text>
+					}
+					if (unpaidInvoiceCount != null){
+						<text>
+							unpaidCount = @unpaidInvoiceCount;
+						</text>
+					}
+					if (totalPaid != null){
+						<text>
+							totalPaid = @totalPaid;
+						</text>
+					}
+					if (totalAmount != null){
+						<text>
+							total = @totalAmount;
+						</text>
+					}
+				}
 
-            //Format to two decimal number
-            if (total > 0) {
-                totalAmountFormatted = AmCharts.formatNumber(total, {
-                    precision: -1,
-                    decimalSeparator: ",",
-                    thousandsSeparator: "."
-                }, 2);
-            }
+				//Format to two decimal number
+				if (total > 0) {
+					totalAmountFormatted = AmCharts.formatNumber(total, {
+						precision: -1,
+						decimalSeparator: ",",
+						thousandsSeparator: "."
+					}, 2);
+				}
 
-            //-----------------------------------------------------------------
-            //Chart one of two
-            if (total > 0 && totalPaid >= 0) {
-                AmCharts.makeChart("admin_chartdiv",
-                    {
-                        "type": "serial",
-                        "categoryField": "category",
-                        "decimalSeparator": ",",
-                        "thousandsSeparator": ".",
-                        "rotate": true,
-                        "startDuration": 2,
-                        "creditsPosition": "bottom-left",
-                        "theme": "light",
-                        "precision": 2,
-                        "usePrefixes": false,
-                        "categoryAxis": {
-                            "autoRotateCount": 0,
-                            "gridPosition": "start",
-                            "autoGridCount": false,
-                            "labelsEnabled": false,
-                            "title": "Currently Paid",
-                            "size": 10
-                        },
-                        "trendLines": [],
-                        "graphs": [
-                            {
-                                "fillAlphas": 1,
-                                "id": "AmGraph-1",
-                                "title": "graph 1",
-                                "precision": 2,
-                                "type": "column",
-                                "valueField": "graph 1",
-                                "balloonText": "Currently Paid: €[[graph 1]]",
-                                "balloonFunction": function (item, graph) {
-                                    var result = graph.balloonText;
-                                    for (var key in item.dataContext) {
-                                        if (item.dataContext.hasOwnProperty(key) && !isNaN(item.dataContext[key])) {
-                                            var formatted = AmCharts.formatNumber(item.dataContext[key], {
-                                                precision: -1,
-                                                decimalSeparator: ",",
-                                                thousandsSeparator: "."
-                                            }, 2);
-                                            result = result.replace("[[" + key + "]]", formatted);
-                                        }
-                                    }
-                                    return result;
-                                },
-                            }
-                        ],
-                        "guides": [
-                            {
-                                "above": true,
-                                "balloonText": "Total Amount: €" + totalAmountFormatted,
-                                "position": "top",
-                                "boldLabel": true,
-                                "angle": 0,
-                                "dashLength": 0,
-                                "id": "Guide-1",
-                                "inside": true,
-                                "label": "Total Amount",
-                                "labelRotation": 90,
-                                "lineAlpha": 1,
-                                "lineColor": "#FFFF00",
-                                "lineThickness": 3,
-                                "value": total
-                            }
-                        ],
-                        "valueAxes": [
-                            {
-                                "id": "ValueAxis-1",
-                                "maximum": total,
-                                "minimum": (totalPaid - (totalPaid / 3)),
-                                "precision": 2,
-                                "unit": "€",
-                                "labelsEnabled": false,
-                                "unitPosition": "left",
-                                "title": "",
-                                "titleBold": false
-                            }
-                        ],
-                        "allLabels": [],
-                        "balloon": {},
-                        "titles": [
-                            {
-                                "id": "Title-1",
-                                "size": 10,
-                                "text": "Current amount of paid invoices"
-                            }
-                        ],
-                        "dataProvider": [
-                            {
-                                "category": "category 1",
-                                "graph 1": totalPaid
-                            }
-                        ]
-                    });
+				//-----------------------------------------------------------------
+				//Chart one of two
+				if (total > 0 && totalPaid >= 0) {
+					AmCharts.makeChart("admin_chartdiv",
+						{
+							"type": "serial",
+							"categoryField": "category",
+							"decimalSeparator": ",",
+							"thousandsSeparator": ".",
+							"rotate": true,
+							"startDuration": 2,
+							"creditsPosition": "bottom-left",
+							"theme": "light",
+							"precision": 2,
+							"usePrefixes": false,
+							"categoryAxis": {
+								"autoRotateCount": 0,
+								"gridPosition": "start",
+								"autoGridCount": false,
+								"labelsEnabled": false,
+								"title": "Currently Paid",
+								"size": 10
+							},
+							"trendLines": [],
+							"graphs": [
+								{
+									"fillAlphas": 1,
+									"id": "AmGraph-1",
+									"title": "graph 1",
+									"precision": 2,
+									"type": "column",
+									"valueField": "graph 1",
+									"balloonText": "Currently Paid: €[[graph 1]]",
+									"balloonFunction": function (item, graph) {
+										var result = graph.balloonText;
+										for (var key in item.dataContext) {
+											if (item.dataContext.hasOwnProperty(key) && !isNaN(item.dataContext[key])) {
+												var formatted = AmCharts.formatNumber(item.dataContext[key], {
+													precision: -1,
+													decimalSeparator: ",",
+													thousandsSeparator: "."
+												}, 2);
+												result = result.replace("[[" + key + "]]", formatted);
+											}
+										}
+										return result;
+									},
+								}
+							],
+							"guides": [
+								{
+									"above": true,
+									"balloonText": "Total Amount: €" + totalAmountFormatted,
+									"position": "top",
+									"boldLabel": true,
+									"angle": 0,
+									"dashLength": 0,
+									"id": "Guide-1",
+									"inside": true,
+									"label": "Total Amount",
+									"labelRotation": 90,
+									"lineAlpha": 1,
+									"lineColor": "#FFFF00",
+									"lineThickness": 3,
+									"value": total
+								}
+							],
+							"valueAxes": [
+								{
+									"id": "ValueAxis-1",
+									"maximum": total,
+									"minimum": (totalPaid - (totalPaid / 3)),
+									"precision": 2,
+									"unit": "€",
+									"labelsEnabled": false,
+									"unitPosition": "left",
+									"title": "",
+									"titleBold": false
+								}
+							],
+							"allLabels": [],
+							"balloon": {},
+							"titles": [
+								{
+									"id": "Title-1",
+									"size": 10,
+									"text": "Current amount of paid invoices"
+								}
+							],
+							"dataProvider": [
+								{
+									"category": "category 1",
+									"graph 1": totalPaid
+								}
+							]
+						});
 
-                $("#home").css("margin-bottom", "40px");
-            }
+					$("#home").css("margin-bottom", "40px");
+				}
 
-            //-----------------------------------------------------------------
-            //Chart two of two
-            if (paidCount >= 0 && unpaidCount > 0) {
-                AmCharts.makeChart("admin_chartdiv2",
-                    {
-                        "type": "pie",
-                        "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
-                        "innerRadius": 3,
-                        "labelRadius": 16,
-                        "radius": 90,
-                        "maxLabelWidth": 198,
-                        "pullOutDuration": 2,
-                        "pullOutEffect": "elastic",
-                        "startDuration": 2,
-                        "startEffect": "easeOutSine",
-                        "titleField": "category",
-                        "valueField": "column-1",
-                        "creditsPosition": "bottom-right",
-                        "theme": "light",
-                        "allLabels": [],
-                        "balloon": {},
-                        "legend": {
-                            "enabled": true,
-                            "align": "center",
-                            "markerType": "circle",
-                        },
-                        "titles": [
-                            {
-                                "id": "Title-1",
-                                "size": 10,
-                                "text": "Percentages of paid/unpaid invoices"
-                            }
-                        ],
-                        "dataProvider": [
-                            {
-                                "category": "Paid",
-                                "column-1": paidCount
-                            },
-                            {
-                                "category": "Unpaid",
-                                "column-1": unpaidCount
-                            }
-                        ]
-                    });
+				//-----------------------------------------------------------------
+				//Chart two of two
+				if (paidCount >= 0 && unpaidCount >= 0) {
+					AmCharts.makeChart("admin_chartdiv2",
+						{
+							"type": "pie",
+							"balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+							"innerRadius": 3,
+							"labelRadius": 16,
+							"radius": 90,
+							"maxLabelWidth": 198,
+							"pullOutDuration": 2,
+							"pullOutEffect": "elastic",
+							"startDuration": 2,
+							"startEffect": "easeOutSine",
+							"titleField": "category",
+							"valueField": "column-1",
+							"creditsPosition": "bottom-right",
+							"theme": "light",
+							"allLabels": [],
+							"balloon": {},
+							"legend": {
+								"enabled": true,
+								"align": "center",
+								"markerType": "circle",
+							},
+							"titles": [
+								{
+									"id": "Title-1",
+									"size": 10,
+									"text": "Percentages of paid/unpaid invoices"
+								}
+							],
+							"dataProvider": [
+								{
+									"category": "Paid",
+									"column-1": paidCount
+								},
+								{
+									"category": "Unpaid",
+									"column-1": unpaidCount
+								}
+							]
+						});
 
-                $("#home").css("margin-bottom", "40px");
+					$("#home").css("margin-bottom", "40px");
+				}
             }
         }
     </script>

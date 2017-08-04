@@ -91,11 +91,11 @@ $("#_category").change(function () {
         dataType: "json",
         data: { id: $(this).val() },
         success: function (items) {
-            $.each(items, function (i, item) {
+			$.each(items, function (i, item) {
                 $(productSelect)
                     .append('<option value="' + item.value + '">' + item.text + '</option>');
-            });
-            $(productSelect).material_select();
+			});
+			$(productSelect).material_select();
         },
         error: function (ex) {
             alert('Failed to retrieve products.' + ex);

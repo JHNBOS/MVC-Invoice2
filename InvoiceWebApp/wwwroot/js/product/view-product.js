@@ -6,14 +6,13 @@ $(document).ready(function () {
     setPrice();
 
     //Set value of category input
-    setDropDown();
+	setCategory();
 });
 
-function setDropDown() {
-    if (category != "") {
-        $(".select-wrapper input").val(category);
-        $(".select-wrapper ul").find('li span:contains("' + category + '")').parent().addClass("active selected");
-    }
+function setCategory() {
+	$("#category_select").material_select();
+	$("#category_select").find('option:contains("' + category + '")').prop('selected', true);
+	$("#category_select").material_select();
 
     $("#details-product > div:nth-child(3) > div > form > fieldset > div:nth-child(6) > div > div > input").prop("disabled", true);
     $("#remove-product > div:nth-child(3) > div > form > fieldset > div:nth-child(6) > div > div > input").prop("disabled", true);

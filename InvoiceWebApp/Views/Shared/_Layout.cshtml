@@ -292,7 +292,7 @@
     <script>
         $(document).ready(() => {
 			$(".button-collapse").sideNav({
-				menuWidth: 250, 
+				menuWidth: 210, 
 				edge: "left", 
 				closeOnClick: true
 			});
@@ -302,7 +302,6 @@
             var isLoggedIn = false;
             var width = $(window).width();
             var button = $("#account-btn");
-            var mobileButton = $("#account-btn-mobile");
 
             @if (user != null || admin != null) {
                 <text>
@@ -339,21 +338,6 @@
 
 				//Set location attribute
                 button.attr("onclick", "location.href='@Url.Action("Login", "Users")'");
-            }
-
-            //Account button mobile
-            if (isLoggedIn == true && width <= 768) {
-                mobileButton.css("background", "#e53935", "important");
-                mobileButton.css("color", "#fff", "important");
-
-                mobileButton.html(`<span>Log out</span>`);
-                mobileButton.attr("onclick", "location.href='@Url.Action("Logout", "Users")'");
-            } else if (isLoggedIn == false && width <= 768) {
-                mobileButton.css("background", "#64dd17", "important");
-                mobileButton.css("color", "#fff", "important");
-
-                mobileButton.html(`<span>Log in</span>`);
-                mobileButton.attr("onclick", "location.href='@Url.Action("Login", "Users")'");
             }
 
             //Change color of navbar links to black when scrolling
