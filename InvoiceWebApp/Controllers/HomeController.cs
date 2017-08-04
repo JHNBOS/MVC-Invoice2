@@ -108,6 +108,7 @@ namespace InvoiceWebApp.Controllers {
                 conceptCount = invoiceList.Where(inv => inv.Type == "Concept").Count();
                 finalCount = invoiceList.Where(inv => inv.Type == "Final").Count();
 
+				//Variables for chart 1
                 ViewBag.conceptCount = conceptCount;
                 ViewBag.finalCount = finalCount;
 
