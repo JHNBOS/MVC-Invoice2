@@ -112,7 +112,8 @@ namespace InvoiceWebApp.Controllers {
                 ViewBag.conceptCount = conceptCount;
                 ViewBag.finalCount = finalCount;
 
-                ViewBag.adminPaidCount = paidCount;
+				//Variables for chart 2
+				ViewBag.adminPaidCount = paidCount;
                 ViewBag.adminNotPaidCount = unpaidCount;
 
                 ViewBag.total = CalculateTotal(invoiceList);

@@ -270,13 +270,13 @@
             }
             @if (ViewBag.finalCount == 1) {
                 <text>
-					finalText += "You have 1 unpaid invoice.";
+					finalText += "You have 1 invoice.";
 					showCharts = true;
                 </text>
             }
             @if (ViewBag.finalCount > 1) {
                 <text>
-					finalText += "You have @(ViewBag.conceptCount) unpaid invoiced.";
+					finalText += "You have @(ViewBag.finalCount) invoices.";
 					showCharts = true;
                 </text>
             }
@@ -361,196 +361,416 @@
 
 				//-----------------------------------------------------------------
 				//Chart one of two
-				if (total > 0 && totalPaid >= 0) {
-					AmCharts.makeChart("admin_chartdiv",
-						{
-							"type": "serial",
-							"categoryField": "category",
-							"columnSpacing": 33,
-							"columnWidth": 0.6,
-							"rotate": true,
-							"colors": [
-								"#67b7dc",
-								"#fdd400",
-								"#84b761",
-								"#cc4748",
-								"#cd82ad",
-								"#2f4074",
-								"#448e4d",
-								"#b7b83f",
-								"#b9783f",
-								"#b93e3d",
-								"#913167"
-							],
-							"startDuration": 3,
-							"autoDisplay": true,
-							"fontFamily": "Arial",
-							"fontSize": 12,
-							"theme": "light",
-							"categoryAxis": {
-								"autoWrap": true,
-								"gridPosition": "start",
-								"gridAlpha": 0,
-								"titleFontSize": 0
-							},
-							"trendLines": [],
-							"graphs": [
-								{
-									"balloonText": "Invoices saved as concept: [[value]]",
-									"bulletAlpha": 0,
-									"color": "#CC0000",
-									"columnWidth": 1,
-									"cornerRadiusTop": 3,
-									"fillAlphas": 1,
-									"fontSize": 0,
-									"gapPeriod": 1,
-									"id": "AmGraph-1",
-									"labelPosition": "bottom",
-									"labelText": "",
-									"lineAlpha": 0,
-									"negativeFillAlphas": 0,
-									"title": "graph 1",
-									"type": "column",
-									"valueField": "graph 1"
-								}
-							],
-							"guides": [
-								{
-									"above": true,
-									"angle": 0,
-									"balloonText": "Total invoices",
-									"boldLabel": true,
-									"dashLength": 0,
-									"expand": true,
-									"fillColor": "#FFFF00",
-									"id": "Guide-1",
-									"inside": true,
-									"label": "Total invoices",
-									"labelRotation": 90,
-									"lineAlpha": 1,
-									"lineColor": "#FFC800",
-									"lineThickness": 2,
-									"position": "bottom",
-									"tickLength": 3,
-									"toAngle": 0,
-									"value": totalInvoices,
-									"valueAxis": "ValueAxis-1"
-								}
-							],
-							"valueAxes": [
-								{
-									"id": "ValueAxis-1",
-									"includeAllValues": true,
-									"includeGuidesInMinMax": true,
-									"zeroGridAlpha": 0,
-									"axisAlpha": 0,
+				if (conceptInvoices > 0 && total > 0) {
+					if ($("#admin_chartdiv").empty()) {
+						AmCharts.makeChart("admin_chartdiv",
+							{
+								"type": "serial",
+								"categoryField": "category",
+								"rotate": true,
+								"depth3D": 8,
+								"colors": [
+									"#67b7dc",
+									"#fdd400",
+									"#84b761",
+									"#cc4748",
+									"#cd82ad",
+									"#2f4074",
+									"#448e4d",
+									"#b7b83f",
+									"#b9783f",
+									"#b93e3d",
+									"#913167"
+								],
+								"startDuration": 3,
+								"autoDisplay": true,
+								"fontSize": 12,
+								"theme": "light",
+								"categoryAxis": {
+									"autoWrap": true,
+									"gridPosition": "start",
 									"gridAlpha": 0,
+									"titleFontSize": 0,
 									"labelsEnabled": false,
-									"minorGridAlpha": 0,
-									"offset": 2,
-									"title": "",
-									"titleFontSize": 11
-								}
-							],
-							"allLabels": [],
-							"balloon": {
-								"maxWidth": 201,
-								"offsetX": -3
-							},
-							"titles": [
-								{
-									"id": "Title-1",
-									"size": 15,
-									"text": "Invoices saved as concept"
-								}
-							],
-							"dataProvider": [
-								{
-									"category": "",
-									"graph 1": conceptInvoices
-								}
-							]
-						}
-					);
+									"gridCount": 0,
+									"gridThickness": 0,
+									"tickLength": 0,
+									"axisColor": "#A4A4A4"
+								},
+								"trendLines": [],
+								"graphs": [
+									{
+										"balloonText": "Invoices saved as concept: [[value]]",
+										"bulletAlpha": 0,
+										"color": "#000",
+										"columnWidth": 1.0,
+										"cornerRadiusTop": 3,
+										"fillAlphas": 1,
+										"gapPeriod": 1,
+										"id": "AmGraph-1",
+										"labelPosition": "bottom",
+										"lineAlpha": 0,
+										"negativeFillAlphas": 0,
+										"labelAnchor": "middle",
+										"labelPosition": "right",
+										"labelOffset": 20,
+										"labelRotation": 90,
+										"labelText": "Concepts",
+										"title": "graph 1",
+										"type": "column",
+										"valueField": "graph 1"
+									}
+								],
+								"guides": [
+									{
+										"above": true,
+										"angle": 0,
+										"balloonText": "Total invoices: " + totalInvoices,
+										"boldLabel": true,
+										"dashLength": 0,
+										"expand": true,
+										"fillColor": "#FFFF00",
+										"id": "Guide-1",
+										"inside": true,
+										"label": "Total invoices",
+										"labelRotation": 90,
+										"lineAlpha": 1,
+										"lineColor": "#FFC800",
+										"lineThickness": 2,
+										"position": "bottom",
+										"tickLength": 3,
+										"toAngle": 0,
+										"value": totalInvoices,
+										"valueAxis": "ValueAxis-1"
+									}
+								],
+								"valueAxes": [
+									{
+										"id": "ValueAxis-1",
+										"includeAllValues": true,
+										"includeGuidesInMinMax": true,
+										"zeroGridAlpha": 0,
+										"integersOnly": true,
+										"axisAlpha": 0,
+										"gridAlpha": 0,
+										"minorGridAlpha": 0,
+										"offset": 2,
+										"title": "",
+										"titleFontSize": 11,
+										"gridCount": 0,
+										"gridThickness": 0,
+										"labelsEnabled": false,
+										"axisThickness": 0,
+									}
+								],
+								"allLabels": [],
+								"balloon": {
+									"maxWidth": 201,
+									"offsetX": -3
+								},
+								"titles": [
+									{
+										"id": "Title-1",
+										"size": 15,
+										"text": "Invoices saved as concept"
+									}
+								],
+								"dataProvider": [
+									{
+										"category": "",
+										"graph 1": conceptInvoices
+									}
+								]
+							}
+						);
+					} else if ($("#admin_chartdiv2").empty()){ 
+						AmCharts.makeChart("admin_chartdiv2",
+							{
+								"type": "serial",
+								"categoryField": "category",
+								"rotate": true,
+								"depth3D": 8,
+								"colors": [
+									"#67b7dc",
+									"#fdd400",
+									"#84b761",
+									"#cc4748",
+									"#cd82ad",
+									"#2f4074",
+									"#448e4d",
+									"#b7b83f",
+									"#b9783f",
+									"#b93e3d",
+									"#913167"
+								],
+								"startDuration": 3,
+								"autoDisplay": true,
+								"fontSize": 12,
+								"theme": "light",
+								"categoryAxis": {
+									"autoWrap": true,
+									"gridPosition": "start",
+									"gridAlpha": 0,
+									"titleFontSize": 0,
+									"labelsEnabled": false,
+									"gridCount": 0,
+									"gridThickness": 0,
+									"tickLength": 0,
+									"axisColor": "#A4A4A4"
+								},
+								"trendLines": [],
+								"graphs": [
+									{
+										"balloonText": "Invoices saved as concept: [[value]]",
+										"bulletAlpha": 0,
+										"color": "#000",
+										"columnWidth": 1.0,
+										"cornerRadiusTop": 3,
+										"fillAlphas": 1,
+										"gapPeriod": 1,
+										"id": "AmGraph-1",
+										"labelPosition": "bottom",
+										"lineAlpha": 0,
+										"negativeFillAlphas": 0,
+										"labelAnchor": "middle",
+										"labelPosition": "right",
+										"labelOffset": 20,
+										"labelRotation": 90,
+										"labelText": "Concepts",
+										"title": "graph 1",
+										"type": "column",
+										"valueField": "graph 1"
+									}
+								],
+								"guides": [
+									{
+										"above": true,
+										"angle": 0,
+										"balloonText": "Total invoices: " + totalInvoices,
+										"boldLabel": true,
+										"dashLength": 0,
+										"expand": true,
+										"fillColor": "#FFFF00",
+										"id": "Guide-1",
+										"inside": true,
+										"label": "Total invoices",
+										"labelRotation": 90,
+										"lineAlpha": 1,
+										"lineColor": "#FFC800",
+										"lineThickness": 2,
+										"position": "bottom",
+										"tickLength": 3,
+										"toAngle": 0,
+										"value": totalInvoices,
+										"valueAxis": "ValueAxis-1"
+									}
+								],
+								"valueAxes": [
+									{
+										"id": "ValueAxis-1",
+										"includeAllValues": true,
+										"includeGuidesInMinMax": true,
+										"zeroGridAlpha": 0,
+										"integersOnly": true,
+										"axisAlpha": 0,
+										"gridAlpha": 0,
+										"minorGridAlpha": 0,
+										"offset": 2,
+										"title": "",
+										"titleFontSize": 11,
+										"gridCount": 0,
+										"gridThickness": 0,
+										"labelsEnabled": false,
+										"axisThickness": 0,
+									}
+								],
+								"allLabels": [],
+								"balloon": {
+									"maxWidth": 201,
+									"offsetX": -3
+								},
+								"titles": [
+									{
+										"id": "Title-1",
+										"size": 15,
+										"text": "Invoices saved as concept"
+									}
+								],
+								"dataProvider": [
+									{
+										"category": "",
+										"graph 1": conceptInvoices
+									}
+								]
+							}
+						);
+					}
 
 					$("#home").css("margin-bottom", "40px");
 				}
 
 				//-----------------------------------------------------------------
 				//Chart two of two
-				if (paidCount >= 0 && unpaidCount >= 0) {
-					AmCharts.makeChart("admin_chartdiv2",
-						{
-							"type": "serial",
-							"categoryField": "category",
-							"columnSpacing": 15,
-							"columnWidth": 0.5,
-							"depth3D": 3,
-							"startDuration": 2,
-							"startEffect": "bounce",
-							"autoDisplay": true,
-							"theme": "light",
-							"categoryAxis": {
-								"gridPosition": "start",
-								"title": "",
-								"titleFontSize": 11
-							},
-							"trendLines": [],
-							"graphs": [
-								{
-									"balloonText": "Invoices collected[[category]]: [[value]]",
-									"fillAlphas": 1,
-									"id": "AmGraph-1",
-									"title": "Collected",
-									"type": "column",
-									"valueField": "Collected"
+				if (paidCount >= 0 && unpaidCount > 0) {
+					if ($("#admin_chartdiv2").empty()) {
+						AmCharts.makeChart("admin_chartdiv2",
+							{
+								"type": "serial",
+								"categoryField": "category",
+								"columnSpacing": 15,
+								"columnWidth": 0.5,
+								"depth3D": 8,
+								"startDuration": 2,
+								"startEffect": "bounce",
+								"autoDisplay": true,
+								"theme": "light",
+								"categoryAxis": {
+									"gridPosition": "start",
+									"title": "",
+									"titleFontSize": 11,
+									"labelsEnabled": false,
+									"gridCount": 0,
+									"gridThickness": 0,
+									"tickLength": 0,
+									"axisColor": "#A4A4A4"
 								},
-								{
-									"balloonText": "Invoices due[[category]]: [[value]]",
-									"fillAlphas": 1,
-									"id": "AmGraph-2",
-									"title": "Due",
-									"type": "column",
-									"valueField": "Due"
-								}
-							],
-							"guides": [],
-							"valueAxes": [
-								{
-									"id": "ValueAxis-1",
-									"title": "Amount of invoices"
-								}
-							],
-							"allLabels": [],
-							"balloon": {
-								"borderThickness": 0
-							},
-							"legend": {
-								"enabled": true,
-								"align": "center",
-								"maxColumns": 2,
-								"useGraphSettings": true,
-								"valueWidth": 40
-							},
-							"titles": [
-								{
-									"id": "Title-1",
-									"size": 15,
-									"text": "Invoices collected"
-								}
-							],
-							"dataProvider": [
-								{
-									"category": "",
-									"Due": unpaidCount,
-									"Collected": paidCount
-								}
-							]
-						}
-					);
+								"trendLines": [],
+								"graphs": [
+									{
+										"balloonText": "Invoices collected[[category]]: [[value]]",
+										"fillAlphas": 1,
+										"id": "AmGraph-1",
+										"labelText": "Collected",
+										"labelOffset": 12,
+										"title": "Collected",
+										"type": "column",
+										"valueField": "Collected"
+									},
+									{
+										"balloonText": "Invoices due[[category]]: [[value]]",
+										"fillAlphas": 1,
+										"id": "AmGraph-2",
+										"labelText": "Due",
+										"labelOffset": 12,
+										"title": "Due",
+										"type": "column",
+										"valueField": "Due"
+									}
+								],
+								"guides": [],
+								"valueAxes": [
+									{
+										"id": "ValueAxis-1",
+										"title": "",
+										"integersOnly": true,
+										"gridCount": 0,
+										"gridThickness": 0,
+										"labelsEnabled": false,
+										"axisThickness": 0
+									}
+								],
+								"allLabels": [],
+								"balloon": {
+									"borderThickness": 0
+								},
+								"titles": [
+									{
+										"id": "Title-1",
+										"size": 15,
+										"text": "Invoices collected"
+									}
+								],
+								"dataProvider": [
+									{
+										"category": "",
+										"Due": unpaidCount,
+										"Collected": paidCount
+									}
+								]
+							}
+						);
+					} else if ($("#admin_chartdiv").empty()){ 
+						AmCharts.makeChart("admin_chartdiv",
+							{
+								"type": "serial",
+								"categoryField": "category",
+								"columnSpacing": 15,
+								"columnWidth": 0.5,
+								"depth3D": 8,
+								"startDuration": 2,
+								"startEffect": "bounce",
+								"autoDisplay": true,
+								"theme": "light",
+								"categoryAxis": {
+									"gridPosition": "start",
+									"title": "",
+									"titleFontSize": 11,
+									"labelsEnabled": false,
+									"gridCount": 0,
+									"gridThickness": 0,
+									"tickLength": 0,
+									"axisColor": "#A4A4A4"
+								},
+								"trendLines": [],
+								"graphs": [
+									{
+										"balloonText": "Invoices collected[[category]]: [[value]]",
+										"fillAlphas": 1,
+										"id": "AmGraph-1",
+										"labelText": "Collected",
+										"labelOffset": 12,
+										"title": "Collected",
+										"type": "column",
+										"valueField": "Collected"
+									},
+									{
+										"balloonText": "Invoices due[[category]]: [[value]]",
+										"fillAlphas": 1,
+										"id": "AmGraph-2",
+										"labelText": "Due",
+										"labelOffset": 12,
+										"title": "Due",
+										"type": "column",
+										"valueField": "Due"
+									}
+								],
+								"guides": [],
+								"valueAxes": [
+									{
+										"id": "ValueAxis-1",
+										"title": "",
+										"integersOnly": true,
+										"gridCount": 0,
+										"gridThickness": 0,
+										"labelsEnabled": false,
+										"axisThickness": 0
+									}
+								],
+								"allLabels": [],
+								"balloon": {
+									"borderThickness": 0
+								},
+								"titles": [
+									{
+										"id": "Title-1",
+										"size": 15,
+										"text": "Invoices collected"
+									}
+								],
+								"dataProvider": [
+									{
+										"category": "",
+										"Due": unpaidCount,
+										"Collected": paidCount
+									}
+								]
+							}
+						);
+					}
 
 					$("#home").css("margin-bottom", "40px");
 				}
+
             }
         }
     </script>
