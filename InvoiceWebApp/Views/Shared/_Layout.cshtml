@@ -9,11 +9,13 @@
 
 	//Check for user
 	if (SessionHelper.IsExists(Context.Session, "User")) {
+		admin = null;
 		user = (User) Context.Session.Get<User>("User");
 	}
 
 	//Check for admin
 	if (SessionHelper.IsExists(Context.Session, "Admin")) {
+		user = null;
 		admin = (Admin) Context.Session.Get<Admin>("Admin");
 	}
 
@@ -94,7 +96,7 @@
 			
 
 			<!--Check if admin exist-->
-			@if (admin != null) {
+			@if (user == null && admin != null) {
                 <!--Debtors-->
 				<li class="">
 					<ul class="collapsible collapsible-accordion">
@@ -160,7 +162,7 @@
 
 
 			<!--Check if user exist-->
-			@if (user != null) {
+			@if (admin == null && user != null) {
                 <!--My Invoices-->
 				<li class="@(ViewBag.Current == "MyInvoices" ? "active" : "")">
 					<a asp-area="" asp-controller="MyInvoices" asp-action="Index">Invoices</a>
@@ -173,7 +175,7 @@
 			</li>
 
 			<!--Settings button-->
-			@if (admin != null) {
+			@if (user == null && admin != null) {
 				<li class="@(ViewBag.Current == "Settings" ? "active" : "")">
 					<a id="settings-btn" asp-controller="Admins" asp-action="Settings"
 					   class="btn-flat waves-effect waves-default tooltipped"
@@ -198,7 +200,7 @@
 		</a>
 
 		<!--Navbar brand-->
-		@if (user != null) {
+		@if (admin == null && user != null) {
 			<a class="brand-logo right" asp-controller="Home" asp-action="Index"
 			   asp-route-email="@(user.Email)">
 				<!--BEGIN OF LOGO-->
@@ -211,7 +213,7 @@
 				<!--END OF LOGO-->
 			</a>
 		}
-		@if (admin != null) {
+		else if (admin != null && user == null) {
 			<a class="brand-logo right" asp-controller="Home" asp-action="Index"
 			   asp-route-email="@(admin.Email)">
 				<!--BEGIN OF LOGO-->

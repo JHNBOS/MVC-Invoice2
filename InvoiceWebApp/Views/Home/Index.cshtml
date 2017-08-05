@@ -100,18 +100,20 @@
 			var divHeight = $("#home").height();
 
 			//Hide charts
-			$("#chartdiv").show();
-			$("#admin_chartdiv").show();
-			$("#admin_chartdiv2").show();
+			$("#chartdiv").hide();
+			$("#admin_chartdiv").hide();
+			$("#admin_chartdiv2").hide();
 
             @if (user != null) {
                 <text>
+					admin = null;
                     user = "@user.Email";
                 </text>
             }
             @if (admin != null) {
                 <text>
-                    admin = "@admin.Email";
+					user = null;
+					admin = "@admin.Email";
                 </text>
             }
 
@@ -270,13 +272,13 @@
             }
             @if (ViewBag.finalCount == 1) {
                 <text>
-					finalText += "You have 1 invoice.";
+					finalText += "There is currently 1 invoice.";
 					showCharts = true;
                 </text>
             }
             @if (ViewBag.finalCount > 1) {
                 <text>
-					finalText += "You have @(ViewBag.finalCount) invoices.";
+					finalText += "There are currently @(ViewBag.finalCount) invoices.";
 					showCharts = true;
                 </text>
             }
@@ -284,17 +286,17 @@
 			@*Concept invoice text*@
             @if (ViewBag.conceptCount == 0){
                 <text>
-					conceptText += "<br /> You have no invoices saved as 'concept'.";
+					conceptText += "<br /> There are no invoices saved as 'concept'.";
                 </text>
             }
             @if (ViewBag.conceptCount == 1) {
                 <text>
-					conceptText += "<br /> You have 1 invoice saved as 'concept'.";
+					conceptText += "<br /> There is 1 invoice saved as 'concept'.";
                 </text>
             }
             @if (ViewBag.conceptCount > 1) {
                 <text>
-					conceptText += "<br /> You have @(ViewBag.conceptCount) invoices saved as 'concept'.";
+					conceptText += "<br /> There are @(ViewBag.conceptCount) invoices saved as 'concept'.";
                 </text>
             }
 
@@ -369,21 +371,16 @@
 								"categoryField": "category",
 								"rotate": true,
 								"depth3D": 8,
+								"angle": 40,
 								"colors": [
-									"#67b7dc",
-									"#fdd400",
-									"#84b761",
-									"#cc4748",
-									"#cd82ad",
-									"#2f4074",
-									"#448e4d",
-									"#b7b83f",
-									"#b9783f",
-									"#b93e3d",
-									"#913167"
+									"#eaa40b", //orange
 								],
-								"startDuration": 3,
+								"startEffect": "easeInSine",
+								"startDuration": 2,
 								"autoDisplay": true,
+								"plotAreaBorderAlpha": 0,
+								"plotAreaBorderColor": "#FFF9F9",
+								"plotAreaFillAlphas": 0,
 								"fontSize": 12,
 								"theme": "light",
 								"categoryAxis": {
@@ -471,7 +468,7 @@
 								"titles": [
 									{
 										"id": "Title-1",
-										"size": 15,
+										"size": 12,
 										"text": "Invoices saved as concept"
 									}
 								],
@@ -481,8 +478,7 @@
 										"graph 1": conceptInvoices
 									}
 								]
-							}
-						);
+							});
 					} else if ($("#admin_chartdiv2").empty()){ 
 						AmCharts.makeChart("admin_chartdiv2",
 							{
@@ -490,21 +486,16 @@
 								"categoryField": "category",
 								"rotate": true,
 								"depth3D": 8,
+								"angle": 40,
 								"colors": [
-									"#67b7dc",
-									"#fdd400",
-									"#84b761",
-									"#cc4748",
-									"#cd82ad",
-									"#2f4074",
-									"#448e4d",
-									"#b7b83f",
-									"#b9783f",
-									"#b93e3d",
-									"#913167"
+									"#eaa40b", //orange
 								],
-								"startDuration": 3,
+								"startEffect": "easeInSine",
+								"startDuration": 2,
 								"autoDisplay": true,
+								"plotAreaBorderAlpha": 0,
+								"plotAreaBorderColor": "#FFF9F9",
+								"plotAreaFillAlphas": 0,
 								"fontSize": 12,
 								"theme": "light",
 								"categoryAxis": {
@@ -592,7 +583,7 @@
 								"titles": [
 									{
 										"id": "Title-1",
-										"size": 15,
+										"size": 12,
 										"text": "Invoices saved as concept"
 									}
 								],
@@ -602,8 +593,7 @@
 										"graph 1": conceptInvoices
 									}
 								]
-							}
-						);
+							});
 					}
 
 					$("#home").css("margin-bottom", "40px");
@@ -617,12 +607,20 @@
 							{
 								"type": "serial",
 								"categoryField": "category",
+								"colors": [
+									"#00a1ff", //blue
+									"#8a11f4", //purple
+								],
 								"columnSpacing": 15,
 								"columnWidth": 0.5,
 								"depth3D": 8,
-								"startDuration": 2,
+								"angle": 40,
+								"startDuration": 4,
 								"startEffect": "bounce",
 								"autoDisplay": true,
+								"plotAreaBorderAlpha": 0,
+								"plotAreaBorderColor": "#FFF9F9",
+								"plotAreaFillAlphas": 0,
 								"theme": "light",
 								"categoryAxis": {
 									"gridPosition": "start",
@@ -676,7 +674,7 @@
 								"titles": [
 									{
 										"id": "Title-1",
-										"size": 15,
+										"size": 12,
 										"text": "Invoices collected"
 									}
 								],
@@ -694,12 +692,20 @@
 							{
 								"type": "serial",
 								"categoryField": "category",
+								"colors": [
+									"#00a1ff", //blue
+									"#8a11f4", //purple
+								],
 								"columnSpacing": 15,
 								"columnWidth": 0.5,
 								"depth3D": 8,
-								"startDuration": 2,
+								"angle": 40,
+								"startDuration": 4,
 								"startEffect": "bounce",
 								"autoDisplay": true,
+								"plotAreaBorderAlpha": 0,
+								"plotAreaBorderColor": "#FFF9F9",
+								"plotAreaFillAlphas": 0,
 								"theme": "light",
 								"categoryAxis": {
 									"gridPosition": "start",
@@ -753,7 +759,7 @@
 								"titles": [
 									{
 										"id": "Title-1",
-										"size": 15,
+										"size": 12,
 										"text": "Invoices collected"
 									}
 								],
