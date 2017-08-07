@@ -48,11 +48,11 @@
         <div class="row">
             <div class="col s12 col m12 center-align">
                 @if (user != null) {
-                    <h4 style="margin-top: 40px;text-transform:uppercase;">Welcome, @user.Debtor.FirstName</h4>
+                    <h4 style="margin-top: 0px;text-transform:uppercase;">Welcome, @user.Debtor.FirstName</h4>
                 } else if (admin != null) {
-                    <h4 style="margin-top: 40px;text-transform:uppercase;">Welcome, @admin.FirstName</h4>
+                    <h4 style="margin-top: 0px;text-transform:uppercase;">Welcome, @admin.FirstName</h4>
                 } else {
-                    <h4 style="margin-top: 40px;text-transform:uppercase;">Welcome</h4>
+                    <h4 style="margin-top: 0px;text-transform:uppercase;">Welcome</h4>
                 }
             </div>
         </div>
@@ -595,8 +595,6 @@
 								]
 							});
 					}
-
-					$("#home").css("margin-bottom", "40px");
 				}
 
 				//-----------------------------------------------------------------
@@ -773,8 +771,6 @@
 							}
 						);
 					}
-
-					$("#home").css("margin-bottom", "40px");
 				}
 
             }
