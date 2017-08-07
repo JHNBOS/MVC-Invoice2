@@ -357,8 +357,13 @@ namespace InvoiceWebApp.Controllers {
 
             //Remove session variables and return to login page
             HttpContext.Session.Remove("User");
-            HttpContext.Session.Remove("Admin");
-            return RedirectToAction("Login", "Users", new { area = "" });
+			HttpContext.Session.Remove("Admin");
+			HttpContext.Session.Clear();
+
+			Debug.WriteLine("User exists: " + HttpContext.Session.IsExists("User"));
+			Debug.WriteLine("Admin exists: " + HttpContext.Session.IsExists("Admin"));
+
+			return RedirectToAction("Login", "Users", new { email = "" });
         }
 
         //---------------------------------

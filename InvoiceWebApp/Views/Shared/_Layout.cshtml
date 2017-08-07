@@ -7,6 +7,14 @@
 	Admin admin = null;
 	AppSettings settings = null;
 
+	//If not logged in
+	if (!SessionHelper.IsExists(Context.Session, "User")
+		&& !SessionHelper.IsExists(Context.Session, "Admin"))
+	{
+		user = null;
+		admin = null;
+	}
+
 	//Check for user
 	if (SessionHelper.IsExists(Context.Session, "User")) {
 		admin = null;
@@ -83,12 +91,14 @@
 					<a asp-area="" asp-controller="Home" asp-route-email="@(user.Email)"
 					   asp-action="Index">Home</a>
 				</li>
-			} else if (admin != null) {
+			} 
+			@if (admin != null) {
 				<li class="@(ViewBag.Current == "Home" ? "active" : "")">
 					<a asp-area="" asp-controller="Home" asp-route-email="@(admin.Email)"
 					   asp-action="Index">Home</a>
 				</li>
-			} else {
+			}
+			@if (admin == null && user == null){
 				<li class="@(ViewBag.Current == "Home" ? "active" : "")">
 					<a asp-area="" asp-controller="Home" asp-action="Index">Home</a>
 				</li>
@@ -96,7 +106,7 @@
 			
 
 			<!--Check if admin exist-->
-			@if (user == null && admin != null) {
+			@if (admin != null) {
                 <!--Debtors-->
 				<li class="">
 					<ul class="collapsible collapsible-accordion">
@@ -162,7 +172,7 @@
 
 
 			<!--Check if user exist-->
-			@if (admin == null && user != null) {
+			@if (user != null) {
                 <!--My Invoices-->
 				<li class="@(ViewBag.Current == "MyInvoices" ? "active" : "")">
 					<a asp-area="" asp-controller="MyInvoices" asp-action="Index">Invoices</a>
@@ -175,7 +185,7 @@
 			</li>
 
 			<!--Settings button-->
-			@if (user == null && admin != null) {
+			@if (admin != null) {
 				<li class="@(ViewBag.Current == "Settings" ? "active" : "")">
 					<a id="settings-btn" asp-controller="Admins" asp-action="Settings"
 					   class="btn-flat waves-effect waves-default tooltipped"
@@ -200,7 +210,7 @@
 		</a>
 
 		<!--Navbar brand-->
-		@if (admin == null && user != null) {
+		@if (user != null) {
 			<a class="brand-logo right" asp-controller="Home" asp-action="Index"
 			   asp-route-email="@(user.Email)">
 				<!--BEGIN OF LOGO-->
@@ -213,7 +223,7 @@
 				<!--END OF LOGO-->
 			</a>
 		}
-		else if (admin != null && user == null) {
+		@if (admin != null && user == null) {
 			<a class="brand-logo right" asp-controller="Home" asp-action="Index"
 			   asp-route-email="@(admin.Email)">
 				<!--BEGIN OF LOGO-->
@@ -225,7 +235,8 @@
 				}
 				<!--END OF LOGO-->
 			</a>
-		} else {
+		}
+		@if(admin == null && user == null){
 			<a class="brand-logo right" asp-controller="Home" asp-action="Index"
 			   asp-route-email="">
 				<!--BEGIN OF LOGO-->
@@ -294,8 +305,8 @@
     <script>
         $(document).ready(() => {
 			$(".button-collapse").sideNav({
-				menuWidth: 210, 
-				edge: "left", 
+				menuWidth: 210,
+				edge: "left",
 				closeOnClick: true
 			});
             $(".collapsible").collapsible();
@@ -310,9 +321,15 @@
                     isLoggedIn = true;
                 </text>
             }
+			@if (user == null && admin == null)
+			{
+				<text>
+                    isLoggedIn = false;
+                </text>
+			}
 
-            //Account button non-mobile
-            if (isLoggedIn == true && width > 768) {
+			//Account button non-mobile
+			if (isLoggedIn == true && width > 768) {
 				//Set background color
 				button.css("background", "#e53935", "important");
 
@@ -321,12 +338,12 @@
 				button.text("Sign out");
 
 				//Set tooltip
-                button.attr("data-tooltip", "Sign out");
-                button.tooltip();
+				button.attr("data-tooltip", "Sign out");
+				button.tooltip();
 
 				//Set location attribute
-                button.attr("onclick", "location.href='@Url.Action("Logout", "Users")'");
-            } else if (isLoggedIn == false && width > 768) {
+				button.attr("href", "/Users/Logout");
+			} else if (isLoggedIn == false && width > 768) {
 				//Set background color
 				button.css("background", "#64dd17", "important");
 
@@ -339,12 +356,12 @@
 				button.tooltip();
 
 				//Set location attribute
-                button.attr("onclick", "location.href='@Url.Action("Login", "Users")'");
-            }
+				button.attr("href", "/Users/Login");
+			}
 
             //Change color of navbar links to black when scrolling
 			/*
-            $(window).scroll(() => { 
+            $(window).scroll(() => {
                 if ($(window).scrollTop() >= 45) {
                     //$("nav ul a").css("color", "#000");
                     $("nav").css("background", "rgba(86, 91, 141, 0.6)")

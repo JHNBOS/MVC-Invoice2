@@ -273,6 +273,8 @@ namespace InvoiceWebApp.Migrations
                     b.Property<int>("InvoiceNumber")
                         .ValueGeneratedOnAdd();
 
+                    b.Property<string>("Comments");
+
                     b.Property<int?>("CompanyID");
 
                     b.Property<DateTime>("CreatedOn");

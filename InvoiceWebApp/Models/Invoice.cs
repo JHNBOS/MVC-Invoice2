@@ -41,7 +41,9 @@ namespace InvoiceWebApp.Models {
 
         public bool Paid { get; set; }
 
-        public virtual Debtor Debtor { get; set; }
+		public string Comments { get; set; }
+
+		public virtual Debtor Debtor { get; set; }
         public virtual Company Company { get; set; }
         public virtual List<InvoiceItem> InvoiceItems { get; set; }
     }

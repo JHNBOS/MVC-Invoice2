@@ -32,13 +32,17 @@
 
                             <div class="row" id="debtor-row">
                                 <div class="input-field col s12 col m12 col l6">
-                                    <label for="select_debtor" style="top:-15px;font-size:12px;left:60px;">Choose Debtor</label>
+                                    <label for="select_debtor" style="top:-15px;font-size:12px;left:60px;">
+										Choose Debtor
+									</label>
                                     <i class="material-icons prefix">person</i>
                                     @Html.DropDownListFor(m => m.DebtorID, (SelectList)ViewBag.DebtorID,
                                                 "Choose debtor", new { @id = "select_debtor", @class = "chosen-select" })
                                 </div>
                                 <div class="input-field col s12 col m12 col l6">
-                                    <label for="select_company" style="top:-15px;font-size:12px;left:60px;">Choose Company</label>
+                                    <label for="select_company" style="top:-15px;font-size:12px;left:60px;">
+										Choose Company
+									</label>
                                     <i class="material-icons prefix">business</i>
                                     @Html.DropDownListFor(m => m.CompanyID, (SelectList) ViewBag.CompanyID,
                                                 "Choose company", new { @id = "select_company", @class = "chosen-select" })
@@ -94,6 +98,17 @@
                                     <label id="total-label" for="total" style="font-size:.8rem;position:absolute;top:-7px;left:13px;">Total</label>
                                 </div>
                             </div>
+
+							<div class="row">
+								<div class="input-field col s12 col m12 col l6">
+									<i class="material-icons prefix">comment</i>
+									<textarea id="icon_comment" class="materialize-textarea" asp-for="Comments"></textarea>
+									<label for="icon_comment">Comments</label>
+								</div>
+
+								<div class="input-field col s12 col m12 col l6">
+								</div>
+							</div>
 
                         </fieldset>
                     </div>

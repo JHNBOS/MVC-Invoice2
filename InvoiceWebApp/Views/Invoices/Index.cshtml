@@ -110,11 +110,15 @@
                                 @Html.DisplayFor(modelItem => item.Type)
                             </td>
                             <td>
-                                @if (item.Paid == true) {
-                                    @Html.Raw("Yes")
-                                } else {
-                                    @Html.Raw("No")
-                                }
+								@if (DateTime.Now >= item.ExpirationDate)
+								{
+									@Html.Raw("<span style=color:red;font-weight:bold;>"
+											+ "Late</span>")
+								} else if (item.Paid == true) {
+                                    @Html.Raw("<span style=color:green;font-weight:bold;>Yes</span>")
+								} else {
+                                    @Html.Raw("<b>No<b>")
+								}
                             </td>
                             <td>
                                 @Html.Raw(String.Format("{0:C2}", item.Total))

@@ -322,7 +322,7 @@ namespace InvoiceWebApp.Controllers {
             HttpContext.Session.Remove("Admin");
             HttpContext.Session.Remove("User");
             return RedirectToAction("Login", "Admins", new { area = "" });
-        }
+		}
 
         //---------------------------------
 

@@ -166,8 +166,10 @@ namespace InvoiceWebApp.Controllers {
                     invoiceBeforeUpdate.ExpirationDate = invoice.ExpirationDate;
                     invoiceBeforeUpdate.Type = invoice.Type;
                     invoiceBeforeUpdate.Total = decimal.Parse(total);
+					invoiceBeforeUpdate.Comments = invoice.Comments;
 
-                    _context.Update(invoiceBeforeUpdate);
+
+					_context.Update(invoiceBeforeUpdate);
                     _context.InvoiceItems.RemoveRange(_context.InvoiceItems.Where(s => s.InvoiceNumber == invoice.InvoiceNumber));
                     _context.SaveChanges();
 
@@ -406,7 +408,7 @@ namespace InvoiceWebApp.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create(
-            [Bind("InvoiceNumber,CreatedOn,DebtorID,CompanyID,Paid,ExpirationDate,Type,Discount")] Invoice invoice,
+            [Bind("InvoiceNumber,CreatedOn,DebtorID,CompanyID,Paid,ExpirationDate,Type,Discount,Comments")] Invoice invoice,
             string total, string pids, string amounts) {
 
             if (ModelState.IsValid) {
@@ -547,7 +549,7 @@ namespace InvoiceWebApp.Controllers {
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id,
-            [Bind("InvoiceNumber,CreatedOn,DebtorID,CompanyID,Paid,ExpirationDate,Type,Discount")] Invoice invoice,
+            [Bind("InvoiceNumber,CreatedOn,DebtorID,CompanyID,Paid,ExpirationDate,Type,Discount,Comments")] Invoice invoice,
             string pids, string amounts, string total) {
 
             if (id != invoice.InvoiceNumber) {
