@@ -447,7 +447,7 @@ namespace InvoiceWebApp.Controllers {
 
                 Admin currentAdmin = SessionHelper.Get<Admin>(this.HttpContext.Session, "Admin");
                 return RedirectToAction("Index", "Home", new { email = currentAdmin.Email });
-            }
+			}
 
             return View();
         }
