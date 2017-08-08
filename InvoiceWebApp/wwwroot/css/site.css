@@ -12,21 +12,7 @@
     * Buttons
     * Input
     * Chart
-    * Login and Forgot
     * Search Form
-
-    // Pages
-    * Page: Home
-    * Page: Settings
-    * Page: Debtor
-    * Page: Product
-    * Page: Company
-    * Page: Category
-    * Page: User
-    * Page: Admins
-    * Page: Invoice
-    * Page: My Invoice
-
     * Media Queries
 **/
 
@@ -34,20 +20,18 @@
     Body CSS
 -----------------------------------------------------------------------------------*/
 html, body {
-    position: relative;
-    height: 100%;
+	position: relative;
+	height: 100%;
 }
 
 body {
 	font-family: 'Overpass', sans-serif;
 	padding-bottom: 0px;
 	margin-bottom: 0px;
-
 	/* Sticky footer */
 	display: flex;
 	min-height: 100vh;
 	flex-direction: column;
-
 	/* Background */
 	background: #5f2c82; /* fallback for old browsers */
 	background: -webkit-linear-gradient(to right, #49a09d, #5f2c82); /* Chrome 10-25, Safari 5.1-6 */
@@ -62,80 +46,85 @@ main {
     Default CSS
 -----------------------------------------------------------------------------------*/
 .body-content {
-    padding-left: 65px;
-    padding-right: 65px;
-    width: 100%;
-    margin: 3% auto;
-    min-height: calc(100% - 154px);
+	padding-left: 65px;
+	padding-right: 65px;
+	width: 100%;
+	margin: 3% auto;
+	min-height: calc(100% - 154px);
 }
 
 input,
 select,
 textarea {
-    max-width: 280px;
+	max-width: 280px;
 }
 
 .carousel-caption p {
-    font-size: 20px;
-    line-height: 1.4;
+	font-size: 20px;
+	line-height: 1.4;
 }
 
 .btn-bracketed::before {
-    display: inline-block;
-    content: "[";
-    padding-right: 0.5em;
+	display: inline-block;
+	content: "[";
+	padding-right: 0.5em;
 }
 
 .btn-bracketed::after {
-    display: inline-block;
-    content: "]";
-    padding-left: 0.5em;
+	display: inline-block;
+	content: "]";
+	padding-left: 0.5em;
 }
 
 .carousel-inner .item img[src$=".svg"] {
-    width: 100%;
+	width: 100%;
 }
 
 @media screen and (max-width: 767px) {
-    .carousel-caption {
-        display: none;
-    }
+	.carousel-caption {
+		display: none;
+	}
+
+	.body-content {
+		padding-left: 8px;
+		padding-right: 8px;
+		width: 100%;
+		margin: 3% auto;
+	}
 }
 
 /*-----------------------------------------------------------------------------------
     Navigation CSS
 -----------------------------------------------------------------------------------*/
 nav {
-    background: rgba(255, 255, 255, 0.25);
-
-    /* Shadows */
-    box-shadow: 0px 7px 18px -6px rgba(0,0,0,0.66);
-    -webkit-box-shadow: 0px 7px 18px -6px rgba(0,0,0,0.66);
-    -moz-box-shadow: 0px 7px 18px -6px rgba(0,0,0,0.66);
-
-    /* Background transition*/
-    -webkit-transition: background-color .7s;
-    -ms-transition: background-color .7s;
-    transition: background-color .7s;
+	background: rgba(255, 255, 255, 0.25);
+	/* Shadows */
+	box-shadow: 0px 7px 18px -6px rgba(0,0,0,0.66);
+	-webkit-box-shadow: 0px 7px 18px -6px rgba(0,0,0,0.66);
+	-moz-box-shadow: 0px 7px 18px -6px rgba(0,0,0,0.66);
+	/* Background transition*/
+	-webkit-transition: background-color .7s;
+	-ms-transition: background-color .7s;
+	transition: background-color .7s;
 }
 
 nav .nav-wrapper {
-    width: 94%;
-    margin: auto;
+	width: 94%;
+	margin: auto;
 }
 
 nav .brand-logo {
-    font-family: 'Montserrat', Raleway, sans-serif;
-    font-weight: 100 !important;
+	font-family: 'Montserrat', Raleway, sans-serif;
+	font-weight: 100 !important;
 }
 
 nav .brand-logo.right {
-    padding-right: 25px;
+	padding-right: 25px;
 }
 
 nav .brand-logo img {
-    vertical-align: middle;
-    padding-bottom: 10px;
+	vertical-align: middle;
+	padding-bottom: 10px;
 }
 
 /*Menu item*/
@@ -165,6 +154,7 @@ nav .brand-logo img {
 	border-top: 1px solid rgba(14, 109, 191, 0.0);
 	border-bottom: 1px solid rgba(14, 109, 191, 0.0);
 }
+
 /*Active menu item*/
 .side-nav li.active {
 	background-color: rgba(0,0,0,0.05);
@@ -202,14 +192,14 @@ nav .brand-logo img {
 
 /*Menu item*/
 nav ul a {
-    -webkit-transition: background-color .3s;
-    -ms-transition: background-color .3s;
-    transition: background-color .3s;
-    font-size: 14px;
-    color: #FFF;
-    display: block;
-    padding: 0 12px;
-    cursor: pointer;
+	-webkit-transition: background-color .3s;
+	-ms-transition: background-color .3s;
+	transition: background-color .3s;
+	font-size: 14px;
+	color: #FFF;
+	display: block;
+	padding: 0 12px;
+	cursor: pointer;
 }
 
 #settings-btn {
@@ -267,7 +257,7 @@ nav ul a {
 }
 
 #sidenav-overlay {
-    z-index: 996;
+	z-index: 996;
 }
 
 .side-nav .collapsible-body li a, .side-nav.fixed .collapsible-body li a {
@@ -276,44 +266,49 @@ nav ul a {
 	background-color: #efefef;
 }
 
-.side-nav .collapsible-body > ul:not(.collapsible) > li.active a, 
+.side-nav .collapsible-body > ul:not(.collapsible) > li.active a,
 .side-nav.fixed .collapsible-body > ul:not(.collapsible) > li.active a {
-    color: #6e1abb;
-    font-weight: bold;
+	color: #6e1abb;
+	font-weight: bold;
 }
 
 /*-----------------------------------------------------------------------------------
     Footer CSS
 -----------------------------------------------------------------------------------*/
 .page-footer {
-    height: 50px !important;
-    background: rgba(255, 255, 255, 0);
-    width: 100%;
+	height: 50px !important;
+	background: rgba(255, 255, 255, 0);
+	width: 100%;
 }
 
 .footer-copyright {
-    background: rgba(255, 255, 255, 0.25) !important;
-
-    /* Shadows */
-    box-shadow: 0px -7px 18px -6px rgba(0,0,0,0.66);
-    -webkit-box-shadow: 0px -7px 18px -6px rgba(0,0,0,0.66);
-    -moz-box-shadow: 0px -7px 18px -6px rgba(0,0,0,0.66);
+	background: rgba(255, 255, 255, 0.25) !important;
+	/* Shadows */
+	box-shadow: 0px -7px 18px -6px rgba(0,0,0,0.66);
+	-webkit-box-shadow: 0px -7px 18px -6px rgba(0,0,0,0.66);
+	-moz-box-shadow: 0px -7px 18px -6px rgba(0,0,0,0.66);
 }
 
 /*-----------------------------------------------------------------------------------
     Title CSS
 -----------------------------------------------------------------------------------*/
 h4 {
-    font-family: 'Overpass';
-    font-weight: 600;
+	font-family: 'Overpass';
+	font-weight: 600;
+}
+
+@media screen and (max-width: 767px) {
+	.section h4 {
+		font-size: 25px !important;
+	}
 }
 
 /*-----------------------------------------------------------------------------------
     Table CSS
 -----------------------------------------------------------------------------------*/
 .responsive-table {
-    width: 90%;
-    margin: 0 auto;
+	width: 90%;
+	margin: 0 auto;
 }
 
 /*-----------------------------------------------------------------------------------
@@ -328,1091 +323,230 @@ fieldset {
 }
 
 legend {
-    font-family: 'Lato';
-    font-weight: 300;
-    padding: 4px 10px 4px 8px;
+	font-family: 'Lato';
+	font-weight: 300;
+	padding: 4px 10px 4px 8px;
+}
+
+@media screen and (max-width: 767px) {
+	fieldset {
+		width: 100%;
+		margin: 0 auto;
+		padding: 10px 10px;
+	}
 }
 
 /*-----------------------------------------------------------------------------------
     Buttons CSS
 -----------------------------------------------------------------------------------*/
 #button-area {
-    margin-right: 5%;
-    margin-top: 15px;
-    float: right;
-    text-align: right;
+	margin-right: 5%;
+	margin-top: 15px;
+	float: right;
 }
 
 #button-area a {
-    font-size: 17px;
-    padding-left: 0px;
-    position: relative;
-    left: -18px;
+	font-size: 15px;
+	font-weight: bold;
+	display: block;
 }
 
 #button-field {
-    white-space: nowrap;
+	white-space: nowrap;
+}
+
+@media screen and (max-width: 767px) {
+	#button-area {
+		float: none;
+		margin-right: 0;
+	}
+
+	#button-area button {
+		width: 100%;
+	}
+
+	#button-area button i {
+		display: none;
+	}
+
+	#button-area a {
+		font-size: 15px;
+		font-weight: bold;
+		display: block;
+		text-align: center;
+	}
+
+	#button-field {
+		white-space: normal;
+	}
 }
 
 /*-----------------------------------------------------------------------------------
     Input CSS
 -----------------------------------------------------------------------------------*/
 input, select, textarea, input[type=date]:not(.browser-default) {
-    max-width: 100%;
+	max-width: 100%;
 }
 
 ::-webkit-input-placeholder {
-    color: #9a9a9a;
+	color: #9a9a9a;
 }
 
 ::-webkit-input-placeholder:focus {
-    color: #2b2b2b;
+	color: #2b2b2b;
 }
 
 input[type=email]:focus:not([readonly]) {
-    border-bottom: 1px solid #7cb342;
-    box-shadow: 0 1px 0 0 #7cb342;
+	border-bottom: 1px solid #7cb342;
+	box-shadow: 0 1px 0 0 #7cb342;
 }
 
 input[type=email]:focus:not([readonly]) + label {
-    color: #2b2b2b;
+	color: #2b2b2b;
 }
 
 input[type=number]:not(.browser-default):disabled {
-    color: #2b2b2b;
-    border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
+	color: #2b2b2b;
+	border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
 }
 
 input[type=number]:not(.browser-default):disabled + label {
-    color: #9e9e9e;
+	color: #9e9e9e;
 }
 
 .input-field input[type=text]:focus + label {
-    color: #2b2b2b;
+	color: #2b2b2b;
 }
 
 .input-field input[type=text]:focus {
-    border-bottom: 1px solid #7cb342;
-    box-shadow: 0 1px 0 0 #7cb342;
+	border-bottom: 1px solid #7cb342;
+	box-shadow: 0 1px 0 0 #7cb342;
 }
 
 .input-field input[type=text].valid {
-    border-bottom: 1px solid #7cb342;
-    box-shadow: 0 1px 0 0 #7cb342;
+	border-bottom: 1px solid #7cb342;
+	box-shadow: 0 1px 0 0 #7cb342;
 }
 
 .input-field input[type=text].invalid {
-    border-bottom: 1px solid #E23834;
-    box-shadow: 0 1px 0 0 #E23834;
+	border-bottom: 1px solid #E23834;
+	box-shadow: 0 1px 0 0 #E23834;
 }
 
 .input-field .prefix.active {
-    color: #7cb342;
+	color: #7cb342;
 }
 
 input[type="checkbox"]:checked + label:before {
-    border-right: 5px solid #7cb342;
-    border-bottom: 5px solid #7cb342;
+	border-right: 5px solid #7cb342;
+	border-bottom: 5px solid #7cb342;
 }
 
 .select-dropdown {
-    max-width: 100%;
+	max-width: 100%;
+}
+
+@media screen and (max-width: 767px) {
+	input, select, textarea, input[type=date]:not(.browser-default) {
+		max-width: 75%;
+	}
+
+	.select-wrapper {
+		max-width: 75%;
+	}
 }
 
 /*-----------------------------------------------------------------------------------
     Chart CSS
 -----------------------------------------------------------------------------------*/
 .amcharts-chart-div > a {
-    display: none !important;
-}
-
-/*-----------------------------------------------------------------------------------
-    Page: Login and Forgot
------------------------------------------------------------------------------------*/
-#login-row, #forgot-row {
-    width: 100%;
-    margin-bottom: 0px;
-}
-
-#login-form, #forgot-form {
-    background-color: rgba(255, 255, 255, 0.85);
-    border: 1px solid #616161;
-    padding: 50px 44px 20px 44px;
-    margin: 0 auto;
-    position: relative;
-    /* Shadow */
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
-}
-
-#login-button, #forgot-button {
-    width: 60%;
-	margin: 10px auto 6px auto;
-}
-
-#login-button:hover, #forgot-button:hover {
-    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
-}
-
-#forgot-link, #login-link {
-	font-weight: bold;
-	display: block;
-}
-
-@media screen and (max-width: 767px) and (min-width: 641px) {
-	#login-form input, select, textarea, input[type=date]:not(.browser-default) {
-		max-width: 90% !important;
-	}
-
-	#forgot-form input, select, textarea, input[type=date]:not(.browser-default) {
-		max-width: 90% !important;
-	}
-}
-@media screen and (max-width: 768px) {
-	#login-form, #forgot-form {
-		padding: 35px 29px 5px 29px;
-	}
+	display: none !important;
 }
 
 /*-----------------------------------------------------------------------------------
     Search Form CSS
 -----------------------------------------------------------------------------------*/
 #search-form {
-    text-align: right;
+	text-align: right;
 }
 
 #searchQuery::-webkit-input-placeholder {
-    color: rgba(0, 0, 0, 0.5);
+	color: rgba(0, 0, 0, 0.5);
 }
 
-
-/*-----------------------------------------------------------------------------------
-    Pages: Home
------------------------------------------------------------------------------------*/
-#home {
-    padding: 40px 40px;
-    margin: 0 auto;
-    min-height: 250px;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.85);
-    border: 1px solid #616161;
-    /* Shadow */
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
-}
-
-/*----- Buttons --------------*/
-#home-button {
-    line-height: 50px;
-}
-
-#home-button:hover {
-    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 
-        0 3px 14px 2px rgba(0,0,0,0.12), 
-        0 5px 5px -3px rgba(0,0,0,0.3);
-}
-
-#home-button i {
-    padding-right: 15px;
-    position: relative;
-    top: 3px;
-}
-
-/*-----------------------------------------------------------------------------------
-    Pages: Contact
------------------------------------------------------------------------------------*/
-#contact {
-    padding: 40px 40px;
-    margin: 0 auto;
-    min-height: 250px;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.85);
-    border: 1px solid #616161;
-    /* Shadow */
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
-}
-
-/*-----------------------------------------------------------------------------------
-    Pages: Settings
------------------------------------------------------------------------------------*/
-#showImg {
-    margin-top: 25px;
-    max-height: 60%;
-    max-width: 60%;
-}
-
-#settings-admin fieldset {
-	margin: 10px auto;
-}
-
-#settings-admin .tabs {
-	height: 100%;
-	white-space: nowrap;
-	margin: 15px 0;
-	background-color: transparent;
-	overflow-x: hidden;
-	overflow-y: auto;
-	display: block;
-}
-
-#settings-admin .tab {
-	display: block;
-	width: 100%;
-	border-bottom: 1px solid #D0D0D0;
-}
-
-#settings-admin .tabs .tab {
-	height: 50px;
-	line-height: 50px;
-}
-
-#settings-admin .tabs .tab a {
-	color: #3949ab;
-	display: block;
-	width: 100%;
-	height: 100%;
-	padding: 0 24px;
-	font-size: 13px;
-	font-family: 'Lato', sans-serif;
-	text-overflow: ellipsis;
-	overflow: hidden;
-	transition: color .28s ease;
-}
-
-#settings-admin .tabs .tab a.active {
-	background-color: transparent;
-	color: #2b3984;
-	font-weight: bold;
-}
-
-#settings-admin .tab-content {
-	height: 310px;
-	width: 100%;
-	background-color: transparent;
-	border: 0px solid #FFF;
-}
-
-#settings-admin .indicator {
-	display: none;
-}
-
-/*----- Buttons --------------*/
-#save-settings-btn {
-	margin-top: 15px;
-	margin-bottom: 25px;
-	width: 170px;
-}
-
-#save-settings-btn:hover {
-	box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
-}
-
-#save-settings-btn > span {
-	height: 36px;
-	line-height: 40px;
-}
-
-@media screen and (min-width: 769px) and (max-width: 992px) {
-	#settings-admin .tabs .tab a {
-		color: #3949ab;
-		display: block;
-		width: 100%;
-		height: 100%;
-		padding: 0;
-		font-size: 13px;
-		font-family: 'Lato', sans-serif;
-		text-overflow: ellipsis;
-		overflow: hidden;
-		transition: color .28s ease;
-		padding-left: 0px;
-		padding-right: 0px;
+@media screen and (max-width: 767px) {
+	#search-form {
+		text-align: center;
 	}
-}
 
+	.responsive-table {
+		width: 100%;
+	}
 
-
-/*-----------------------------------------------------------------------------------
-    Pages: Debtor
------------------------------------------------------------------------------------*/
-#debtor-index,
-#create-debtor, #edit-debtor,
-#details-debtor, #remove-debtor {
-    padding: 40px 40px;
-    margin: 0 auto 40px auto;
-    min-height: 250px;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.85);
-    border: 1px solid #616161;
-    /* Shadow */
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
-}
-
-/*----- Buttons --------------*/
-#create-debtor-btn, #edit-debtor-btn,
-#change-debtor-btn, #remove-debtor-btn {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    width: 170px;
-}
-
-#create-debtor-btn:hover, #edit-debtor-btn:hover,
-#change-debtor-btn:hover, #remove-debtor-btn:hover {
-    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
-}
-
-#create-debtor-btn > span, #edit-debtor-btn > span,
-#change-debtor-btn > span, #remove-debtor-btn > span {
-    height: 36px;
-    line-height: 40px;
-}
-
-#add-debtor-btn, #search-debtor-btn {
-    margin-top: -5px;
-    width: 120px;
-    vertical-align: middle;
-}
-
-/*----- Input --------------*/
-/* Color of disabled input on detail and delete view*/
-#details-debtor input[type=text]:disabled,
-#remove-debtor input[type=text]:disabled,
-#details-debtor input[type=email]:disabled,
-#remove-debtor input[type=email]:disabled {
-    color: rgba(0, 0, 0, 0.65) !important;
-    border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
-}
-
-/* Label color of disabled on detail and delete view*/
-#details-debtor input[type=text]:disabled + label,
-#remove-debtor input[type=text]:disabled + label,
-#details-debtor input[type=email]:disabled + label,
-#remove-debtor input[type=email]:disabled + label {
-    color: rgba(0, 0, 0, 0.50) !important;
-}
-
-/*-----------------------------------------------------------------------------------
-    Pages: Product
------------------------------------------------------------------------------------*/
-#product-index,
-#create-product, #edit-product,
-#details-product, #remove-product {
-    padding: 40px 40px;
-    margin: 0 auto 40px auto;
-    min-height: 250px;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.85);
-    border: 1px solid #616161;
-    /* Shadow */
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
-}
-
-#products {
-    height: auto;
-    max-height: 300px;
-    overflow-y: scroll;
-    overflow-x: hidden;
-}
-
-/*----- Buttons --------------*/
-#create-product-btn, #edit-product-btn,
-#change-product-btn, #remove-product-btn {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    width: 170px;
-}
-
-#create-product-btn:hover, #edit-product-btn:hover,
-#change-product-btn:hover, #remove-product-btn:hover {
-    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
-}
-
-#create-product-btn > span, #edit-product-btn > span,
-#change-product-btn > span, #remove-product-btn > span {
-    height: 36px;
-    line-height: 40px;
-}
-
-#add-product-btn, #search-product-btn {
-    margin-top: -5px;
-    width: 120px;
-    vertical-align: middle;
-}
-
-/*----- Input --------------*/
-/* Color of disabled input on detail and delete view*/
-#details-product input[type=text]:disabled,
-#remove-product input[type=text]:disabled,
-#details-product input[type=email]:disabled,
-#remove-product input[type=email]:disabled,
-#details-product textarea:disabled,
-#remove-product textarea:disabled {
-    color: rgba(0, 0, 0, 0.65) !important;
-    border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
-}
-
-/* Label color of disabled on detail and delete view*/
-#details-product input[type=text]:disabled + label,
-#remove-product input[type=text]:disabled + label,
-#details-product input[type=email]:disabled + label,
-#remove-product input[type=email]:disabled + label,
-#details-product textarea:disabled + label,
-#remove-product textarea:disabled + label {
-    color: rgba(0, 0, 0, 0.50) !important;
-}
-
-#create-product form .input-field,
-#edit-product #form .input-field,
-#details-product form .input-field,
-#remove-product #form .input-field {
-    position: relative;
-    left: 3%;
-}
-
-/*-----------------------------------------------------------------------------------
-    Pages: Company
------------------------------------------------------------------------------------*/
-#company-index,
-#create-company, #edit-company,
-#details-company, #remove-company {
-    padding: 40px 40px;
-    margin: 0 auto 40px auto;
-    min-height: 250px;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.85);
-    border: 1px solid #616161;
-    /* Shadow */
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
-}
-
-/*----- Buttons --------------*/
-#create-company-btn, #edit-company-btn,
-#change-company-btn, #remove-company-btn {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    width: 170px;
-}
-
-#create-company-btn > span, 
-#edit-company-btn > span,
-#change-company-btn > span, 
-#remove-company-btn > span {
-    height: 36px;
-    line-height: 40px;
-}
-
-#add-company-btn, #search-company-btn {
-    margin-top: -5px;
-    width: 120px;
-    vertical-align: middle;
-}
-
-/*----- Input --------------*/
-/* Color of disabled input on detail and delete view*/
-#details-company input[type=text]:disabled, 
-#remove-company input[type=text]:disabled,
-#details-company input[type=email]:disabled, 
-#remove-company input[type=email]:disabled {
-    color: rgba(0, 0, 0, 0.65) !important;
-    border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
-}
-
-/* Label color of disabled on detail and delete view*/
-#details-company input[type=text]:disabled + label, 
-#remove-company input[type=text]:disabled + label,
-#details-company input[type=email]:disabled + label, 
-#remove-company input[type=email]:disabled + label {
-    color: rgba(0, 0, 0, 0.50) !important;
-}
-
-/*-----------------------------------------------------------------------------------
-    Pages: Category
------------------------------------------------------------------------------------*/
-#category-index,
-#create-category, #edit-category,
-#details-category, #remove-category {
-    padding: 40px 40px;
-    margin: 0 auto 40px auto;
-    min-height: 250px;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.85);
-    border: 1px solid #616161;
-    /* Shadow */
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
-}
-
-/*----- Buttons --------------*/
-#create-category-btn, #edit-category-btn,
-#change-category-btn, #remove-category-btn {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    width: 170px;
-}
-
-#create-category-btn > span,
-#edit-category-btn > span,
-#change-category-btn > span,
-#remove-category-btn > span {
-    height: 36px;
-    line-height: 40px;
-}
-
-#add-category-btn, #search-category-btn {
-    margin-top: -5px;
-    width: 120px;
-    vertical-align: middle;
-}
-
-/*----- Input --------------*/
-/* Color of disabled input on detail and delete view*/
-#details-category input[type=text]:disabled,
-#remove-category input[type=text]:disabled {
-    color: rgba(0, 0, 0, 0.65) !important;
-    border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
-}
-
-/* Label color of disabled on detail and delete view*/
-#details-category input[type=text]:disabled + label,
-#remove-category input[type=text]:disabled + label {
-    color: rgba(0, 0, 0, 0.50) !important;
-}
-
-/*-----------------------------------------------------------------------------------
-    Pages: User
------------------------------------------------------------------------------------*/
-#user-index,
-#create-user, #edit-user,
-#details-user, #remove-user {
-    padding: 40px 40px;
-    margin: 0 auto 40px auto;
-    min-height: 250px;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.85);
-    border: 1px solid #616161;
-    /* Shadow */
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
-}
-
-/*----- Buttons --------------*/
-#create-user-btn, #edit-user-btn,
-#change-user-btn, #remove-user-btn {
-    margin-top: 15px;
-    margin-bottom: 25px;
-    width: 170px;
-}
-
-#create-user-btn:hover, #edit-user-btn:hover,
-#change-user-btn:hover, #remove-user-btn:hover {
-    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
-}
-
-#create-user-btn > span, #edit-user-btn > span,
-#change-user-btn > span, #remove-user-btn > span {
-    height: 36px;
-    line-height: 40px;
-}
-
-#add-user-btn, #search-user-btn {
-    margin-top: -5px;
-    width: 120px;
-    vertical-align: middle;
-}
-
-/*----- Input --------------*/
-/* Color of disabled input on detail and delete view*/
-#details-user input[type=text]:disabled, 
-#remove-user input[type=text]:disabled, 
-#edit-user input[type=text]:disabled,
-#details-user input[type=email]:disabled, 
-#remove-user input[type=email]:disabled, 
-#edit-user input[type=email]:disabled,
-#details-user input[type=password]:disabled, 
-#remove-user input[type=password]:disabled, 
-#edit-user input[type=password]:disabled {
-    color: rgba(0, 0, 0, 0.65) !important;
-    border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
-}
-
-/* Label color of disabled on detail and delete view*/
-#details-user input[type=text]:disabled + label, 
-#remove-user input[type=text]:disabled + label, 
-#edit-user input[type=text]:disabled + label,
-#details-user input[type=email]:disabled + label, 
-#remove-user input[type=email]:disabled + label, 
-#edit-user input[type=email]:disabled + label,
-#details-user input[type=password]:disabled + label, 
-#remove-user input[type=password]:disabled + label, 
-#edit-user input[type=password]:disabled + label {
-    color: rgba(0, 0, 0, 0.50) !important;
-}
-
-/*-----------------------------------------------------------------------------------
-    Pages: Admin
------------------------------------------------------------------------------------*/
-#admin-index,
-#create-admin, #edit-admin,
-#details-admin, #remove-admin,
-#settings-admin {
-    padding: 40px 40px;
-    margin: 0 auto 40px auto;
-    min-height: 250px;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.85);
-    border: 1px solid #616161;
-    /* Shadow */
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
-}
-
-/*----- Buttons --------------*/
-#create-admin-btn, #edit-admin-btn,
-#change-admin-btn, #remove-admin-btn {
-    margin-top: 15px;
-    margin-bottom: 25px;
-    width: 170px;
-}
-
-#create-admin-btn:hover, #edit-admin-btn:hover,
-#change-admin-btn:hover, #remove-admin-btn:hover {
-    box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
-}
-
-#create-admin-btn > span, #edit-admin-btn > span,
-#change-admin-btn > span, #remove-admin-btn > span {
-    height: 36px;
-    line-height: 40px;
-}
-
-#add-admin-btn, #search-admin-btn {
-    margin-top: -5px;
-    width: 120px;
-    vertical-align: middle;
-}
-
-/*----- Input --------------*/
-/* Color of disabled input on detail and delete view*/
-#details-admin input[type=text]:disabled, #remove-admin input[type=text]:disabled,
-#details-admin input[type=email]:disabled, #remove-admin input[type=email]:disabled,
-#details-admin input[type=password]:disabled, #remove-admin input[type=password]:disabled {
-    color: rgba(0, 0, 0, 0.65) !important;
-    border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
-}
-
-/* Label color of disabled on detail and delete view*/
-#details-admin input[type=text]:disabled + label, #remove-admin input[type=text]:disabled + label,
-#details-admin input[type=email]:disabled + label, #remove-admin input[type=email]:disabled + label,
-#details-admin input[type=password]:disabled + label, #remove-admin input[type=password]:disabled + label {
-    color: rgba(0, 0, 0, 0.50) !important;
-}
-
-/*-----------------------------------------------------------------------------------
-    Pages: Invoice
------------------------------------------------------------------------------------*/
-#invoice-index {
-    padding: 40px 40px;
-    margin: 0 auto 40px auto;
-    min-height: 250px;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.85);
-    border: 1px solid #616161;
-    /* Shadow */
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
-}
-
-#create-invoice, #details-invoice,
-#edit-invoice, #remove-invoice {
-    padding: 40px 50px;
-    margin: 0 auto 40px auto;
-    min-height: 250px;
-    width: 100%;
-    background-color: #f1f1f1;
-    border: 1px solid #d0d0d0;
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-}
-
-/*----- Input --------------*/
-#_amount{
-    max-width: 100%;
-}
-
-/* Color of disabled input on detail and delete view*/
-#edit-invoice input[type=text]:disabled, #edit-invoice input[type=date]:disabled, #edit-invoice input:not([type]):disabled,
-#details-invoice input[type=text]:disabled, #details-invoice input[type=date]:disabled, #details-invoice input:not([type]):disabled,
-#remove-invoice input[type=text]:disabled, #remove-invoice input[type=date]:disabled, #remove-invoice input:not([type]):disabled {
-    color: rgba(0, 0, 0, 0.65) !important;
-    border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
-}
-
-/* Label color of disabled on detail and delete view*/
-#edit-invoice input[type=text]:disabled + label, #edit-invoice input[type=date]:disabled + label, #edit-invoice input:not([type]):disabled + label,
-#details-invoice input[type=text]:disabled + label, #details-invoice input[type=date]:disabled + label, #details-invoice input:not([type]):disabled + label,
-#remove-invoice input[type=text]:disabled + label, #remove-invoice input[type=date]:disabled + label, #remove-invoice input:not([type]):disabled + label {
-    color: rgba(0, 0, 0, 0.50) !important;
-}
-
-/*----- Buttons --------------*/
-#add-invoice-btn, #search-invoice-btn {
-    margin-top: -5px;
-    width: 120px;
-    vertical-align: middle;
-}
-
-#delete-row-btn {
-    margin-top: 10px;
-    padding-left: 15px;
-    padding-right: 15px;
-    float: right;
-}
-
-#create-invoice-btn, #edit-invoice-btn,
-#change-invoice-btn, #remove-invoice-btn {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    width: 170px;
-}
-
-#create-invoice-btn > span,
-#edit-invoice-btn > span,
-#change-invoice-btn > span,
-#remove-invoice-btn > span {
-    height: 36px;
-    line-height: 40px;
-}
-
-/*----- Labels --------------*/
-#total-label {
-    position: relative;
-    left: -36%;
-}
-
-/*-----------------------------------------------------------------------------------
-    Pages: My Invoice
------------------------------------------------------------------------------------*/
-#myinvoice-index {
-    padding: 40px 40px;
-    margin: 0 auto;
-    min-height: 250px;
-    width: 100%;
-    background-color: rgba(255, 255, 255, 0.85);
-    border: 1px solid #616161;
-    /* Shadow */
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
-    box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
-}
-
-#details-myinvoice {
-    padding: 40px 50px;
-    margin: 0 auto 40px auto;
-    min-height: 250px;
-    width: 100%;
-    background-color: #f1f1f1;
-    border: 1px solid #d0d0d0;
-    -webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    -moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-    box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
-}
-
-/*----- Buttons --------------*/
-#search-myinvoice-btn {
-    margin-top: -5px;
-    width: 160px;
-    vertical-align: middle;
-}
-
-#pay-invoice-btn {
-    margin-top: 15px;
-    margin-bottom: 15px;
-    width: 170px;
-}
-
-#pay-invoice-btn > span {
-    height: 36px;
-    line-height: 40px;
-}
-
-/*----- Input --------------*/
-#_amount {
-    max-width: 100%;
-}
-
-/* Color of disabled input on detail and delete view*/
-
-#details-myinvoice input[type=text]:disabled,
-#details-myinvoice input[type=date]:disabled,
-#details-myinvoice input:not([type]):disabled {
-    color: rgba(0, 0, 0, 0.65) !important;
-    border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
-}
-
-/* Label color of disabled on detail and delete view*/
-#details-myinvoice input[type=text]:disabled + label, 
-#details-myinvoice input[type=date]:disabled + label, 
-#details-myinvoice input:not([type]):disabled + label {
-    color: rgba(0, 0, 0, 0.50) !important;
+	#searchQuery {
+		position: relative;
+		left: 0%;
+		max-width: inherit !important;
+		margin: 0 auto;
+	}
 }
 
 /*-----------------------------------------------------------------------------------
     Media Queries
 -----------------------------------------------------------------------------------*/
 @media screen and (max-width: 640px) {
-    .row .col.s12 {
-        padding: 0 10px;
-    }
+	.row .col.s12 {
+		padding: 0 10px;
+	}
 
-    input, select, textarea, input[type=date]:not(.browser-default) {
-        max-width: 80%;
-    }
+	input, select, textarea, input[type=date]:not(.browser-default) {
+		max-width: 80%;
+	}
 
-    .select-wrapper {
-        max-width: 80%;
-    }
+	.select-wrapper {
+		max-width: 80%;
+	}
 }
 
 @media screen and (min-width: 641px) and (max-width: 767px) {
-    .body-content {
-        width: 100%;
-        margin: 0 auto;
-        padding-left: 7px;
-        padding-right: 7px;
-    }
+	/*------------ DEBTORS ---------------*/
+	#details-debtor form .row .input-field label,
+	#remove-debtor form .row .input-field label {
+		padding-left: 13% !important;
+	}
 
-    #search-form {
-        text-align: center;
-    }
+	#create-debtor form .row .input-field,
+	#edit-debtor form .row .input-field,
+	#details-debtor form .row .input-field,
+	#remove-debtor form .row .input-field {
+		padding-left: 15% !important;
+	}
 
-    .responsive-table {
-        width: 100%;
-    }
+		#create-debtor form .row .input-field label,
+		#edit-debtor form .row .input-field label,
+		#details-debtor form .row .input-field label,
+		#remove-debtor form .row .input-field label {
+			padding-left: 15%;
+		}
 
-    #button-field {
-        white-space: nowrap;
-    }
+	/*------------ PRODUCTS ---------------*/
+	#details-product form .row .input-field label,
+	#remove-product form .row .input-field label {
+		padding-left: 13% !important;
+	}
 
-    #searchQuery {
-        position: relative;
-        left: -28%;
-    }
+	#create-product form .row .input-field,
+	#edit-product form .row .input-field,
+	#details-product form .row .input-field,
+	#remove-product form .row .input-field {
+		padding-left: 15% !important;
+	}
 
-    fieldset {
-        width: 100%;
-        margin: 0 auto;
-        padding: 10px 10px;
-    }
-
-    input, select, textarea, input[type=date]:not(.browser-default) {
-        max-width: 75%;
-    }
-
-    .select-wrapper {
-        max-width: 75%;
-    }
-
-    /*------------ DEBTORS ---------------*/
-    #details-debtor form .row .input-field label,
-    #remove-debtor form .row .input-field label {
-        padding-left: 13% !important;
-    }
-
-    #create-debtor form .row .input-field,
-    #edit-debtor form .row .input-field,
-    #details-debtor form .row .input-field,
-    #remove-debtor form .row .input-field {
-        padding-left: 15% !important;
-    }
-
-    #create-debtor form .row .input-field label,
-    #edit-debtor form .row .input-field label,
-    #details-debtor form .row .input-field label,
-    #remove-debtor form .row .input-field label {
-        padding-left: 15%;
-    }
-
-    /*------------ COMPANIES ---------------*/
-    #details-product form .row .input-field label,
-    #remove-product form .row .input-field label {
-        padding-left: 13% !important;
-    }
-
-    #create-product form .row .input-field,
-    #edit-product form .row .input-field,
-    #details-product form .row .input-field,
-    #remove-product form .row .input-field {
-        padding-left: 15% !important;
-    }
-
-    #create-product form .row .input-field label,
-    #edit-product form .row .input-field label,
-    #details-product form .row .input-field label,
-    #remove-product form .row .input-field label {
-        padding-left: 15%;
-    }
+		#create-product form .row .input-field label,
+		#edit-product form .row .input-field label,
+		#details-product form .row .input-field label,
+		#remove-product form .row .input-field label {
+			padding-left: 15%;
+		}
 }
 
-@media screen and (max-width: 768px) {
-    .body-content {
-        width: 100%;
-        margin: 0 auto;
-        padding-left: 7px;
-        padding-right: 7px;
-    }
-
-    #search-form {
-        text-align: center;
-    }
-
-    .responsive-table {
-        width: 100%;
-    }
-
-    #button-field {
-        white-space: normal;
-    }
-
-    #searchQuery {
-        position: relative;
-        left: 0%;
-        max-width: inherit !important;
-        margin: 0 auto;
-    }
-
-    /*------------ ADMINS ---------------*/
-    #add-admin-btn, #search-admin-btn, #create-admin-btn {
-        margin-top: 10px;
-        width: 100%;
-    }
-
-    /*------------ BUTTONS ---------------*/
-    #button-area {
-        float: none;
-        margin-right: 0;
-    }
-
-    #button-area button {
-        width: 100%;
-    }
-
-    #button-area button i {
-        display: none;
-    }
-
-    #button-area a {
-        position: relative;
-        left: 40%;
-        font-size: 15px;
-        font-weight: bold;
-    }
-
-    /*------------ USER ---------------*/
-    #search-user-btn {
-        margin-top: 10px;
-        width: 100%;
-    }
-
-    /*------------ DEBTORS ---------------*/
-    #debtor-index,
-    #create-debtor, #edit-debtor,
-    #details-debtor, #remove-debtor {
-        padding: 20px 15px;
-    }
-
-    #add-debtor-btn, #search-debtor-btn {
-        margin-top: 10px;
-        width: 100%;
-    }
-
-    /*------------ COMPANIES ---------------*/
-    #company-index,
-    #create-company, #edit-company,
-    #details-company, #remove-company {
-        padding: 20px 15px;
-    }
-
-    #add-company-btn, #search-company-btn {
-        margin-top: 10px;
-        width: 100%;
-    }
-
-    /*------------ INVOICES ---------------*/
-    #invoice-index,
-    #create-invoice, #edit-invoice,
-    #details-invoice, #remove-invoice {
-        padding: 20px 15px;
-    }
-
-    #add-invoice-btn, #search-invoice-btn {
-        margin-top: 10px;
-        width: 100%;
-    }
-
-    #total-label {
-        position: relative;
-        left: 9%;
-    }
-
-    /*------------ MY INVOICES ---------------*/
-    #myinvoice-index, #details-myinvoice {
-        padding: 20px 15px;
-    }
-
-    #search-myinvoice-btn {
-        margin-top: 10px;
-        width: 100%;
-    }
-
-    #total-label {
-        position: relative;
-        left: 9%;
-    }
-
-    /*------------ PRODUCTS ---------------*/
-    #product-index,
-    #create-product, #edit-product,
-    #details-product, #remove-product {
-        padding: 20px 15px;
-    }
-
-    #create-product #form .input-field, #edit-product #form .input-field,
-    #details-product #form .input-field, #remove-product #form .input-field {
-        left: 0%;
-    }
-}
-
-@media screen and (min-width: 769px) and (max-width: 992px){
-    #button-field {
-        white-space: normal;
-    }
-
-    #button-field button {
-        width: 90%;
-        margin: 3px auto;
-    }
-
-    #button-field a {
-        width: 90%;
-        margin: 3px auto;
-    }
-
-    #searchQuery {
-        position: relative;
-        left: 0%;
-    }
-}

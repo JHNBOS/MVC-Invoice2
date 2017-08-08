@@ -18,6 +18,10 @@
     }
 }
 
+@section HEAD {
+	<link rel="stylesheet" href="~/css/login-forgot.css" />
+}
+
 <div>
     <div class="section center-align" style="padding-bottom: 5px;padding-top: 0px;">
         <h4 class="white-text">SIGN IN</h4>
@@ -44,8 +48,7 @@
                 <div class="row">
                     <div class="input-field col s12 col m12 col l12">
 						<i class="material-icons prefix">lock</i>
-                        <input asp-for="Password" id="password" type="password"
-							   class="grey-text text-darken-3" placeholder=" ">
+                        <input asp-for="Password" id="password" type="password" class="grey-text text-darken-3">
                         <label class="grey-text text-darken-3" for="password">Password</label>
                     </div>
                 </div>
@@ -70,4 +73,41 @@
 
 @section Scripts {
     @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+
+	<script>
+		$(document).ready(function () {
+			changeEmailLabel();
+			changePasswordLabel();
+		});
+
+		$("input").on("keyup", function () {
+			changePasswordLabel();
+			changeEmailLabel();
+		});
+
+		function changePasswordLabel() {
+			if ($("#password").val().length > 0) {
+				$("#password").parent().find("label").css("transform", "translateY(-14px) scale(0.8)");
+				$("#password").parent().find("label").css("transform-origin", "0 0");
+			} else {
+				$("#password").parent().find("label").css("transform", "translateY(12px)");
+				$("#password").parent().find("label").css("transform-origin", "0 100%");
+			}
+
+			if ($("#email").val().length > 0 && $("#password").val().length == 0) {
+				$("#password").parent().find("label").css("transform", "translateY(-14px) scale(0.8)");
+				$("#password").parent().find("label").css("transform-origin", "0 0");
+			}
+		}
+
+		function changeEmailLabel() {
+			if ($("#email").val().length > 0) {
+				$("#email").parent().find("label").css("transform", "translateY(-14px) scale(0.8)");
+				$("#email").parent().find("label").css("transform-origin", "0 0");
+			} else {
+				$("#email").parent().find("label").css("transform", "translateY(12px)");
+				$("#email").parent().find("label").css("transform-origin", "0 100%");
+			}
+		}
+	</script>
 }

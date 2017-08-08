@@ -1,0 +1,100 @@
+﻿/*-----------------------------------------------------------------------------------
+    Pages: Product
+-----------------------------------------------------------------------------------*/
+
+#product-index,
+#create-product, #edit-product,
+#details-product, #remove-product {
+	padding: 40px 40px;
+	margin: 0 auto 40px auto;
+	min-height: 250px;
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.85);
+	border: 1px solid #616161;
+	/* Shadow */
+	-webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+	-moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+	box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
+}
+
+#products {
+	height: auto;
+	max-height: 300px;
+	overflow-y: scroll;
+	overflow-x: hidden;
+}
+
+/*-------------------------------------------------------------------------------------*/
+/*----- Buttons --------------*/
+
+#create-product-btn, #edit-product-btn,
+#change-product-btn, #remove-product-btn {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	width: 170px;
+}
+
+#create-product-btn:hover, #edit-product-btn:hover,
+#change-product-btn:hover, #remove-product-btn:hover {
+	box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
+}
+
+#create-product-btn > span, #edit-product-btn > span,
+#change-product-btn > span, #remove-product-btn > span {
+	height: 36px;
+	line-height: 40px;
+}
+
+#add-product-btn, #search-product-btn {
+	margin-top: -5px;
+	width: 120px;
+	vertical-align: middle;
+}
+
+/*-------------------------------------------------------------------------------------*/
+/*----- Input --------------*/
+
+/* Color of disabled input on detail and delete view*/
+#details-product input[type=text]:disabled,
+#remove-product input[type=text]:disabled,
+#details-product input[type=email]:disabled,
+#remove-product input[type=email]:disabled,
+#details-product textarea:disabled,
+#remove-product textarea:disabled {
+	color: rgba(0, 0, 0, 0.65) !important;
+	border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
+}
+
+/* Label color of disabled on detail and delete view*/
+#details-product input[type=text]:disabled + label,
+#remove-product input[type=text]:disabled + label,
+#details-product input[type=email]:disabled + label,
+#remove-product input[type=email]:disabled + label,
+#details-product textarea:disabled + label,
+#remove-product textarea:disabled + label {
+	color: rgba(0, 0, 0, 0.50) !important;
+}
+
+#create-product form .input-field,
+#edit-product #form .input-field,
+#details-product form .input-field,
+#remove-product #form .input-field {
+	position: relative;
+	left: 3%;
+}
+
+/*-------------------------------------------------------------------------------------*/
+/*----- Media Query --------------*/
+
+@media screen and (max-width: 768px) {
+	#product-index,
+	#create-product, #edit-product,
+	#details-product, #remove-product {
+		padding: 20px 15px;
+	}
+
+	#create-product #form .input-field, #edit-product #form .input-field,
+	#details-product #form .input-field, #remove-product #form .input-field {
+		left: 0%;
+	}
+}

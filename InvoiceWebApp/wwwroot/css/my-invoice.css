@@ -1,0 +1,89 @@
+﻿/*-----------------------------------------------------------------------------------
+    Pages: My Invoice
+-----------------------------------------------------------------------------------*/
+
+#myinvoice-index {
+	padding: 40px 40px;
+	margin: 0 auto;
+	min-height: 250px;
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.85);
+	border: 1px solid #616161;
+	/* Shadow */
+	-webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+	-moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+	box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
+}
+
+#details-myinvoice {
+	padding: 40px 50px;
+	margin: 0 auto 40px auto;
+	min-height: 250px;
+	width: 100%;
+	background-color: #f1f1f1;
+	border: 1px solid #d0d0d0;
+	-webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+	-moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+	box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.66);
+}
+
+/*-------------------------------------------------------------------------------------*/
+/*----- Buttons --------------*/
+
+#search-myinvoice-btn {
+	margin-top: -5px;
+	width: 160px;
+	vertical-align: middle;
+}
+
+#pay-invoice-btn {
+	margin-top: 15px;
+	margin-bottom: 15px;
+	width: 170px;
+}
+
+#pay-invoice-btn > span {
+	height: 36px;
+	line-height: 40px;
+}
+
+/*-------------------------------------------------------------------------------------*/
+/*----- Input --------------*/
+
+#_amount {
+	max-width: 100%;
+}
+
+/* Color of disabled input on detail and delete view*/
+#details-myinvoice input[type=text]:disabled,
+#details-myinvoice input[type=date]:disabled,
+#details-myinvoice input:not([type]):disabled {
+	color: rgba(0, 0, 0, 0.65) !important;
+	border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
+}
+
+/* Label color of disabled on detail and delete view*/
+#details-myinvoice input[type=text]:disabled + label,
+#details-myinvoice input[type=date]:disabled + label,
+#details-myinvoice input:not([type]):disabled + label {
+	color: rgba(0, 0, 0, 0.50) !important;
+}
+
+/*-------------------------------------------------------------------------------------*/
+/*----- Media Query --------------*/
+
+@media screen and (max-width: 768px) {
+	#myinvoice-index, #details-myinvoice {
+		padding: 20px 15px;
+	}
+
+	#search-myinvoice-btn {
+		margin-top: 10px;
+		width: 100%;
+	}
+
+	#total-label {
+		position: relative;
+		left: 9%;
+	}
+}

@@ -88,10 +88,10 @@
           }
         }
       },
-      "MailKit/1.16.2": {
+      "MailKit/1.18.0": {
         "type": "package",
         "dependencies": {
-          "MimeKit": "1.16.2",
+          "MimeKit": "1.18.0",
           "NETStandard.Library": "1.6.1",
           "Portable.BouncyCastle": "1.8.1.2",
           "System.Data.Common": "4.3.0",
@@ -2014,7 +2014,7 @@
           }
         }
       },
-      "MimeKit/1.16.2": {
+      "MimeKit/1.18.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
@@ -4524,10 +4524,10 @@
         "runtimes/win7-x86/native/libuv.dll"
       ]
     },
-    "MailKit/1.16.2": {
-      "sha512": "+TmqWZlDbON05CpqiH6N++LUtqwW6SjUzc526srAogqJvjeTuAYN6vni5jc+riNBc3CFKS23VlyYqOxlZ943IA==",
+    "MailKit/1.18.0": {
+      "sha512": "SQLkaLnX4jrwAF4NFEl9oYno/17m3mTAPHcxkinKkr92/x94RwRNIQWQ3B7yXAEjAi6nktcS/iDZXOGFJgBb5Q==",
       "type": "package",
-      "path": "mailkit/1.16.2",
+      "path": "mailkit/1.18.0",
       "files": [
         "lib/MonoAndroid10/MailKit.dll",
         "lib/MonoAndroid10/MailKit.xml",
@@ -4545,7 +4545,7 @@
         "lib/win81/MailKit.xml",
         "lib/wpa81/MailKit.dll",
         "lib/wpa81/MailKit.xml",
-        "mailkit.1.16.2.nupkg.sha512",
+        "mailkit.1.18.0.nupkg.sha512",
         "mailkit.nuspec"
       ]
     },
@@ -6277,10 +6277,10 @@
         "runtimes/win/lib/netstandard1.3/Microsoft.Win32.Registry.dll"
       ]
     },
-    "MimeKit/1.16.2": {
-      "sha512": "n/yoKMfFXUSUzQPz+wvl+eArDA01XntJ3z40DBUduAEpx8QXEpLMRhr177Lwi23dHRA4/aDqb3+X2b6r/X/1hw==",
+    "MimeKit/1.18.0": {
+      "sha512": "4cu/BH/EenesTKaQscYWg6vuAYlh+CIbWZJlYoZ+9RklhqOFZZU1XlS4yI8hwDNtXKVH+COvsU+wpccCtCLdKA==",
       "type": "package",
-      "path": "mimekit/1.16.2",
+      "path": "mimekit/1.18.0",
       "files": [
         "lib/MonoAndroid10/BouncyCastle.dll",
         "lib/MonoAndroid10/MimeKit.dll",
@@ -6304,7 +6304,7 @@
         "lib/wpa81/MimeKit.dll",
         "lib/wpa81/MimeKit.xml",
         "lib/wpa81/Portable.Text.Encoding.dll",
-        "mimekit.1.16.2.nupkg.sha512",
+        "mimekit.1.18.0.nupkg.sha512",
         "mimekit.nuspec"
       ]
     },
@@ -11441,7 +11441,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v1.1": [
-      "MailKit >= 1.16.2",
+      "MailKit >= 1.18.0",
       "Microsoft.ApplicationInsights.AspNetCore >= 2.1.1",
       "Microsoft.AspNetCore >= 1.1.2",
       "Microsoft.AspNetCore.Authentication.Cookies >= 1.1.2",
@@ -11489,7 +11489,7 @@
         "dependencies": {
           "MailKit": {
             "target": "Package",
-            "version": "1.16.2"
+            "version": "1.18.0"
           },
           "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
             "target": "Package",

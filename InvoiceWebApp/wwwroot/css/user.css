@@ -1,0 +1,84 @@
+﻿/*-----------------------------------------------------------------------------------
+    Pages: User
+-----------------------------------------------------------------------------------*/
+
+#user-index,
+#create-user, #edit-user,
+#details-user, #remove-user {
+	padding: 40px 40px;
+	margin: 0 auto 40px auto;
+	min-height: 250px;
+	width: 100%;
+	background-color: rgba(255, 255, 255, 0.85);
+	border: 1px solid #616161;
+	/* Shadow */
+	-webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+	-moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+	box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
+}
+
+/*-------------------------------------------------------------------------------------*/
+/*----- Buttons --------------*/
+
+#create-user-btn, #edit-user-btn,
+#change-user-btn, #remove-user-btn {
+	margin-top: 15px;
+	margin-bottom: 25px;
+	width: 170px;
+}
+
+#create-user-btn:hover, #edit-user-btn:hover,
+#change-user-btn:hover, #remove-user-btn:hover {
+	box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
+}
+
+#create-user-btn > span, #edit-user-btn > span,
+#change-user-btn > span, #remove-user-btn > span {
+	height: 36px;
+	line-height: 40px;
+}
+
+#add-user-btn, #search-user-btn {
+	margin-top: -5px;
+	width: 120px;
+	vertical-align: middle;
+}
+
+/*-------------------------------------------------------------------------------------*/
+/*----- Input --------------*/
+
+/* Color of disabled input on detail and delete view*/
+#details-user input[type=text]:disabled,
+#remove-user input[type=text]:disabled,
+#edit-user input[type=text]:disabled,
+#details-user input[type=email]:disabled,
+#remove-user input[type=email]:disabled,
+#edit-user input[type=email]:disabled,
+#details-user input[type=password]:disabled,
+#remove-user input[type=password]:disabled,
+#edit-user input[type=password]:disabled {
+	color: rgba(0, 0, 0, 0.65) !important;
+	border-bottom: 1px dotted rgba(0, 0, 0, 0.65) !important;
+}
+
+/* Label color of disabled on detail and delete view*/
+#details-user input[type=text]:disabled + label,
+#remove-user input[type=text]:disabled + label,
+#edit-user input[type=text]:disabled + label,
+#details-user input[type=email]:disabled + label,
+#remove-user input[type=email]:disabled + label,
+#edit-user input[type=email]:disabled + label,
+#details-user input[type=password]:disabled + label,
+#remove-user input[type=password]:disabled + label,
+#edit-user input[type=password]:disabled + label {
+	color: rgba(0, 0, 0, 0.50) !important;
+}
+
+/*-----------------------------------------------------------------------*/
+/*----- Media Query --------------*/
+@media screen and (max-width: 768px) {
+	#search-user-btn {
+		margin-top: 10px;
+		width: 100%;
+	}
+}

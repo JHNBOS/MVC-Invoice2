@@ -1,0 +1,54 @@
+﻿/*-----------------------------------------------------------------------------------
+    Page: Login and Forgot
+-----------------------------------------------------------------------------------*/
+
+#login-row, #forgot-row {
+	width: 100%;
+	margin-bottom: 0px;
+}
+
+#login-form, #forgot-form {
+	background-color: rgba(255, 255, 255, 0.85);
+	border: 1px solid #616161;
+	padding: 50px 44px 20px 44px;
+	margin: 0 auto;
+	position: relative;
+	/* Shadow */
+	-webkit-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+	-moz-box-shadow: 0px 9px 18px -6px rgba(0,0,0,0.60);
+	box-shadow: 0px 8px 15px 0px rgba(0,0,0,0.60)
+}
+
+/*-------------------------------------------------------------------------------------*/
+/*----- Buttons --------------*/
+
+#login-button, #forgot-button {
+	width: 60%;
+	margin: 10px auto 6px auto;
+}
+
+#login-button:hover, #forgot-button:hover {
+	box-shadow: 0 8px 10px 1px rgba(0,0,0,0.14), 0 3px 14px 2px rgba(0,0,0,0.12), 0 5px 5px -3px rgba(0,0,0,0.3);
+}
+
+#forgot-link, #login-link {
+	font-weight: bold;
+	display: block;
+}
+
+/*-------------------------------------------------------------------------------------*/
+/*----- Media Query --------------*/
+
+@media screen and (max-width: 768px) {
+	#login-form, #forgot-form {
+		padding: 35px 29px 5px 29px;
+	}
+
+	#login-form input, select, textarea, input[type=date]:not(.browser-default) {
+		max-width: 90% !important;
+	}
+
+	#forgot-form input, select, textarea, input[type=date]:not(.browser-default) {
+		max-width: 90% !important;
+	}
+}

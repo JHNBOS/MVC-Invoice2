@@ -333,7 +333,7 @@
 			}
 
 			//Account button non-mobile
-			if (isLoggedIn == true && width > 768) {
+			if (isLoggedIn == true) {
 				//Set background color
 				button.css("background", "#e53935", "important");
 
@@ -347,7 +347,7 @@
 
 				//Set location attribute
 				button.attr("href", "/Users/Logout");
-			} else if (isLoggedIn == false && width > 768) {
+			} else if (isLoggedIn == false) {
 				//Set background color
 				button.css("background", "#64dd17", "important");
 
@@ -362,20 +362,6 @@
 				//Set location attribute
 				button.attr("href", "/Users/Login");
 			}
-
-            //Change color of navbar links to black when scrolling
-			/*
-            $(window).scroll(() => {
-                if ($(window).scrollTop() >= 45) {
-                    //$("nav ul a").css("color", "#000");
-                    $("nav").css("background", "rgba(86, 91, 141, 0.6)")
-                } else if ($(window).scrollTop() < 45) {
-                    //$("nav ul a").css("color", "#FFF");
-                    $("nav").css("background", "rgba(255, 255, 255, 0.25)")
-                }
-            });
-			*/
-
         });
     </script>
 </body>
