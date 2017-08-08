@@ -18,12 +18,15 @@ namespace InvoiceWebApp.Controllers {
         private ApplicationDbContext _context;
         private AppSettings _settings;
         private IHostingEnvironment _env;
+		private PasswordEncrypter encryption;
 
         public UsersController(ApplicationDbContext context, IHostingEnvironment env) {
             _context = context;
             _env = env;
             _settings = _context.Settings.SingleOrDefault();
-        }
+			encryption = new PasswordEncrypter();
+
+		}
 
         //------------------------------------------------------------------------
         //Database action methods
@@ -51,7 +54,11 @@ namespace InvoiceWebApp.Controllers {
         //Add user to the database
         private async Task CreateUser(User user) {
             try {
-                _context.Users.Add(user);
+				//Encrypt password
+				string hash = encryption.Encrypt(user.Password);
+				user.Password = hash;
+
+				_context.Users.Add(user);
                 await _context.SaveChangesAsync();
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
@@ -61,7 +68,11 @@ namespace InvoiceWebApp.Controllers {
         //Update existing user
         private async Task UpdateUser(User user) {
             try {
-                _context.Update(user);
+				//Encrypt password
+				string hash = encryption.Encrypt(user.Password);
+				user.Password = hash;
+
+				_context.Update(user);
                 await _context.SaveChangesAsync();
             } catch (DbUpdateConcurrencyException ex) {
                 Debug.WriteLine(ex);
@@ -216,7 +227,10 @@ namespace InvoiceWebApp.Controllers {
                 return NotFound();
             }
 
-            return View(user);
+			//Decrypt password
+			user.Password = encryption.Decrypt(user.Password);
+
+			return View(user);
         }
 
         //---------------------------------
@@ -301,51 +315,32 @@ namespace InvoiceWebApp.Controllers {
             Admin adminLogin = null;
 
             try {
+				string email = user.Email;
+				string password = encryption.Encrypt(user.Password);
+
                 //Find user based on email and password
                 userLogin = _context.Users
                                 .Include(s => s.Debtor)
-                                .SingleOrDefault(u => u.Email == user.Email && u.Password == user.Password);
+                                .SingleOrDefault(u => u.Email == email && u.Password == password);
 
                 if (userLogin == null) {
                     adminLogin = _context.Admins
-                                    .SingleOrDefault(u => u.Email == user.Email && u.Password == user.Password);
-                    SessionHelper.Set(this.HttpContext.Session, "Admin", adminLogin);
+                                    .SingleOrDefault(u => u.Email == email && u.Password == password);
+
+					//Set session variable for admin
+					SessionHelper.Set(this.HttpContext.Session, "Admin", adminLogin);
                     return RedirectToAction("Index", "Home", new { email = adminLogin.Email });
+
                 } else {
+					//Set session variable for client
                     SessionHelper.Set(this.HttpContext.Session, "User", userLogin);
                     return RedirectToAction("Index", "Home", new { email = userLogin.Email });
+
                 }
 
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }
-
-            //Set session variables
-            /*
-            if (userLogin != null) {
-                var isExist = SessionHelper.IsExists(this.HttpContext.Session, "User");
-
-                if (isExist == false) {
-                    SessionHelper.Set(this.HttpContext.Session, "User", userLogin);
-                } else {
-                    SessionHelper.Set(this.HttpContext.Session, "User", null);
-                    SessionHelper.Set(this.HttpContext.Session, "User", userLogin);
-                }
-
-                return RedirectToAction("Index", "Home", new { email = userLogin.Email });
-            } else if (adminLogin != null) {
-                var isExist = SessionHelper.IsExists(this.HttpContext.Session, "Admin");
-
-                if (isExist == false) {
-                    SessionHelper.Set(this.HttpContext.Session, "Admin", adminLogin);
-                } else {
-                    SessionHelper.Set(this.HttpContext.Session, "Admin", null);
-                    SessionHelper.Set(this.HttpContext.Session, "Admin", adminLogin);
-                }
-
-                return RedirectToAction("Index", "Home", new { email = adminLogin.Email });
-            }
-            */
 
             return View(user);
         }
@@ -403,12 +398,12 @@ namespace InvoiceWebApp.Controllers {
             try {
                 //Update password
                 if (userLogin != null) {
-                    userLogin.Password = password;
+                    userLogin.Password = encryption.Encrypt(password);
                     _context.Update(userLogin);
 
                 } else if (adminLogin != null) {
-                    adminLogin.Password = password;
-                    _context.Update(adminLogin);
+                    adminLogin.Password = encryption.Encrypt(password);
+					_context.Update(adminLogin);
                 }
 
                 _context.SaveChanges();

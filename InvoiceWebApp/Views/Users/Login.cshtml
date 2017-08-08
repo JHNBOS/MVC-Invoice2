@@ -25,14 +25,15 @@
 
     <div class="row" id="login-row">
         <div class="col s12 col m12 col l6 offset-l3">
-            <form id="login-form" asp-controller="Users" asp-action="Login" method="post">
+            <form id="login-form" asp-controller="Users" asp-action="Login" method="post" autocomplete="off">
 
                 <!--Email-->
                 <div class="row">
 					<div class="input-field col s12 col m12 col l12">
 						<i class="material-icons prefix">account_circle</i>
 						<input asp-for="Email" id="email" type="email" class="validate grey-text text-darken-3">
-						<label class="grey-text text-darken-3" for="email" data-error="This email address is not valid."
+						<label class="grey-text text-darken-3" for="email" 
+							   data-error="This email address is not valid."
 							   data-success="This email address is valid.">
 							Email
 						</label>
@@ -43,7 +44,8 @@
                 <div class="row">
                     <div class="input-field col s12 col m12 col l12">
 						<i class="material-icons prefix">lock</i>
-                        <input asp-for="Password" id="password" type="password" class="grey-text text-darken-3">
+                        <input asp-for="Password" id="password" type="password"
+							   class="grey-text text-darken-3" placeholder=" ">
                         <label class="grey-text text-darken-3" for="password">Password</label>
                     </div>
                 </div>

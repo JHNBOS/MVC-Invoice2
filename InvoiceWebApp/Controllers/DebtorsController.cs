@@ -17,17 +17,19 @@ namespace InvoiceWebApp.Controllers {
         //Instances
         private ApplicationDbContext _context;
         private AppSettings _settings;
+		private PasswordEncrypter encryption;
 
-        public DebtorsController(ApplicationDbContext context) {
+		public DebtorsController(ApplicationDbContext context) {
             _context = context;
             _settings = _context.Settings.FirstOrDefault();
-        }
+			encryption = new PasswordEncrypter();
+		}
 
-        //------------------------------------------------------------------------
-        //Database action methods
+		//------------------------------------------------------------------------
+		//Database action methods
 
-        //Get a list of all debtors
-        private async Task<List<Debtor>> GetDebtors() {
+		//Get a list of all debtors
+		private async Task<List<Debtor>> GetDebtors() {
             return await _context.Debtors.ToListAsync();
         }
 
@@ -64,12 +66,16 @@ namespace InvoiceWebApp.Controllers {
                 user.Email = debtor.Email;
                 user.Password = debtor.FirstName + "_" + DateTime.Now.ToString("ddMMHH");
 
-                _context.Users.Add(user);
+				//Encrypt password
+				string hash = encryption.Encrypt(user.Password);
+				user.Password = hash;
+
+				_context.Users.Add(user);
                 await _context.SaveChangesAsync();
 
                 //Send email with username and password
                 AuthMessageSender email = new AuthMessageSender(_settings);
-                await email.SendLoginEmailAsync(user.Email, user.Password);
+                await email.SendLoginEmailAsync(user.Email, encryption.Decrypt(user.Password));
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
             }

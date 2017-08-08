@@ -31,7 +31,7 @@
     <!--Form-->
     <div class="row" style="margin-top: 5px;">
         <div class="col s12 col col m10 offset-m1">
-            <form id="form" asp-controller="Users" asp-action="Edit">
+            <form id="form" asp-controller="Users" asp-action="Edit" autocomplete="off">
                 <input type="hidden" asp-for="ID" />
                 <input type="hidden" asp-for="DebtorID" />
 
@@ -54,12 +54,13 @@
                     <div class="row">
                         <div class="input-field col s12 col m4 offset-m2">
                             <i class="material-icons prefix">email</i>
-                            @Html.TextBoxFor(m => m.Email, new { @id = "icon_email"})
-                            <label for="icon_email">Email</label>
+                            @Html.TextBoxFor(m => m.Email, new { @id = "icon_email", @disabled = "disabled" })
+                            <label for="icon_email" data-error="This email address is not valid."
+							   data-success="This email address is valid.">Email</label>
                         </div>
                         <div class="input-field col s12 col m4">
                             <i class="material-icons prefix">lock</i>
-                            @Html.TextBoxFor(m => m.Password, new { @id = "icon_password" })
+                            @Html.TextBoxFor(m => m.Password, new { @id = "icon_password", type = "text" })
                             <label for="icon_password">Password</label>
                         </div>
                     </div>

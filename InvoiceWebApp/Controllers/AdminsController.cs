@@ -19,12 +19,14 @@ namespace InvoiceWebApp.Controllers {
         private ApplicationDbContext _context;
         private AppSettings _settings;
         private IHostingEnvironment _env;
+		private PasswordEncrypter encryption;
 
         public AdminsController(ApplicationDbContext context, IHostingEnvironment env) {
             _context = context;
             _env = env;
             _settings = _context.Settings.SingleOrDefault();
-        }
+			encryption = new PasswordEncrypter();
+		}
 
         //------------------------------------------------------------------------
         //Database action methods
@@ -50,7 +52,11 @@ namespace InvoiceWebApp.Controllers {
         //Add administrator to the database
         private async Task CreateAdmin(Admin admin) {
             try {
-                _context.Admins.Add(admin);
+				//Encrypt password
+				string hash = encryption.Encrypt(admin.Password);
+				admin.Password = hash;
+
+				_context.Admins.Add(admin);
                 await _context.SaveChangesAsync();
             } catch (Exception ex) {
                 Debug.WriteLine(ex);
@@ -60,7 +66,11 @@ namespace InvoiceWebApp.Controllers {
         //Update existing administrator
         private async Task UpdateAdmin(Admin admin) {
             try {
-                _context.Update(admin);
+				//Encrypt password
+				string hash = encryption.Encrypt(admin.Password);
+				admin.Password = hash;
+
+				_context.Update(admin);
                 await _context.SaveChangesAsync();
             } catch (DbUpdateConcurrencyException ex) {
                 Debug.WriteLine(ex);
@@ -212,7 +222,10 @@ namespace InvoiceWebApp.Controllers {
                 return NotFound();
             }
 
-            return View(admin);
+			//Decrypt password
+			admin.Password = encryption.Decrypt(admin.Password);
+
+			return View(admin);
         }
 
         //---------------------------------
@@ -287,86 +300,7 @@ namespace InvoiceWebApp.Controllers {
 
             return View();
         }
-
-        //---------------------------------
-
-        //POST => Admins/Login
-        [HttpPost]
-        public ActionResult Login(Admin admin) {
-
-            Admin login = null;
-
-            try {
-                //Get admin based on email and password
-                login = _context.Admins.Where(a => a.Email == admin.Email && a.Password == admin.Password)
-                    .FirstOrDefault();
-            } catch (Exception ex) {
-                Debug.WriteLine(ex);
-            }
-
-            //Set admin session variable
-            if (login != null) {
-                SessionHelper.Set(this.HttpContext.Session, "Admin", login);
-                return RedirectToAction("Index", "Home", new { email = login.Email });
-            }
-
-            return View(login);
-        }
-
-        //---------------------------------
-
-        //POST => Admins/Logout
-        public ActionResult Logout() {
-
-            //Remove session variables and return to sign in view
-            HttpContext.Session.Remove("Admin");
-            HttpContext.Session.Remove("User");
-            return RedirectToAction("Login", "Admins", new { area = "" });
-		}
-
-        //---------------------------------
-
-        //GET => Admins/ForgotPassword
-        public ActionResult ForgotPassword() {
-
-            //Current page
-            ViewBag.Current = "AdminLogin";
-
-            return View();
-        }
-
-        //---------------------------------
-
-        //POST => Admins/ForgotPassword
-        [HttpPost]
-        public ActionResult ForgotPassword(string email, string password) {
-
-            Admin admin = null;
-
-            try {
-                //Get admin based on email
-                admin = _context.Admins.SingleOrDefault(m => m.Email == email);
-            } catch (Exception ex) {
-                Debug.WriteLine(ex);
-            }
-
-            if (admin == null) {
-                return NotFound();
-            }
-
-            try {
-                //Update administrator with new password
-                admin.Password = password;
-                _context.Update(admin);
-                _context.SaveChanges();
-
-                return RedirectToAction("Login", "Admins", new { area = "" });
-            } catch (Exception ex) {
-                Debug.WriteLine(ex);
-                return View(admin);
-            }
-        }
-
+      
         //---------------------------------
 
         //GET => Admins/Settings
@@ -375,7 +309,10 @@ namespace InvoiceWebApp.Controllers {
             //Current page
             ViewBag.Current = "Settings";
 
-            return View(_settings);
+			//Decrypt password
+			_settings.Password = encryption.Decrypt(_settings.Password);
+
+			return View(_settings);
         }
 
         //---------------------------------
@@ -427,8 +364,8 @@ namespace InvoiceWebApp.Controllers {
                 _settings.Phone = AppSettings.Phone;
 
                 _settings.Email = AppSettings.Email;
-                _settings.Password = AppSettings.Password;
-                _settings.SMTP = AppSettings.SMTP;
+                _settings.Password = encryption.Encrypt(AppSettings.Password);
+				_settings.SMTP = AppSettings.SMTP;
                 _settings.Port = AppSettings.Port;
 
 				_settings.InvoiceCycle = AppSettings.InvoiceCycle;
