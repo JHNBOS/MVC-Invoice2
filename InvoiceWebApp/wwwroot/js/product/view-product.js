@@ -7,6 +7,9 @@ $(document).ready(function () {
 
     //Set value of category input
 	setCategory();
+
+	//Reinitialize all labels
+	Materialize.updateTextFields();
 });
 
 function setCategory() {

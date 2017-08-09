@@ -51,13 +51,13 @@
                                 <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">today</i>
                                     <input asp-for="CreatedOn" id="icon_created" disabled />
-                                    <label for="icon_created" style="font-size:.8rem;position:absolute;top:-16px;left:13px;">Invoice Date</label>
+                                    <label for="icon_created" class="active">Invoice Date</label>
                                 </div>
 
                                 <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">today</i>
                                     <input asp-for="ExpirationDate" id="icon_expired" disabled />
-                                    <label for="icon_expired" style="font-size:.8rem;position:absolute;top:-16px;left:13px;">Invoice Expiration Date</label>
+                                    <label for="icon_expired" class="active">Invoice Expiration Date</label>
                                 </div>
                             </div>
 
@@ -84,13 +84,13 @@
                                 <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">exposure_neg_2</i>
                                     <input id="icon_discount" asp-for="Discount" disabled />
-                                    <label for="icon_discount">Discount (%)</label>
+                                    <label for="icon_discount" class="active">Discount (%)</label>
                                 </div>
 
                                 <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">euro_symbol</i>
                                     <input id="total" name="total" type="text" readonly />
-                                    <label id="total-label" for="total" style="font-size:.8rem;position:absolute;top:13px;left:13px;">Total</label>
+                                    <label id="total-label" for="total" class="active">Total</label>
                                 </div>
                             </div>
 

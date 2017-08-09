@@ -56,3 +56,20 @@
 #remove-category input[type=text]:disabled + label {
 	color: rgba(0, 0, 0, 0.50) !important;
 }
+
+/*-------------------------------------------------------------------------------------*/
+/*----- Media Query --------------*/
+
+@media screen and (max-width: 768px) {
+	#category-index,
+	#create-category, #edit-category,
+	#details-category, #remove-category {
+		padding: 20px 15px;
+	}
+
+	#add-category-btn, #search-category-btn {
+		margin-top: 10px;
+		width: 100%;
+		display: block;
+	}
+}

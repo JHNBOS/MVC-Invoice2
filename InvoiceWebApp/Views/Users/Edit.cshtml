@@ -58,7 +58,7 @@
                     <div class="row">
                         <div class="input-field col s12 col m4 offset-m2">
                             <i class="material-icons prefix">email</i>
-                            @Html.TextBoxFor(m => m.Email, new { @id = "icon_email", @disabled = "disabled" })
+                            @Html.TextBoxFor(m => m.Email, new { @id = "icon_email", @disabled = "disabled", @class = "validate" })
                             <label for="icon_email" data-error="This email address is not valid."
 							   data-success="This email address is valid.">Email</label>
                         </div>

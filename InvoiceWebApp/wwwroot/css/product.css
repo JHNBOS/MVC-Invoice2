@@ -97,4 +97,10 @@
 	#details-product #form .input-field, #remove-product #form .input-field {
 		left: 0%;
 	}
+
+	#add-product-btn, #search-product-btn {
+		margin-top: 10px;
+		width: 100%;
+		display: block;
+	}
 }

@@ -127,7 +127,7 @@ function init() {
 
     //Set value of the total amount in the input box
     $("#total").val(totalAmount);
-    total = totalAmount;
+	total = totalAmount;
 
     //Hide delete button product-control
     $("#products #product-control #delete-row-btn").hide();
@@ -135,7 +135,7 @@ function init() {
     //Set product rows is this is the first run
     if (firstRun == true) {
         setRows();
-    }
+	}
 }
 
 //Add new row for product

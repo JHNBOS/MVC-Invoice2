@@ -30,8 +30,8 @@
 
                             @if (Model.DebtorID != null) {
                                 <div class="row" id="debtor-row">
-                                    <label for="debtor" style="padding-left: 57px;">Debtor</label>
-                                    <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
+                                    <label for="debtor">Debtor</label>
+                                    <div class="input-field col s12 col m12 col l12">
                                         <i class="material-icons prefix">perm_identity</i>
                                         <input id="debtor" value="@(Model.Debtor.FullName)" disabled />
                                     </div>
@@ -40,8 +40,8 @@
 
                             @if (Model.CompanyID != null) {
                                 <div class="row" id="company-row">
-                                    <label for="company" style="padding-left: 57px;">Company</label>
-                                    <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
+                                    <label for="company">Company</label>
+                                    <div class="input-field col s12 col m12 col l12">
                                         <i class="material-icons prefix">business</i>
                                         <input id="company" value="@(Model.Company.CompanyName)" disabled />
                                     </div>
@@ -49,16 +49,16 @@
                             }
 
                             <div class="row">
-                                <label for="icon_created" style="padding-left: 57px;">Invoice Date</label>
-                                <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
+                                <label for="icon_created">Invoice Date</label>
+                                <div class="input-field col s12 col m12 col l12">
                                     <i class="material-icons prefix">today</i>
                                     <input asp-for="CreatedOn" id="icon_created createdon" disabled />
                                 </div>
                             </div>
 
                             <div class="row">
-                                <label for="icon_expired" style="padding-left: 57px;">Expiration Date</label>
-                                <div class="input-field col s12 col m12 col l12" style="margin-top: 0px;">
+                                <label for="icon_expired">Expiration Date</label>
+                                <div class="input-field col s12 col m12 col l12">
                                     <i class="material-icons prefix">today</i>
                                     <input asp-for="ExpirationDate" id="icon_expired expired" disabled />
                                 </div>
@@ -120,7 +120,10 @@
 
             //Set value of the total amount in the input box
             var totalAmount = "@(ViewBag.Total)";
-            $("#total").val(totalAmount);
+			$("#total").val(totalAmount);
+
+			//Reinitialize all labels
+			Materialize.updateTextFields();
 
             //Set product rows is this is the first run
             if (firstRun == true) {

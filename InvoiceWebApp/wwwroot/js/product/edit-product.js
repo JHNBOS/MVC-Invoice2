@@ -5,10 +5,9 @@ $(document).ready(function () {
 
     //Set value of category
 	setCategory();
-});
 
-$("#category_select").on("change", function () {
-	console.log("I am selected!");
+	//Reinitialize all labels
+	Materialize.updateTextFields();
 });
 
 //Add parameters to form

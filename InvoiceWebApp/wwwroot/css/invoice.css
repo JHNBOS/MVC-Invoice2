@@ -88,14 +88,6 @@
 }
 
 /*-------------------------------------------------------------------------------------*/
-/*----- Labels --------------*/
-
-#total-label {
-	position: relative;
-	left: -36%;
-}
-
-/*-------------------------------------------------------------------------------------*/
 /*----- Media Query --------------*/
 
 @media screen and (max-width: 768px) {
@@ -108,6 +100,7 @@
 	#add-invoice-btn, #search-invoice-btn {
 		margin-top: 10px;
 		width: 100%;
+		display: block;
 	}
 
 	#total-label {

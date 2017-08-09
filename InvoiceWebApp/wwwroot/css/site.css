@@ -349,6 +349,8 @@ legend {
 	font-size: 15px;
 	font-weight: bold;
 	display: block;
+	text-align: right;
+	padding-right: 10px;
 }
 
 #button-field {
@@ -374,6 +376,7 @@ legend {
 		font-weight: bold;
 		display: block;
 		text-align: center;
+		padding-right: 0px;
 	}
 
 	#button-field {
@@ -419,27 +422,27 @@ input[type=number]:not(.browser-default):disabled + label {
 }
 
 .input-field input[type=text]:focus {
-	border-bottom: 1px solid #7cb342;
-	box-shadow: 0 1px 0 0 #7cb342;
+	border-bottom: 1px solid #147aff;
+	box-shadow: 0 1px 0 0 #147aff;
 }
 
 .input-field input[type=text].valid {
-	border-bottom: 1px solid #7cb342;
-	box-shadow: 0 1px 0 0 #7cb342;
+	border-bottom: 1px solid #56ff14;
+	box-shadow: 0 1px 0 0 #56ff14;
 }
 
 .input-field input[type=text].invalid {
-	border-bottom: 1px solid #E23834;
-	box-shadow: 0 1px 0 0 #E23834;
+	border-bottom: 1px solid #f70202;
+	box-shadow: 0 1px 0 0 #f70202;
 }
 
 .input-field .prefix.active {
-	color: #7cb342;
+	color: #147aff;
 }
 
 input[type="checkbox"]:checked + label:before {
-	border-right: 5px solid #7cb342;
-	border-bottom: 5px solid #7cb342;
+	border-right: 5px solid #147aff;
+	border-bottom: 5px solid #147aff;
 }
 
 .select-dropdown {
@@ -522,12 +525,12 @@ input[type="checkbox"]:checked + label:before {
 		padding-left: 15% !important;
 	}
 
-		#create-debtor form .row .input-field label,
-		#edit-debtor form .row .input-field label,
-		#details-debtor form .row .input-field label,
-		#remove-debtor form .row .input-field label {
-			padding-left: 15%;
-		}
+	#create-debtor form .row .input-field label,
+	#edit-debtor form .row .input-field label,
+	#details-debtor form .row .input-field label,
+	#remove-debtor form .row .input-field label {
+		padding-left: 15%;
+	}
 
 	/*------------ PRODUCTS ---------------*/
 	#details-product form .row .input-field label,
@@ -542,11 +545,11 @@ input[type="checkbox"]:checked + label:before {
 		padding-left: 15% !important;
 	}
 
-		#create-product form .row .input-field label,
-		#edit-product form .row .input-field label,
-		#details-product form .row .input-field label,
-		#remove-product form .row .input-field label {
-			padding-left: 15%;
-		}
+	#create-product form .row .input-field label,
+	#edit-product form .row .input-field label,
+	#details-product form .row .input-field label,
+	#remove-product form .row .input-field label {
+		padding-left: 15%;
+	}
 }
 

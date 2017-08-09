@@ -74,5 +74,6 @@
 	#add-company-btn, #search-company-btn {
 		margin-top: 10px;
 		width: 100%;
+		display: block;
 	}
 }

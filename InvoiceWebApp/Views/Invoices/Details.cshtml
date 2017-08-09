@@ -30,16 +30,16 @@
 
                             <div class="row" id="debtor-row">
                                 <div class="input-field col s12 col m12 col l6">
-                                    <i class="material-icons prefix">perm_identity</i>
-                                    @Html.DropDownListFor(m => m.DebtorID, (SelectList)ViewBag.DebtorID,
-                                                "Select a debtor", new { @id = "select_debtor", @disabled = "disabled" })
-                                    <label for="select_debtor">Choose Debtor</label>
+									<i class="material-icons prefix">person</i>
+									@Html.DropDownListFor(m => m.DebtorID, (SelectList) ViewBag.DebtorID,
+												"Choose debtor", new { @id = "select_debtor", @disabled = "disabled" })
+									<label for="select_debtor" class="">Choose Debtor</label>
                                 </div>
                                 <div class="input-field col s12 col m12 col l6">
-                                    <i class="material-icons prefix">business</i>
-                                    @Html.DropDownListFor(m => m.CompanyID, (SelectList)ViewBag.CompanyID,
-                                                "Select a company", new { @id = "select_company", @disabled = "disabled" })
-                                    <label for="select_company">Choose Company</label>
+									<i class="material-icons prefix">business</i>
+									@Html.DropDownListFor(m => m.CompanyID, (SelectList) ViewBag.CompanyID,
+												"Choose company", new { @id = "select_company", @disabled = "disabled" })
+									<label for="select_company" class="">Choose Company</label>
                                 </div>
                             </div>
 
@@ -50,13 +50,13 @@
                                 <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">today</i>
                                     <input asp-for="CreatedOn" id="icon_created" disabled />
-                                    <label for="icon_created" style="font-size:.8rem;position:absolute;top:-16px;left:13px;">Invoice Date</label>
+                                    <label for="icon_created" class="active">Invoice Date</label>
                                 </div>
 
                                 <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">today</i>
                                     <input asp-for="ExpirationDate" id="icon_expired" disabled />
-                                    <label for="icon_expired" style="font-size:.8rem;position:absolute;top:-16px;left:13px;">Invoice Expiration Date</label>
+                                    <label for="icon_expired" class="active">Invoice Expiration Date</label>
                                 </div>
                             </div>
 
@@ -83,13 +83,13 @@
                                 <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">exposure_neg_2</i>
                                     <input id="icon_discount" asp-for="Discount" disabled />
-                                    <label for="icon_discount">Discount (%)</label>
+                                    <label for="icon_discount" class="active">Discount (%)</label>
                                 </div>
 
                                 <div class="input-field col s12 col m12 col l6">
                                     <i class="material-icons prefix">euro_symbol</i>
                                     <input id="total" name="total" type="text" readonly />
-                                    <label id="total-label" for="total" style="font-size:.8rem;position:absolute;top:13px;left:13px;">Total</label>
+                                    <label id="total-label" for="total" class="active">Total</label>
                                 </div>
                             </div>
 

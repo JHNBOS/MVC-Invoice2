@@ -24,7 +24,7 @@
 #create-admin-btn, #edit-admin-btn,
 #change-admin-btn, #remove-admin-btn {
 	margin-top: 15px;
-	margin-bottom: 25px;
+	margin-bottom: 15px;
 	width: 170px;
 }
 
@@ -70,5 +70,6 @@
 	#add-admin-btn, #search-admin-btn, #create-admin-btn {
 		margin-top: 10px;
 		width: 100%;
+		display: block;
 	}
 }
