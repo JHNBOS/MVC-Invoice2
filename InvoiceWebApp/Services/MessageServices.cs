@@ -12,9 +12,11 @@ namespace InvoiceWebApp.Services {
     // For more details see this link https://go.microsoft.com/fwlink/?LinkID=532713
     public class AuthMessageSender : IEmailSender, ISmsSender {
         private AppSettings _settings;
-        private ApplicationDbContext _context;
+        private readonly ApplicationDbContext _context;
 
-        public AuthMessageSender(AppSettings settings) {
+		public ApplicationDbContext Context => _context;
+
+		public AuthMessageSender(AppSettings settings) {
             _settings = settings;
         }
 

@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp1.1</TargetFramework>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -21,70 +21,27 @@
     <Content Include="Controllers\MyInvoicesController.cs" />
     <Content Include="Controllers\ProductsController.cs" />
     <Content Include="Controllers\UsersController.cs" />
-    <Content Include="wwwroot\css\admin.css" />
-    <Content Include="wwwroot\css\category.css" />
-    <Content Include="wwwroot\css\company.css" />
-    <Content Include="wwwroot\css\contact.css" />
-    <Content Include="wwwroot\css\debtor.css" />
-    <Content Include="wwwroot\css\home.css" />
-    <Content Include="wwwroot\css\invoice.css" />
-    <Content Include="wwwroot\css\login-forgot.css" />
-    <Content Include="wwwroot\css\my-invoice.css" />
-    <Content Include="wwwroot\css\product.css" />
-    <Content Include="wwwroot\css\settings.css" />
-    <Content Include="wwwroot\css\site.css" />
-    <Content Include="wwwroot\css\site.min.css" />
-    <Content Include="wwwroot\css\user.css" />
-    <Content Include="wwwroot\favicon.ico" />
-    <Content Include="wwwroot\images\banner1.svg" />
-    <Content Include="wwwroot\images\banner2.svg" />
-    <Content Include="wwwroot\images\banner3.svg" />
-    <Content Include="wwwroot\images\banner4.svg" />
-    <Content Include="wwwroot\js\invoice\create-invoice.js" />
-    <Content Include="wwwroot\js\invoice\edit-invoice.js" />
-    <Content Include="wwwroot\js\invoice\view-invoice.js" />
-    <Content Include="wwwroot\js\jquery-adaptive-background.js" />
-    <Content Include="wwwroot\js\product\create-product.js" />
-    <Content Include="wwwroot\js\product\edit-product.js" />
-    <Content Include="wwwroot\js\product\view-product.js" />
-    <Content Include="wwwroot\js\quantize.js" />
-    <Content Include="wwwroot\js\site.js" />
-    <Content Include="wwwroot\js\site.min.js" />
-    <Content Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
-    <Content Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
-    <Content Include="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
-    <Content Include="wwwroot\lib\jquery-validation\dist\additional-methods.min.js" />
-    <Content Include="wwwroot\lib\jquery-validation\dist\jquery.validate.js" />
-    <Content Include="wwwroot\lib\jquery-validation\dist\jquery.validate.min.js" />
-    <Content Include="wwwroot\lib\jquery-validation\LICENSE.md" />
-    <Content Include="wwwroot\lib\jquery\dist\jquery.js" />
-    <Content Include="wwwroot\lib\jquery\dist\jquery.min.js" />
-    <Content Include="wwwroot\lib\jquery\dist\jquery.min.map" />
-    <Content Include="wwwroot\lib\jquery\LICENSE.txt" />
-    <Content Include="wwwroot\lib\jquery-validation-unobtrusive\.bower.json" />
-    <Content Include="wwwroot\lib\jquery-validation\.bower.json" />
-    <Content Include="wwwroot\lib\jquery\.bower.json" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.3.1" />
-    <PackageReference Include="MailKit" Version="1.18.0" />
-    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore" Version="1.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="1.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="1.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="1.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="1.1.3" />
-    <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="1.1.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Session" Version="1.1.2" />
-    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="1.1.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="1.1.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="1.1.2" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.2" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="1.1.1" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="1.1.2" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="1.1.2" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="1.1.1" PrivateAssets="All" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="1.1.2" />
+    <PackageReference Include="iTextSharp.LGPLv2.Core" Version="1.5.0" />
+    <PackageReference Include="MailKit" Version="2.1.3" />
+    <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.6.1" />
+    <PackageReference Include="Microsoft.AspNetCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="2.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.NodeServices" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Session" Version="2.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.StaticFiles" Version="2.2.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="2.2.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.2.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.Design" Version="1.1.6" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.2.3" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.UserSecrets" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.2.3" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.BrowserLink" Version="2.2.0" />
     <PackageReference Include="WkWrap.Core" Version="1.0.2" />
   </ItemGroup>
   <ItemGroup>
@@ -93,15 +50,136 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="wwwroot\css\site.css" />
-    <None Include="wwwroot\css\site.min.css" />
-    <None Include="wwwroot\favicon.ico" />
     <None Include="wwwroot\images\banner1.svg" />
     <None Include="wwwroot\images\banner2.svg" />
     <None Include="wwwroot\images\banner3.svg" />
     <None Include="wwwroot\images\banner4.svg" />
+    <None Include="wwwroot\js\chosen.jquery.js" />
+    <None Include="wwwroot\js\invoice\create-invoice.js" />
+    <None Include="wwwroot\js\invoice\edit-invoice.js" />
+    <None Include="wwwroot\js\invoice\view-invoice.js" />
+    <None Include="wwwroot\js\jquery-adaptive-background.js" />
+    <None Include="wwwroot\js\product\create-product.js" />
+    <None Include="wwwroot\js\product\edit-product.js" />
+    <None Include="wwwroot\js\product\view-product.js" />
+    <None Include="wwwroot\js\quantize.js" />
     <None Include="wwwroot\js\site.js" />
     <None Include="wwwroot\js\site.min.js" />
+    <None Include="wwwroot\lib\bootstrap\CHANGELOG.md" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap-theme.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map" />
+    <None Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\lib\bootstrap\dist\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\bootstrap.min.js" />
+    <None Include="wwwroot\lib\bootstrap\dist\js\npm.js" />
+    <None Include="wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.svg" />
+    <None Include="wwwroot\lib\bootstrap\fonts\glyphicons-halflings-regular.woff2" />
+    <None Include="wwwroot\lib\bootstrap\Gemfile" />
+    <None Include="wwwroot\lib\bootstrap\Gemfile.lock" />
+    <None Include="wwwroot\lib\bootstrap\Gruntfile.js" />
+    <None Include="wwwroot\lib\bootstrap\grunt\.jshintrc" />
+    <None Include="wwwroot\lib\bootstrap\grunt\bs-commonjs-generator.js" />
+    <None Include="wwwroot\lib\bootstrap\grunt\bs-glyphicons-data-generator.js" />
+    <None Include="wwwroot\lib\bootstrap\grunt\bs-lessdoc-parser.js" />
+    <None Include="wwwroot\lib\bootstrap\grunt\bs-raw-files-generator.js" />
+    <None Include="wwwroot\lib\bootstrap\grunt\change-version.js" />
+    <None Include="wwwroot\lib\bootstrap\grunt\sauce_browsers.yml" />
+    <None Include="wwwroot\lib\bootstrap\ISSUE_TEMPLATE.md" />
+    <None Include="wwwroot\lib\bootstrap\js\.jscsrc" />
+    <None Include="wwwroot\lib\bootstrap\js\.jshintrc" />
+    <None Include="wwwroot\lib\bootstrap\js\affix.js" />
+    <None Include="wwwroot\lib\bootstrap\js\alert.js" />
+    <None Include="wwwroot\lib\bootstrap\js\button.js" />
+    <None Include="wwwroot\lib\bootstrap\js\carousel.js" />
+    <None Include="wwwroot\lib\bootstrap\js\collapse.js" />
+    <None Include="wwwroot\lib\bootstrap\js\dropdown.js" />
+    <None Include="wwwroot\lib\bootstrap\js\modal.js" />
+    <None Include="wwwroot\lib\bootstrap\js\popover.js" />
+    <None Include="wwwroot\lib\bootstrap\js\scrollspy.js" />
+    <None Include="wwwroot\lib\bootstrap\js\tab.js" />
+    <None Include="wwwroot\lib\bootstrap\js\tooltip.js" />
+    <None Include="wwwroot\lib\bootstrap\js\transition.js" />
+    <None Include="wwwroot\lib\bootstrap\less\.csslintrc" />
+    <None Include="wwwroot\lib\bootstrap\less\alerts.less" />
+    <None Include="wwwroot\lib\bootstrap\less\badges.less" />
+    <None Include="wwwroot\lib\bootstrap\less\bootstrap.less" />
+    <None Include="wwwroot\lib\bootstrap\less\breadcrumbs.less" />
+    <None Include="wwwroot\lib\bootstrap\less\button-groups.less" />
+    <None Include="wwwroot\lib\bootstrap\less\buttons.less" />
+    <None Include="wwwroot\lib\bootstrap\less\carousel.less" />
+    <None Include="wwwroot\lib\bootstrap\less\close.less" />
+    <None Include="wwwroot\lib\bootstrap\less\code.less" />
+    <None Include="wwwroot\lib\bootstrap\less\component-animations.less" />
+    <None Include="wwwroot\lib\bootstrap\less\dropdowns.less" />
+    <None Include="wwwroot\lib\bootstrap\less\forms.less" />
+    <None Include="wwwroot\lib\bootstrap\less\glyphicons.less" />
+    <None Include="wwwroot\lib\bootstrap\less\grid.less" />
+    <None Include="wwwroot\lib\bootstrap\less\input-groups.less" />
+    <None Include="wwwroot\lib\bootstrap\less\jumbotron.less" />
+    <None Include="wwwroot\lib\bootstrap\less\labels.less" />
+    <None Include="wwwroot\lib\bootstrap\less\list-group.less" />
+    <None Include="wwwroot\lib\bootstrap\less\media.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\alerts.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\background-variant.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\border-radius.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\buttons.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\center-block.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\clearfix.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\forms.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\gradients.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\grid-framework.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\grid.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\hide-text.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\image.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\labels.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\list-group.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\nav-divider.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\nav-vertical-align.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\opacity.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\pagination.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\panels.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\progress-bar.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\reset-filter.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\reset-text.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\resize.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\responsive-visibility.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\size.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\tab-focus.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\table-row.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\text-emphasis.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\text-overflow.less" />
+    <None Include="wwwroot\lib\bootstrap\less\mixins\vendor-prefixes.less" />
+    <None Include="wwwroot\lib\bootstrap\less\modals.less" />
+    <None Include="wwwroot\lib\bootstrap\less\navbar.less" />
+    <None Include="wwwroot\lib\bootstrap\less\navs.less" />
+    <None Include="wwwroot\lib\bootstrap\less\normalize.less" />
+    <None Include="wwwroot\lib\bootstrap\less\pager.less" />
+    <None Include="wwwroot\lib\bootstrap\less\pagination.less" />
+    <None Include="wwwroot\lib\bootstrap\less\panels.less" />
+    <None Include="wwwroot\lib\bootstrap\less\popovers.less" />
+    <None Include="wwwroot\lib\bootstrap\less\print.less" />
+    <None Include="wwwroot\lib\bootstrap\less\progress-bars.less" />
+    <None Include="wwwroot\lib\bootstrap\less\responsive-embed.less" />
+    <None Include="wwwroot\lib\bootstrap\less\responsive-utilities.less" />
+    <None Include="wwwroot\lib\bootstrap\less\scaffolding.less" />
+    <None Include="wwwroot\lib\bootstrap\less\tables.less" />
+    <None Include="wwwroot\lib\bootstrap\less\theme.less" />
+    <None Include="wwwroot\lib\bootstrap\less\thumbnails.less" />
+    <None Include="wwwroot\lib\bootstrap\less\tooltip.less" />
+    <None Include="wwwroot\lib\bootstrap\less\type.less" />
+    <None Include="wwwroot\lib\bootstrap\less\utilities.less" />
+    <None Include="wwwroot\lib\bootstrap\less\variables.less" />
+    <None Include="wwwroot\lib\bootstrap\less\wells.less" />
+    <None Include="wwwroot\lib\bootstrap\LICENSE" />
+    <None Include="wwwroot\lib\bootstrap\nuget\bootstrap.less.nuspec" />
+    <None Include="wwwroot\lib\bootstrap\nuget\bootstrap.nuspec" />
+    <None Include="wwwroot\lib\bootstrap\nuget\MyGet.ps1" />
+    <None Include="wwwroot\lib\bootstrap\package.js" />
+    <None Include="wwwroot\lib\bootstrap\README.md" />
     <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js" />
     <None Include="wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js" />
     <None Include="wwwroot\lib\jquery-validation\dist\additional-methods.js" />
@@ -112,7 +190,6 @@
     <None Include="wwwroot\lib\jquery\dist\jquery.js" />
     <None Include="wwwroot\lib\jquery\dist\jquery.min.js" />
     <None Include="wwwroot\lib\jquery\dist\jquery.min.map" />
-    <None Include="wwwroot\lib\jquery\LICENSE.txt" />
   </ItemGroup>
   <ItemGroup>
     <None Update="invoice_db.mdf">
